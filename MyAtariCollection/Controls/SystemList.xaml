@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+             x:Class="MyAtariCollection.Controls.SystemList"
+             WidthRequest="400" 
+             BackgroundColor="{StaticResource ComponentBackground}"
+             >
+   
+<CollectionView Margin="20,20,10,20" >
+                 <!-- BackgroundColor="{StaticResource ComponentBackground}"> -->
+    <CollectionView.EmptyView>
+        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+               FontSize="20"
+               TextColor="{StaticResource PlaceHolderText}"
+               Text="To Get Started, you can create a new system using the button in the header bar"> </Label>
+    </CollectionView.EmptyView>
+        
+    
+    <CollectionView.Header>
+        <ContentView>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <controls:H1 Grid.Column="0" Text="Systems"></controls:H1>
+                <Button WidthRequest="70" HeightRequest="20" HorizontalOptions="End" Grid.Column="1" Text="new"></Button>
+            </Grid>
+        </ContentView>
+    </CollectionView.Header>
+
+    <CollectionView.Footer>
+        <ContentView>
+            <controls:H2 Text="Total: 0"></controls:H2>
+        </ContentView>
+    </CollectionView.Footer>
+    
+</CollectionView>    
+
+</ContentView>

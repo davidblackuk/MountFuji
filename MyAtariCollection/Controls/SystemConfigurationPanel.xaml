@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+             x:Class="MyAtariCollection.Controls.SystemConfigurationPanel"
+             BackgroundColor="{StaticResource ComponentBackground}">
+ 
+    <!-- <Grid BackgroundColor="{StaticResource ComponentBackground}"> -->
+    
+   <Grid Margin="20,20,10,20" >
+       <Grid.RowDefinitions>
+           <RowDefinition Height="40"></RowDefinition>
+           <RowDefinition Height="*"></RowDefinition>
+       </Grid.RowDefinitions>
+       <controls:H1 Text="This is the name of the config" Grid.Row="0"></controls:H1>
+       
+       <ScrollView Grid.Row="1">
+           <VerticalStackLayout Spacing="10" Margin="0,20,0,0" >
+            <controls:ConfigurationSection Title="System">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <controls:H3 Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Text="Machine type"></controls:H3>
+                        
+                    <RadioButton Grid.Column="0" Grid.Row="1" GroupName="system" Content="ST" IsChecked="True"></RadioButton>
+                    <RadioButton Grid.Column="1" Grid.Row="1" GroupName="system" Content="Mega ST" IsChecked="False"></RadioButton>
+                    <RadioButton Grid.Column="2" Grid.Row="1" GroupName="system" Content="STE" IsChecked="False"></RadioButton>
+                    <RadioButton Grid.Column="3" Grid.Row="1" GroupName="system" Content="Mega STE" IsChecked="False"></RadioButton>
+                    <RadioButton Grid.Column="4" Grid.Row="1" GroupName="system" Content="TT" IsChecked="False"></RadioButton>
+                    <RadioButton Grid.Column="5" Grid.Row="1" GroupName="system" Content="Falcon" IsChecked="False"></RadioButton>
+                        
+
+                    <controls:H3  Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="6"  Text="Video timing"></controls:H3>
+                    
+                    <RadioButton Grid.Column="0" Grid.Row="3" GroupName="vt" Content="Random" IsChecked="True"></RadioButton>
+                    <RadioButton  Grid.Column="1" Grid.Row="3" GroupName="vt" Content="WakeState 1" IsChecked="False"></RadioButton>
+                    <RadioButton  Grid.Column="2" Grid.Row="3" GroupName="vt" Content="WakeState 2" IsChecked="False"></RadioButton>
+                    <RadioButton  Grid.Column="3" Grid.Row="3" GroupName="vt" Content="WakeState 3" IsChecked="True"></RadioButton>
+                    <RadioButton  Grid.Column="4" Grid.Row="3" GroupName="vt" Content="WakeState 4" IsChecked="False"></RadioButton>
+
+                </Grid>
+
+            </controls:ConfigurationSection>
+
+
+            <controls:ConfigurationSection Title="CPU">
+            </controls:ConfigurationSection>
+            <controls:ConfigurationSection Title="ROM">
+            </controls:ConfigurationSection>
+            <controls:ConfigurationSection Title="Memory">
+            </controls:ConfigurationSection>
+            <controls:ConfigurationSection Title="Floppy Disks">
+            </controls:ConfigurationSection>
+            <controls:ConfigurationSection Title="Hard Disks">
+            </controls:ConfigurationSection>
+            <controls:ConfigurationSection Title="Atari Screen">
+            </controls:ConfigurationSection>
+            <controls:ConfigurationSection Title="Hatari Screen">
+            </controls:ConfigurationSection>
+            <controls:ConfigurationSection Title="Joysticks">
+            </controls:ConfigurationSection>
+            <controls:ConfigurationSection Title="Keyboard">
+            </controls:ConfigurationSection>
+            <controls:ConfigurationSection Title="Devices">
+            </controls:ConfigurationSection>
+            <controls:ConfigurationSection Title="Sound">
+            </controls:ConfigurationSection>
+
+        </VerticalStackLayout>
+
+       </ScrollView>
+    </Grid>
+
+</ContentView>

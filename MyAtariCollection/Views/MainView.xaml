@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mvvm:TinyView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:mvvm="clr-namespace:TinyMvvm;assembly=TinyMvvm.Maui"
+               xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+               xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+               x:DataType="vm:MainViewModel"
+               x:Class="MyAtariCollection.Views.MainView"
+               Shell.NavBarIsVisible="False">
+    <ContentPage.Content>
+        <Grid BackgroundColor="{StaticResource WindowBackground}" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <controls:SystemList Grid.Column="0"></controls:SystemList>
+
+            
+            
+            <!-- <BoxView Margin="5,10,10,10" BackgroundColor="{StaticResource ComponentBackground}" Grid.Column="1"></BoxView> -->
+             
+            <controls:SystemConfigurationPanel Grid.Column="2"></controls:SystemConfigurationPanel>
+
+        </Grid>
+
+
+    </ContentPage.Content>
+</mvvm:TinyView>
