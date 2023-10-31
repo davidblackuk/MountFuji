@@ -9,7 +9,7 @@
                x:Class="MyAtariCollection.Views.MainView"
                Shell.NavBarIsVisible="False">
     <ContentPage.Content>
-        <Grid BackgroundColor="{StaticResource WindowBackground}" Margin="10">
+        <Grid  Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="400" />
                 <ColumnDefinition Width="10" />
