@@ -9,7 +9,7 @@ public partial class App
         InitializeComponent();
         if (App.Current is App app)
         {
-            app.UserAppTheme = AppTheme.Dark;
+            //app.UserAppTheme = AppTheme.Dark;
         }
         MainPage = new AppShell();
     }

@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyAtariCollection.Controls.H1">
     <VerticalStackLayout Spacing="5">
-        <Label x:Name="TextLabel" FontAttributes="Bold" FontSize="35" TextColor="{StaticResource H1Color}"></Label>
-        <!-- <BoxView HeightRequest="1"  Color="{StaticResource Gray600}"></BoxView> -->
+        <Label x:Name="TextLabel"  Style="{StaticResource H1Label}" ></Label>
+
     </VerticalStackLayout>
 </ContentView>

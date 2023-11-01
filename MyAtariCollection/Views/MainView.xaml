@@ -16,13 +16,13 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <controls:SystemList Grid.Column="0"></controls:SystemList>
+            <controls:SystemPanel Grid.Column="0"></controls:SystemPanel>
 
             
             
             <!-- <BoxView Margin="5,10,10,10" BackgroundColor="{StaticResource ComponentBackground}" Grid.Column="1"></BoxView> -->
              
-            <controls:SystemConfigurationPanel Grid.Column="2"></controls:SystemConfigurationPanel>
+            <controls:ConfigurationPanel Grid.Column="2"></controls:ConfigurationPanel>
 
         </Grid>
 

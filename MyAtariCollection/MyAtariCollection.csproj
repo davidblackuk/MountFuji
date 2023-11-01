@@ -64,16 +64,20 @@
     </ItemGroup>
 
     <ItemGroup>
-      <MauiXaml Update="Controls\SystemList.xaml">
+      <MauiXaml Update="Controls\SystemPanel.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Controls\SystemList.xaml.cs">
+      <Compile Update="Controls\SystemPanel.xaml.cs">
         <DependentUpon>SystemView.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Resources\Images\" />
     </ItemGroup>
 
     <!-- Build Properties must be defined within these property groups to ensure successful publishing

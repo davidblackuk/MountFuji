@@ -1,8 +1,18 @@
 
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace MyAtariCollection.Models;
 
-public class AtariConfiguration
+[ObservableObject]
+public partial class AtariConfiguration
 {
-    public string DisplayName { get; set; }
-    public AtariSystem System { get; set; }
+    [ObservableProperty] 
+    private string displayName;
+
+    [ObservableProperty] 
+    private AtariSystemType systemType;
+
+    [ObservableProperty]
+    private VideoTiming stVideoTiming;
+
 }

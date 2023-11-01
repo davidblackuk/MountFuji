@@ -1,8 +1,8 @@
 namespace MyAtariCollection.Controls;
 
-public partial class SystemList 
+public partial class SystemPanel 
 {
-    public SystemList()
+    public SystemPanel()
     {
         InitializeComponent();
     }

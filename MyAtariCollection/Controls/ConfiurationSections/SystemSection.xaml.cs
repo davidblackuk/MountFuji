@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyAtariCollection.Controls;
+namespace MyAtariCollection.Controls.ConfiurationSections;
 
-public partial class SystemListEntry
+public partial class SystemSection : ContentView
 {
-    public SystemListEntry()
+    public SystemSection()
     {
         InitializeComponent();
     }

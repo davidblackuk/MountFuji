@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+             xmlns:sections="clr-namespace:MyAtariCollection.Controls.ConfiurationSections"
+             
+             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             x:DataType="vm:MainViewModel"
+             x:Class="MyAtariCollection.Controls.ConfigurationPanel">
+
+    <!-- <Grid BackgroundColor="{StaticResource ComponentBackground}"> -->
+    <Frame  CornerRadius="10">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Text="{Binding SelectedConfiguration.DisplayName}" Grid.Row="0" Style="{StaticResource H1Label}"></Label>
+
+            <ScrollView Grid.Row="1">
+                <VerticalStackLayout Spacing="10" Margin="0,20,0,0">
+                    
+                    <sections:SystemSection></sections:SystemSection>
+
+                    <controls:ConfigurationPanelSection Title="CPU">
+                    </controls:ConfigurationPanelSection>
+                    <controls:ConfigurationPanelSection Title="ROM">
+                    </controls:ConfigurationPanelSection>
+                    <controls:ConfigurationPanelSection Title="Memory">
+                    </controls:ConfigurationPanelSection>
+                    <controls:ConfigurationPanelSection Title="Floppy Disks">
+                    </controls:ConfigurationPanelSection>
+                    <controls:ConfigurationPanelSection Title="Hard Disks">
+                    </controls:ConfigurationPanelSection>
+                    <controls:ConfigurationPanelSection Title="Atari Screen">
+                    </controls:ConfigurationPanelSection>
+                    <controls:ConfigurationPanelSection Title="Hatari Screen">
+                    </controls:ConfigurationPanelSection>
+                    <controls:ConfigurationPanelSection Title="Joysticks">
+                    </controls:ConfigurationPanelSection>
+                    <controls:ConfigurationPanelSection Title="Keyboard">
+                    </controls:ConfigurationPanelSection>
+                    <controls:ConfigurationPanelSection Title="Devices">
+                    </controls:ConfigurationPanelSection>
+                    <controls:ConfigurationPanelSection Title="Sound">
+                    </controls:ConfigurationPanelSection>
+
+                </VerticalStackLayout>
+
+            </ScrollView>
+        </Grid>
+    </Frame>
+</ContentView>

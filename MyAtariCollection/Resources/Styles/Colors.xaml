@@ -9,7 +9,9 @@
     <Color x:Key="ComponentBackground">#212121</Color>
     <Color x:Key="WindowBackground">#141414</Color>
 
-    <Color x:Key="H1Color">#B98AFF</Color>
+    <Color x:Key="H1ColorDark">#B98AFF</Color>
+    <Color x:Key="H1ColorLight">#8124FF</Color>
+    
     <Color x:Key="H2Color">#C3FFB8</Color>
     <Color x:Key="H3Color">#F4FFAF</Color>
     

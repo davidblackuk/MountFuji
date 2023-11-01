@@ -9,32 +9,38 @@ public class MachineTemplateService : IMachineTemplateService
         new ()
         {
             DisplayName = "ST",
-            System = AtariSystem.ST
+            SystemType = AtariSystemType.ST,
+            StVideoTiming = VideoTiming.Three,
         },
         new ()
         {
             DisplayName = "Mega ST",
-            System = AtariSystem.MegaST
+            SystemType = AtariSystemType.MegaST,
+            StVideoTiming = VideoTiming.Three,
         },
         new ()
         {
             DisplayName = "STE",
-            System = AtariSystem.STE
+            SystemType = AtariSystemType.STE,
+            StVideoTiming = VideoTiming.Three,
         },
         new ()
         {
             DisplayName = "Mega STE",
-            System = AtariSystem.MegaSTE
+            SystemType = AtariSystemType.MegaSTE,
+            StVideoTiming = VideoTiming.Three,
         },
         new ()
         {
             DisplayName = "TT",
-            System = AtariSystem.TT
+            SystemType = AtariSystemType.TT,
+            StVideoTiming = VideoTiming.Three,
         },
         new ()
         {
             DisplayName = "Falcon",
-            System = AtariSystem.Falcon
+            SystemType = AtariSystemType.Falcon,
+            StVideoTiming = VideoTiming.Three,
         },
     };
 
@@ -53,7 +59,8 @@ public class MachineTemplateService : IMachineTemplateService
         {
             // lets use 
             DisplayName = template.DisplayName,
-            System = template.System
+            SystemType = template.SystemType,
+            StVideoTiming = template.StVideoTiming
         };
 
         return config;

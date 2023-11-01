@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace MyAtariCollection.Controls;
 
-public partial class ConfigurationSection : ContentView
+public partial class ConfigurationPanelSection : ContentView
 {
     public static readonly BindableProperty TitleProperty =
         BindableProperty.Create(nameof(Title), 
             typeof(string), 
-            typeof(ConfigurationSection));
+            typeof(ConfigurationPanelSection));
     
-    public ConfigurationSection() => InitializeComponent();
+    public ConfigurationPanelSection() => InitializeComponent();
 
     public string Title
     {

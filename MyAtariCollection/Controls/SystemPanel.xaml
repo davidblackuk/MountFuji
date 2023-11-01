@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+             xmlns:models="clr-namespace:MyAtariCollection.Models"
+             x:Class="MyAtariCollection.Controls.SystemPanel"
+             x:DataType="vm:MainViewModel"
+             WidthRequest="400"
+             >
+    <Frame  CornerRadius="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+            </Grid.RowDefinitions>
+    
+            <!-- we implement our own header and footer as we don't want em to scroll with the content -->
+            
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Systems" Style="{StaticResource H1Label}"></Label>
+                <Button WidthRequest="70" HeightRequest="20" HorizontalOptions="End" Grid.Column="1" Text="new" Command="{Binding CreateNewSystemCommand}"></Button>
+            </Grid>
+            
+            <HorizontalStackLayout Grid.Row="2">
+                <controls:H2 Text="Total: "></controls:H2>
+                <controls:H2 Text="{Binding Systems.Count}"></controls:H2>
+            </HorizontalStackLayout>
+            
+            <CollectionView SelectionMode="Single" 
+                            SelectedItem="{Binding SelectedConfiguration}"
+                            Grid.Row="1" 
+                            ItemsSource="{Binding Systems}">
+            <!-- BackgroundColor="{StaticResource ComponentBackground}"> -->
+            <CollectionView.EmptyView>
+                <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                       FontSize="20"
+                       Text="To Get Started, you can create a new system using the button in the header bar">
+                </Label>
+            </CollectionView.EmptyView>
+            
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:AtariConfiguration">
+                    <controls:SystemPanelEntry/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            
+            
+        </CollectionView>
+            
+        </Grid>
+    </Frame>
+</ContentView>

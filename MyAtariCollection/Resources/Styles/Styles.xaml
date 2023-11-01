@@ -405,4 +405,14 @@
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
 
+    
+    <!-- My Styles -->
+    
+    <Style TargetType="Label" x:Key="H1Label">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource H1ColorLight}, Dark={StaticResource H1ColorDark}}" />
+        <Setter Property="FontSize" Value="35" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+    
+    
 </ResourceDictionary>

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
+using Microsoft.Maui.Controls.Handlers.Items;
 using ObjCRuntime;
 using UIKit;
 
@@ -17,8 +18,6 @@ public class Program
         {
             Thread.Sleep(4000);
         }
-
-        
       
         // if you want to use a different Application Delegate class from "AppDelegate"
         // you can specify it here.
