@@ -10,7 +10,7 @@
              x:DataType="vm:MainViewModel"
              WidthRequest="400"
              >
-    <Frame  CornerRadius="10">
+    <Frame Style="{StaticResource PanelFrame}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"></RowDefinition>
@@ -20,18 +20,14 @@
     
             <!-- we implement our own header and footer as we don't want em to scroll with the content -->
             
-            <Grid >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
+            <Grid ColumnDefinitions="*,50">
                 <Label Grid.Column="0" Text="Systems" Style="{StaticResource H1Label}"></Label>
-                <Button WidthRequest="70" HeightRequest="20" HorizontalOptions="End" Grid.Column="1" Text="new" Command="{Binding CreateNewSystemCommand}"></Button>
+                <Button  Style="{StaticResource MaterialButton}" Grid.Column="1" Text="{x:Static controls:IconFont.Add_circle_outline}" Command="{Binding CreateNewSystemCommand}"></Button>
             </Grid>
             
             <HorizontalStackLayout Grid.Row="2">
-                <controls:H2 Text="Total: "></controls:H2>
-                <controls:H2 Text="{Binding Systems.Count}"></controls:H2>
+                <Label Text="Total: " Style="{StaticResource H2Label}"></Label>
+                <Label Text="{Binding Systems.Count}" Style="{StaticResource H2Label}"></Label>
             </HorizontalStackLayout>
             
             <CollectionView SelectionMode="Single" 

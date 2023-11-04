@@ -7,7 +7,9 @@
                xmlns:controls="clr-namespace:MyAtariCollection.Controls"
                x:DataType="vm:MainViewModel"
                x:Class="MyAtariCollection.Views.MainView"
-               Shell.NavBarIsVisible="False">
+               Shell.NavBarIsVisible="False"
+               Style="{StaticResource MyPage}"
+               >
     <ContentPage.Content>
         <Grid  Margin="10">
             <Grid.ColumnDefinitions>
@@ -18,9 +20,6 @@
 
             <controls:SystemPanel Grid.Column="0"></controls:SystemPanel>
 
-            
-            
-            <!-- <BoxView Margin="5,10,10,10" BackgroundColor="{StaticResource ComponentBackground}" Grid.Column="1"></BoxView> -->
              
             <controls:ConfigurationPanel Grid.Column="2"></controls:ConfigurationPanel>
 

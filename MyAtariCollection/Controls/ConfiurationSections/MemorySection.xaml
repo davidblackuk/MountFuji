@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+             xmlns:models="clr-namespace:MyAtariCollection.Models"
+             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             xmlns:converters="clr-namespace:MyAtariCollection.Converters"
+             x:DataType="vm:MainViewModel"
+
+             x:Class="MyAtariCollection.Controls.ConfiurationSections.MemorySection">
+    <controls:ConfigurationPanelSection Title="Memory">
+        <VerticalStackLayout>
+            <Grid ColumnDefinitions="auto,*" RowDefinitions="*,*">
+                <Label Text="ST-Memory"></Label>
+                <Picker Grid.Column="1">
+                    <Picker.Items>
+                        <x:String>256 KB</x:String>
+                        <x:String>512 KB</x:String>
+                        <x:String>1 MB</x:String>
+                        <x:String>2 MB</x:String>
+                        <x:String>2.5 MB</x:String>
+                        <x:String>4 MB</x:String>
+                        <x:String>8 MB</x:String>
+                        <x:String>10 MB</x:String>
+                        <x:String>14 MB</x:String>
+                    </Picker.Items>
+                </Picker>
+                
+                <Label Text="TT-Memory" Grid.Row="1"/>
+                <HorizontalStackLayout Grid.Row="1" Grid.Column="1">
+                    <Slider Minimum="0" Maximum="64" x:Name="MemorySlider"  />
+                    <Label Text="16"></Label>
+                    <Label Text="MB"></Label>
+                    <Stepper Minimum="0" Maximum="64" Increment="4" Value="0"/>
+                </HorizontalStackLayout>
+                
+            </Grid>
+        </VerticalStackLayout>
+    </controls:ConfigurationPanelSection>
+</ContentView>

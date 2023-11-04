@@ -10,41 +10,37 @@
              x:Class="MyAtariCollection.Controls.ConfigurationPanel">
 
     <!-- <Grid BackgroundColor="{StaticResource ComponentBackground}"> -->
-    <Frame  CornerRadius="10">
-        <Grid >
+    <Frame  Style="{StaticResource PanelFrame}">
+        <Grid  IsVisible="{Binding HasSelectedConfig}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Label Text="{Binding SelectedConfiguration.DisplayName}" Grid.Row="0" Style="{StaticResource H1Label}"></Label>
-
+            
+            <HorizontalStackLayout>
+            </HorizontalStackLayout>
+            
+            <Grid ColumnDefinitions="*,auto">
+                <Label HorizontalOptions="Start" VerticalOptions="Center" Text="{Binding SelectedConfiguration.DisplayName}" Style="{StaticResource H1Label}"></Label>
+                <Button Grid.Column="1" Text="{x:Static controls:IconFont.Play_circle_outline}" Style="{StaticResource MaterialButton}" Command="{Binding RunCommand}"></Button>
+            </Grid>
+            
             <ScrollView Grid.Row="1">
                 <VerticalStackLayout Spacing="10" Margin="0,20,0,0">
                     
-                    <sections:SystemSection></sections:SystemSection>
+                    <sections:SystemSection />
+                    <sections:CpuSection />
+                    <sections:RomSection/>
+                    <sections:MemorySection/>             
 
-                    <controls:ConfigurationPanelSection Title="CPU">
-                    </controls:ConfigurationPanelSection>
-                    <controls:ConfigurationPanelSection Title="ROM">
-                    </controls:ConfigurationPanelSection>
-                    <controls:ConfigurationPanelSection Title="Memory">
-                    </controls:ConfigurationPanelSection>
-                    <controls:ConfigurationPanelSection Title="Floppy Disks">
-                    </controls:ConfigurationPanelSection>
-                    <controls:ConfigurationPanelSection Title="Hard Disks">
-                    </controls:ConfigurationPanelSection>
-                    <controls:ConfigurationPanelSection Title="Atari Screen">
-                    </controls:ConfigurationPanelSection>
-                    <controls:ConfigurationPanelSection Title="Hatari Screen">
-                    </controls:ConfigurationPanelSection>
-                    <controls:ConfigurationPanelSection Title="Joysticks">
-                    </controls:ConfigurationPanelSection>
-                    <controls:ConfigurationPanelSection Title="Keyboard">
-                    </controls:ConfigurationPanelSection>
-                    <controls:ConfigurationPanelSection Title="Devices">
-                    </controls:ConfigurationPanelSection>
-                    <controls:ConfigurationPanelSection Title="Sound">
-                    </controls:ConfigurationPanelSection>
+                    <controls:ConfigurationPanelSection Title="Floppy Disks"/>
+                    <controls:ConfigurationPanelSection Title="Hard Disks"/>
+                    <controls:ConfigurationPanelSection Title="Atari Screen"/>
+                    <controls:ConfigurationPanelSection Title="Hatari Screen"/>
+                    <controls:ConfigurationPanelSection Title="Joysticks"/>
+                    <controls:ConfigurationPanelSection Title="Keyboard"/>
+                    <controls:ConfigurationPanelSection Title="Devices"/>
+                    <controls:ConfigurationPanelSection Title="Sound"/>
 
                 </VerticalStackLayout>
 

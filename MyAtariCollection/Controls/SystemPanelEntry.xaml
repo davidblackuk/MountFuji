@@ -12,7 +12,7 @@
             <HorizontalStackLayout >
                 <Rectangle WidthRequest="60" HeightRequest="60" Fill="Cyan"></Rectangle>
                 <VerticalStackLayout Margin="10,0,0,0">
-                    <controls:H3 Text="{Binding DisplayName}"></controls:H3>
+                    <Label Text="{Binding DisplayName}"  Style="{StaticResource H3Label}"/>
                     <Label Text="Atari ST, 512k, 1 disk"></Label>
                     <Label Text="last modified Jun 29 2023"></Label>
                 </VerticalStackLayout>

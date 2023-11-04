@@ -71,3 +71,70 @@ public enum VideoTiming
     /// </summary>
     Four
 }
+
+/// <summary>
+/// Specifies the Emulation quality of the DSP on the falcon, i'll flesh this out when I know more.
+/// </summary>
+public enum FalconDspEmulation
+{
+    None,
+    
+    Dummy,
+    
+    Full
+}
+
+/// <summary>
+/// Processor type in use, notably MC68000 everywhere, except for TT & Falcon (030),
+/// however third party hardware modules existed to allow more impressive CPus on humble STs
+/// </summary>
+public enum CpuType
+{
+    MC68000,
+    MC68010,
+    MC68020,
+    MC68030,
+    MC68040,
+    MC68060,
+}
+
+/// <summary>
+///  The the speed we clock at
+/// </summary>
+public enum CpuClock
+{
+    /// <summary>
+    /// Stock speed of ST, STE, pluse mega varieties
+    /// </summary>
+    Clock8Mhz,
+    
+    /// <summary>
+    /// Stock Falcon speed
+    /// </summary>
+    Clock16Mhz,
+    
+    /// <summary>
+    /// Stock TT speed
+    /// </summary>
+    Clock32Mhz,
+}
+
+/// <summary>
+/// Floating point unit type 
+/// </summary>
+public enum FpuType
+{
+    /// <summary>
+    /// ST/STE + Mega varieties did not come with an FPU in the case
+    /// </summary>
+    None,
+    
+    MC68881,
+    
+    /// <summary>
+    /// Included by default for TT computers
+    /// </summary>
+    MC68882,
+    
+    Internal
+}

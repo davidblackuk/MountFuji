@@ -6,9 +6,9 @@
              x:Class="MyAtariCollection.Controls.ConfigurationPanelSection">
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            <Frame Margin="10" CornerRadius="10">
+            <Frame Margin="10" CornerRadius="10" >
                 <VerticalStackLayout Spacing="10">
-                    <controls:H2 Text="{TemplateBinding Title}"></controls:H2>
+                    <Label Text="{TemplateBinding Title}" Style="{StaticResource H2Label}"></Label>
                     <BoxView HeightRequest="1"  Color="{StaticResource Gray600}"></BoxView>
                     <ContentPresenter />
                 </VerticalStackLayout>
