@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             xmlns:local="clr-namespace:MyAtariCollection.Controls.ConfiurationSections"
+
+             x:DataType="vm:MainViewModel"
+             x:Class="MyAtariCollection.Controls.ConfiurationSections.Panes.MemoryPane">
+    <local:ConfigurationGroup Title="ST RAM">
+        <VerticalStackLayout>
+            <HorizontalStackLayout RadioButtonGroup.GroupName="ram"
+                                   RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.StMemorySize}">
+                <VerticalStackLayout>
+                    <RadioButton Content="256 KiB" Value="{x:Int32 256}" />
+                    <RadioButton Content="512 KiB" Value="{x:Int32 512}" />
+                    <RadioButton Content="1 MiB" Value="{x:Int32 1}" />
+                    <RadioButton Content="2 MiB" Value="{x:Int32 2}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <RadioButton Content="4 MiB" Value="{x:Int32 4}" />
+                    <RadioButton Content="8 MiB" Value="{x:Int32 8}" />
+                    <RadioButton Content="10 MiB" Value="{x:Int32 10}" />
+                    <RadioButton Content="14 MiB" Value="{x:Int32 14}" />
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+            <Label Text="TT RAM" Style="{StaticResource H3Offset}"></Label>
+
+            <Grid ColumnDefinitions="*,auto" Margin="0,10,0,0">
+                <Label Text="{Binding SelectedConfiguration.TtMemorySize}"></Label>
+                <Stepper Grid.Column="1" Value="{Binding SelectedConfiguration.TtMemorySize}" Minimum="0"
+                         Maximum="1024" Increment="4">
+                </Stepper>
+            </Grid>
+        </VerticalStackLayout>
+    </local:ConfigurationGroup>
+</ContentView>

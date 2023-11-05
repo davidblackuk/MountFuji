@@ -11,21 +11,21 @@ public class AtariConfigurationTemplate
     /// The type of system we are emulating (ST, TT etc)
     /// </summary>
     public AtariSystemType SystemType { get; init; }
-    
+
     /// <summary>
     /// For STF type computers, the initial wake state
     /// </summary>
-    public VideoTiming StVideoTiming { get; init; }
- 
+    public VideoTiming StVideoTiming { get; init; } = VideoTiming.Three;
+
     /// <summary>
     /// For falcons the type of Dsp emulation we want.
     /// </summary>
-    public FalconDspEmulation FalconDsp  { get; init; }
+    public FalconDspEmulation FalconDsp { get; init; } = FalconDspEmulation.None;
 
     /// <summary>
     /// For base (none 'E' STs, solder in a socket and plug a bliter in
     /// </summary>
-    public bool BlitterInStMode { get; init; }
+    public bool BlitterInStMode { get; init; } = false;
     
     /// <summary>
     /// Speed up emulation are the risk of slight 
@@ -57,31 +57,43 @@ public class AtariConfigurationTemplate
     /// <summary>
     /// Use a more compatible 68000 CPU mode with better prefetch accuracy and cycle counting
     /// </summary>
-    public bool PrefetchEmulation { get; init; }
-    
+    public bool PrefetchEmulation { get; init; } = true;
     /// <summary>
     /// Use cycle exact emulation (uses more host CPU)
     /// </summary>
-    public bool CycleExact { get; init; }
+    public bool CycleExact { get; init; } = true;
     
     /// <summary>
     /// Emulate the memory management unit (uses more host CPU)
     /// </summary>
     public bool MmuEmulation { get; init; }
-    
+
     /// <summary>
     /// Use 24-bit instead of 32-bit addressing mode (24-bit is enabled by default)
     /// </summary>
-    public bool Use24BitAddressing { get; init; }
-    
+    public bool Use24BitAddressing { get; init; } = true;
+
     /// <summary>
     /// Use full software FPU emulation (Softfloat library)
     /// </summary>
-    public bool AccurateFpuEmulation { get; init; }
+    public bool AccurateFpuEmulation { get; init; } = true;
 
     /// <summary>
     /// Full path to the rom image to use for this device
     /// </summary>
-    public string RomImage { get; init; } 
-    
+    public string RomImage { get; init; } = "";
+
+
+    /// <summary>
+    /// Amount of St memory in kilobytes (KiB), valid values are
+    /// 256 (rare original ST), 512 (stock ST),vales 1 to 14 are MB sizes!
+    /// not sure why) then multiples of 1024 up to a max of 14MB (really only falcon)
+    /// </summary>
+    public int StMemorySize { get; init; } = 512;
+
+    /// <summary>
+    /// Amount of TT memory in the system, must be incremented in blocks of 4*1024 and max of 1024 * 1024
+    /// </summary>
+    public int TtMemorySize { get; init; } = 0;
+
 }

@@ -31,7 +31,6 @@
                     <sections:SystemSection />
                     <sections:CpuSection />
                     <sections:RomSection/>
-                    <sections:MemorySection/>             
 
                     <controls:ConfigurationPanelSection Title="Floppy Disks"/>
                     <controls:ConfigurationPanelSection Title="Hard Disks"/>

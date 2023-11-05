@@ -6,90 +6,107 @@
              xmlns:models="clr-namespace:MyAtariCollection.Models"
              xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
              xmlns:converters="clr-namespace:MyAtariCollection.Converters"
+             xmlns:panes="clr-namespace:MyAtariCollection.Controls.ConfiurationSections.Panes"
+
+             xmlns:local="clr-namespace:MyAtariCollection.Controls.ConfiurationSections"
+
              x:DataType="vm:MainViewModel"
              x:Class="MyAtariCollection.Controls.ConfiurationSections.CpuSection">
-    
+
     <ContentView.Resources>
         <converters:ComparisonConverter x:Key="ComparisonConverter" />
     </ContentView.Resources>
     <controls:ConfigurationPanelSection Title="CPU">
-        
-        <VerticalStackLayout>
-            <Grid ColumnDefinitions="*,*,*,*,*,*" RowDefinitions="*,*,*,*,*,*,*,*,*">
-                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Text="CPU type"
-                       Style="{StaticResource H3Offset}" />
 
-                <RadioButton Grid.Column="0" Grid.Row="1" GroupName="cpu" Content="68000"
-                             IsChecked="{Binding Path=SelectedConfiguration.CpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuType.MC68000}}" />
-                <RadioButton Grid.Column="1" Grid.Row="1" GroupName="cpu" Content="68010"
-                             IsChecked="{Binding Path=SelectedConfiguration.CpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuType.MC68010}}" />
-                <RadioButton Grid.Column="2" Grid.Row="1" GroupName="cpu" Content="68020"
-                             IsChecked="{Binding Path=SelectedConfiguration.CpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuType.MC68020}}" />
-                <RadioButton Grid.Column="3" Grid.Row="1" GroupName="cpu" Content="68030"
-                             IsChecked="{Binding Path=SelectedConfiguration.CpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuType.MC68030}}" />
-                <RadioButton Grid.Column="4" Grid.Row="1" GroupName="cpu" Content="68040"
-                             IsChecked="{Binding Path=SelectedConfiguration.CpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuType.MC68040}}" />
-                <RadioButton Grid.Column="5" Grid.Row="1" GroupName="cpu" Content="68060"
-                             IsChecked="{Binding Path=SelectedConfiguration.CpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuType.MC68060}}" />
-
+        <HorizontalStackLayout>
+            <local:ConfigurationGroup Title="CPU">
                 
-                <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="6" Text="CPU Clock"
-                       Style="{StaticResource H3Offset}" />
-                <RadioButton Grid.Column="0" Grid.Row="3" GroupName="clk" Content="8 Mhz"
-                             IsChecked="{Binding Path=SelectedConfiguration.CpuClock, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuClock.Clock8Mhz}}" />
-                <RadioButton Grid.Column="1" Grid.Row="3" GroupName="clk" Content="16 Mhz"
-                             IsChecked="{Binding Path=SelectedConfiguration.CpuClock, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuClock.Clock16Mhz}}" />
-                <RadioButton Grid.Column="2" Grid.Row="3" GroupName="clk" Content="32 Mhz"
-                             IsChecked="{Binding Path=SelectedConfiguration.CpuClock, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuClock.Clock32Mhz}}"  />
-                
-                <Label Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="6" Text="FPU type"
-                       Style="{StaticResource H3Offset}" />
-                <RadioButton Grid.Column="0" Grid.Row="5" GroupName="fpu" Content="None"
-                             IsChecked="{Binding Path=SelectedConfiguration.FpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:FpuType.None}}"/>
-                <RadioButton Grid.Column="1" Grid.Row="5" GroupName="fpu" Content="68881"
-                             IsChecked="{Binding Path=SelectedConfiguration.FpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:FpuType.MC68881}}"/>
-                <RadioButton Grid.Column="2" Grid.Row="5" GroupName="fpu" Content="68882"
-                             IsChecked="{Binding Path=SelectedConfiguration.FpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:FpuType.MC68882}}"/>
-                <RadioButton Grid.Column="3" Grid.Row="5" GroupName="fpu" Content="Internal"
-                             IsChecked="{Binding Path=SelectedConfiguration.FpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:FpuType.Internal}}"/>
+                <VerticalStackLayout>
+                    <RadioButton GroupName="cpu" Content="68000"
+                                 IsChecked="{Binding Path=SelectedConfiguration.CpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuType.MC68000}}" />
+                    <RadioButton GroupName="cpu" Content="68010"
+                                 IsChecked="{Binding Path=SelectedConfiguration.CpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuType.MC68010}}" />
+                    <RadioButton GroupName="cpu" Content="68020"
+                                 IsChecked="{Binding Path=SelectedConfiguration.CpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuType.MC68020}}" />
+                    <RadioButton GroupName="cpu" Content="68030"
+                                 IsChecked="{Binding Path=SelectedConfiguration.CpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuType.MC68030}}" />
+                    <RadioButton GroupName="cpu" Content="68040"
+                                 IsChecked="{Binding Path=SelectedConfiguration.CpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuType.MC68040}}" />
+                    <RadioButton GroupName="cpu" Content="68060"
+                                 IsChecked="{Binding Path=SelectedConfiguration.CpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuType.MC68060}}" />
 
-                
-            </Grid>
-            
-            <Label Text="CPU Emulation parameters" Style="{StaticResource H3Offset}" />
-            <HorizontalStackLayout >
-                <CheckBox VerticalOptions="Center"  
-                          IsChecked="{Binding Path=SelectedConfiguration.PrefetchEmulation}" />
-                <Label Text="Prefetch emulation" VerticalOptions="Center"/>
-                <Label Text="*" VerticalOptions="Center" Style="{StaticResource Warning}"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout >
-                <CheckBox VerticalOptions="Center"  
-                          IsChecked="{Binding Path=SelectedConfiguration.CycleExact}" />
-                <Label Text="Cycle exact with cache emulation" VerticalOptions="Center"/>
-                <Label Text="*" VerticalOptions="Center" Style="{StaticResource Warning}"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout >
-                <CheckBox VerticalOptions="Center"  
-                          IsChecked="{Binding Path=SelectedConfiguration.MmuEmulation}" />
-                <Label Text="MMU Emulation" VerticalOptions="Center"/>
-                <Label Text="*" VerticalOptions="Center" Style="{StaticResource Warning}"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout >
-                <CheckBox VerticalOptions="Center"  
-                          IsChecked="{Binding Path=SelectedConfiguration.Use24BitAddressing}" />
-                <Label Text="Use 24 bit addressing (32 bit if disabled)" VerticalOptions="Center"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout >
-                <CheckBox VerticalOptions="Center"  
-                          IsChecked="{Binding Path=SelectedConfiguration.AccurateFpuEmulation}" />
-                <Label Text="Accurate FPU emulation" VerticalOptions="Center"/>
-                <Label Text="*" VerticalOptions="Center" Style="{StaticResource Warning}"/>
-            </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </local:ConfigurationGroup>
 
-            <Label Text="* Uses more host CPU" VerticalOptions="Center" Style="{StaticResource Warning}"/>
+            <local:ConfigurationGroup Title="Clock">
+                <VerticalStackLayout>
+                    <RadioButton GroupName="clk" Content="8 Mhz"
+                                 IsChecked="{Binding Path=SelectedConfiguration.CpuClock, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuClock.Clock8Mhz}}" />
+                    <RadioButton GroupName="clk" Content="16 Mhz"
+                                 IsChecked="{Binding Path=SelectedConfiguration.CpuClock, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuClock.Clock16Mhz}}" />
+                    <RadioButton GroupName="clk" Content="32 Mhz"
+                                 IsChecked="{Binding Path=SelectedConfiguration.CpuClock, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:CpuClock.Clock32Mhz}}" />
 
-            
-        </VerticalStackLayout>
+                </VerticalStackLayout>
+            </local:ConfigurationGroup>
+
+            <local:ConfigurationGroup Title="FPU">
+                <VerticalStackLayout>
+
+
+                    <RadioButton GroupName="fpu" Content="None"
+                                 IsChecked="{Binding Path=SelectedConfiguration.FpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:FpuType.None}}" />
+                    <RadioButton GroupName="fpu" Content="68881"
+                                 IsChecked="{Binding Path=SelectedConfiguration.FpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:FpuType.MC68881}}" />
+                    <RadioButton GroupName="fpu" Content="68882"
+                                 IsChecked="{Binding Path=SelectedConfiguration.FpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:FpuType.MC68882}}" />
+                    <RadioButton GroupName="fpu" Content="Internal"
+                                 IsChecked="{Binding Path=SelectedConfiguration.FpuType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:FpuType.Internal}}" />
+
+                </VerticalStackLayout>
+            </local:ConfigurationGroup>
+
+          <panes:MemoryPane/>
+
+
+            <local:ConfigurationGroup Title="Emulation Parameters">
+                <VerticalStackLayout>
+                    <HorizontalStackLayout>
+                        <CheckBox VerticalOptions="Center"
+                                  IsChecked="{Binding Path=SelectedConfiguration.PrefetchEmulation}" />
+                        <Label Text="Prefetch emulation" VerticalOptions="Center" />
+                        <Label Text="*" VerticalOptions="Center" Style="{StaticResource Warning}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <CheckBox VerticalOptions="Center"
+                                  IsChecked="{Binding Path=SelectedConfiguration.CycleExact}" />
+                        <Label Text="Cycle exact with cache emulation" VerticalOptions="Center" />
+                        <Label Text="*" VerticalOptions="Center" Style="{StaticResource Warning}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <CheckBox VerticalOptions="Center"
+                                  IsChecked="{Binding Path=SelectedConfiguration.MmuEmulation}" />
+                        <Label Text="MMU Emulation" VerticalOptions="Center" />
+                        <Label Text="*" VerticalOptions="Center" Style="{StaticResource Warning}" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <CheckBox VerticalOptions="Center"
+                                  IsChecked="{Binding Path=SelectedConfiguration.Use24BitAddressing}" />
+                        <Label Text="Use 24 bit addressing (32 bit if disabled)" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <CheckBox VerticalOptions="Center"
+                                  IsChecked="{Binding Path=SelectedConfiguration.AccurateFpuEmulation}" />
+                        <Label Text="Accurate FPU emulation" VerticalOptions="Center" />
+                        <Label Text="*" VerticalOptions="Center" Style="{StaticResource Warning}" />
+                    </HorizontalStackLayout>
+
+                    <Label Text="* Uses more host CPU" VerticalOptions="Center" Style="{StaticResource Warning}" />
+
+                </VerticalStackLayout>
+            </local:ConfigurationGroup>
+
+
+        </HorizontalStackLayout>
     </controls:ConfigurationPanelSection>
 </ContentView>

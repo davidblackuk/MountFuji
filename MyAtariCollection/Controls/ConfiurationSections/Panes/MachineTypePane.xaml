@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MyAtariCollection.Models"
+             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             xmlns:sections="clr-namespace:MyAtariCollection.Controls.ConfiurationSections"
+             xmlns:converters="clr-namespace:MyAtariCollection.Converters"
+             x:DataType="vm:MainViewModel"
+
+             x:Class="MyAtariCollection.Controls.ConfiurationSections.Panes.MachineTypePane">
+    <ContentView.Resources>
+        <converters:ComparisonConverter x:Key="ComparisonConverter" />
+    </ContentView.Resources>
+
+    <sections:ConfigurationGroup Title="Machine Type">
+        <HorizontalStackLayout>
+            <VerticalStackLayout>
+                <RadioButton GroupName="system" Content="ST"
+                             IsChecked="{Binding Path=SelectedConfiguration.SystemType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:AtariSystemType.ST}}" />
+                <RadioButton GroupName="system" Content="Mega ST"
+                             IsChecked="{Binding Path=SelectedConfiguration.SystemType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:AtariSystemType.MegaST}}" />
+                <RadioButton GroupName="system" Content="STE"
+                             IsChecked="{Binding Path=SelectedConfiguration.SystemType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:AtariSystemType.STE}}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <RadioButton GroupName="system" Content="Mega STE"
+                             IsChecked="{Binding Path=SelectedConfiguration.SystemType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:AtariSystemType.MegaSTE}}" />
+                <RadioButton GroupName="system" Content="TT"
+                             IsChecked="{Binding Path=SelectedConfiguration.SystemType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:AtariSystemType.TT}}" />
+                <RadioButton GroupName="system" Content="Falcon"
+                             IsChecked="{Binding Path=SelectedConfiguration.SystemType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static models:AtariSystemType.Falcon}}" />
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+    </sections:ConfigurationGroup>
+
+
+</ContentView>

@@ -88,4 +88,16 @@ public partial class AtariConfiguration: ObservableObject
     /// </summary>
     [ObservableProperty] private string romImage;
 
+    /// <summary>
+    /// Amount of St memory in kilobytes (KiB), valid values are
+    /// 256 (rare original ST), 512 (stock ST), 1020 (1040ST), 2048 (2.5 Meg
+    /// not sure why) then multiples of 1024 up to a max of 14MB (really only falcon)
+    /// </summary>
+    [ObservableProperty] private int stMemorySize;
+
+    /// <summary>
+    /// Amount of TT memory in the system, must be incremented in blocks of 4*1024 and max of 1024 * 1024
+    /// </summary>
+    [ObservableProperty] private int ttMemorySize;
+
 }
