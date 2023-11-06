@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyAtariCollection.Controls.ConfiurationSections.Panes;
+namespace MyAtariCollection.Controls.ConfigurationSections.Panes;
 
-public partial class MemoryPane : ContentView
+public partial class FpuPane : ContentView
 {
-    public MemoryPane()
+    public FpuPane()
     {
         InitializeComponent();
     }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MyAtariCollection.Models"
+             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+             x:DataType="vm:MainViewModel"
+             x:Class="MyAtariCollection.Controls.ConfigurationSections.Panes.ClockSpeedPane">
+    
+    <configurationSections:ConfigurationGroup Title="Clock">
+        <VerticalStackLayout  RadioButtonGroup.GroupName="clk"
+                              RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.CpuClock}">
+  
+            <RadioButton Content="8 Mhz"  Value="{x:Static models:CpuClock.Clock8Mhz}" />
+            <RadioButton Content="16 Mhz" Value="{x:Static models:CpuClock.Clock16Mhz}" />
+            <RadioButton Content="32 Mhz" Value="{x:Static models:CpuClock.Clock32Mhz}" />
+
+        </VerticalStackLayout>
+    </configurationSections:ConfigurationGroup>
+</ContentView>

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyAtariCollection.Controls.ConfiurationSections.Panes;
+namespace MyAtariCollection.Controls.ConfigurationSections.Panes;
 
-public partial class MachineTypePane : ContentView
+public partial class EmulationParametersPane : ContentView
 {
-    public MachineTypePane()
+    public EmulationParametersPane()
     {
         InitializeComponent();
     }

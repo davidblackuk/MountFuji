@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyAtariCollection.Controls.ConfiurationSections;
+namespace MyAtariCollection.Controls.ConfigurationSections.Panes;
 
-public partial class CpuSection : ContentView
+public partial class ClockSpeedPane : ContentView
 {
-    public CpuSection()
+    public ClockSpeedPane()
     {
         InitializeComponent();
     }
