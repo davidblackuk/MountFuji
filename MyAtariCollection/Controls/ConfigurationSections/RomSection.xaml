@@ -3,11 +3,9 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:MyAtariCollection.Controls"
-             xmlns:models="clr-namespace:MyAtariCollection.Models"
              xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
-             xmlns:converters="clr-namespace:MyAtariCollection.Converters"
              x:DataType="vm:MainViewModel"
-             x:Class="MyAtariCollection.Controls.ConfiurationSections.RomSection">
+             x:Class="MyAtariCollection.Controls.ConfigurationSections.RomSection">
     <controls:ConfigurationPanelSection Title="ROM and Cartridge">
         <VerticalStackLayout>
             <Label Text="ROM Path" Style="{StaticResource H3Offset}" />

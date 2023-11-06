@@ -1,11 +1,4 @@
-using System.Text;
-
-namespace MyAtariCollection.Services;
-
-public interface ICpuOptionsGenerator
-{
-    void Generate(AtariConfiguration config, StringBuilder builder);
-}
+namespace MyAtariCollection.Services.OptionsGenerators;
 
 public class CpuOptionsGenerator: OptionsGenerator, ICpuOptionsGenerator
 {
@@ -15,12 +8,14 @@ public class CpuOptionsGenerator: OptionsGenerator, ICpuOptionsGenerator
         AddCpuType(config, builder);
         AddCpuClock(config, builder);
         AddFpuType(config, builder);
+        AddRam(config, builder);
         AddFlag(builder,"compatible", config.PrefetchEmulation);
         AddFlag(builder,"cpu-exact", config.CycleExact);
         AddFlag(builder,"mmu", config.MmuEmulation);
         AddFlag(builder,"addr24", config.Use24BitAddressing);
         AddFlag(builder,"fpu-softfloat", config.AccurateFpuEmulation);
     }
+
 
     private void AddCpuType(AtariConfiguration config, StringBuilder builder)
     {
@@ -93,4 +88,12 @@ public class CpuOptionsGenerator: OptionsGenerator, ICpuOptionsGenerator
         }
         AddFlag(builder, "fpu", val);
     }
+    
+    private void AddRam(AtariConfiguration config, StringBuilder builder)
+    {
+        AddFlag(builder, "memsize", config.StMemorySize);
+        AddFlag(builder, "ttram", config.TtMemorySize);
+    }
+
+    
 }

@@ -1,6 +1,6 @@
-using System.Text;
 
-namespace MyAtariCollection.Services;
+
+namespace MyAtariCollection.Services.OptionsGenerators;
 
 public class SystemOptionsGenerator: OptionsGenerator, ISystemOptionsGenerator
 {

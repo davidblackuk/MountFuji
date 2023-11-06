@@ -72,7 +72,7 @@ public partial class MainViewModel : TinyViewModel
     [RelayCommand()]
     private void Run()
     {
-        Console.WriteLine(optionsService.Generate(SelectedConfiguration));
+        Console.WriteLine("open /Applications/Hatari.app --args " + optionsService.Generate(SelectedConfiguration));
     }
 
     #endregion

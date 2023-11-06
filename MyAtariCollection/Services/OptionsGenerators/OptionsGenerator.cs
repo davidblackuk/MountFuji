@@ -1,7 +1,4 @@
-using System.Text;
-using Microsoft.Extensions.Primitives;
-
-namespace MyAtariCollection.Services;
+namespace MyAtariCollection.Services.OptionsGenerators;
 
 public class OptionsGenerator
 {
@@ -12,7 +9,7 @@ public class OptionsGenerator
         builder.Append(" ");
         builder.Append(value);
     }
-    protected void AddQuotedValue(StringBuilder builder, string flag, string value)
+    protected void AddQuotedFlag(StringBuilder builder, string flag, string value)
     {
         AddFlag(builder, flag, $" \"{value }\"");
     }
@@ -21,4 +18,10 @@ public class OptionsGenerator
     {
         AddFlag(builder, flag, value ? "1" : "0");
     }
+    
+    protected void AddFlag(StringBuilder builder, string flag, int value)
+    {
+        AddFlag(builder, flag, value.ToString());
+    }
+    
 }

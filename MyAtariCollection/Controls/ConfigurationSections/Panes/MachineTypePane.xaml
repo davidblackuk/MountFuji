@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MyAtariCollection.Models"
+             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+             x:DataType="vm:MainViewModel"
+
+             x:Class="MyAtariCollection.Controls.ConfigurationSections.Panes.MachineTypePane">
+
+    <configurationSections:ConfigurationGroup Title="Machine Type">
+        <HorizontalStackLayout  RadioButtonGroup.GroupName="system"
+                                RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.SystemType}">
+            <VerticalStackLayout>
+                <RadioButton GroupName="system" Content="ST"  Value="{x:Static models:AtariSystemType.ST}" />
+                <RadioButton GroupName="system" Content="Mega ST"  Value="{x:Static models:AtariSystemType.MegaST}" />
+                <RadioButton GroupName="system" Content="STE"  Value="{x:Static models:AtariSystemType.STE}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <RadioButton GroupName="system" Content="Mega STE"  Value="{x:Static models:AtariSystemType.MegaSTE}" />
+                <RadioButton GroupName="system" Content="TT"  Value="{x:Static models:AtariSystemType.TT}" />
+                <RadioButton GroupName="system" Content="Falcon"  Value="{x:Static models:AtariSystemType.Falcon}" />
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+    </configurationSections:ConfigurationGroup>
+
+
+</ContentView>

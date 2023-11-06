@@ -1,6 +1,6 @@
 namespace MyAtariCollection.Services.OptionsGenerators;
 
-public interface ISystemOptionsGenerator
+public interface ICpuOptionsGenerator
 {
     void Generate(AtariConfiguration config, StringBuilder builder);
 }
