@@ -9,6 +9,7 @@
                x:Class="MyAtariCollection.Views.MainView"
                Shell.NavBarIsVisible="False"
                Style="{StaticResource MyPage}"
+           
                >
     <ContentPage.Content>
         <Grid  Margin="10">
@@ -18,10 +19,10 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <controls:SystemPanel Grid.Column="0"></controls:SystemPanel>
+            <controls:SystemSelector Grid.Column="0"></controls:SystemSelector>
 
              
-            <controls:ConfigurationPanel Grid.Column="2"></controls:ConfigurationPanel>
+            <controls:SystemEditor Grid.Column="2"></controls:SystemEditor>
 
         </Grid>
 

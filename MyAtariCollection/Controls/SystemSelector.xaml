@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
              xmlns:controls="clr-namespace:MyAtariCollection.Controls"
              xmlns:models="clr-namespace:MyAtariCollection.Models"
-             x:Class="MyAtariCollection.Controls.SystemPanel"
+             x:Class="MyAtariCollection.Controls.SystemSelector"
              x:DataType="vm:MainViewModel"
              WidthRequest="400"
              >
@@ -44,7 +44,7 @@
             
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:AtariConfiguration">
-                    <controls:SystemPanelEntry/>
+                    <controls:SystemSelectorEntry/>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
             

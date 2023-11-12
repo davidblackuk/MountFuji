@@ -57,6 +57,7 @@
 
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Maui" Version="6.0.0" />
+        <PackageReference Include="M.BindableProperty.Generator" Version="0.11.1" />
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)"/>
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0-rc.2.23479.6"/>
@@ -64,13 +65,13 @@
     </ItemGroup>
 
     <ItemGroup>
-      <MauiXaml Update="Controls\SystemPanel.xaml">
+      <MauiXaml Update="Controls\SystemSelector.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Controls\SystemPanel.xaml.cs">
+      <Compile Update="Controls\SystemSelector.xaml.cs">
         <DependentUpon>SystemView.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>

@@ -24,4 +24,11 @@ public class OptionsGenerator
         AddFlag(builder, flag, value.ToString());
     }
     
+    protected void AddIdQuotedIdValueFlag(string flag, int id, string diskImage, StringBuilder builder)
+    {
+        if (!String.IsNullOrWhiteSpace(diskImage))
+        {
+            AddFlag(builder, flag, $"{id}=\"{diskImage}\"");
+        }
+    }
 }

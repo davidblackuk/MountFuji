@@ -110,6 +110,8 @@ public class MachineTemplateService : IMachineTemplateService
             
             StMemorySize = template.StMemorySize,
             TtMemorySize = template.TtMemorySize,
+            
+                        
         };
 
         return config;

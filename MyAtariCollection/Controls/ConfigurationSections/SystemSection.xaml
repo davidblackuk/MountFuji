@@ -7,7 +7,7 @@
              xmlns:panes="clr-namespace:MyAtariCollection.Controls.ConfigurationSections.Panes"
              x:DataType="vm:MainViewModel"
              x:Class="MyAtariCollection.Controls.ConfigurationSections.SystemSection">
-    <controls:ConfigurationPanelSection Title="System">
+    <controls:SystemEditorExpander Title="System" Expanded="{Binding PanelVisibility.ShowSystemPanel}">
 
         <HorizontalStackLayout>
             <panes:MachineTypePane />
@@ -16,5 +16,5 @@
             <panes:SystemParametersPane />
         </HorizontalStackLayout>
         
-    </controls:ConfigurationPanelSection>
+    </controls:SystemEditorExpander>
 </ContentView>

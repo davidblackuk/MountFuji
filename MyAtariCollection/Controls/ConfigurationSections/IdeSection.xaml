@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+             xmlns:models="clr-namespace:MyAtariCollection.Models"
+             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             x:DataType="vm:MainViewModel"
+
+             x:Class="MyAtariCollection.Controls.ConfigurationSections.IdeSection">
+    <controls:SystemEditorExpander Title="IDE - Hard Disks" Expanded="{Binding PanelVisibility.ShowIdeHddPanel}">
+        <VerticalStackLayout>
+
+            <VerticalStackLayout>
+
+                <controls:HardDiskPathEditor
+                    Title="Disk: 0" DiskId="{x:Int32 0}"
+                    DiskImagePath="{Binding SelectedConfiguration.IdeOptions.Disk0}"
+                    ClearDiskImageCommand="{Binding ClearIdeDiskImageCommand}"
+                    BrowseDiskImageCommand="{Binding BrowseIdeDiskImageCommand}" />
+
+                <HorizontalStackLayout RadioButtonGroup.GroupName="ide1"
+                                     RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.IdeOptions.ByteSwapDrive0}">
+                    <Label Margin="60,10,0,20" Text="Byte swap: "></Label>
+                    <RadioButton Content="Off" Value="{x:Static models:IdeByteSwap.Off}" />
+                    <RadioButton Content="On" Value="{x:Static models:IdeByteSwap.On}" />
+                    <RadioButton Content="Auto" Value="{x:Static models:IdeByteSwap.Auto}" />
+                </HorizontalStackLayout>
+                
+                <controls:HardDiskPathEditor
+                    Title="Disk: 1" DiskId="{x:Int32 1}"
+                    DiskImagePath="{Binding SelectedConfiguration.IdeOptions.Disk1}"
+                    ClearDiskImageCommand="{Binding ClearIdeDiskImageCommand}"
+                    BrowseDiskImageCommand="{Binding BrowseIdeDiskImageCommand}" />
+
+                <HorizontalStackLayout RadioButtonGroup.GroupName="ide2"
+                                       RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.IdeOptions.ByteSwapDrive1}">
+                    <Label Margin="66,10,0,10" Text="Byte swap: "></Label>
+                    <RadioButton Content="Off" Value="{x:Static models:IdeByteSwap.Off}" />
+                    <RadioButton Content="On" Value="{x:Static models:IdeByteSwap.On}" />
+                    <RadioButton Content="Auto" Value="{x:Static models:IdeByteSwap.Auto}" />
+                </HorizontalStackLayout>
+
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </controls:SystemEditorExpander>
+</ContentView>

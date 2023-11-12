@@ -3,7 +3,10 @@ global using System.Text;
 global using Microsoft.Extensions.Logging;
 
 global using TinyMvvm;
+global using System.Windows.Input;
+global using Maui.BindableProperty.Generator.Core;
 
+global using MyAtariCollection.Extensions;
 global using MyAtariCollection.Services;
 global using MyAtariCollection.Models;
 global using MyAtariCollection.Views;
@@ -42,6 +45,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ISystemOptionsGenerator, SystemOptionsGenerator>();
         builder.Services.AddTransient<ICpuOptionsGenerator, CpuOptionsGenerator>();
         builder.Services.AddTransient<IRomOptionsGenerator, RomOptionsGenerator>();
+        builder.Services.AddTransient<IHardDiskOptionsGenerator, HardDiskOptionsGenerator>();
 
         
         builder.Services.AddTransient<ICommandLineOptionsService, CommandLineOptionsService>();

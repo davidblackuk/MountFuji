@@ -7,7 +7,7 @@
              xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
              xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
              x:DataType="vm:MainViewModel"
-             x:Class="MyAtariCollection.Controls.ConfigurationPanel">
+             x:Class="MyAtariCollection.Controls.SystemEditor">
 
     <!-- <Grid BackgroundColor="{StaticResource ComponentBackground}"> -->
     <Frame  Style="{StaticResource PanelFrame}">
@@ -28,18 +28,20 @@
             <ScrollView Grid.Row="1">
                 <VerticalStackLayout Spacing="10" Margin="0,20,0,0">
                     
-                    <configurationSections:SystemSection />
+                    <configurationSections:SystemSection/>
                     <configurationSections:CpuSection />
                     <configurationSections:RomSection/>
+                    <configurationSections:AcsiSection/>
+                    <configurationSections:ScsiSection/>
+                    <configurationSections:IdeSection/>
 
-                    <controls:ConfigurationPanelSection Title="Floppy Disks"/>
-                    <controls:ConfigurationPanelSection Title="Hard Disks"/>
-                    <controls:ConfigurationPanelSection Title="Atari Screen"/>
-                    <controls:ConfigurationPanelSection Title="Hatari Screen"/>
-                    <controls:ConfigurationPanelSection Title="Joysticks"/>
-                    <controls:ConfigurationPanelSection Title="Keyboard"/>
-                    <controls:ConfigurationPanelSection Title="Devices"/>
-                    <controls:ConfigurationPanelSection Title="Sound"/>
+                    <controls:SystemEditorExpander Title="Floppy Disks"/>
+                    <controls:SystemEditorExpander Title="Atari Screen"/>
+                    <controls:SystemEditorExpander Title="Hatari Screen"/>
+                    <controls:SystemEditorExpander Title="Joysticks"/>
+                    <controls:SystemEditorExpander Title="Keyboard"/>
+                    <controls:SystemEditorExpander Title="Devices"/>
+                    <controls:SystemEditorExpander Title="Sound"/>
 
                 </VerticalStackLayout>
 
