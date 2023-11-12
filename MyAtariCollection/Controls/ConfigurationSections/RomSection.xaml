@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
              x:DataType="vm:MainViewModel"
              x:Class="MyAtariCollection.Controls.ConfigurationSections.RomSection">
-    <controls:ConfigurationPanelSection Title="ROM and Cartridge">
+    <controls:SystemEditorExpander Title="ROM and Cartridge"  Expanded="{Binding PanelVisibility.ShowRomPanel}">
         <VerticalStackLayout>
             <Label Text="ROM Path" Style="{StaticResource H3Offset}" />
             
@@ -17,5 +17,5 @@
                 <Button Style="{StaticResource InlineMaterialButton}"  Grid.Column="2" Text="{x:Static controls:IconFont.File_open}"  Command="{Binding BrowseRomsCommand}"></Button>
             </Grid>
         </VerticalStackLayout>
-    </controls:ConfigurationPanelSection>
+    </controls:SystemEditorExpander>
 </ContentView>

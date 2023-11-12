@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:MyAtariCollection.Models"
              xmlns:controls="clr-namespace:MyAtariCollection.Controls"
-             x:Class="MyAtariCollection.Controls.SystemPanelEntry"
+             x:Class="MyAtariCollection.Controls.SystemSelectorEntry"
              x:DataType="models:AtariConfiguration">
     
     <VerticalStackLayout Margin="0,5,0,5">

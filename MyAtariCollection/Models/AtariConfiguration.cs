@@ -42,7 +42,7 @@ public partial class AtariConfiguration: ObservableObject
     [ObservableProperty] private bool fastBootPatch;
 
     /// <summary>
-    /// Processor type in use, notably MC68000 everywhere, except for TT & Falcon (030),
+    /// Processor type in use, notably MC68000 everywhere, except for TT  Falcon (030),
     /// however third party hardware modules existed to allow more impressive CPus on humble STs
     /// </summary>
     [ObservableProperty] private CpuType cpuType;
@@ -56,7 +56,6 @@ public partial class AtariConfiguration: ObservableObject
     /// Floating point unit type 
     /// </summary>
     [ObservableProperty] private FpuType fpuType;
-
     
     /// <summary>
     /// Use a more compatible 68000 CPU mode with better prefetch accuracy and cycle counting
@@ -100,4 +99,19 @@ public partial class AtariConfiguration: ObservableObject
     /// </summary>
     [ObservableProperty] private int ttMemorySize;
 
+    /// <summary>
+    /// optional paths to ACSI drive images, not applicable for Falcons
+    /// </summary>
+    [ObservableProperty] private AcsiScsiDiskOptions acsiImagePaths = new();
+
+    /// <summary>
+    /// optional paths to SCSI drive images
+    /// </summary>
+    [ObservableProperty] private AcsiScsiDiskOptions scsiImagePaths = new();
+    
+    /// <summary>
+    /// optional paths to IDE primary / secondary drive images, only applicable for Falcons
+    /// </summary>
+    [ObservableProperty] private IdeDiskOptions ideOptions = new();
+    
 }

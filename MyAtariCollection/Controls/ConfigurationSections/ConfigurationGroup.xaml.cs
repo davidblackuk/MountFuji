@@ -5,7 +5,7 @@ public partial class ConfigurationGroup : ContentView
     public static readonly BindableProperty TitleProperty =
         BindableProperty.Create(nameof(Title),
             typeof(string),
-            typeof(ConfigurationPanelSection));
+            typeof(SystemEditorExpander));
 
     public ConfigurationGroup()
     {

@@ -38,7 +38,7 @@ public class AtariConfigurationTemplate
     public bool FastBootPatch { get; init; }
 
     /// <summary>
-    /// Processor type in use, notably MC68000 everywhere, except for TT & Falcon (030),
+    /// Processor type in use, notably MC68000 everywhere, except for TT  Falcon (030),
     /// however third party hardware modules existed to allow more impressive CPus on humble STs
     /// </summary>
     public CpuType CpuType { get; init; }
@@ -95,5 +95,20 @@ public class AtariConfigurationTemplate
     /// Amount of TT memory in the system, must be incremented in blocks of 4*1024 and max of 1024 * 1024
     /// </summary>
     public int TtMemorySize { get; init; } = 0;
+
+    /// <summary>
+    /// optional paths to ACSI drive images, not applicable for Falcons
+    /// </summary>
+    public AcsiScsiDiskOptions AchiDiskImagePaths = new ();
+
+    /// <summary>
+    /// optional paths to SCSI drive images
+    /// </summary>
+    public AcsiScsiDiskOptions ScsiDiskImagePaths = new ();
+
+    /// <summary>
+    /// optional paths to ACSI drive images, only applicable for Falcons
+    /// </summary>
+    public IdeDiskOptions IdeDiskOptions = new ();
 
 }

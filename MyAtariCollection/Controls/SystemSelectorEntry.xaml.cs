@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyAtariCollection.Controls;
 
-public partial class SystemPanelEntry
+public partial class SystemSelectorEntry
 {
-    public SystemPanelEntry()
+    public SystemSelectorEntry()
     {
         InitializeComponent();
     }

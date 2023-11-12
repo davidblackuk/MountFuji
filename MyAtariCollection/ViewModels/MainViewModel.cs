@@ -25,11 +25,15 @@ public partial class MainViewModel : TinyViewModel
     }
 
 
-    [ObservableProperty] private ObservableCollection<AtariConfiguration> systems = new();
+    [ObservableProperty] 
+    private ObservableCollection<AtariConfiguration> systems = new();
 
-    [ObservableProperty] [NotifyPropertyChangedFor(nameof(HasSelectedConfig))]
+    [ObservableProperty] 
+    [NotifyPropertyChangedFor(nameof(HasSelectedConfig))]
     private AtariConfiguration selectedConfiguration;
-
+    
+    [ObservableProperty]
+    private PanelVisibility panelVisibility = new PanelVisibility(); 
 
     public bool HasSelectedConfig => SelectedConfiguration != null;
 
@@ -48,12 +52,52 @@ public partial class MainViewModel : TinyViewModel
             SelectedConfiguration.RomImage = file.FullPath;
         }
     }
-
     [RelayCommand]
     private void ClearRom()
     {
         SelectedConfiguration.RomImage = String.Empty;
     }
+    
+    #region disk image  operations
+    
+    [RelayCommand()]
+    private async void BrowseAcsiDiskImage(int diskId)
+    {
+        var file = await filePicker.PickAsync();
+        
+        if (file != null) SelectedConfiguration.AcsiImagePaths.SetImagePath(diskId, file.FullPath);
+    }
+    
+    [RelayCommand()]
+    private void ClearAcsiDiskImage(int diskId) => SelectedConfiguration.AcsiImagePaths.ClearImagePath(diskId);
+
+
+    [RelayCommand()]
+    private async void BrowseScsiDiskImage(int diskId)
+    {
+        var file = await filePicker.PickAsync();
+        
+        if (file != null) SelectedConfiguration.ScsiImagePaths.SetImagePath(diskId, file.FullPath);
+    }
+    
+    [RelayCommand()]
+    private void ClearScsiDiskImage(int diskId) => SelectedConfiguration.ScsiImagePaths.ClearImagePath(diskId);
+
+    [RelayCommand()]
+    private async void BrowseIdeDiskImage(int diskId)
+    {
+        var file = await filePicker.PickAsync();
+        
+        if (file != null) SelectedConfiguration.IdeOptions.SetImagePath(diskId, file.FullPath);
+    }
+    
+    [RelayCommand()]
+    private void ClearIdeDiskImage(int diskId) => SelectedConfiguration.IdeOptions.ClearImagePath(diskId);
+
+    
+    
+    
+    #endregion
     
     [RelayCommand]
     private void CreateNewSystem()

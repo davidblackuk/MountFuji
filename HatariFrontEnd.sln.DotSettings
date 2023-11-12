@@ -3,5 +3,6 @@
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=ST/@EntryIndexedValue">ST</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=STE/@EntryIndexedValue">STE</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=TT/@EntryIndexedValue">TT</s:String>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Acsi/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=blitter/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Hatari/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
