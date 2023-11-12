@@ -22,5 +22,10 @@ public partial class FloppyDriveOptions: ObservableObject
 {
     [ObservableProperty] private string driveAPath = String.Empty;
     [ObservableProperty] private bool driveAEnabled = true;
- 
+
+    [ObservableProperty] private string driveBPath = String.Empty;
+    [ObservableProperty] private bool driveBEnabled = true;
+
+
+
 }
