@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -34,8 +34,8 @@
                     <configurationSections:AcsiSection/>
                     <configurationSections:ScsiSection/>
                     <configurationSections:IdeSection/>
+                    <configurationSections:FloppySection />
 
-                    <controls:SystemEditorExpander Title="Floppy Disks"/>
                     <controls:SystemEditorExpander Title="Atari Screen"/>
                     <controls:SystemEditorExpander Title="Hatari Screen"/>
                     <controls:SystemEditorExpander Title="Joysticks"/>

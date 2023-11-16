@@ -113,5 +113,10 @@ public partial class AtariConfiguration: ObservableObject
     /// optional paths to IDE primary / secondary drive images, only applicable for Falcons
     /// </summary>
     [ObservableProperty] private IdeDiskOptions ideOptions = new();
-    
+
+    /// <summary>
+    /// Floppy disk configuration
+    /// </summary>
+    [ObservableProperty] private FloppyDriveOptions floppyOptions = new();
+
 }

@@ -46,6 +46,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ICpuOptionsGenerator, CpuOptionsGenerator>();
         builder.Services.AddTransient<IRomOptionsGenerator, RomOptionsGenerator>();
         builder.Services.AddTransient<IHardDiskOptionsGenerator, HardDiskOptionsGenerator>();
+        builder.Services.AddTransient<IFloppyOptionsGenerator, FloppyOptionsGenerator>();
 
         
         builder.Services.AddTransient<ICommandLineOptionsService, CommandLineOptionsService>();

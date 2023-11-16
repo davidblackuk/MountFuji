@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              xmlns:controls="clr-namespace:MyAtariCollection.Controls"
              xmlns:models="clr-namespace:MyAtariCollection.Models"
              xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
@@ -14,7 +15,7 @@
             <VerticalStackLayout>
 
                 <controls:HardDiskPathEditor
-                    Title="Disk: 0" DiskId="{x:Int32 0}"
+                    Title="Disk: 0" DiskId="{sys:Int32 0}"
                     DiskImagePath="{Binding SelectedConfiguration.IdeOptions.Disk0}"
                     ClearDiskImageCommand="{Binding ClearIdeDiskImageCommand}"
                     BrowseDiskImageCommand="{Binding BrowseIdeDiskImageCommand}" />
@@ -28,7 +29,7 @@
                 </HorizontalStackLayout>
                 
                 <controls:HardDiskPathEditor
-                    Title="Disk: 1" DiskId="{x:Int32 1}"
+                    Title="Disk: 1" DiskId="{sys:Int32 1}"
                     DiskImagePath="{Binding SelectedConfiguration.IdeOptions.Disk1}"
                     ClearDiskImageCommand="{Binding ClearIdeDiskImageCommand}"
                     BrowseDiskImageCommand="{Binding BrowseIdeDiskImageCommand}" />

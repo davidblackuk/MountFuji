@@ -94,11 +94,22 @@ public partial class MainViewModel : TinyViewModel
     [RelayCommand()]
     private void ClearIdeDiskImage(int diskId) => SelectedConfiguration.IdeOptions.ClearImagePath(diskId);
 
-    
-    
-    
+    [RelayCommand()]
+    private async void BrowseFloppyDiskImage(int diskId)
+    {
+        var file = await filePicker.PickAsync();
+
+        if (file != null) SelectedConfiguration.FloppyOptions.SetImagePath(diskId, file.FullPath);
+    }
+
+    [RelayCommand()]
+    private void ClearFloppyDiskImage(int diskId) => SelectedConfiguration.FloppyOptions.ClearImagePath(diskId);
+
+
+
+
     #endregion
-    
+
     [RelayCommand]
     private void CreateNewSystem()
     {

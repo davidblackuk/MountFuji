@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             xmlns:models="clr-namespace:MyAtariCollection.Models"
+             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             x:DataType="vm:MainViewModel"
+
+             x:Class="MyAtariCollection.Controls.ConfigurationSections.FloppySection">
+
+    <controls:SystemEditorExpander Title="Floppy Drives" Expanded="{Binding PanelVisibility.ShowFloppyPanel}">
+
+        <VerticalStackLayout>
+
+            <controls:HardDiskPathEditor
+                    Title="Drive A" DiskId="{sys:Int32 0}"
+                    DiskImagePath="{Binding SelectedConfiguration.FloppyOptions.DriveAPath}"
+                    ClearDiskImageCommand="{Binding ClearFloppyDiskImageCommand}"
+                    BrowseDiskImageCommand="{Binding BrowseFloppyDiskImageCommand}" />
+
+            <Grid ColumnDefinitions="40,auto,40,*" Margin="60,10,0,20">
+                <CheckBox Grid.Column="0" VerticalOptions="Center" IsChecked="{Binding SelectedConfiguration.FloppyOptions.DriveAEnabled}" />
+                <Label Grid.Column="1" Text="Enabled" VerticalOptions="Center" />
+                <CheckBox  Grid.Column="2"  VerticalOptions="Center" IsChecked="{Binding SelectedConfiguration.FloppyOptions.DriveADoubleSided}" />
+                <Label  Grid.Column="3" Text="Double sided" VerticalOptions="Center" />
+            </Grid>
+
+             <controls:HardDiskPathEditor
+                    Title="Drive B" DiskId="{sys:Int32 1}"
+                    DiskImagePath="{Binding SelectedConfiguration.FloppyOptions.DriveBPath}"
+                    ClearDiskImageCommand="{Binding ClearFloppyDiskImageCommand}"
+                    BrowseDiskImageCommand="{Binding BrowseFloppyDiskImageCommand}" />
+
+            <Grid ColumnDefinitions="40,auto,40,*" Margin="60,10,0,20">
+                <CheckBox Grid.Column="0" VerticalOptions="Center" IsChecked="{Binding SelectedConfiguration.FloppyOptions.DriveBEnabled}" />
+                <Label Grid.Column="1" Text="Enabled" VerticalOptions="Center" />
+                <CheckBox  Grid.Column="2"  VerticalOptions="Center" IsChecked="{Binding SelectedConfiguration.FloppyOptions.DriveBDoubleSided}" />
+                <Label  Grid.Column="3" Text="Double sided" VerticalOptions="Center" />
+            </Grid>
+
+            <Label Text="Extras"/>
+
+            <HorizontalStackLayout>
+                <CheckBox Grid.Column="0" VerticalOptions="Center" IsChecked="{Binding SelectedConfiguration.FloppyOptions.AutoInsertB}" />
+                <Label Grid.Column="1" Text="Auto insert B" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+            
+            <HorizontalStackLayout>
+                <CheckBox Grid.Column="0" VerticalOptions="Center" IsChecked="{Binding SelectedConfiguration.FloppyOptions.FastFloppyAccess}" />
+                <Label Grid.Column="1" Text="Fast floppy access" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+                <HorizontalStackLayout RadioButtonGroup.GroupName="floppyWriteProtect"
+                                     RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.FloppyOptions.WriteProtection}">
+                    <Label Margin="10,10,0,20" Text="Write protection:" VerticalOptions="Center"></Label>
+                    <RadioButton Content="Off" Value="{x:Static models:FloppyWriteProtection.Off}" />
+                    <RadioButton Content="On" Value="{x:Static models:FloppyWriteProtection.On}" />
+                    <RadioButton Content="Auto" Value="{x:Static models:FloppyWriteProtection.Auto}" />
+                </HorizontalStackLayout>
+                
+
+
+
+        </VerticalStackLayout>
+    </controls:SystemEditorExpander>
+</ContentView>
+
+ 

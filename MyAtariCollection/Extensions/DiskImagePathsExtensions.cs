@@ -90,4 +90,28 @@ public static class DiskImagePathsExtensions
             options.Disk1 = "";
         }
     }
+
+    public static void SetImagePath(this FloppyDriveOptions options, int diskId, string fileFullPath)
+    {
+        if (diskId == 0)
+        {
+            options.DriveAPath = fileFullPath;
+        }
+        else
+        {
+            options.DriveBPath = fileFullPath;
+        }
+    }
+
+    public static void ClearImagePath(this FloppyDriveOptions options, int diskId)
+    {
+        if (diskId == 0)
+        {
+            options.DriveAPath = "";
+        }
+        else
+        {
+            options.DriveBPath = "";
+        }
+    }
 }

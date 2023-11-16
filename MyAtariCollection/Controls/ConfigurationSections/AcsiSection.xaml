@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              xmlns:controls="clr-namespace:MyAtariCollection.Controls"
              xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
              x:DataType="vm:MainViewModel"
@@ -13,50 +14,50 @@
             <VerticalStackLayout>
 
                 <controls:HardDiskPathEditor 
-                    Title="Disk: 0" DiskId="{x:Int32 0}"
+                    Title="Disk: 0" DiskId="{sys:Int32 0}"
                     DiskImagePath="{Binding SelectedConfiguration.AcsiImagePaths.Disk0}" 
                     ClearDiskImageCommand="{Binding ClearAcsiDiskImageCommand}"
                     BrowseDiskImageCommand="{Binding BrowseAcsiDiskImageCommand}"/>
 
                 <controls:HardDiskPathEditor 
-                    Title="Disk: 1" DiskId="{x:Int32 1}"
+                    Title="Disk: 1" DiskId="{sys:Int32 1}"
                     DiskImagePath="{Binding SelectedConfiguration.AcsiImagePaths.Disk1}" 
                     ClearDiskImageCommand="{Binding ClearAcsiDiskImageCommand}"
                     BrowseDiskImageCommand="{Binding BrowseAcsiDiskImageCommand}"/>
            
                 <controls:HardDiskPathEditor 
-                    Title="Disk: 2" DiskId="{x:Int32 2}"
+                    Title="Disk: 2" DiskId="{sys:Int32 2}"
                     DiskImagePath="{Binding SelectedConfiguration.AcsiImagePaths.Disk2}" 
                     ClearDiskImageCommand="{Binding ClearAcsiDiskImageCommand}"
                     BrowseDiskImageCommand="{Binding BrowseAcsiDiskImageCommand}"/>
 
                <controls:HardDiskPathEditor 
-                    Title="Disk: 3" DiskId="{x:Int32 3}"
+                    Title="Disk: 3" DiskId="{sys:Int32 3}"
                     DiskImagePath="{Binding SelectedConfiguration.AcsiImagePaths.Disk3}" 
                     ClearDiskImageCommand="{Binding ClearAcsiDiskImageCommand}"
                     BrowseDiskImageCommand="{Binding BrowseAcsiDiskImageCommand}"/>
 
                <controls:HardDiskPathEditor 
-                    Title="Disk: 4" DiskId="{x:Int32 4}"
+                    Title="Disk: 4" DiskId="{sys:Int32 4}"
                     DiskImagePath="{Binding SelectedConfiguration.AcsiImagePaths.Disk4}" 
                     ClearDiskImageCommand="{Binding ClearAcsiDiskImageCommand}"
                     BrowseDiskImageCommand="{Binding BrowseAcsiDiskImageCommand}"/>
 
                <controls:HardDiskPathEditor 
                     Title="Disk: 5" 
-                    DiskId="{x:Int32 5}"
+                    DiskId="{sys:Int32 5}"
                     DiskImagePath="{Binding SelectedConfiguration.AcsiImagePaths.Disk5}" 
                     ClearDiskImageCommand="{Binding ClearAcsiDiskImageCommand}"
                     BrowseDiskImageCommand="{Binding BrowseAcsiDiskImageCommand}"/>
 
                <controls:HardDiskPathEditor 
-                    Title="Disk: 6" DiskId="{x:Int32 6}"
+                    Title="Disk: 6" DiskId="{sys:Int32 6}"
                     DiskImagePath="{Binding SelectedConfiguration.AcsiImagePaths.Disk6}" 
                     ClearDiskImageCommand="{Binding ClearAcsiDiskImageCommand}"
                     BrowseDiskImageCommand="{Binding BrowseAcsiDiskImageCommand}"/>
 
                <controls:HardDiskPathEditor 
-                    Title="Disk: 7" DiskId="{x:Int32 7}"
+                    Title="Disk: 7" DiskId="{sys:Int32 7}"
                     DiskImagePath="{Binding SelectedConfiguration.AcsiImagePaths.Disk7}" 
                     ClearDiskImageCommand="{Binding ClearAcsiDiskImageCommand}"
                     BrowseDiskImageCommand="{Binding BrowseAcsiDiskImageCommand}"/>

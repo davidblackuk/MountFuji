@@ -111,4 +111,9 @@ public class AtariConfigurationTemplate
     /// </summary>
     public IdeDiskOptions IdeDiskOptions = new ();
 
+    /// <summary>
+    /// Options for floppy drives
+    /// </summary>
+    public FloppyDriveOptions FloppyOptions = new();
+
 }
