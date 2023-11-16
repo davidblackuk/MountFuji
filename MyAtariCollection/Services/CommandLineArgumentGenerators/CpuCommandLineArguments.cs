@@ -1,6 +1,6 @@
-namespace MyAtariCollection.Services.OptionsGenerators;
+namespace MyAtariCollection.Services.CommandLineArgumentGenerators;
 
-public class CpuOptionsGenerator: OptionsGenerator, ICpuOptionsGenerator
+public class CpuCommandLineArguments: CommandLineArguments, ICpuCommandLineArguments
 {
 
     public void Generate(AtariConfiguration config, StringBuilder builder)

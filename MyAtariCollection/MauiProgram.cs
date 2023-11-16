@@ -16,7 +16,7 @@ global using CommunityToolkit.Maui;
 global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Maui.Storage;
-using MyAtariCollection.Services.OptionsGenerators;
+using MyAtariCollection.Services.CommandLineArgumentGenerators;
 
 namespace MyAtariCollection;
 
@@ -42,11 +42,11 @@ public static class MauiProgram
         builder.Services.AddTransient<IFolderPicker>(provider => FolderPicker.Default);
         builder.Services.AddTransient<IFilePicker>(provider => FilePicker.Default);
         
-        builder.Services.AddTransient<ISystemOptionsGenerator, SystemOptionsGenerator>();
-        builder.Services.AddTransient<ICpuOptionsGenerator, CpuOptionsGenerator>();
-        builder.Services.AddTransient<IRomOptionsGenerator, RomOptionsGenerator>();
-        builder.Services.AddTransient<IHardDiskOptionsGenerator, HardDiskOptionsGenerator>();
-        builder.Services.AddTransient<IFloppyOptionsGenerator, FloppyOptionsGenerator>();
+        builder.Services.AddTransient<ISystemCommandLineArguments, SystemCommandLineArguments>();
+        builder.Services.AddTransient<ICpuCommandLineArguments, CpuCommandLineArguments>();
+        builder.Services.AddTransient<IRomCommandLineArguments, RomCommandLineArguments>();
+        builder.Services.AddTransient<IHardDiskCommandLineArguments, HardDiskCommandLineArguments>();
+        builder.Services.AddTransient<IFloppyCommandLineArguments, FloppyCommandLineArguments>();
 
         
         builder.Services.AddTransient<ICommandLineOptionsService, CommandLineOptionsService>();

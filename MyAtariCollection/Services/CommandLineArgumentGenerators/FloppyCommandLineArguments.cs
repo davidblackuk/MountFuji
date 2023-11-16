@@ -1,14 +1,8 @@
-﻿using System;
-namespace MyAtariCollection.Services.OptionsGenerators
+﻿namespace MyAtariCollection.Services.CommandLineArgumentGenerators
 {
-	public interface IFloppyOptionsGenerator
+	public class FloppyCommandLineArguments: CommandLineArguments, IFloppyCommandLineArguments
 	{
-		void Generate(AtariConfiguration config, StringBuilder builder);
-	}
-
-	public class FloppyOptionsGenerator: OptionsGenerator, IFloppyOptionsGenerator
-	{
-		public FloppyOptionsGenerator()
+		public FloppyCommandLineArguments()
 		{
 		}
 

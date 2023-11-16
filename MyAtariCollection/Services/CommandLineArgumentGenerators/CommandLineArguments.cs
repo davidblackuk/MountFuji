@@ -1,6 +1,6 @@
-namespace MyAtariCollection.Services.OptionsGenerators;
+namespace MyAtariCollection.Services.CommandLineArgumentGenerators;
 
-public class OptionsGenerator
+public class CommandLineArguments
 {
     protected void AddFlag(StringBuilder builder, string flag, string value)
     {

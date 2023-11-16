@@ -1,5 +1,5 @@
 using System.Text;
-using MyAtariCollection.Services.OptionsGenerators;
+using MyAtariCollection.Services.CommandLineArgumentGenerators;
 
 namespace MyAtariCollection.Services;
 
@@ -8,18 +8,18 @@ public interface ICommandLineOptionsService
     string Generate(AtariConfiguration config);
 }
 
-public class CommandLineOptionsService(ISystemOptionsGenerator systemOptions, ICpuOptionsGenerator cpuOptions,
-        IRomOptionsGenerator romOptions, IHardDiskOptionsGenerator hddOptions, IFloppyOptionsGenerator floppyOptions)
+public class CommandLineOptionsService(ISystemCommandLineArguments systemArguments, ICpuCommandLineArguments cpuArguments,
+        IRomCommandLineArguments romArguments, IHardDiskCommandLineArguments hddArguments, IFloppyCommandLineArguments floppyArguments)
     : ICommandLineOptionsService
 {
     public string Generate(AtariConfiguration config)
     {
         StringBuilder builder = new StringBuilder();
-        systemOptions.Generate(config, builder);
-        cpuOptions.Generate(config, builder);
-        romOptions.Generate(config, builder);
-        hddOptions.Generate(config, builder);
-        floppyOptions.Generate(config, builder);
+        systemArguments.Generate(config, builder);
+        cpuArguments.Generate(config, builder);
+        romArguments.Generate(config, builder);
+        hddArguments.Generate(config, builder);
+        floppyArguments.Generate(config, builder);
         return builder.ToString();
     }
     
