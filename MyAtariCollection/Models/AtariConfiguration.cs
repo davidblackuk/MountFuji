@@ -119,4 +119,8 @@ public partial class AtariConfiguration: ObservableObject
     /// </summary>
     [ObservableProperty] private FloppyDriveOptions floppyOptions = new();
 
+    /// <summary>
+    /// Atari screen options, video mode, VDI settings etc
+    /// </summary>
+    [ObservableProperty] private AtariScreenOptions screenOptions = new();
 }

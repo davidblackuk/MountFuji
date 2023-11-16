@@ -15,4 +15,6 @@ public partial class PanelVisibility: ObservableObject
     [ObservableProperty] private bool showIdeHddPanel = false;
 
     [ObservableProperty] private bool showFloppyPanel = false;
+    
+    [ObservableProperty] private bool showAtariScreenPanel = false;
 }
