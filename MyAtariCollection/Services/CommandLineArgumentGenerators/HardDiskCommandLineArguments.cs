@@ -1,13 +1,6 @@
-using System.Numerics;
+namespace MyAtariCollection.Services.CommandLineArgumentGenerators;
 
-namespace MyAtariCollection.Services.OptionsGenerators;
-
-public interface IHardDiskOptionsGenerator
-{
-    void Generate(AtariConfiguration config, StringBuilder builder);
-}
-
-public class HardDiskOptionsGenerator : OptionsGenerator, IHardDiskOptionsGenerator
+public class HardDiskCommandLineArguments : CommandLineArguments, IHardDiskCommandLineArguments
 {
     public void Generate(AtariConfiguration config, StringBuilder builder)
     {

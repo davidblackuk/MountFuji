@@ -1,8 +1,8 @@
 
 
-namespace MyAtariCollection.Services.OptionsGenerators;
+namespace MyAtariCollection.Services.CommandLineArgumentGenerators;
 
-public class SystemOptionsGenerator: OptionsGenerator, ISystemOptionsGenerator
+public class SystemCommandLineArguments: CommandLineArguments, ISystemCommandLineArguments
 {
     public void Generate(AtariConfiguration config, StringBuilder builder)
     {
