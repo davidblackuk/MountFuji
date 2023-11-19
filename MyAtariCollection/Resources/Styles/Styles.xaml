@@ -371,6 +371,27 @@
     
     <!-- ========================== My Styles  ========================== -->
     
+    <Style TargetType="HorizontalStackLayout" x:Key="ContentViewItem">
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource ContentViewUnselectedLight}, Dark={StaticResource ContentViewUnselectedDark}}" />
+                        </VisualState.Setters>
+                    </VisualState>                        
+                    <VisualState Name="Selected">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource ContentViewSelectedLight}, Dark={StaticResource ContentViewSelectedDark}}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    
+    
     <!-- Backgrounds -->
     
     <Style TargetType="Page" x:Key="MyPage">

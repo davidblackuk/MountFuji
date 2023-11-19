@@ -31,6 +31,13 @@
     <Color x:Key="MaterialButtonTextEnabledLight">#1E8B99</Color>
     <Color x:Key="MaterialButtonTextDisabledLight">#C6C1CA</Color>
 
+    <Color x:Key="ContentViewUnselectedLight">#FFFFFF</Color>
+    <Color x:Key="ContentViewSelectedLight">#C8CDFE</Color>
+    
+  <Color x:Key="ContentViewUnselectedDark">#00000000</Color>
+    <Color x:Key="ContentViewSelectedDark">#09137C</Color>
+
+    
     
     <Color x:Key="PlaceHolderText">#ACACAC</Color>
     

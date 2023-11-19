@@ -5,45 +5,40 @@
              xmlns:models="clr-namespace:MyAtariCollection.Models"
              xmlns:converters="clr-namespace:MyAtariCollection.Converters"
              x:Class="MyAtariCollection.Controls.SystemSelectorEntry"
-             x:DataType="models:AtariConfiguration"
-             >
+             x:DataType="models:AtariConfiguration">
     <ContentView.Resources>
-        <converters:AtariSystemMemorySummaryConverter x:Key="summaryConverter"/>
-        <converters:CpuSummaryConverter x:Key="cpuConverter"/>
+        <converters:AtariSystemMemorySummaryConverter x:Key="summaryConverter" />
+        <converters:CpuSummaryConverter x:Key="cpuConverter" />
     </ContentView.Resources>
-    <VerticalStackLayout Margin="0,5,0,5">
-        <Frame>
-            <HorizontalStackLayout >
-                <Rectangle WidthRequest="70" HeightRequest="70" Fill="Gray"></Rectangle>
-                <VerticalStackLayout Margin="10,0,0,0">
-                    <Label Text="{Binding DisplayName}"  Style="{StaticResource H3Label}"/>
+    <HorizontalStackLayout>
+        <Rectangle WidthRequest="70" HeightRequest="70" Fill="Gray"></Rectangle>
+        <VerticalStackLayout Margin="10,0,0,0">
+            <Label Text="{Binding DisplayName}" Style="{StaticResource H3Label}" />
 
-                    <Label>
-                        <Label.Text>
-                            <MultiBinding Converter="{StaticResource summaryConverter}">
-                                <Binding Path="SystemType"></Binding>
-                                <Binding Path="StMemorySize"></Binding>
-                                <Binding Path="TtMemorySize"></Binding>
-                            </MultiBinding>
-                            
-                        </Label.Text>
-                    </Label>
-                    
-                    <Label>
-                        <Label.Text>
-                            <MultiBinding Converter="{StaticResource cpuConverter}">
-                                <Binding Path="CpuType"></Binding>
-                                <Binding Path="CpuClock"></Binding>
-                                <Binding Path="FpuType"></Binding>
-                            </MultiBinding>
-                            
-                        </Label.Text>
-                    </Label>
+            <Label>
+                <Label.Text>
+                    <MultiBinding Converter="{StaticResource summaryConverter}">
+                        <Binding Path="SystemType"></Binding>
+                        <Binding Path="StMemorySize"></Binding>
+                        <Binding Path="TtMemorySize"></Binding>
+                    </MultiBinding>
 
-                </VerticalStackLayout>
-            </HorizontalStackLayout>
-        </Frame>
-    </VerticalStackLayout>
-    
-    
+                </Label.Text>
+            </Label>
+
+            <Label>
+                <Label.Text>
+                    <MultiBinding Converter="{StaticResource cpuConverter}">
+                        <Binding Path="CpuType"></Binding>
+                        <Binding Path="CpuClock"></Binding>
+                        <Binding Path="FpuType"></Binding>
+                    </MultiBinding>
+
+                </Label.Text>
+            </Label>
+
+        </VerticalStackLayout>
+    </HorizontalStackLayout>
+
+
 </ContentView>
