@@ -35,8 +35,8 @@
                     <configurationSections:ScsiSection/>
                     <configurationSections:IdeSection/>
                     <configurationSections:FloppySection />
+                    <configurationSections:ScreenSection/>
 
-                    <controls:SystemEditorExpander Title="Atari Screen"/>
                     <controls:SystemEditorExpander Title="Hatari Screen"/>
                     <controls:SystemEditorExpander Title="Joysticks"/>
                     <controls:SystemEditorExpander Title="Keyboard"/>

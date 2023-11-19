@@ -7,7 +7,7 @@
              xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
              x:DataType="vm:MainViewModel"
              x:Class="MyAtariCollection.Controls.ConfigurationSections.ScsiSection">
-       <controls:SystemEditorExpander Title="Scsi - Hard Disks" Expanded="{Binding PanelVisibility.ShowScsiHddPanel}">
+       <controls:SystemEditorExpander Title="Scsi - Hard Disks" Expanded="{Binding SectionVisibility.ExpandScsiHddSection}">
         <VerticalStackLayout>
 
             <VerticalStackLayout>

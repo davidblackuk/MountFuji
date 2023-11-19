@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+                  xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+                  xmlns:models="clr-namespace:MyAtariCollection.Models"
+                  xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+                  xmlns:converters="clr-namespace:MyAtariCollection.Converters"
+                  x:DataType="vm:NewSystemPopupViewModel"
+                  x:Class="MyAtariCollection.Views.NewSystemPopup"
+                  Title="NewSystemPopup" BackgroundColor="#80000000">
+    <mopups:PopupPage.Resources>
+        <converters:TemplateSummaryConverter x:Key="templateConverter" />
+    </mopups:PopupPage.Resources>
+
+    <Frame WidthRequest="850" HeightRequest="650">
+        <Grid RowDefinitions="auto,*,auto" ColumnDefinitions="440,10,*">
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Text="New System"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Style="{StaticResource H1Label}" />
+
+
+            <configurationSections:ConfigurationGroup Title="Templates" Grid.Row="1" Grid.Column="0">
+                <CollectionView
+                    SelectionMode="Single"
+                    SelectedItem="{Binding SelectedTemplate}"
+                    ItemsSource="{Binding Templates}"
+                    >
+       
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:AtariConfigurationTemplate">
+                                <HorizontalStackLayout Padding="10">
+                                    <RoundRectangle CornerRadius="24" HeightRequest="48" WidthRequest="48" Fill="LightGray"/>
+                                    <VerticalStackLayout Margin="15,0,0,0">
+                                        <Label Text="{Binding DisplayName}" Style="{StaticResource H3Label}" />
+                                        <Label Padding="0,5,0,0">
+                                            <Label.Text>
+                                                <MultiBinding Converter="{StaticResource templateConverter}">
+                                                    <Binding Path="CpuType"></Binding>
+                                                    <Binding Path="CpuClock"></Binding>
+                                                    <Binding Path="FpuType"></Binding>
+                                                    <Binding Path="StMemorySize"></Binding>
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </configurationSections:ConfigurationGroup>
+            <configurationSections:ConfigurationGroup Title="Quick settings" Grid.Row="1" Grid.Column="2">
+                <VerticalStackLayout>
+                    <Label Text="Name" />
+                    <Entry Margin="0,10,0,0" Text="{Binding Name}" />
+
+                    <Label Text="Description" />
+                    <Border>
+                        <Editor HeightRequest="100" Text="{Binding Description}" />
+                    </Border>
+                </VerticalStackLayout>
+            </configurationSections:ConfigurationGroup>
+
+            <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End">
+                <Button Text="OK" Command="{Binding OkCommand}" Margin="0,0,15,0" />
+                <Button Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />
+            </HorizontalStackLayout>
+        </Grid>
+    </Frame>
+</mopups:PopupPage>

@@ -9,7 +9,7 @@
 
              x:Class="MyAtariCollection.Controls.ConfigurationSections.FloppySection">
 
-    <controls:SystemEditorExpander Title="Floppy Drives" Expanded="{Binding PanelVisibility.ShowFloppyPanel}">
+    <controls:SystemEditorExpander Title="Floppy Drives" Expanded="{Binding SectionVisibility.ExpandFloppySection}">
 
         <VerticalStackLayout>
 

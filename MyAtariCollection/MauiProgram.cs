@@ -15,8 +15,14 @@ global using MyAtariCollection.ViewModels;
 global using CommunityToolkit.Maui;
 global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Input;
+
+global using Mopups.Interfaces;
+
+
 using CommunityToolkit.Maui.Storage;
 using MyAtariCollection.Services.CommandLineArgumentGenerators;
+using Mopups.Hosting;
+using Mopups.Services;
 
 namespace MyAtariCollection;
 
@@ -32,16 +38,21 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("MaterialIconsOutlined-Regular.otf", "MaterialIcons");
-            })
+            }) 
+            .ConfigureMopups()
             .UseTinyMvvm()
             .UseMauiCommunityToolkit();
 
         builder.Services.AddTransient<MainView>();
         builder.Services.AddTransient<MainViewModel>();
+        builder.Services.AddTransient<NewSystemPopup>();
+        builder.Services.AddTransient<NewSystemPopupViewModel>();
 
         builder.Services.AddTransient<IFolderPicker>(provider => FolderPicker.Default);
         builder.Services.AddTransient<IFilePicker>(provider => FilePicker.Default);
-        
+
+        builder.Services.AddSingleton<IPopupNavigation>(MopupService.Instance);
+
         builder.Services.AddTransient<ISystemCommandLineArguments, SystemCommandLineArguments>();
         builder.Services.AddTransient<ICpuCommandLineArguments, CpuCommandLineArguments>();
         builder.Services.AddTransient<IRomCommandLineArguments, RomCommandLineArguments>();

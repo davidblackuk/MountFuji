@@ -116,4 +116,9 @@ public class AtariConfigurationTemplate
     /// </summary>
     public FloppyDriveOptions FloppyOptions = new();
 
+    /// <summary>
+    /// Atari screen options, video mode, VDI settings etc
+    /// </summary>
+    public AtariScreenOptions ScreenOptions = new();
+
 }

@@ -12,6 +12,11 @@ public partial class AtariConfiguration: ObservableObject
     [ObservableProperty] private string displayName;
 
     /// <summary>
+    /// Description of the system.
+    /// </summary>
+    [ObservableProperty] private string description;
+
+    /// <summary>
     /// The type of system we are emulating (ST, TT etc)
     /// </summary>
     [ObservableProperty] private AtariSystemType systemType;
@@ -119,4 +124,8 @@ public partial class AtariConfiguration: ObservableObject
     /// </summary>
     [ObservableProperty] private FloppyDriveOptions floppyOptions = new();
 
+    /// <summary>
+    /// Atari screen options, video mode, VDI settings etc
+    /// </summary>
+    [ObservableProperty] private AtariScreenOptions screenOptions = new();
 }
