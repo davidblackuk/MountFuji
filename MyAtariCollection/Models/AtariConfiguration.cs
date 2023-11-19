@@ -12,6 +12,11 @@ public partial class AtariConfiguration: ObservableObject
     [ObservableProperty] private string displayName;
 
     /// <summary>
+    /// Description of the system.
+    /// </summary>
+    [ObservableProperty] private string description;
+
+    /// <summary>
     /// The type of system we are emulating (ST, TT etc)
     /// </summary>
     [ObservableProperty] private AtariSystemType systemType;

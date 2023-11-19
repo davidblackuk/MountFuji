@@ -8,7 +8,7 @@
              x:DataType="vm:MainViewModel"
              x:Class="MyAtariCollection.Controls.ConfigurationSections.AcsiSection">
 
-    <controls:SystemEditorExpander Title="ACSI - Hard Disks" Expanded="{Binding PanelVisibility.ShowAcsiHddPanel}">
+    <controls:SystemEditorExpander Title="ACSI - Hard Disks" Expanded="{Binding SectionVisibility.ExpandAcsiHddSection}">
         <VerticalStackLayout>
 
             <VerticalStackLayout>

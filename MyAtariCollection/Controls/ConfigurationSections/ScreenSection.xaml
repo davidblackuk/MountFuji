@@ -6,15 +6,11 @@
              xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
              xmlns:panes="clr-namespace:MyAtariCollection.Controls.ConfigurationSections.Panes"
              x:DataType="vm:MainViewModel"
-             x:Class="MyAtariCollection.Controls.ConfigurationSections.SystemSection">
-    <controls:SystemEditorExpander Title="System" Expanded="{Binding SectionVisibility.ExpandSystemSection}">
-
+             x:Class="MyAtariCollection.Controls.ConfigurationSections.ScreenSection">
+    <controls:SystemEditorExpander Title="Screen"  Expanded="{Binding SectionVisibility.ExpandScreenSection}">
         <HorizontalStackLayout>
-            <panes:MachineTypePane />
-            <panes:VideoTimingPane />
-            <panes:FalconDspPane />
-            <panes:SystemParametersPane />
+            <panes:AtariMonitorPane/>
         </HorizontalStackLayout>
-        
     </controls:SystemEditorExpander>
+    
 </ContentView>

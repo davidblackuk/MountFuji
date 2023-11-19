@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MyAtariCollection.Models"
+             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+             x:DataType="vm:MainViewModel"
+             x:Class="MyAtariCollection.Controls.ConfigurationSections.Panes.AtariMonitorPane">
+    <configurationSections:ConfigurationGroup Title="Monitor type">
+        <HorizontalStackLayout RadioButtonGroup.GroupName="atariscreen"
+                               RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.ScreenOptions.MonitorType}">
+            
+            <VerticalStackLayout>
+                <RadioButton Content="Mono" Value="{x:Static models:AtariMonitorType.Mono}" />
+                <RadioButton Content="RGB" Value="{x:Static models:AtariMonitorType.Rgb}" />
+                <RadioButton Content="VGA" Value="{x:Static models:AtariMonitorType.Vga}" />
+                <RadioButton Content="TV" Value="{x:Static models:AtariMonitorType.Tv}" />
+                
+                <Label Text="Extras" Style="{StaticResource H3Offset}"></Label>
+                <HorizontalStackLayout>
+                    <CheckBox  IsChecked="{Binding SelectedConfiguration.ScreenOptions.ShowBorders}" VerticalOptions="Center" />
+                    <Label Text="Show borders" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+                
+            </VerticalStackLayout>
+            
+        </HorizontalStackLayout>
+    </configurationSections:ConfigurationGroup>
+    
+</ContentView>

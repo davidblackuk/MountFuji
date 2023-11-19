@@ -8,7 +8,7 @@
              x:DataType="vm:MainViewModel"
              x:Class="MyAtariCollection.Controls.ConfigurationSections.CpuSection">
 
-    <controls:SystemEditorExpander Title="CPU" Expanded="{Binding PanelVisibility.ShowCpuPanel}">
+    <controls:SystemEditorExpander Title="CPU" Expanded="{Binding SectionVisibility.ExpandCpuSection}">
 
         <HorizontalStackLayout>
             <panes:CpuPane />

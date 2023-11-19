@@ -3,18 +3,43 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:MyAtariCollection.Models"
-             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+             xmlns:converters="clr-namespace:MyAtariCollection.Converters"
              x:Class="MyAtariCollection.Controls.SystemSelectorEntry"
-             x:DataType="models:AtariConfiguration">
-    
+             x:DataType="models:AtariConfiguration"
+             >
+    <ContentView.Resources>
+        <converters:AtariSystemMemorySummaryConverter x:Key="summaryConverter"/>
+        <converters:CpuSummaryConverter x:Key="cpuConverter"/>
+    </ContentView.Resources>
     <VerticalStackLayout Margin="0,5,0,5">
         <Frame>
             <HorizontalStackLayout >
-                <Rectangle WidthRequest="60" HeightRequest="60" Fill="Cyan"></Rectangle>
+                <Rectangle WidthRequest="70" HeightRequest="70" Fill="Gray"></Rectangle>
                 <VerticalStackLayout Margin="10,0,0,0">
                     <Label Text="{Binding DisplayName}"  Style="{StaticResource H3Label}"/>
-                    <Label Text="Atari ST, 512k, 1 disk"></Label>
-                    <Label Text="last modified Jun 29 2023"></Label>
+
+                    <Label>
+                        <Label.Text>
+                            <MultiBinding Converter="{StaticResource summaryConverter}">
+                                <Binding Path="SystemType"></Binding>
+                                <Binding Path="StMemorySize"></Binding>
+                                <Binding Path="TtMemorySize"></Binding>
+                            </MultiBinding>
+                            
+                        </Label.Text>
+                    </Label>
+                    
+                    <Label>
+                        <Label.Text>
+                            <MultiBinding Converter="{StaticResource cpuConverter}">
+                                <Binding Path="CpuType"></Binding>
+                                <Binding Path="CpuClock"></Binding>
+                                <Binding Path="FpuType"></Binding>
+                            </MultiBinding>
+                            
+                        </Label.Text>
+                    </Label>
+
                 </VerticalStackLayout>
             </HorizontalStackLayout>
         </Frame>

@@ -9,7 +9,7 @@
              x:DataType="vm:MainViewModel"
 
              x:Class="MyAtariCollection.Controls.ConfigurationSections.IdeSection">
-    <controls:SystemEditorExpander Title="IDE - Hard Disks" Expanded="{Binding PanelVisibility.ShowIdeHddPanel}">
+    <controls:SystemEditorExpander Title="IDE - Hard Disks" Expanded="{Binding SectionVisibility.ExpandIdeHddSection}">
         <VerticalStackLayout>
 
             <VerticalStackLayout>

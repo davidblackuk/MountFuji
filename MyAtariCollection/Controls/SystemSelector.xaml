@@ -11,12 +11,7 @@
              WidthRequest="400"
              >
     <Frame Style="{StaticResource PanelFrame}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-            </Grid.RowDefinitions>
+        <Grid RowDefinitions="50,*,25">
     
             <!-- we implement our own header and footer as we don't want em to scroll with the content -->
             

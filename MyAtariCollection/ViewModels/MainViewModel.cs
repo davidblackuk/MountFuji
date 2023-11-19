@@ -8,14 +8,18 @@ public partial class MainViewModel : TinyViewModel
 {
     private readonly ISystemsService systemService;
     private readonly ICommandLineOptionsService optionsService;
+    private readonly IPopupNavigation popupNavigation;
     private readonly IFilePicker filePicker;
+    private readonly IServiceProvider serviceProvider;
     private readonly Random random = new();
 
-    public MainViewModel(ISystemsService systemService, ICommandLineOptionsService optionsService, IFilePicker filePicker)
+    public MainViewModel(ISystemsService systemService, ICommandLineOptionsService optionsService, IPopupNavigation popupNavigation, IFilePicker filePicker, IServiceProvider serviceProvider)
     {
         this.systemService = systemService;
         this.optionsService = optionsService;
+        this.popupNavigation = popupNavigation;
         this.filePicker = filePicker;
+        this.serviceProvider = serviceProvider;
     }
 
     public override Task OnFirstAppear()
@@ -33,7 +37,7 @@ public partial class MainViewModel : TinyViewModel
     private AtariConfiguration selectedConfiguration;
     
     [ObservableProperty]
-    private PanelVisibility panelVisibility = new PanelVisibility(); 
+    private SectionVisibility sectionVisibility = new SectionVisibility(); 
 
     public bool HasSelectedConfig => SelectedConfiguration != null;
 
@@ -111,18 +115,23 @@ public partial class MainViewModel : TinyViewModel
     #endregion
 
     [RelayCommand]
-    private void CreateNewSystem()
+    private async void CreateNewSystem()
     {
-        // for now we just clone a random system
-        var all = systemService.All().ToArray();
-        var system = all[nextSystem];
+        var popup = serviceProvider.GetService<NewSystemPopup>();
+        await popupNavigation.PushAsync(popup);
 
-        nextSystem += 1;
-        if (nextSystem >= all.Length) nextSystem = 0;
-
-        Systems.Add(system);
-        SelectedConfiguration = system;
+        popup.Disappearing += (sender, args) =>
+        {
+            if (popup.ViewModel.Confirmed)
+            {
+                var system = popup.ViewModel.GetConfiguration();
+                Systems.Add(system);
+                SelectedConfiguration = system;
+            }
+        };      
     }
+
+ 
 
     [RelayCommand()]
     private void Run()

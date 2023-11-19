@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
              x:DataType="vm:MainViewModel"
              x:Class="MyAtariCollection.Controls.ConfigurationSections.RomSection">
-    <controls:SystemEditorExpander Title="ROM and Cartridge"  Expanded="{Binding PanelVisibility.ShowRomPanel}">
+    <controls:SystemEditorExpander Title="ROM and Cartridge"  Expanded="{Binding SectionVisibility.ExpandRomSection}">
         <VerticalStackLayout>
             <Label Text="ROM Path" Style="{StaticResource H3Offset}" />
             
