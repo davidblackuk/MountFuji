@@ -7,28 +7,22 @@
              xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
              xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
              x:DataType="vm:MainViewModel"
-             x:Class="MyAtariCollection.Controls.SystemEditor">
+             x:Class="MyAtariCollection.Controls.SystemEditor"
+             Padding="0" Margin="0">
 
     <!-- <Grid BackgroundColor="{StaticResource ComponentBackground}"> -->
-    <Frame  Style="{StaticResource PanelFrame}">
-        <Grid  IsVisible="{Binding HasSelectedConfig}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
+    <Frame  Style="{StaticResource PanelFrame}" >
+        <Grid  IsVisible="{Binding HasSelectedConfig}" RowDefinitions="70, *">
             
-            <HorizontalStackLayout>
-            </HorizontalStackLayout>
-            
-            <Grid ColumnDefinitions="*,auto">
-                <Label HorizontalOptions="Start" VerticalOptions="Center" Text="{Binding SelectedConfiguration.DisplayName}" Style="{StaticResource H1Label}"></Label>
+            <Grid ColumnDefinitions="*,auto" >
+                <Label VerticalOptions="Center" Text="{Binding SelectedConfiguration.DisplayName}" Style="{StaticResource H1Label}"></Label>
                 <Button Grid.Column="1" Text="{x:Static controls:IconFont.Play_circle_outline}" Style="{StaticResource MaterialButton}" Command="{Binding RunCommand}"></Button>
             </Grid>
             
-            <ScrollView Grid.Row="1">
-                <VerticalStackLayout Spacing="10" Margin="0,20,0,0">
+            <ScrollView Grid.Row="1"  >
+                <VerticalStackLayout Spacing="10" Margin="0" Padding="0"  >
                     
-                    <configurationSections:SystemSection/>
+                    <configurationSections:SystemSection />
                     <configurationSections:CpuSection />
                     <configurationSections:RomSection/>
                     <configurationSections:AcsiSection/>

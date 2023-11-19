@@ -12,5 +12,11 @@ public partial class NewSystemPopup: PopupPage
         ViewModel = viewModel;
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        ViewModel.Foo();
+    }
+
     public NewSystemPopupViewModel ViewModel { get; }
 }

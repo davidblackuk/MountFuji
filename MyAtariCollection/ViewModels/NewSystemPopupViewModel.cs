@@ -12,9 +12,15 @@ namespace MyAtariCollection.ViewModels
             this.popupNavigation = popupNavigation;
 
             Templates = templatesService.All();
-
         }
 
+
+
+        public void Foo()
+        {
+            SelectedTemplate = Templates.First();
+        }
+        
 
         public bool Confirmed { get; set; }
 

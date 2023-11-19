@@ -22,12 +22,6 @@ public partial class MainViewModel : TinyViewModel
         this.serviceProvider = serviceProvider;
     }
 
-    public override Task OnFirstAppear()
-    {
-        base.OnFirstAppear();
-        return Task.CompletedTask;
-    }
-
 
     [ObservableProperty] 
     private ObservableCollection<AtariConfiguration> systems = new();

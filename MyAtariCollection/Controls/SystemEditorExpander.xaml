@@ -9,7 +9,7 @@
              >
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            <Frame Margin="10" CornerRadius="10">
+            <Frame  CornerRadius="10">
                 <VerticalStackLayout Spacing="10">
                     <HorizontalStackLayout Spacing="10">
                         

@@ -8,15 +8,15 @@
              xmlns:models="clr-namespace:MyAtariCollection.Models"
              x:Class="MyAtariCollection.Controls.SystemSelector"
              x:DataType="vm:MainViewModel"
-             WidthRequest="400"
+             WidthRequest="460"
              >
-    <Frame Style="{StaticResource PanelFrame}">
-        <Grid RowDefinitions="50,*,25">
+    <Frame Style="{StaticResource PanelFrame}" >
+        <Grid RowDefinitions="70,*,25">
     
             <!-- we implement our own header and footer as we don't want em to scroll with the content -->
             
-            <Grid ColumnDefinitions="*,50">
-                <Label Grid.Column="0" Text="Systems" Style="{StaticResource H1Label}"></Label>
+            <Grid ColumnDefinitions="*,50" >
+                <Label VerticalOptions="Center" Grid.Column="0" Text="Systems" Style="{StaticResource H1Label}"></Label>
                 <Button  Style="{StaticResource MaterialButton}" Grid.Column="1" Text="{x:Static controls:IconFont.Add_circle_outline}" Command="{Binding CreateNewSystemCommand}"></Button>
             </Grid>
             
@@ -39,7 +39,7 @@
             
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:AtariConfiguration">
-                    <controls:SystemSelectorEntry/>
+                    <controls:SystemSelectorEntry  Style="{StaticResource ContentViewItem}"/>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
             

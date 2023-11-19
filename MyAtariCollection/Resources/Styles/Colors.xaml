@@ -35,7 +35,7 @@
     <Color x:Key="ContentViewSelectedLight">#C8CDFE</Color>
     
   <Color x:Key="ContentViewUnselectedDark">#00000000</Color>
-    <Color x:Key="ContentViewSelectedDark">#09137C</Color>
+    <Color x:Key="ContentViewSelectedDark">#2C2C2C</Color>
 
     
     
