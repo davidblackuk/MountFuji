@@ -17,7 +17,7 @@ public partial class IdeDiskOptions: ObservableObject
     [ObservableProperty] private IdeByteSwap byteSwapDrive1 = IdeByteSwap.Off;
 }
 
-public enum FloppyWriteProtection
+public enum DiskWriteProtection
 {
     Off,
     On,
@@ -38,7 +38,18 @@ public partial class FloppyDriveOptions: ObservableObject
     [ObservableProperty] private bool autoInsertB = true;
     [ObservableProperty] private bool fastFloppyAccess = false;
 
-    [ObservableProperty] private FloppyWriteProtection writeProtection = FloppyWriteProtection.Off;
+    [ObservableProperty] private DiskWriteProtection writeProtection = DiskWriteProtection.Off;
+
+
+}
+
+
+public partial class GdosDriveOptions: ObservableObject
+{
+    [ObservableProperty] private string gdosFolder = String.Empty;
+    [ObservableProperty] private bool addGemdosAfterPhysicalDrives = true;
+    [ObservableProperty] private bool atariHostFilenameConversion = true;
+    [ObservableProperty] private DiskWriteProtection writeProtection = DiskWriteProtection.Off;
 
 
 }

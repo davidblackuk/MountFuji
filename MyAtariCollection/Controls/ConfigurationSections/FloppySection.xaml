@@ -54,9 +54,9 @@
                 <HorizontalStackLayout RadioButtonGroup.GroupName="floppyWriteProtect"
                                      RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.FloppyOptions.WriteProtection}">
                     <Label Margin="10,10,0,20" Text="Write protection:" VerticalOptions="Center"></Label>
-                    <RadioButton Content="Off" Value="{x:Static models:FloppyWriteProtection.Off}" />
-                    <RadioButton Content="On" Value="{x:Static models:FloppyWriteProtection.On}" />
-                    <RadioButton Content="Auto" Value="{x:Static models:FloppyWriteProtection.Auto}" />
+                    <RadioButton Content="Off" Value="{x:Static models:DiskWriteProtection.Off}" />
+                    <RadioButton Content="On" Value="{x:Static models:DiskWriteProtection.On}" />
+                    <RadioButton Content="Auto" Value="{x:Static models:DiskWriteProtection.Auto}" />
                 </HorizontalStackLayout>
                 
 

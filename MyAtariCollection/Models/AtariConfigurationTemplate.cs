@@ -112,6 +112,16 @@ public class AtariConfigurationTemplate
     public IdeDiskOptions IdeDiskOptions = new ();
 
     /// <summary>
+    /// Options for GEMDOS drives
+    /// </summary>
+    public GdosDriveOptions GdosDriveOptions = new();
+    
+    /// <summary>
+    /// Should we boot from hard disk
+    /// </summary>
+    public bool BootFromHardDisk = false;
+    
+    /// <summary>
     /// Options for floppy drives
     /// </summary>
     public FloppyDriveOptions FloppyOptions = new();

@@ -33,7 +33,7 @@
             <CollectionView.EmptyView>
                 <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
                        FontSize="20"
-                       Text="To Get Started, you can create a new system using the button in the header bar">
+                       Text="To Get Started, you can create a new system using the + button in the header bar">
                 </Label>
             </CollectionView.EmptyView>
             

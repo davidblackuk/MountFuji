@@ -120,9 +120,19 @@ public partial class AtariConfiguration: ObservableObject
     [ObservableProperty] private IdeDiskOptions ideOptions = new();
 
     /// <summary>
+    /// optional drive path and options for a GEMDOS drive
+    /// </summary>
+    [ObservableProperty] private GdosDriveOptions gdosDriveOptions = new();
+
+    /// <summary>
     /// Floppy disk configuration
     /// </summary>
     [ObservableProperty] private FloppyDriveOptions floppyOptions = new();
+
+    /// <summary>
+    /// Should we boot from hard disk automatically
+    /// </summary>
+    [ObservableProperty] private bool bootFromHardDisk = false;
 
     /// <summary>
     /// Atari screen options, video mode, VDI settings etc
