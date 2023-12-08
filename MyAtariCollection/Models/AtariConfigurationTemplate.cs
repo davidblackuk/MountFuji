@@ -83,6 +83,11 @@ public class AtariConfigurationTemplate
     /// </summary>
     public string RomImage { get; init; } = "";
 
+    /// <summary>
+    /// Full path to the cartridge image to use for this device
+    /// </summary>
+    public string CartridgeImage { get; init; } = "";
+
 
     /// <summary>
     /// Amount of St memory in kilobytes (KiB), valid values are

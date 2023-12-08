@@ -57,6 +57,20 @@ public partial class MainViewModel : TinyViewModel
     {
         SelectedConfiguration.RomImage = String.Empty;
     }
+    [RelayCommand()]
+    private async void BrowseCartridges()
+    {
+        var file = await filePicker.PickAsync();
+        if (file != null)
+        {
+            SelectedConfiguration.CartridgeImage = file.FullPath;
+        }
+    }
+    [RelayCommand]
+    private void ClearCartridge()
+    {
+        SelectedConfiguration.CartridgeImage = String.Empty;
+    }
     
     #region disk image  operations
     

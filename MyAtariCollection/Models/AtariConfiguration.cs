@@ -93,6 +93,14 @@ public partial class AtariConfiguration: ObservableObject
     [ObservableProperty] private string romImage;
 
     /// <summary>
+    /// Full path to the cartridge image to use for this device
+    /// </summary>
+    [ObservableProperty] private string cartridgeImage;
+
+
+    
+    
+    /// <summary>
     /// Amount of St memory in kilobytes (KiB), valid values are
     /// 256 (rare original ST), 512 (stock ST), 1020 (1040ST), 2048 (2.5 Meg
     /// not sure why) then multiples of 1024 up to a max of 14MB (really only falcon)

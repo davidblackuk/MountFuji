@@ -107,6 +107,7 @@ public class MachineTemplateService : IMachineTemplateService
             CycleExact = template.CycleExact,
             
             RomImage = template.RomImage,
+            CartridgeImage = template.CartridgeImage,
             
             StMemorySize = template.StMemorySize,
             TtMemorySize = template.TtMemorySize,
