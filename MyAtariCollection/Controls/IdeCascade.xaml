@@ -1,33 +1,35 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
              xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
              x:DataType="vm:MainViewModel"
-
-             x:Class="MyAtariCollection.Controls.HardDiskPathEditor">
+             x:Class="MyAtariCollection.Controls.IdeCascade">
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <Grid Grid.ColumnDefinitions="40, 80, 40,*,40,40" RowDefinitions="*,*" Margin="0,10,0,0">
                 
-                <Button Text="{x:Static controls:IconFont.Navigate_before}" Grid.Column="0" Style="{StaticResource InlineMaterialButton}" />
+                <Button Text="{x:Static controls:IconFont.Navigate_before}" 
+                        Clicked="PreviousClicked"
+                        Grid.Column="0" Style="{StaticResource InlineMaterialButton}" />
                 
                 <Label Text="{TemplateBinding Title}" VerticalOptions="Center" Grid.Column="1"/>
 
-                <Button Text="{x:Static controls:IconFont.Navigate_next}"  Grid.Column="2" Style="{StaticResource InlineMaterialButton}" />
+                <Button Text="{x:Static controls:IconFont.Navigate_next}"  
+                        Clicked="NextClicked"
+                        Grid.Column="2" Style="{StaticResource InlineMaterialButton}" />
 
                 <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="4"
                         Text="{x:Static controls:IconFont.Cancel}" 
-                        Command="{TemplateBinding ClearDiskImageCommand}"
-                        CommandParameter="{TemplateBinding DiskId}"
+                        Clicked="ClearClicked"
                         VerticalOptions="Center" />
                 <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="5"
                         Text="{x:Static controls:IconFont.File_open}"
-                        Command="{TemplateBinding BrowseDiskImageCommand}" 
-                        CommandParameter="{TemplateBinding DiskId}"
+                        Clicked="BrowseHddImage"
                         VerticalOptions="Center" />
                 
-                <Label Text="{TemplateBinding DiskImagePath}" Grid.Column="3" Grid.Row="0"
+                <Label Text="{TemplateBinding DiskImagePath}" Grid.Column="3" Grid.Row="1"
                        VerticalOptions="Center" />
 
                 

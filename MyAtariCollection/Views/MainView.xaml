@@ -18,12 +18,8 @@
                 <ColumnDefinition Width="10" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
             <controls:SystemSelector Grid.Column="0"/>
-
-             
             <controls:SystemEditor Grid.Column="2"/>
-
         </Grid>
 
 

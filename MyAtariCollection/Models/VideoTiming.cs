@@ -11,25 +11,25 @@ public enum VideoTiming
     /// <summary>
     /// Pick a randon wake state
     /// </summary>
-    Random,
+    Random = 0,
     
     /// <summary>
     /// Wake state 1
     /// </summary>
-    One,
+    One = 1,
     
     /// <summary>
     /// Wake state 2, this is the default.
     /// </summary>
-    Two,
+    Two = 2,
     
     /// <summary>
     /// Wake state 3
     /// </summary>
-    Three,
+    Three = 3,
     
     /// <summary>
     /// Wake state 4
     /// </summary>
-    Four
+    Four = 4
 }

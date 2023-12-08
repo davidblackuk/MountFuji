@@ -41,12 +41,12 @@ public class AtariConfigurationTemplate
     /// Processor type in use, notably MC68000 everywhere, except for TT  Falcon (030),
     /// however third party hardware modules existed to allow more impressive CPus on humble STs
     /// </summary>
-    public CpuType CpuType { get; init; }
-    
+    public CpuType CpuType { get; init; } = CpuType.MC68000;
+
     /// <summary>
     ///  The the speed we clock at
     /// </summary>
-    public CpuClock CpuClock { get; init; }
+    public CpuClock CpuClock { get; init; } = CpuClock.Clock8Mhz;
     
     /// <summary>
     /// Floating point unit type 

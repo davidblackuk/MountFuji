@@ -8,14 +8,14 @@ public enum FpuType
     /// <summary>
     /// ST/STE + Mega varieties did not come with an FPU in the case
     /// </summary>
-    None,
+    None = 0,
     
-    MC68881,
+    MC68881 = 68881,
     
     /// <summary>
     /// Included by default for TT computers
     /// </summary>
-    MC68882,
+    MC68882 = 68882,
     
-    Internal
+    Internal = 68040
 }

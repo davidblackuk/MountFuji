@@ -8,15 +8,15 @@ public enum CpuClock
     /// <summary>
     /// Stock speed of ST, STE, pluse mega varieties
     /// </summary>
-    Clock8Mhz,
+    Clock8Mhz = 8,
     
     /// <summary>
     /// Stock Falcon speed
     /// </summary>
-    Clock16Mhz,
+    Clock16Mhz = 16,
     
     /// <summary>
     /// Stock TT speed
     /// </summary>
-    Clock32Mhz,
+    Clock32Mhz = 32,
 }

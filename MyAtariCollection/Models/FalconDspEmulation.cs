@@ -5,9 +5,9 @@ namespace MyAtariCollection.Models;
 /// </summary>
 public enum FalconDspEmulation
 {
-    None,
+    None = 0,
     
-    Dummy,
+    Dummy = 1,
     
-    Full
+    Full = 2
 }

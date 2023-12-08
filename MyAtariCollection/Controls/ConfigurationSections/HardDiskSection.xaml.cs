@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MyAtariCollection.Controls.ConfigurationSections;
 
-public partial class AcsiSection : ContentView
+public partial class HardDiskSection : ContentView
 {
-    public AcsiSection()
+    public HardDiskSection()
     {
         InitializeComponent();
     }

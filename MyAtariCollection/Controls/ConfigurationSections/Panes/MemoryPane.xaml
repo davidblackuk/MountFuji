@@ -14,14 +14,14 @@
                 <VerticalStackLayout>
                     <RadioButton Content="256 KiB" Value="{x:Int32 256}" />
                     <RadioButton Content="512 KiB" Value="{x:Int32 512}" />
-                    <RadioButton Content="1 MiB" Value="{x:Int32 1}" />
-                    <RadioButton Content="2 MiB" Value="{x:Int32 2}" />
+                    <RadioButton Content="1 MiB" Value="{x:Int32 1024}" />
+                    <RadioButton Content="2 MiB" Value="{x:Int32 2048}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout>
-                    <RadioButton Content="4 MiB" Value="{x:Int32 4}" />
-                    <RadioButton Content="8 MiB" Value="{x:Int32 8}" />
-                    <RadioButton Content="10 MiB" Value="{x:Int32 10}" />
-                    <RadioButton Content="14 MiB" Value="{x:Int32 14}" />
+                    <RadioButton Content="4 MiB" Value="{x:Int32 4096}" />
+                    <RadioButton Content="8 MiB" Value="{x:Int32 8192}" />
+                    <RadioButton Content="10 MiB" Value="{x:Int32 10240}" />
+                    <RadioButton Content="14 MiB" Value="{x:Int32 14336}" />
                 </VerticalStackLayout>
 
             </HorizontalStackLayout>

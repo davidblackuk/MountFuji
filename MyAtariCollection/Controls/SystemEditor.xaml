@@ -25,8 +25,7 @@
                     <configurationSections:SystemSection />
                     <configurationSections:CpuSection />
                     <configurationSections:RomSection/>
-                    <configurationSections:AcsiSection/>
-                    <configurationSections:ScsiSection/>
+                    <configurationSections:HardDiskSection/>
                     <configurationSections:IdeSection/>
                     <configurationSections:FloppySection />
                     <configurationSections:ScreenSection/>

@@ -23,6 +23,7 @@ using CommunityToolkit.Maui.Storage;
 using MyAtariCollection.Services.CommandLineArgumentGenerators;
 using Mopups.Hosting;
 using Mopups.Services;
+using MyAtariCollection.Services.ConfigFileSections;
 
 namespace MyAtariCollection;
 
@@ -59,6 +60,10 @@ public static class MauiProgram
         builder.Services.AddTransient<IHardDiskCommandLineArguments, HardDiskCommandLineArguments>();
         builder.Services.AddTransient<IFloppyCommandLineArguments, FloppyCommandLineArguments>();
 
+        builder.Services.AddTransient<ILogConfigFileSection, LogConfigFileSection>();
+        builder.Services.AddTransient<IMemoryConfigFileSection, MemoryConfigFileSection>();
+        builder.Services.AddTransient<ISystemConfigFileSection, SystemConfigFileSection>();
+        builder.Services.AddTransient<IConfigFileService, ConfigFileService>();
         
         builder.Services.AddTransient<ICommandLineOptionsService, CommandLineOptionsService>();
         builder.Services.AddSingleton<IMachineTemplateService, MachineTemplateService>();

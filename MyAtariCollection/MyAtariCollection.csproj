@@ -71,11 +71,18 @@
       <MauiXaml Update="Controls\SystemSelector.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
+      <MauiXaml Update="Controls\HardDiskCascade.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
       <Compile Remove="Platforms\Android\MainApplication.cs" />
       <Compile Remove="Platforms\Android\MainActivity.cs" />
+      <Compile Update="Controls\HardDiskCascade.xaml.cs">
+        <DependentUpon>HardDiskCascade.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
     <ItemGroup>
       <Compile Update="Controls\SystemSelector.xaml.cs">

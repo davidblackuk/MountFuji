@@ -6,10 +6,10 @@ namespace MyAtariCollection.Models;
 /// </summary>
 public enum CpuType
 {
-    MC68000,
-    MC68010,
-    MC68020,
-    MC68030,
-    MC68040,
-    MC68060,
+    MC68000 = 0,
+    MC68010 = 1,
+    MC68020 = 2,
+    MC68030 = 3,
+    MC68040 = 4,
+    MC68060 = 5,
 }
