@@ -23,6 +23,9 @@
                         Clicked="NextClicked"
                         Grid.Column="2" Style="{StaticResource InlineMaterialButton}" />
 
+                <Label Text="{TemplateBinding DiskImagePath}" Grid.Column="3" 
+                       VerticalOptions="Center" />
+
                 <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="4"
                         Text="{x:Static controls:IconFont.Cancel}" 
                         Clicked="ClearClicked"
@@ -32,8 +35,6 @@
                         Clicked="BrowseHddImage"
                         VerticalOptions="Center" />
                 
-                <Label Text="{TemplateBinding DiskImagePath}" Grid.Column="3" Grid.Row="1"
-                       VerticalOptions="Center" />
             </Grid>
         </ControlTemplate>
     </ContentView.ControlTemplate>   

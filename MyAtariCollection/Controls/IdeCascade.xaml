@@ -4,11 +4,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
              xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+             xmlns:models="clr-namespace:MyAtariCollection.Models"
              x:DataType="vm:MainViewModel"
              x:Class="MyAtariCollection.Controls.IdeCascade">
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            <Grid Grid.ColumnDefinitions="40, 80, 40,*,40,40" RowDefinitions="*,*" Margin="0,10,0,0">
+            <Grid Grid.ColumnDefinitions="40, 80, 40,auto,*,40,40" RowDefinitions="20"  Margin="0,10,0,0">
                 
                 <Button Text="{x:Static controls:IconFont.Navigate_before}" 
                         Clicked="PreviousClicked"
@@ -20,17 +21,30 @@
                         Clicked="NextClicked"
                         Grid.Column="2" Style="{StaticResource InlineMaterialButton}" />
 
-                <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="4"
+                
+                <HorizontalStackLayout Grid.Column="3" RadioButtonGroup.GroupName="ideByteSwapCascade"
+                                       RadioButtonGroup.SelectedValue="{TemplateBinding ByteSwap}">
+                    <Label Text="Byte swap: " VerticalOptions="Center"  ></Label>
+                    <RadioButton Content="Off" Value="{x:Static models:IdeByteSwap.Off}"  VerticalOptions="Center"/>
+                    <RadioButton Content="On" Value="{x:Static models:IdeByteSwap.On}"  VerticalOptions="Center"/>
+                    <RadioButton Content="Auto" Value="{x:Static models:IdeByteSwap.Auto}"  VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+                
+                
+                
+                <Label Text="{TemplateBinding DiskImagePath}" Grid.Column="4" Grid.Row="0"
+                       VerticalOptions="Center" />
+
+                
+                <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="5"
                         Text="{x:Static controls:IconFont.Cancel}" 
                         Clicked="ClearClicked"
                         VerticalOptions="Center" />
-                <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="5"
+                <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="6"
                         Text="{x:Static controls:IconFont.File_open}"
                         Clicked="BrowseHddImage"
                         VerticalOptions="Center" />
                 
-                <Label Text="{TemplateBinding DiskImagePath}" Grid.Column="3" Grid.Row="1"
-                       VerticalOptions="Center" />
 
                 
             </Grid>

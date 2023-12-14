@@ -26,11 +26,16 @@ public partial class IdeCascade : ContentView
     [AutoBindable(OnChanged = nameof(SetDisplayValues))]
     private readonly int diskId;
     
+    [AutoBindable(OnChanged = nameof(SetDisplayValues))]
+    private readonly IdeByteSwap byteSwap;
+    
     [AutoBindable]
     private readonly ICommand clearDiskImageCommand;
 
     [AutoBindable]
     private readonly ICommand browseDiskImageCommand;
+    
+    
 
 #pragma warning restore CS0169
 
@@ -50,12 +55,29 @@ public partial class IdeCascade : ContentView
             DiskPaths.PropertyChanged += OnDiskPathsChanged;
         }
         
+        if (propertyName == nameof(ByteSwap))
+        {
+            Console.WriteLine($"Property changed {propertyName} byte swap is {ByteSwap}");
+
+            if (DiskId == 0)
+            {
+                DiskPaths.ByteSwapDrive0 = ByteSwap;
+            }
+            else
+            {
+                DiskPaths.ByteSwapDrive1 = ByteSwap;
+            }
+            
+        }
+        
         base.OnPropertyChanged(propertyName);
     }
+
 
     private void OnDiskPathsChanged(object sender, PropertyChangedEventArgs args)
     {
        SetDiskImagePath();
+   
     }
 
     private void NextClicked(object sender, EventArgs e)
@@ -70,14 +92,17 @@ public partial class IdeCascade : ContentView
     
     private void SetDisplayValues()
     {
+        Console.WriteLine("Set display values BS = " + ByteSwap);
         SetTitle();
 
         SetDiskImagePath();
+
+        SetByteSwap();
     }
 
     private void SetTitle()
     {
-        if (DrivePrefix != null)
+        if (DrivePrefix is not null)
         {
             Title = $"{DrivePrefix} {DiskId}";
         }
@@ -89,6 +114,20 @@ public partial class IdeCascade : ContentView
         {
             DiskImagePath = (DiskId == 0) ? DiskPaths.Disk0 : DiskPaths.Disk1;
         }
+    }
+ 
+    private void SetByteSwap()
+    {
+         if (DiskPaths is not null)
+         {
+             Console.WriteLine("SetByteSwap - No args ");
+        
+             var newValue = (DiskId == 0) ? DiskPaths.ByteSwapDrive0 : DiskPaths.ByteSwapDrive1;
+             if (newValue != ByteSwap)
+             {
+                 ByteSwap = newValue;
+             }
+         }
     }
 
     private void BrowseHddImage(object sender, EventArgs e)
@@ -107,4 +146,7 @@ public partial class IdeCascade : ContentView
             SetDiskImagePath();
         }
     }
+
+   
+
 }

@@ -19,9 +19,9 @@ public partial class IdeDiskOptions: ObservableObject
 
 public enum DiskWriteProtection
 {
-    Off,
-    On,
-    Auto
+    Off = 0,
+    On = 1,
+    Auto = 2
 }
 
 
