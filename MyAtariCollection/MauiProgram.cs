@@ -20,7 +20,6 @@ global using Mopups.Interfaces;
 
 
 using CommunityToolkit.Maui.Storage;
-using MyAtariCollection.Services.CommandLineArgumentGenerators;
 using Mopups.Hosting;
 using Mopups.Services;
 using MyAtariCollection.Services.ConfigFileSections;
@@ -54,11 +53,6 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<IPopupNavigation>(MopupService.Instance);
 
-        builder.Services.AddTransient<ISystemCommandLineArguments, SystemCommandLineArguments>();
-        builder.Services.AddTransient<ICpuCommandLineArguments, CpuCommandLineArguments>();
-        builder.Services.AddTransient<IRomCommandLineArguments, RomCommandLineArguments>();
-        builder.Services.AddTransient<IHardDiskCommandLineArguments, HardDiskCommandLineArguments>();
-        builder.Services.AddTransient<IFloppyCommandLineArguments, FloppyCommandLineArguments>();
 
         builder.Services.AddTransient<ILogConfigFileSection, LogConfigFileSection>();
         builder.Services.AddTransient<IMemoryConfigFileSection, MemoryConfigFileSection>();
@@ -69,7 +63,6 @@ public static class MauiProgram
         builder.Services.AddTransient<IIdeConfigFileSection, IdeConfigFileSection>();
         builder.Services.AddTransient<IConfigFileService, ConfigFileService>();
         
-        builder.Services.AddTransient<ICommandLineOptionsService, CommandLineOptionsService>();
         builder.Services.AddSingleton<IMachineTemplateService, MachineTemplateService>();
         builder.Services.AddSingleton<ISystemsService, SystemsService>();
 
