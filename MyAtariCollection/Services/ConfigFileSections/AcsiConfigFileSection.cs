@@ -60,10 +60,23 @@ public class IdeConfigFileSection : ConfigFileSection, IIdeConfigFileSection
 
         AddDrive(builder, 0, config.IdeOptions.Disk0);
         AddFlag(builder, "nByteSwap0", (int)config.IdeOptions.ByteSwapDrive0);
-//        AddFlag(builder, "nDeviceType0", 0);
+//      AddFlag(builder, "nDeviceType0", 0);
 
         AddDrive(builder, 1, config.IdeOptions.Disk1);
-        AddFlag(builder, "nByteSwap1", (int)config.IdeOptions.ByteSwapDrive1);
-  //      AddFlag(builder, "nDeviceType1", 0);
+        AddFlag(builder, "nByteSwap1", (int)config.IdeOptions.ByteSwapDrive1); 
+//      AddFlag(builder, "nDeviceType1", 0);
     }
 }
+
+
+/*
+[HardDisk]
+   nGemdosDrive = 0                     [add after acsi/scsi/ide, 0 = false, -1 = true]
+   bBootFromHardDisk = FALSE
+   bUseHardDiskDirectory = FALSE       [!String.isNullorEmpty(path)]
+   szHardDiskDirectory = /
+   nGemdosCase = 0
+   nWriteProtection = 0
+   bFilenameConversion = FALSE
+   bGemdosHostTime = FALSE          [Super advanced, ignore for now]
+*/
