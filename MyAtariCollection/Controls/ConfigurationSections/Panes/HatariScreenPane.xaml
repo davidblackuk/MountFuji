@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MyAtariCollection.Models"
+             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+             x:DataType="vm:MainViewModel"
+             x:Class="MyAtariCollection.Controls.ConfigurationSections.Panes.HatariScreenPane">
+
+    
+    
+    <configurationSections:ConfigurationGroup Title="Hatari screen">
+        
+        <VerticalStackLayout>
+        
+        
+            <HorizontalStackLayout Margin="0,0,0,0">
+         
+                <VerticalStackLayout RadioButtonGroup.GroupName="Indicators"
+                                     RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.ScreenOptions.Indicators}">
+                    <Label Text="Indicators" Style="{StaticResource H4Label}"></Label>
+                    <RadioButton Content="Status bar"  Value="{x:Static models:Indicators.StatusBar}" />
+                    <RadioButton Content="Drive LED" Value="{x:Static models:Indicators.DriveLed}" />
+                    <RadioButton Content="None" Value="{x:Static models:Indicators.None}" />
+
+                </VerticalStackLayout>
+         
+                <VerticalStackLayout Margin="25,0,0,0"
+                                     RadioButtonGroup.GroupName="frameSkip"
+                                     RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.ScreenOptions.FrameSkip}">
+                    <Label Text="Frame skip" Style="{StaticResource H4Label}"></Label>
+                    <RadioButton Content="off"  Value="{x:Static models:FrameSkip.Off}" />
+                    <RadioButton Content="1"  Value="{x:Static models:FrameSkip.Skip1}" />
+                    <RadioButton Content="2"  Value="{x:Static models:FrameSkip.Skip2}" />
+                    <RadioButton Content="4"  Value="{x:Static models:FrameSkip.Skip4}" />
+                    <RadioButton Content="Auto"  Value="{x:Static models:FrameSkip.Auto}" />
+
+                </VerticalStackLayout>
+         
+         
+         
+         
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <CheckBox VerticalOptions="Center" IsChecked="{Binding SelectedConfiguration.ScreenOptions.FullScreen}"></CheckBox>            
+                <Label Text="Full screen" VerticalOptions="Center"></Label>
+            </HorizontalStackLayout>
+
+            
+            
+        </VerticalStackLayout>
+
+    </configurationSections:ConfigurationGroup>
+
+    
+    
+</ContentView>

@@ -39,7 +39,7 @@
                 <Label  Grid.Column="3" Text="Double sided" VerticalOptions="Center" />
             </Grid>
 
-            <Label Text="Extras"/>
+            <Label Text="Extras" Style="{StaticResource H4Label}"/>
 
             <HorizontalStackLayout>
                 <CheckBox Grid.Column="0" VerticalOptions="Center" IsChecked="{Binding SelectedConfiguration.FloppyOptions.AutoInsertB}" />
@@ -58,10 +58,6 @@
                     <RadioButton Content="On" Value="{x:Static models:DiskWriteProtection.On}" />
                     <RadioButton Content="Auto" Value="{x:Static models:DiskWriteProtection.Auto}" />
                 </HorizontalStackLayout>
-                
-
-
-
         </VerticalStackLayout>
     </controls:SystemEditorExpander>
 </ContentView>

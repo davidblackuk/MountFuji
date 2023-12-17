@@ -423,6 +423,12 @@
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
+    <Style TargetType="Label"  x:Key="H4Label">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource H4ColorLight}, Dark={StaticResource H4ColorDark}}" />
+        <Setter Property="FontSize" Value="19" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+    
     <Style TargetType="Label"  x:Key="H3Offset" BasedOn="{StaticResource H3Label}">
         <Setter Property="Margin" Value="0,10,0,0"></Setter>
     </Style>

@@ -58,9 +58,12 @@ public static class MauiProgram
         builder.Services.AddTransient<IMemoryConfigFileSection, MemoryConfigFileSection>();
         builder.Services.AddTransient<ISystemConfigFileSection, SystemConfigFileSection>();
         builder.Services.AddTransient<IRomConfigFileSection, RomConfigFileSection>();
+        builder.Services.AddTransient<IHardDiskConfigFileSection, HardDiskConfigFileSection>();
+        builder.Services.AddTransient<IFloppyConfigFileSection, FloppyConfigFileSection>();
         builder.Services.AddTransient<IAcsiConfigFileSection, AcsiConfigFileSection>();
         builder.Services.AddTransient<IScsiConfigFileSection, ScsiConfigFileSection>();
         builder.Services.AddTransient<IIdeConfigFileSection, IdeConfigFileSection>();
+        builder.Services.AddTransient<IScreenConfigFileSection, ScreenConfigFileSection>();
         builder.Services.AddTransient<IConfigFileService, ConfigFileService>();
         
         builder.Services.AddSingleton<IMachineTemplateService, MachineTemplateService>();

@@ -5,36 +5,81 @@
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              xmlns:controls="clr-namespace:MyAtariCollection.Controls"
              xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             xmlns:models="clr-namespace:MyAtariCollection.Models"
+             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
              x:DataType="vm:MainViewModel"
              x:Class="MyAtariCollection.Controls.ConfigurationSections.HardDiskSection">
 
     <controls:SystemEditorExpander Title="Hard Disks" Expanded="{Binding SectionVisibility.ExpandAcsiHddSection}">
-            <VerticalStackLayout>
-                <Label Text="ACSI" Style="{StaticResource H3Offset}"></Label>
-                <controls:HardDiskCascade 
+        <VerticalStackLayout>
+            <configurationSections:ConfigurationGroup Title="ACSI">
+                <controls:HardDiskCascade
                     DrivePrefix="ACSI HD"
                     DiskPaths="{Binding SelectedConfiguration.AcsiImagePaths}"
                     ClearDiskImageCommand="{Binding ClearAcsiDiskImageCommand}"
-                    BrowseDiskImageCommand="{Binding BrowseAcsiDiskImageCommand}"
-                    />
-                <Label Text="SCSI" Style="{StaticResource H3Offset}"></Label>
-                <controls:HardDiskCascade 
+                    BrowseDiskImageCommand="{Binding BrowseAcsiDiskImageCommand}" />
+            </configurationSections:ConfigurationGroup>
+
+            <configurationSections:ConfigurationGroup Title="SCSI">
+                <controls:HardDiskCascade
                     DrivePrefix="SCSI HD"
                     DiskPaths="{Binding SelectedConfiguration.ScsiImagePaths}"
                     ClearDiskImageCommand="{Binding ClearScsiDiskImageCommand}"
-                    BrowseDiskImageCommand="{Binding BrowseScsiDiskImageCommand}"
-                />
-                <Label Text="IDE" Style="{StaticResource H3Offset}"></Label>
-                
-                <controls:IdeCascade 
+                    BrowseDiskImageCommand="{Binding BrowseScsiDiskImageCommand}" />
+            </configurationSections:ConfigurationGroup>
+
+            <configurationSections:ConfigurationGroup Title="IDE">
+                <controls:IdeCascade
                     DrivePrefix="IDE HD"
                     DiskPaths="{Binding SelectedConfiguration.IdeOptions}"
                     ClearDiskImageCommand="{Binding ClearIdeDiskImageCommand}"
-                    BrowseDiskImageCommand="{Binding BrowseIdeDiskImageCommand}"
-                />
-                
-                
-            </VerticalStackLayout>
+                    BrowseDiskImageCommand="{Binding BrowseIdeDiskImageCommand}" />
+            </configurationSections:ConfigurationGroup>
+
+
+            <configurationSections:ConfigurationGroup Title="GEMDOS">
+                <VerticalStackLayout>
+                    <controls:HardDiskPathEditor Title="Folder"
+                                                 BrowseDiskImageCommand="{Binding BrowseGemdosFolderCommand}"
+                                                 ClearDiskImageCommand="{Binding ClearGemdosFolderCommand}"
+                                                 DiskImagePath="{Binding SelectedConfiguration.GdosDriveOptions.GemdosFolder}" />
+
+
+                    <VerticalStackLayout Margin="60,0,0,0">
+                        <HorizontalStackLayout>
+                            <CheckBox VerticalOptions="Center"
+                                      IsChecked="{Binding Path=SelectedConfiguration.GdosDriveOptions.AtariHostFilenameConversion}" />
+                            <Label Text="Atari &lt;-&gt; host 8-bit file name conversion" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout>
+                            <CheckBox VerticalOptions="Center"
+                                      IsChecked="{Binding Path=SelectedConfiguration.GdosDriveOptions.AddGemdosAfterPhysicalDrives}" />
+                            <Label Text="Add GEMDOS HD after ACSI/SCSI/IDE partitions" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout RadioButtonGroup.GroupName="gdosWriteProtect"
+                                               RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.GdosDriveOptions.WriteProtection}">
+                            <Label Margin="10,10,0,20" Text="Write protection:" VerticalOptions="Center"></Label>
+                            <RadioButton Content="Off" Value="{x:Static models:DiskWriteProtection.Off}" />
+                            <RadioButton Content="On" Value="{x:Static models:DiskWriteProtection.On}" />
+                            <RadioButton Content="Auto" Value="{x:Static models:DiskWriteProtection.Auto}" />
+                        </HorizontalStackLayout>
+
+
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </configurationSections:ConfigurationGroup>
+
+            <configurationSections:ConfigurationGroup Title="Extras">
+                <HorizontalStackLayout>
+                    <CheckBox VerticalOptions="Center"
+                              IsChecked="{Binding Path=SelectedConfiguration.GdosDriveOptions.BootFromHardDisk}" />
+                    <Label Text="Boot from hard disk" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </configurationSections:ConfigurationGroup>
+
+        </VerticalStackLayout>
     </controls:SystemEditorExpander>
 
 

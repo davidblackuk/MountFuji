@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MyAtariCollection.Models"
+             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+             x:DataType="vm:MainViewModel"
+             x:Class="MyAtariCollection.Controls.ConfigurationSections.Panes.Sdl2Pane">
+ 
+    <configurationSections:ConfigurationGroup Title="SDL 2">
+        
+        <VerticalStackLayout>
+            
+            <HorizontalStackLayout>
+                <CheckBox VerticalOptions="Center" IsChecked="{Binding SelectedConfiguration.ScreenOptions.GpuScaling}"></CheckBox>            
+                <Label Text="GPU Scaling" VerticalOptions="Center"></Label>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <CheckBox VerticalOptions="Center" IsChecked="{Binding SelectedConfiguration.ScreenOptions.Resizable}"></CheckBox>            
+                <Label Text="Resizable" VerticalOptions="Center"></Label>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <CheckBox VerticalOptions="Center" IsChecked="{Binding SelectedConfiguration.ScreenOptions.Vsync}"></CheckBox>            
+                <Label Text="VSync" VerticalOptions="Center"></Label>
+            </HorizontalStackLayout>
+
+            
+            
+        </VerticalStackLayout>
+
+    </configurationSections:ConfigurationGroup>
+   
+</ContentView>

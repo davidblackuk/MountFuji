@@ -8,19 +8,21 @@ public partial class MainViewModel : TinyViewModel
 {
     private readonly ISystemsService systemService;
     private readonly IConfigFileService configFileService;
-    private readonly ICommandLineOptionsService optionsService;
     private readonly IPopupNavigation popupNavigation;
     private readonly IFilePicker filePicker;
+    private readonly IFolderPicker folderPicker;
     private readonly IServiceProvider serviceProvider;
     private readonly Random random = new();
 
-    public MainViewModel(ISystemsService systemService, IConfigFileService configFileService, ICommandLineOptionsService optionsService, IPopupNavigation popupNavigation, IFilePicker filePicker, IServiceProvider serviceProvider)
+    public MainViewModel(ISystemsService systemService, IConfigFileService configFileService, 
+        IPopupNavigation popupNavigation, IFilePicker filePicker, IFolderPicker folderPicker, 
+        IServiceProvider serviceProvider)
     {
         this.systemService = systemService;
         this.configFileService = configFileService;
-        this.optionsService = optionsService;
         this.popupNavigation = popupNavigation;
         this.filePicker = filePicker;
+        this.folderPicker = folderPicker;
         this.serviceProvider = serviceProvider;
     }
 
@@ -122,6 +124,18 @@ public partial class MainViewModel : TinyViewModel
     [RelayCommand()]
     private void ClearFloppyDiskImage(int diskId) => SelectedConfiguration.FloppyOptions.ClearImagePath(diskId);
 
+    
+    
+    [RelayCommand()]
+    private async void BrowseGemdosFolder()
+    {
+        var folder = await folderPicker.PickAsync();
+        
+        if (folder.IsSuccessful) SelectedConfiguration.GdosDriveOptions.GemdosFolder = folder.Folder.Path;
+    }
+    
+    [RelayCommand()]
+    private void ClearGemdosFolder(int diskId) => SelectedConfiguration.GdosDriveOptions.GemdosFolder = string.Empty;
 
 
 
@@ -149,8 +163,7 @@ public partial class MainViewModel : TinyViewModel
     [RelayCommand()]
     private async void Run()
     {
-        Console.WriteLine("open /Applications/Hatari.app --args " + optionsService.Generate(SelectedConfiguration));
-
+       
         var configFileContent = configFileService.Generate(SelectedConfiguration);
         Console.WriteLine($"\n{configFileContent}");
 

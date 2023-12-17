@@ -3,8 +3,8 @@ namespace MyAtariCollection.Models;
 public partial class GdosDriveOptions: ObservableObject
 {
     [ObservableProperty] private string gemdosFolder = String.Empty;
-    [ObservableProperty] private bool addGemdosAfterPhysicalDrives = true;
-    [ObservableProperty] private bool atariHostFilenameConversion = true;
+    [ObservableProperty] private bool addGemdosAfterPhysicalDrives = false;
+    [ObservableProperty] private bool atariHostFilenameConversion = false;
     [ObservableProperty] private DiskWriteProtection writeProtection = DiskWriteProtection.Off;
-    [ObservableProperty] private bool bootFromHardDisk = true;
+    [ObservableProperty] private bool bootFromHardDisk = false;
 }

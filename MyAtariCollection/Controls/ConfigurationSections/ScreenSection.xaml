@@ -10,6 +10,9 @@
     <controls:SystemEditorExpander Title="Screen"  Expanded="{Binding SectionVisibility.ExpandScreenSection}">
         <HorizontalStackLayout>
             <panes:AtariMonitorPane/>
+            <panes:VdiResolutionPane />
+            <panes:HatariScreenPane />
+            <panes:Sdl2Pane />
         </HorizontalStackLayout>
     </controls:SystemEditorExpander>
     

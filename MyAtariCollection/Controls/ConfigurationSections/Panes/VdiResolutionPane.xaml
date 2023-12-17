@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MyAtariCollection.Models"
+             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+             x:DataType="vm:MainViewModel"
+
+             x:Class="MyAtariCollection.Controls.ConfigurationSections.Panes.VdiResolutionPane">
+    
+    
+    
+    <configurationSections:ConfigurationGroup Title="Extended resolutions">
+        
+        <VerticalStackLayout>
+            <HorizontalStackLayout>
+                <CheckBox VerticalOptions="Center" IsChecked="{Binding SelectedConfiguration.ScreenOptions.EnableExtendedResolutions}"></CheckBox>            
+                <Label Text="Use extended GEM VDI resolution" VerticalOptions="Center"></Label>
+            </HorizontalStackLayout>
+        
+        
+     <HorizontalStackLayout Margin="45,0,0,0">
+         
+         <VerticalStackLayout RadioButtonGroup.GroupName="resolution"
+                              RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.ScreenOptions.Resolution}">
+             <Label Text="Screen size" Style="{StaticResource H4Label}"></Label>
+             <RadioButton Content="640x480"  Value="{x:Static models:Resolution.Resolution640X480}" />
+             <RadioButton Content="800x600" Value="{x:Static models:Resolution.Resolution800X600}" />
+             <RadioButton Content="1024x768" Value="{x:Static models:Resolution.Resolution1024X768}" />
+
+         </VerticalStackLayout>
+         
+         <VerticalStackLayout Margin="25,0,0,0"
+                                RadioButtonGroup.GroupName="colourDepth"
+                              RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.ScreenOptions.ColourDepth}">
+             <Label Text="Colour depth" Style="{StaticResource H4Label}"></Label>
+             <RadioButton Content="2 Colours"  Value="{x:Static models:ColorDepth.Colours2}" />
+             <RadioButton Content="4 Colours" Value="{x:Static models:ColorDepth.Colours4}" />
+             <RadioButton Content="16 Colours" Value="{x:Static models:ColorDepth.Colours16}" />
+
+         </VerticalStackLayout>
+         
+         
+         
+         
+     </HorizontalStackLayout>
+            
+        </VerticalStackLayout>
+
+    </configurationSections:ConfigurationGroup>
+
+    
+</ContentView>

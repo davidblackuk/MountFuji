@@ -60,23 +60,72 @@ public class IdeConfigFileSection : ConfigFileSection, IIdeConfigFileSection
 
         AddDrive(builder, 0, config.IdeOptions.Disk0);
         AddFlag(builder, "nByteSwap0", (int)config.IdeOptions.ByteSwapDrive0);
-//      AddFlag(builder, "nDeviceType0", 0);
 
         AddDrive(builder, 1, config.IdeOptions.Disk1);
         AddFlag(builder, "nByteSwap1", (int)config.IdeOptions.ByteSwapDrive1); 
-//      AddFlag(builder, "nDeviceType1", 0);
     }
 }
 
 
+public interface IHardDiskConfigFileSection
+{
+    void Generate(StringBuilder builder, AtariConfiguration config);
+}
+
+public class HardDiskConfigFileSection : ConfigFileSection, IHardDiskConfigFileSection
+{
+    public void Generate(StringBuilder builder, AtariConfiguration config)
+    {
+        AddSection(builder, "HardDisk");
+
+        AddFlag(builder, "nGemdosDrive", config.GdosDriveOptions.AddGemdosAfterPhysicalDrives ? -1 : 0);
+        AddFlag(builder, "bBootFromHardDisk", config.GdosDriveOptions.BootFromHardDisk);
+        AddFlag(builder, "bUseHardDiskDirectory", !string.IsNullOrEmpty(config.GdosDriveOptions.GemdosFolder));
+        AddFlag(builder, "szHardDiskDirectory", config.GdosDriveOptions.GemdosFolder);
+ //     AddFlag(builder, "nGemdosCase", );
+        AddFlag(builder, "nWriteProtection", (int) config.GdosDriveOptions.WriteProtection);
+        AddFlag(builder, "bFilenameConversion", config.GdosDriveOptions.AtariHostFilenameConversion );
+
+    }
+}
+
+public interface IFloppyConfigFileSection
+{
+    void Generate(StringBuilder builder, AtariConfiguration config);
+}
+
+public class FloppyConfigFileSection : ConfigFileSection, IFloppyConfigFileSection
+{
+    public void Generate(StringBuilder builder, AtariConfiguration config)
+    {
+        AddSection(builder, "Floppy");
+        
+        
+        AddFlag(builder, "bAutoInsertDiskB", config.FloppyOptions.AutoInsertB);
+        AddFlag(builder, "FastFloppy", config.FloppyOptions.FastFloppyAccess);
+
+        AddFlag(builder, "EnableDriveA", config.FloppyOptions.DriveAEnabled);
+        AddFlag(builder, "szDiskAFileName", config.FloppyOptions.DriveAPath);
+        AddFlag(builder, "DriveA_NumberOfHeads", config.FloppyOptions.DriveADoubleSided ? 2 : 1);
+        
+        
+        
+        AddFlag(builder, "EnableDriveB", config.FloppyOptions.DriveBEnabled);
+        AddFlag(builder, "szDiskBFileName", config.FloppyOptions.DriveBPath);
+        AddFlag(builder, "DriveB_NumberOfHeads", config.FloppyOptions.DriveBDoubleSided ? 2 : 1);
+        
+        AddFlag(builder, "nWriteProtection", (int) config.FloppyOptions.WriteProtection);
+        
+    }
+}
+
 /*
-[HardDisk]
-   nGemdosDrive = 0                     [add after acsi/scsi/ide, 0 = false, -1 = true]
-   bBootFromHardDisk = FALSE
-   bUseHardDiskDirectory = FALSE       [!String.isNullorEmpty(path)]
-   szHardDiskDirectory = /
-   nGemdosCase = 0
-   nWriteProtection = 0
-   bFilenameConversion = FALSE
-   bGemdosHostTime = FALSE          [Super advanced, ignore for now]
+
+
+filename is the zip file
+zippath is within the zip file
+   szDiskAZipPath =
+   szDiskBZipPath =
+   szDiskImageDirectory = /
+   
 */

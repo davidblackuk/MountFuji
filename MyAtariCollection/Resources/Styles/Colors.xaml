@@ -21,6 +21,11 @@
 
     <Color x:Key="H3ColorDark">#F4FFAF</Color>
     <Color x:Key="H3ColorLight">#7F7E28</Color>
+    
+    <Color x:Key="H4ColorDark">#C1FCFE</Color>
+    <Color x:Key="H4ColorLight">#1E8B99</Color>
+    
+    
 
     <Color x:Key="WarningColorDark">#FFCAE8</Color>
     <Color x:Key="WarningColorLight">#7F3E4C</Color>

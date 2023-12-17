@@ -29,7 +29,7 @@
                     <configurationSections:FloppySection />
                     <configurationSections:ScreenSection/>
 
-                    <controls:SystemEditorExpander Title="Hatari Screen"/>
+                 
                     <controls:SystemEditorExpander Title="Joysticks"/>
                     <controls:SystemEditorExpander Title="Keyboard"/>
                     <controls:SystemEditorExpander Title="Devices"/>
