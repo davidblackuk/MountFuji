@@ -13,12 +13,15 @@ public class ConfigFileService : IConfigFileService
     private readonly IHardDiskConfigFileSection hardDiskConfig;
     private readonly IFloppyConfigFileSection floppyConfig;
     private readonly IScreenConfigFileSection screenConfig;
+    private readonly ISoundConfigFileSection soundConfig;
     private readonly ILogConfigFileSection logConfig;
 
-    public ConfigFileService(ILogConfigFileSection logConfig, 
-        IMemoryConfigFileSection memoryConfig, ISystemConfigFileSection systemConfig, IRomConfigFileSection romConfig, 
+    public ConfigFileService(ILogConfigFileSection logConfig,
+        IMemoryConfigFileSection memoryConfig, ISystemConfigFileSection systemConfig, IRomConfigFileSection romConfig,
         IAcsiConfigFileSection acsiConfig, IScsiConfigFileSection scsiConfig, IIdeConfigFileSection ideSection,
-        IHardDiskConfigFileSection hardDiskConfig, IFloppyConfigFileSection floppyConfig, IScreenConfigFileSection screenConfig)
+        IHardDiskConfigFileSection hardDiskConfig, IFloppyConfigFileSection floppyConfig,
+        IScreenConfigFileSection screenConfig,
+        ISoundConfigFileSection soundConfig)
     {
         this.memoryConfig = memoryConfig;
         this.systemConfig = systemConfig;
@@ -29,39 +32,44 @@ public class ConfigFileService : IConfigFileService
         this.hardDiskConfig = hardDiskConfig;
         this.floppyConfig = floppyConfig;
         this.screenConfig = screenConfig;
+        this.soundConfig = soundConfig;
         this.logConfig = logConfig;
     }
+
     public string Generate(AtariConfiguration config)
     {
         StringBuilder builder = new StringBuilder();
-        
+
+        soundConfig.Generate(builder, config);
+        builder.AppendLine("");
+
         screenConfig.Generate(builder, config);
         builder.AppendLine("");
-        
+
         floppyConfig.Generate(builder, config);
         builder.AppendLine("");
-        
-       hardDiskConfig.Generate(builder, config);
+
+        hardDiskConfig.Generate(builder, config);
         builder.AppendLine("");
-        
+
         scsiConfig.Generate(builder, config);
         builder.AppendLine("");
-        
+
         ideSection.Generate(builder, config);
         builder.AppendLine("");
-        
+
         acsiConfig.Generate(builder, config);
         builder.AppendLine("");
-        
+
         romConfig.Generate(builder, config);
         builder.AppendLine("");
-        
+
         memoryConfig.Generate(builder, config);
         builder.AppendLine("");
-        
+
         systemConfig.Generate(builder, config);
         builder.AppendLine("");
-        
+
         logConfig.Generate(builder, config);
         builder.AppendLine("");
 

@@ -28,12 +28,12 @@
                     <configurationSections:HardDiskSection/>
                     <configurationSections:FloppySection />
                     <configurationSections:ScreenSection/>
+                    <configurationSections:SoundSection/>
 
                  
                     <controls:SystemEditorExpander Title="Joysticks"/>
                     <controls:SystemEditorExpander Title="Keyboard"/>
                     <controls:SystemEditorExpander Title="Devices"/>
-                    <controls:SystemEditorExpander Title="Sound"/>
 
                 </VerticalStackLayout>
 

@@ -13,4 +13,6 @@ public partial class SectionVisibility: ObservableObject
     [ObservableProperty] private bool expandFloppySection = false;
     
     [ObservableProperty] private bool expandScreenSection = false;
+    
+    [ObservableProperty] private bool expandSoundSection = false;
 }

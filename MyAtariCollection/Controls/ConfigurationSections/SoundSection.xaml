@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             xmlns:panes="clr-namespace:MyAtariCollection.Controls.ConfigurationSections.Panes"
+
+             x:DataType="vm:MainViewModel"
+             x:Class="MyAtariCollection.Controls.ConfigurationSections.SoundSection">
+    <controls:SystemEditorExpander Title="Sound" Expanded="{Binding SectionVisibility.ExpandSoundSection}">
+        <HorizontalStackLayout>
+            
+            <panes:SoundSettingsPane />
+            <panes:SoundPlaybackQualityPane />
+            <panes:SoundMixingPane />
+            
+        </HorizontalStackLayout>
+    </controls:SystemEditorExpander>
+</ContentView>

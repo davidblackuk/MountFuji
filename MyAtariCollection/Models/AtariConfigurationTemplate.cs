@@ -136,4 +136,10 @@ public class AtariConfigurationTemplate
     /// </summary>
     public AtariScreenOptions ScreenOptions = new();
 
+    /// <summary>
+    /// Sound options, playback quality etc
+    /// </summary>
+    public SoundOptions SoundOptions = new();
+
+    
 }

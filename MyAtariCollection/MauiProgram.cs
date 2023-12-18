@@ -64,6 +64,7 @@ public static class MauiProgram
         builder.Services.AddTransient<IScsiConfigFileSection, ScsiConfigFileSection>();
         builder.Services.AddTransient<IIdeConfigFileSection, IdeConfigFileSection>();
         builder.Services.AddTransient<IScreenConfigFileSection, ScreenConfigFileSection>();
+        builder.Services.AddTransient<ISoundConfigFileSection, SoundConfigFileSection>();
         builder.Services.AddTransient<IConfigFileService, ConfigFileService>();
         
         builder.Services.AddSingleton<IMachineTemplateService, MachineTemplateService>();

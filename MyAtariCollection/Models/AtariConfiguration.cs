@@ -146,4 +146,12 @@ public partial class AtariConfiguration: ObservableObject
     /// Atari screen options, video mode, VDI settings etc
     /// </summary>
     [ObservableProperty] private AtariScreenOptions screenOptions = new();
+    
+    /// <summary>
+    /// Sound options, playback quality etc
+    /// </summary>
+    [ObservableProperty] private SoundOptions soundOptions = new();
+    
+    
+    
 }
