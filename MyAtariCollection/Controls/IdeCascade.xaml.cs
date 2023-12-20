@@ -57,7 +57,6 @@ public partial class IdeCascade : ContentView
         
         if (propertyName == nameof(ByteSwap))
         {
-            Console.WriteLine($"Property changed {propertyName} byte swap is {ByteSwap}");
 
             if (DiskId == 0)
             {
@@ -92,7 +91,6 @@ public partial class IdeCascade : ContentView
     
     private void SetDisplayValues()
     {
-        Console.WriteLine("Set display values BS = " + ByteSwap);
         SetTitle();
 
         SetDiskImagePath();
@@ -120,8 +118,6 @@ public partial class IdeCascade : ContentView
     {
          if (DiskPaths is not null)
          {
-             Console.WriteLine("SetByteSwap - No args ");
-        
              var newValue = (DiskId == 0) ? DiskPaths.ByteSwapDrive0 : DiskPaths.ByteSwapDrive1;
              if (newValue != ByteSwap)
              {

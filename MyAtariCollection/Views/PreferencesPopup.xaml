@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  x:Class="MyAtariCollection.Views.PreferencesPopup"
+
+                  xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+                  xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+                  xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+                  xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+                  x:DataType="vm:PreferencesPopupViewModel"
+                  Title="Preferences" BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
+
+    <ContentPage.Content>
+
+        <Frame WidthRequest="850" HeightRequest="660">
+            <VerticalStackLayout>
+
+                <Label Text="Preferences" HorizontalOptions="Center" Style="{StaticResource H1Label}" />
+                <VerticalStackLayout>
+                    <configurationSections:ConfigurationGroup Title="System">
+                        <controls:HardDiskPathEditor
+                            Title="Hatari app"
+                            DiskImagePath="{Binding Preferences.HatariApplication}"
+                            ClearDiskImageCommand="{Binding ClearHatariAppCommand}"
+                            BrowseDiskImageCommand="{Binding BrowseHatariAppCommand}"
+                            PickerOpenIcon="{x:Static controls:IconFont.File_open}" />
+                    </configurationSections:ConfigurationGroup>
+
+                    <configurationSections:ConfigurationGroup Title="Folders">
+                        <VerticalStackLayout>
+                            <controls:HardDiskPathEditor
+                                Title="ROMs"
+                                DiskImagePath="{Binding Preferences.RomFolder}"
+                                ClearDiskImageCommand="{Binding ClearRomFolderCommand}"
+                                BrowseDiskImageCommand="{Binding BrowseRomFolderCommand}"
+                                PickerOpenIcon="{x:Static controls:IconFont.Folder_open}" />
+
+                            <controls:HardDiskPathEditor
+                                Title="Cartridges"
+                                DiskImagePath="{Binding Preferences.CartridgeFolder}"
+                                ClearDiskImageCommand="{Binding ClearCartridgeFolderCommand}"
+                                BrowseDiskImageCommand="{Binding BrowseCartridgeFolderCommand}"
+                                PickerOpenIcon="{x:Static controls:IconFont.Folder_open}" />
+
+                            <controls:HardDiskPathEditor
+                                Title="Floppy disks"
+                                DiskImagePath="{Binding Preferences.FloppyDiskFolder}"
+                                ClearDiskImageCommand="{Binding ClearFloppyDiskFolderCommand}"
+                                BrowseDiskImageCommand="{Binding BrowseFloppyDiskFolderCommand}"
+                                PickerOpenIcon="{x:Static controls:IconFont.Folder_open}" />
+
+                            <controls:HardDiskPathEditor
+                                Title="Hard disks"
+                                DiskImagePath="{Binding Preferences.HardDiskFolder}"
+                                ClearDiskImageCommand="{Binding ClearHardDiskFolderCommand}"
+                                BrowseDiskImageCommand="{Binding BrowseHardDiskFolderCommand}"
+                                PickerOpenIcon="{x:Static controls:IconFont.Folder_open}" />
+
+                            <controls:HardDiskPathEditor
+                                Title="GEMDOS disks"
+                                DiskImagePath="{Binding Preferences.GemDosFolder}"
+                                ClearDiskImageCommand="{Binding ClearGemDosDiskFolderCommand}"
+                                BrowseDiskImageCommand="{Binding BrowseGemDosDiskFolderCommand}"
+                                PickerOpenIcon="{x:Static controls:IconFont.Folder_open}" />
+
+                        </VerticalStackLayout>
+
+                    </configurationSections:ConfigurationGroup>
+
+                    <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End"
+                                           HeightRequest="90">
+                        <Button VerticalOptions="Start" Text="Cancel" Command="{Binding CancelCommand}"
+                                Margin="0,12,15,0" />
+                        <Button VerticalOptions="Start" Text="OK" Command="{Binding OkCommand}" Margin="0,12,15,0" />
+                    </HorizontalStackLayout>
+
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </Frame>
+
+    </ContentPage.Content>
+</mopups:PopupPage>

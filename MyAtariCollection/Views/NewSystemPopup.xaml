@@ -7,15 +7,15 @@
                   xmlns:models="clr-namespace:MyAtariCollection.Models"
                   xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
                   xmlns:converters="clr-namespace:MyAtariCollection.Converters"
-                  x:DataType="vm:NewSystemPopupViewModel"
+                
                   x:Class="MyAtariCollection.Views.NewSystemPopup"
-                  Title="NewSystemPopup" BackgroundColor="#80000000">
+                  Title="NewSystemPopup" BackgroundColor="#80000000"  CloseWhenBackgroundIsClicked="False" >
     <mopups:PopupPage.Resources>
         <converters:TemplateSummaryConverter x:Key="templateConverter" />
     </mopups:PopupPage.Resources>
 
-    <Frame WidthRequest="850" HeightRequest="600">
-        <Grid RowDefinitions="50,480,70" ColumnDefinitions="440,10,*">
+    <Frame WidthRequest="850" HeightRequest="620">
+        <Grid RowDefinitions="50,480,90" ColumnDefinitions="440,10,*">
             <Label 
                 Grid.Row="0"
                 Grid.Column="0"
@@ -71,9 +71,9 @@
                 </VerticalStackLayout>
             </configurationSections:ConfigurationGroup>
 
-            <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End">
-                <Button VerticalOptions="Start" HeightRequest="30" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />
-                <Button VerticalOptions="Start" HeightRequest="30" Text="OK" Command="{Binding OkCommand}" Margin="0,0,15,0" />
+            <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End" HeightRequest="90" >
+                <Button VerticalOptions="Start" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,12,15,0" />
+                <Button VerticalOptions="Start" Text="OK" Command="{Binding OkCommand}" Margin="0,12,15,0" />
             </HorizontalStackLayout>
         </Grid>
     </Frame>

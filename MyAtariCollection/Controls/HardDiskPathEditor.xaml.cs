@@ -22,6 +22,9 @@ public partial class HardDiskPathEditor : ContentView
     [AutoBindable]
     private readonly ICommand browseDiskImageCommand;
 
+    [AutoBindable] 
+    private readonly string pickerOpenIcon = IconFont.Folder_open;
+    
 #pragma warning restore CS0169
     
     public HardDiskPathEditor()

@@ -11,8 +11,8 @@
     <controls:SystemEditorExpander Title="ROM and Cartridge" Expanded="{Binding SectionVisibility.ExpandRomSection}">
         <VerticalStackLayout>
 
-            <configurationSections:ConfigurationGroup Title="ROM path">
-                <!-- TODO: replace Autos with sizes -->
+            <configurationSections:ConfigurationGroup Title="ROM image">
+
                 <Grid Grid.ColumnDefinitions="*,auto,auto" Margin="0,10,0,0">
                     <Entry Text="{Binding SelectedConfiguration.RomImage}" />
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="1"
@@ -25,9 +25,9 @@
             </configurationSections:ConfigurationGroup>
 
 
-            <configurationSections:ConfigurationGroup Title="Cartridge Path">
+            <configurationSections:ConfigurationGroup Title="Cartridge image">
 
-                <!-- TODO: replace Autos with sizes -->
+
                 <Grid Grid.ColumnDefinitions="*,auto,auto" Margin="0,10,0,0">
                     <Entry Text="{Binding SelectedConfiguration.CartridgeImage}" />
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="1"

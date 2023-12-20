@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                          xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+            xmlns:controls="clr-namespace:MyAtariCollection.Controls"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              xmlns:models="clr-namespace:MyAtariCollection.Models"
              xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
@@ -17,7 +17,8 @@
                     Title="Drive A" DiskId="{sys:Int32 0}"
                     DiskImagePath="{Binding SelectedConfiguration.FloppyOptions.DriveAPath}"
                     ClearDiskImageCommand="{Binding ClearFloppyDiskImageCommand}"
-                    BrowseDiskImageCommand="{Binding BrowseFloppyDiskImageCommand}" />
+                    BrowseDiskImageCommand="{Binding BrowseFloppyDiskImageCommand}" 
+                    PickerOpenIcon="{x:Static controls:IconFont.File_open}"/>
 
             <Grid ColumnDefinitions="40,auto,40,*" Margin="60,10,0,20">
                 <CheckBox Grid.Column="0" VerticalOptions="Center" IsChecked="{Binding SelectedConfiguration.FloppyOptions.DriveAEnabled}" />
@@ -30,7 +31,8 @@
                     Title="Drive B" DiskId="{sys:Int32 1}"
                     DiskImagePath="{Binding SelectedConfiguration.FloppyOptions.DriveBPath}"
                     ClearDiskImageCommand="{Binding ClearFloppyDiskImageCommand}"
-                    BrowseDiskImageCommand="{Binding BrowseFloppyDiskImageCommand}" />
+                    BrowseDiskImageCommand="{Binding BrowseFloppyDiskImageCommand}" 
+                    PickerOpenIcon="{x:Static controls:IconFont.File_open}"/>
 
             <Grid ColumnDefinitions="40,auto,40,*" Margin="60,10,0,20">
                 <CheckBox Grid.Column="0" VerticalOptions="Center" IsChecked="{Binding SelectedConfiguration.FloppyOptions.DriveBEnabled}" />

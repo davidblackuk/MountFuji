@@ -12,11 +12,12 @@ public partial class MainViewModel : TinyViewModel
     private readonly IFilePicker filePicker;
     private readonly IFolderPicker folderPicker;
     private readonly IServiceProvider serviceProvider;
+    private readonly IPreferencesService preferencesService;
     private readonly Random random = new();
 
     public MainViewModel(ISystemsService systemService, IConfigFileService configFileService, 
         IPopupNavigation popupNavigation, IFilePicker filePicker, IFolderPicker folderPicker, 
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider, IPreferencesService preferencesService)
     {
         this.systemService = systemService;
         this.configFileService = configFileService;
@@ -24,6 +25,7 @@ public partial class MainViewModel : TinyViewModel
         this.filePicker = filePicker;
         this.folderPicker = folderPicker;
         this.serviceProvider = serviceProvider;
+        this.preferencesService = preferencesService;
     }
 
 
@@ -38,9 +40,7 @@ public partial class MainViewModel : TinyViewModel
     private SectionVisibility sectionVisibility = new SectionVisibility(); 
 
     public bool HasSelectedConfig => SelectedConfiguration != null;
-
-
-    private int nextSystem = 0;
+    
 
     #region ---- RELAY COMMANDS ----
     
@@ -158,6 +158,20 @@ public partial class MainViewModel : TinyViewModel
         };      
     }
 
+    [RelayCommand]
+    private async void EditPreferences()
+    {
+        var popup = serviceProvider.GetService<PreferencesPopup>();
+        await popupNavigation.PushAsync(popup);
+
+        popup.Disappearing += async (sender, args) =>
+        {
+             if (popup.ViewModel.Confirmed)
+             {
+                await preferencesService.Save();
+             }
+        };      
+    }
  
 
     [RelayCommand()]

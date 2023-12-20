@@ -42,7 +42,8 @@
                     <controls:HardDiskPathEditor Title="Folder"
                                                  BrowseDiskImageCommand="{Binding BrowseGemdosFolderCommand}"
                                                  ClearDiskImageCommand="{Binding ClearGemdosFolderCommand}"
-                                                 DiskImagePath="{Binding SelectedConfiguration.GdosDriveOptions.GemdosFolder}" />
+                                                 DiskImagePath="{Binding SelectedConfiguration.GdosDriveOptions.GemdosFolder}" 
+                                                 PickerOpenIcon="{x:Static controls:IconFont.Folder_open}"/>
 
 
                     <VerticalStackLayout Margin="60,0,0,0">

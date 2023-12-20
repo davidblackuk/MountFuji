@@ -22,7 +22,7 @@ namespace MyAtariCollection.ViewModels
         }
         
 
-        public bool Confirmed { get; set; }
+        public bool Confirmed { get; set; } 
 
         public AtariConfiguration GetConfiguration()
         {

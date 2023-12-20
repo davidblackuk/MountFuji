@@ -44,9 +44,12 @@ public static class MauiProgram
             .UseMauiCommunityToolkit();
 
         builder.Services.AddTransient<MainView>();
-        builder.Services.AddTransient<MainViewModel>();
         builder.Services.AddTransient<NewSystemPopup>();
+        builder.Services.AddTransient<PreferencesPopup>();
+        
+        builder.Services.AddTransient<MainViewModel>();
         builder.Services.AddTransient<NewSystemPopupViewModel>();
+        builder.Services.AddTransient<PreferencesPopupViewModel>();
 
         builder.Services.AddTransient<IFolderPicker>(provider => FolderPicker.Default);
         builder.Services.AddTransient<IFilePicker>(provider => FilePicker.Default);
@@ -69,11 +72,17 @@ public static class MauiProgram
         
         builder.Services.AddSingleton<IMachineTemplateService, MachineTemplateService>();
         builder.Services.AddSingleton<ISystemsService, SystemsService>();
+        builder.Services.AddSingleton<IPreferencesService, PreferencesService>();
 
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
 
-        return builder.Build();
+        var built =  builder.Build();
+
+        var preferencesService = built.Services.GetService<IPreferencesService>();
+        preferencesService.Load();
+        
+        return built;
     }
 }

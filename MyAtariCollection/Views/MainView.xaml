@@ -9,9 +9,21 @@
                x:Class="MyAtariCollection.Views.MainView"
                Shell.NavBarIsVisible="False"
                Style="{StaticResource MyPage}"
-             
                >
+    <ContentPage.MenuBarItems>
+        <MenuBarItem Text="Systems">
+            <MenuFlyoutItem Text="New system" Command="{Binding CreateNewSystemCommand}"></MenuFlyoutItem>
+        </MenuBarItem>
+
+        <MenuBarItem Text="File">
+            <MenuFlyoutItem Text="Preferences" Command="{Binding EditPreferencesCommand}"></MenuFlyoutItem>
+        </MenuBarItem>
+
+    </ContentPage.MenuBarItems>
+    
     <ContentPage.Content>
+        
+        
         <Grid >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="460" />
