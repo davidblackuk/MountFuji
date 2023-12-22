@@ -23,6 +23,7 @@ using CommunityToolkit.Maui.Storage;
 using Mopups.Hosting;
 using Mopups.Services;
 using MyAtariCollection.Services.ConfigFileSections;
+using MyAtariCollection.Services.Filesystem;
 
 namespace MyAtariCollection;
 
@@ -44,12 +45,16 @@ public static class MauiProgram
             .UseMauiCommunityToolkit();
 
         builder.Services.AddTransient<MainView>();
-        builder.Services.AddTransient<NewSystemPopup>();
-        builder.Services.AddTransient<PreferencesPopup>();
-        
         builder.Services.AddTransient<MainViewModel>();
+
+        builder.Services.AddTransient<NewSystemPopup>();
         builder.Services.AddTransient<NewSystemPopupViewModel>();
+
+        builder.Services.AddTransient<PreferencesPopup>();
         builder.Services.AddTransient<PreferencesPopupViewModel>();
+        
+        builder.Services.AddTransient<FujiFilePickerPopup>();
+        builder.Services.AddTransient<FujiFilePickerPopupViewModel>();
 
         builder.Services.AddTransient<IFolderPicker>(provider => FolderPicker.Default);
         builder.Services.AddTransient<IFilePicker>(provider => FilePicker.Default);
@@ -70,9 +75,12 @@ public static class MauiProgram
         builder.Services.AddTransient<ISoundConfigFileSection, SoundConfigFileSection>();
         builder.Services.AddTransient<IConfigFileService, ConfigFileService>();
         
+        // Services
         builder.Services.AddSingleton<IMachineTemplateService, MachineTemplateService>();
         builder.Services.AddSingleton<ISystemsService, SystemsService>();
         builder.Services.AddSingleton<IPreferencesService, PreferencesService>();
+        builder.Services.AddSingleton<IFujiFilePickerService, FujiFilePickerService>();
+
 
 #if DEBUG
         builder.Logging.AddDebug();

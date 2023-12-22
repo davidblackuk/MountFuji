@@ -16,7 +16,7 @@ namespace MyAtariCollection.ViewModels
 
 
 
-        public void Foo()
+        public void SelectFirstTemplate()
         {
             SelectedTemplate = Templates.First();
         }

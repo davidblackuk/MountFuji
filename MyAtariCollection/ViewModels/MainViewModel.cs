@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Maui.Storage;
+using MyAtariCollection.Services.Filesystem;
 
 
 namespace MyAtariCollection.ViewModels;
@@ -13,11 +14,13 @@ public partial class MainViewModel : TinyViewModel
     private readonly IFolderPicker folderPicker;
     private readonly IServiceProvider serviceProvider;
     private readonly IPreferencesService preferencesService;
+    private readonly IFujiFilePickerService fujiFilePicker;
     private readonly Random random = new();
 
     public MainViewModel(ISystemsService systemService, IConfigFileService configFileService, 
         IPopupNavigation popupNavigation, IFilePicker filePicker, IFolderPicker folderPicker, 
-        IServiceProvider serviceProvider, IPreferencesService preferencesService)
+        IServiceProvider serviceProvider, IPreferencesService preferencesService,
+        IFujiFilePickerService fujiFilePicker)
     {
         this.systemService = systemService;
         this.configFileService = configFileService;
@@ -26,6 +29,7 @@ public partial class MainViewModel : TinyViewModel
         this.folderPicker = folderPicker;
         this.serviceProvider = serviceProvider;
         this.preferencesService = preferencesService;
+        this.fujiFilePicker = fujiFilePicker;
     }
 
 
@@ -48,25 +52,19 @@ public partial class MainViewModel : TinyViewModel
     [RelayCommand()]
     private async void BrowseRoms()
     {
-        var file = await filePicker.PickAsync();
-        if (file != null)
-        {
-            SelectedConfiguration.RomImage = file.FullPath;
-        }
+        var file = await fujiFilePicker.Pick((filename) => SelectedConfiguration.RomImage = filename, preferencesService.Preferences.RomFolder);
     }
+    
     [RelayCommand]
     private void ClearRom()
     {
         SelectedConfiguration.RomImage = String.Empty;
     }
     [RelayCommand()]
+
     private async void BrowseCartridges()
     {
-        var file = await filePicker.PickAsync();
-        if (file != null)
-        {
-            SelectedConfiguration.CartridgeImage = file.FullPath;
-        }
+         await fujiFilePicker.Pick((filename) => SelectedConfiguration.CartridgeImage = filename, preferencesService.Preferences.CartridgeFolder);
     }
     [RelayCommand]
     private void ClearCartridge()

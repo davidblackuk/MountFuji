@@ -15,10 +15,11 @@ public class Program
         // there is a bug in JetBrains Rider, the debugger will not
         // attach unless we sleep here!
         if (Debugger.IsAttached)
-        {
-            Thread.Sleep(4000);
-        }
-      
+        // {
+        //     Thread.Sleep(4000);
+        // }
+    
+        //
         // if you want to use a different Application Delegate class from "AppDelegate"
         // you can specify it here.
         UIApplication.Main(args, null, typeof(AppDelegate));

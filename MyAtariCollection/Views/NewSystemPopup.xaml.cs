@@ -15,7 +15,7 @@ public partial class NewSystemPopup: PopupPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        ViewModel.Foo();
+        ViewModel.SelectFirstTemplate();
     }
 
     public NewSystemPopupViewModel ViewModel { get; }

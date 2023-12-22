@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+                 xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+                 xmlns:models="clr-namespace:MyAtariCollection.Models"
+                 xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+                 xmlns:converters="clr-namespace:MyAtariCollection.Converters"
+                 x:Class="MyAtariCollection.Views.FujiFilePickerPopup"
+                 Title="Fuji picker" BackgroundColor="#80000000"  CloseWhenBackgroundIsClicked="False" >
+    
+    
+    <Frame WidthRequest="850" HeightRequest="620">
+        <Grid RowDefinitions="50,480,90" ColumnDefinitions="440,10,*">
+            <Label 
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Text="File picker"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Style="{StaticResource H1Label}" />
+
+
+
+                <CollectionView
+                    
+                    SelectionMode="Single"
+                    SelectedItem="{Binding SelectedEntry}"
+                    ItemsSource="{Binding Entries}"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="3">
+                    
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Span="2" Orientation="Vertical" ></GridItemsLayout>
+                    </CollectionView.ItemsLayout>
+                    
+                    
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:FileSystemEntry">
+                            <HorizontalStackLayout>
+                                <Label Text="{Binding Icon}" Style="{StaticResource MaterialIcon}" VerticalOptions="Center"/>
+                                <Label Text="{Binding DisplayName}" VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                
+           
+            <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End" HeightRequest="90" >
+                <Button VerticalOptions="Start" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,12,15,0" />
+                <Button VerticalOptions="Start" Text="OK" Command="{Binding OkCommand}" Margin="0,12,15,0" />
+            </HorizontalStackLayout>
+        </Grid>
+    </Frame>
+    
+    
+    
+</mopups:PopupPage>

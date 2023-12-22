@@ -470,7 +470,10 @@
         <Setter Property="FontSize" Value="35"/>
     </Style>
     
-    
+    <Style TargetType="Label" x:Key="MaterialIcon">
+        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="FontFamily" Value="MaterialIcons"/>
+    </Style>
     
     <!-- Modified system -->
     
