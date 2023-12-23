@@ -11,44 +11,45 @@
                  Title="Fuji picker" BackgroundColor="#80000000"  CloseWhenBackgroundIsClicked="False" >
     
     
-    <Frame WidthRequest="850" HeightRequest="620">
-        <Grid RowDefinitions="50,480,90" ColumnDefinitions="440,10,*">
+    <Frame WidthRequest="850" HeightRequest="645">
+        <Grid RowDefinitions="50,25,480,90" >
             <Label 
                 Grid.Row="0"
                 Grid.Column="0"
-                Grid.ColumnSpan="3"
-                Text="File picker"
+    
+                Text="{Binding Title}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 Style="{StaticResource H1Label}" />
-
-
-
+            
+                <HorizontalStackLayout Grid.Row="1">
+                    <Label Text="Folder: "></Label>
+                    <Label Text="{Binding CurrentFolder}"></Label>
+                </HorizontalStackLayout>
+            
                 <CollectionView
-                    
                     SelectionMode="Single"
                     SelectedItem="{Binding SelectedEntry}"
                     ItemsSource="{Binding Entries}"
-                    Grid.Row="1"
-                    Grid.ColumnSpan="3">
                     
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Span="2" Orientation="Vertical" ></GridItemsLayout>
-                    </CollectionView.ItemsLayout>
+                    Grid.Row="2"
+                    Grid.ColumnSpan="3"
                     
-                    
+                    SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                    >
+                  
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:FileSystemEntry">
                             <HorizontalStackLayout>
-                                <Label Text="{Binding Icon}" Style="{StaticResource MaterialIcon}" VerticalOptions="Center"/>
-                                <Label Text="{Binding DisplayName}" VerticalOptions="Center"/>
+                                <Label  Text="{Binding Icon}" Style="{StaticResource MaterialIcon}" VerticalOptions="Center"/>
+                                <Label Text="{Binding DisplayName}" FontSize="20" VerticalOptions="Center" Margin="10,0,0,0"/>
                             </HorizontalStackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
                 
            
-            <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End" HeightRequest="90" >
+            <HorizontalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End" HeightRequest="90" >
                 <Button VerticalOptions="Start" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,12,15,0" />
                 <Button VerticalOptions="Start" Text="OK" Command="{Binding OkCommand}" Margin="0,12,15,0" />
             </HorizontalStackLayout>

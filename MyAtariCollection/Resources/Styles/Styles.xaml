@@ -471,8 +471,9 @@
     </Style>
     
     <Style TargetType="Label" x:Key="MaterialIcon">
-        <Setter Property="FontSize" Value="32"/>
+        <Setter Property="FontSize" Value="25"/>
         <Setter Property="FontFamily" Value="MaterialIcons"/>
+        <Setter Property="TextColor" Value="#A4CBAD"/>
     </Style>
     
     <!-- Modified system -->

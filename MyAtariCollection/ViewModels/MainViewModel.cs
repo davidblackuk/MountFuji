@@ -10,23 +10,18 @@ public partial class MainViewModel : TinyViewModel
     private readonly ISystemsService systemService;
     private readonly IConfigFileService configFileService;
     private readonly IPopupNavigation popupNavigation;
-    private readonly IFilePicker filePicker;
-    private readonly IFolderPicker folderPicker;
     private readonly IServiceProvider serviceProvider;
     private readonly IPreferencesService preferencesService;
     private readonly IFujiFilePickerService fujiFilePicker;
-    private readonly Random random = new();
 
     public MainViewModel(ISystemsService systemService, IConfigFileService configFileService, 
-        IPopupNavigation popupNavigation, IFilePicker filePicker, IFolderPicker folderPicker, 
+        IPopupNavigation popupNavigation, 
         IServiceProvider serviceProvider, IPreferencesService preferencesService,
         IFujiFilePickerService fujiFilePicker)
     {
         this.systemService = systemService;
         this.configFileService = configFileService;
         this.popupNavigation = popupNavigation;
-        this.filePicker = filePicker;
-        this.folderPicker = folderPicker;
         this.serviceProvider = serviceProvider;
         this.preferencesService = preferencesService;
         this.fujiFilePicker = fujiFilePicker;
@@ -52,7 +47,7 @@ public partial class MainViewModel : TinyViewModel
     [RelayCommand()]
     private async void BrowseRoms()
     {
-        var file = await fujiFilePicker.Pick((filename) => SelectedConfiguration.RomImage = filename, preferencesService.Preferences.RomFolder);
+        var file = await fujiFilePicker.PickFile("ROM Image",(filename) => SelectedConfiguration.RomImage = filename, preferencesService.Preferences.RomFolder);
     }
     
     [RelayCommand]
@@ -64,8 +59,9 @@ public partial class MainViewModel : TinyViewModel
 
     private async void BrowseCartridges()
     {
-         await fujiFilePicker.Pick((filename) => SelectedConfiguration.CartridgeImage = filename, preferencesService.Preferences.CartridgeFolder);
+         await fujiFilePicker.PickFile("Cartridge Image",(filename) => SelectedConfiguration.CartridgeImage = filename, preferencesService.Preferences.CartridgeFolder);
     }
+    
     [RelayCommand]
     private void ClearCartridge()
     {
@@ -77,12 +73,8 @@ public partial class MainViewModel : TinyViewModel
     [RelayCommand()]
     private async void BrowseAcsiDiskImage(int diskId)
     {
-        var file = await filePicker.PickAsync();
-
-        if (file != null)
-        {
-            SelectedConfiguration.AcsiImagePaths.SetImagePath(diskId, file.FullPath);
-        }
+        await fujiFilePicker.PickFile("ASCI Disk Image",
+            (filename) => SelectedConfiguration.AcsiImagePaths.SetImagePath(diskId, filename), preferencesService.Preferences.HardDiskFolder);
     }
     
     [RelayCommand()]
@@ -92,9 +84,8 @@ public partial class MainViewModel : TinyViewModel
     [RelayCommand()]
     private async void BrowseScsiDiskImage(int diskId)
     {
-        var file = await filePicker.PickAsync();
-        
-        if (file != null) SelectedConfiguration.ScsiImagePaths.SetImagePath(diskId, file.FullPath);
+        await fujiFilePicker.PickFile("SCSI Disk Image",
+            (filename) => SelectedConfiguration.ScsiImagePaths.SetImagePath(diskId, filename), preferencesService.Preferences.HardDiskFolder);
     }
     
     [RelayCommand()]
@@ -103,9 +94,8 @@ public partial class MainViewModel : TinyViewModel
     [RelayCommand()]
     private async void BrowseIdeDiskImage(int diskId)
     {
-        var file = await filePicker.PickAsync();
-        
-        if (file != null) SelectedConfiguration.IdeOptions.SetImagePath(diskId, file.FullPath);
+        await fujiFilePicker.PickFile("IDE Disk Image",
+            (filename) => SelectedConfiguration.IdeOptions.SetImagePath(diskId, filename), preferencesService.Preferences.HardDiskFolder);
     }
     
     [RelayCommand()]
@@ -114,9 +104,10 @@ public partial class MainViewModel : TinyViewModel
     [RelayCommand()]
     private async void BrowseFloppyDiskImage(int diskId)
     {
-        var file = await filePicker.PickAsync();
+        
+        await fujiFilePicker.PickFile("Floppy Disk Image",
+            (filename) => SelectedConfiguration.FloppyOptions.SetImagePath(diskId, filename), preferencesService.Preferences.FloppyDiskFolder);
 
-        if (file != null) SelectedConfiguration.FloppyOptions.SetImagePath(diskId, file.FullPath);
     }
 
     [RelayCommand()]
@@ -127,9 +118,8 @@ public partial class MainViewModel : TinyViewModel
     [RelayCommand()]
     private async void BrowseGemdosFolder()
     {
-        var folder = await folderPicker.PickAsync();
-        
-        if (folder.IsSuccessful) SelectedConfiguration.GdosDriveOptions.GemdosFolder = folder.Folder.Path;
+        await fujiFilePicker.PickFolder("GEMDOS Folder",
+            (filename) => SelectedConfiguration.GdosDriveOptions.GemdosFolder = filename, preferencesService.Preferences.GemDosFolder);
     }
     
     [RelayCommand()]
