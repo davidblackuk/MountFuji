@@ -13,18 +13,27 @@
 
     <ContentPage.Content>
 
-        <Frame WidthRequest="850" HeightRequest="660">
+        <Frame WidthRequest="850" HeightRequest="770">
             <VerticalStackLayout>
 
                 <Label Text="Preferences" HorizontalOptions="Center" Style="{StaticResource H1Label}" />
                 <VerticalStackLayout>
-                    <configurationSections:ConfigurationGroup Title="System">
+                    <configurationSections:ConfigurationGroup Title="Hatari">
+                        <VerticalStackLayout>
                         <controls:HardDiskPathEditor
-                            Title="Hatari app"
+                            Title="Application"
                             DiskImagePath="{Binding Preferences.HatariApplication}"
                             ClearDiskImageCommand="{Binding ClearHatariAppCommand}"
                             BrowseDiskImageCommand="{Binding BrowseHatariAppCommand}"
                             PickerOpenIcon="{x:Static controls:IconFont.File_open}" />
+                        <controls:HardDiskPathEditor
+                            Title="Config file"
+                            DiskImagePath="{Binding Preferences.HatariConfigFile}"
+                            ClearDiskImageCommand="{Binding ClearHatariConfigFileCommand}"
+                            BrowseDiskImageCommand="{Binding BrowseHatariConfigFileCommand}"
+                            PickerOpenIcon="{x:Static controls:IconFont.File_open}" />
+                        
+                        </VerticalStackLayout>
                     </configurationSections:ConfigurationGroup>
 
                     <configurationSections:ConfigurationGroup Title="Folders">

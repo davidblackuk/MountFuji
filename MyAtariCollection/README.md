@@ -1,5 +1,9 @@
 # My Atari Collection
 
+## TODO
+- Add config file path to system  section of the preferences!
+- Move code for config write into config service
+
 ## Thoughts
 
 ROM image is an interesting example of a rule that nees to be global in nature. It 
@@ -10,14 +14,5 @@ the system list entry?
 
 Does that get into the area of error ckecking CRCs for ROMS?
 
-## Deferred
-
-### Cartridge support
-
-Will need to disable GEMDOS drives and VDI Mode if enabled, so will need a dialog.
-
-### Memory save states
-
-Need to understand the use case for this and if we need it or not. The 
 
 

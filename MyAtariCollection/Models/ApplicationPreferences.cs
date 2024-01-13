@@ -4,6 +4,8 @@ public partial class ApplicationPreferences: ObservableObject
 {
     [ObservableProperty] public string hatariApplication;
     
+    [ObservableProperty] public string hatariConfigFile;
+    
     [ObservableProperty] public string romFolder;
     
     [ObservableProperty] public string cartridgeFolder;

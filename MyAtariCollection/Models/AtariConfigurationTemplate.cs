@@ -23,7 +23,7 @@ public class AtariConfigurationTemplate
     public FalconDspEmulation FalconDsp { get; init; } = FalconDspEmulation.None;
 
     /// <summary>
-    /// For base (none 'E' STs, solder in a socket and plug a bliter in
+    /// For base (none 'E' STs, solder in a socket and plug a blitter in
     /// </summary>
     public bool BlitterInStMode { get; init; } = false;
     

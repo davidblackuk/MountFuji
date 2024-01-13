@@ -39,12 +39,9 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
     {
         CurrentFolder = folder;
         List<FileSystemEntry> all = new List<FileSystemEntry>();
-        var dirs = Directory.GetDirectories(folder, "*", new EnumerationOptions()
-        {
-            ReturnSpecialDirectories = false,
-            IgnoreInaccessible = true,
-            RecurseSubdirectories = false,
-        });
+
+        var dirs = Directory.GetDirectories(folder);
+        
 
         DirectoryInfo info = new DirectoryInfo(folder);
         if (info.Parent != null)
@@ -58,12 +55,15 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
 
         if (PickerType == PickerType.File)
         {
-            var files = Directory.GetFiles(folder, "*.*", new EnumerationOptions()
+            // TODO is the *.* on windows and * on mac???
+            var files = Directory.GetFiles(folder, "*", new EnumerationOptions()
             {
                 ReturnSpecialDirectories = false,
                 IgnoreInaccessible = true,
                 RecurseSubdirectories = false,
             });
+            
+  
             Array.Sort(files, String.Compare);
             all.AddRange(files.Select(dir => new FileSystemEntry(dir, EntryType.File)));
         }

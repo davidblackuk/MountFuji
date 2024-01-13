@@ -56,8 +56,6 @@ public static class MauiProgram
         builder.Services.AddTransient<FujiFilePickerPopup>();
         builder.Services.AddTransient<FujiFilePickerPopupViewModel>();
 
-        builder.Services.AddTransient<IFolderPicker>(provider => FolderPicker.Default);
-        builder.Services.AddTransient<IFilePicker>(provider => FilePicker.Default);
 
         builder.Services.AddSingleton<IPopupNavigation>(MopupService.Instance);
 

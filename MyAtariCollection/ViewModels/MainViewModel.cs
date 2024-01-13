@@ -7,19 +7,18 @@ namespace MyAtariCollection.ViewModels;
 
 public partial class MainViewModel : TinyViewModel
 {
-    private readonly ISystemsService systemService;
     private readonly IConfigFileService configFileService;
     private readonly IPopupNavigation popupNavigation;
     private readonly IServiceProvider serviceProvider;
     private readonly IPreferencesService preferencesService;
     private readonly IFujiFilePickerService fujiFilePicker;
 
-    public MainViewModel(ISystemsService systemService, IConfigFileService configFileService, 
-        IPopupNavigation popupNavigation, 
-        IServiceProvider serviceProvider, IPreferencesService preferencesService,
+    public MainViewModel(IConfigFileService configFileService,
+        IPopupNavigation popupNavigation,
+        IServiceProvider serviceProvider,
+        IPreferencesService preferencesService,
         IFujiFilePickerService fujiFilePicker)
     {
-        this.systemService = systemService;
         this.configFileService = configFileService;
         this.popupNavigation = popupNavigation;
         this.serviceProvider = serviceProvider;
@@ -28,55 +27,59 @@ public partial class MainViewModel : TinyViewModel
     }
 
 
-    [ObservableProperty] 
-    private ObservableCollection<AtariConfiguration> systems = new();
+    [ObservableProperty] private ObservableCollection<AtariConfiguration> systems = new();
 
-    [ObservableProperty] 
-    [NotifyPropertyChangedFor(nameof(HasSelectedConfig))]
+    [ObservableProperty] [NotifyPropertyChangedFor(nameof(HasSelectedConfig))]
     private AtariConfiguration selectedConfiguration;
-    
-    [ObservableProperty]
-    private SectionVisibility sectionVisibility = new SectionVisibility(); 
+
+    [ObservableProperty] private SectionVisibility sectionVisibility = new SectionVisibility();
 
     public bool HasSelectedConfig => SelectedConfiguration != null;
-    
+
 
     #region ---- RELAY COMMANDS ----
-    
-        
+
     [RelayCommand()]
     private async void BrowseRoms()
     {
-        var file = await fujiFilePicker.PickFile("ROM Image",(filename) => SelectedConfiguration.RomImage = filename, preferencesService.Preferences.RomFolder);
+        var file = await fujiFilePicker.PickFile("ROM Image", (filename) =>
+            {
+                SelectedConfiguration.RomImage = filename;
+                RunCommand.NotifyCanExecuteChanged();
+            },
+            preferencesService.Preferences.RomFolder);
     }
-    
+
     [RelayCommand]
     private void ClearRom()
     {
         SelectedConfiguration.RomImage = String.Empty;
+        RunCommand.NotifyCanExecuteChanged();
     }
-    [RelayCommand()]
 
+    [RelayCommand()]
     private async void BrowseCartridges()
     {
-         await fujiFilePicker.PickFile("Cartridge Image",(filename) => SelectedConfiguration.CartridgeImage = filename, preferencesService.Preferences.CartridgeFolder);
+        await fujiFilePicker.PickFile("Cartridge Image", (filename) => SelectedConfiguration.CartridgeImage = filename,
+            preferencesService.Preferences.CartridgeFolder);
     }
-    
+
     [RelayCommand]
     private void ClearCartridge()
     {
         SelectedConfiguration.CartridgeImage = String.Empty;
     }
-    
+
     #region disk image  operations
-    
+
     [RelayCommand()]
     private async void BrowseAcsiDiskImage(int diskId)
     {
         await fujiFilePicker.PickFile("ASCI Disk Image",
-            (filename) => SelectedConfiguration.AcsiImagePaths.SetImagePath(diskId, filename), preferencesService.Preferences.HardDiskFolder);
+            (filename) => SelectedConfiguration.AcsiImagePaths.SetImagePath(diskId, filename),
+            preferencesService.Preferences.HardDiskFolder);
     }
-    
+
     [RelayCommand()]
     private void ClearAcsiDiskImage(int diskId) => SelectedConfiguration.AcsiImagePaths.ClearImagePath(diskId);
 
@@ -85,9 +88,10 @@ public partial class MainViewModel : TinyViewModel
     private async void BrowseScsiDiskImage(int diskId)
     {
         await fujiFilePicker.PickFile("SCSI Disk Image",
-            (filename) => SelectedConfiguration.ScsiImagePaths.SetImagePath(diskId, filename), preferencesService.Preferences.HardDiskFolder);
+            (filename) => SelectedConfiguration.ScsiImagePaths.SetImagePath(diskId, filename),
+            preferencesService.Preferences.HardDiskFolder);
     }
-    
+
     [RelayCommand()]
     private void ClearScsiDiskImage(int diskId) => SelectedConfiguration.ScsiImagePaths.ClearImagePath(diskId);
 
@@ -95,37 +99,35 @@ public partial class MainViewModel : TinyViewModel
     private async void BrowseIdeDiskImage(int diskId)
     {
         await fujiFilePicker.PickFile("IDE Disk Image",
-            (filename) => SelectedConfiguration.IdeOptions.SetImagePath(diskId, filename), preferencesService.Preferences.HardDiskFolder);
+            (filename) => SelectedConfiguration.IdeOptions.SetImagePath(diskId, filename),
+            preferencesService.Preferences.HardDiskFolder);
     }
-    
+
     [RelayCommand()]
     private void ClearIdeDiskImage(int diskId) => SelectedConfiguration.IdeOptions.ClearImagePath(diskId);
 
     [RelayCommand()]
     private async void BrowseFloppyDiskImage(int diskId)
     {
-        
         await fujiFilePicker.PickFile("Floppy Disk Image",
-            (filename) => SelectedConfiguration.FloppyOptions.SetImagePath(diskId, filename), preferencesService.Preferences.FloppyDiskFolder);
-
+            (filename) => SelectedConfiguration.FloppyOptions.SetImagePath(diskId, filename),
+            preferencesService.Preferences.FloppyDiskFolder);
     }
 
     [RelayCommand()]
     private void ClearFloppyDiskImage(int diskId) => SelectedConfiguration.FloppyOptions.ClearImagePath(diskId);
 
-    
-    
+
     [RelayCommand()]
     private async void BrowseGemdosFolder()
     {
         await fujiFilePicker.PickFolder("GEMDOS Folder",
-            (filename) => SelectedConfiguration.GdosDriveOptions.GemdosFolder = filename, preferencesService.Preferences.GemDosFolder);
+            (filename) => SelectedConfiguration.GdosDriveOptions.GemdosFolder = filename,
+            preferencesService.Preferences.GemDosFolder);
     }
-    
+
     [RelayCommand()]
     private void ClearGemdosFolder(int diskId) => SelectedConfiguration.GdosDriveOptions.GemdosFolder = string.Empty;
-
-
 
     #endregion
 
@@ -143,7 +145,7 @@ public partial class MainViewModel : TinyViewModel
                 Systems.Add(system);
                 SelectedConfiguration = system;
             }
-        };      
+        };
     }
 
     [RelayCommand]
@@ -154,25 +156,39 @@ public partial class MainViewModel : TinyViewModel
 
         popup.Disappearing += async (sender, args) =>
         {
-             if (popup.ViewModel.Confirmed)
-             {
+            if (popup.ViewModel.Confirmed)
+            {
                 await preferencesService.Save();
-             }
-        };      
+                RunCommand.NotifyCanExecuteChanged();
+            }
+        };
     }
- 
 
-    [RelayCommand()]
+
+    [RelayCommand(CanExecute = nameof(CanRun))]
     private async void Run()
     {
-       
-        var configFileContent = configFileService.Generate(SelectedConfiguration);
-        Console.WriteLine($"\n{configFileContent}");
-
-        await File.WriteAllTextAsync("/Users/davidblack/Library/Application Support/Hatari/hatari.cfg", configFileContent);
-        await Launcher.Default.OpenAsync("file:///Applications/Hatari.app?--args%20--machine%20falcon");
-     
+        await configFileService.Persist(SelectedConfiguration);
+        
+        // TODO - Platform specific? is it File:// on PC it is on mac
+        var app = preferencesService.Preferences.HatariApplication;
+        var applicationUrl = $"file://{app}";
+        Console.WriteLine($"Launching application: {applicationUrl}");
+        await Launcher.Default.OpenAsync(applicationUrl);
     }
 
+    private bool CanRun()
+    {
+        if (string.IsNullOrWhiteSpace(preferencesService.Preferences.HatariApplication) ||
+            string.IsNullOrWhiteSpace(preferencesService.Preferences.HatariConfigFile) ||
+            SelectedConfiguration is null ||
+            string.IsNullOrWhiteSpace(SelectedConfiguration.RomImage))
+        {
+            return false;
+        }
+
+        return true;
+    }
+    
     #endregion
 }

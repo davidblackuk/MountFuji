@@ -7,6 +7,8 @@ public class FujiFilePickerService : IFujiFilePickerService
     private readonly IServiceProvider serviceProvider;
     private readonly IPopupNavigation popupNavigation;
 
+    private string lastFolderAccessed;
+    
     public FujiFilePickerService(IServiceProvider serviceProvider, IPopupNavigation popupNavigation)
     {
         this.serviceProvider = serviceProvider;
@@ -28,7 +30,7 @@ public class FujiFilePickerService : IFujiFilePickerService
 
         if (String.IsNullOrWhiteSpace(initialFolder))
         {
-            initialFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            initialFolder = String.IsNullOrWhiteSpace(lastFolderAccessed) ? Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) : lastFolderAccessed;
         }
         
         var popup = serviceProvider.GetService<FujiFilePickerPopup>();
@@ -41,10 +43,12 @@ public class FujiFilePickerService : IFujiFilePickerService
         {
             if (complete is not null & popup.ViewModel.Confirmed && pickerType == PickerType.File)
             {
+                lastFolderAccessed = popup.ViewModel.CurrentFolder;
                 complete(popup.ViewModel.SelectedEntry.Path);
             }
             else  if (complete is not null & popup.ViewModel.Confirmed && pickerType == PickerType.Folder)
             {
+                lastFolderAccessed = popup.ViewModel.CurrentFolder;
                 complete(popup.ViewModel.CurrentFolder);
             }
         }; 

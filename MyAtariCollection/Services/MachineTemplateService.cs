@@ -16,25 +16,25 @@ public class MachineTemplateService : IMachineTemplateService
         {
             DisplayName = "1040 ST",
             SystemType = AtariSystemType.ST,
-            StMemorySize = 1,
+            StMemorySize = 1024,
         },
         new ()
         {
             DisplayName = "Mega ST",
             SystemType = AtariSystemType.MegaST,
-            StMemorySize = 1,
+            StMemorySize = 1024,
         },
         new ()
         {
             DisplayName = "Mega 2",
             SystemType = AtariSystemType.MegaST,
-            StMemorySize = 2,
+            StMemorySize = 2048,
         },
         new ()
         {
             DisplayName = "Mega 4",
             SystemType = AtariSystemType.MegaST,
-            StMemorySize = 4,
+            StMemorySize = 4096,
         },
         new ()
         {
@@ -47,7 +47,7 @@ public class MachineTemplateService : IMachineTemplateService
             DisplayName = "Mega STE",
             SystemType = AtariSystemType.MegaSTE,
             CpuClock = CpuClock.Clock16Mhz,
-            StMemorySize = 1,
+            StMemorySize = 1024,
         },
         new ()
         {
@@ -59,7 +59,7 @@ public class MachineTemplateService : IMachineTemplateService
             FpuType = FpuType.MC68882,
 
             Use24BitAddressing = false,
-            StMemorySize = 2,
+            StMemorySize = 2048,
             
             
         },
@@ -69,7 +69,7 @@ public class MachineTemplateService : IMachineTemplateService
             SystemType = AtariSystemType.Falcon,
             FalconDsp = FalconDspEmulation.Dummy,
             // TODO: Add constants for this
-            StMemorySize = 1,
+            StMemorySize = 1024,
             CpuClock = CpuClock.Clock16Mhz,
             CpuType = CpuType.MC68030,
             

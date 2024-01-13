@@ -14,6 +14,7 @@ public class ConfigFileService : IConfigFileService
     private readonly IFloppyConfigFileSection floppyConfig;
     private readonly IScreenConfigFileSection screenConfig;
     private readonly ISoundConfigFileSection soundConfig;
+    private readonly IPreferencesService preferencesService;
     private readonly ILogConfigFileSection logConfig;
 
     public ConfigFileService(ILogConfigFileSection logConfig,
@@ -21,7 +22,8 @@ public class ConfigFileService : IConfigFileService
         IAcsiConfigFileSection acsiConfig, IScsiConfigFileSection scsiConfig, IIdeConfigFileSection ideSection,
         IHardDiskConfigFileSection hardDiskConfig, IFloppyConfigFileSection floppyConfig,
         IScreenConfigFileSection screenConfig,
-        ISoundConfigFileSection soundConfig)
+        ISoundConfigFileSection soundConfig,
+        IPreferencesService preferencesService)
     {
         this.memoryConfig = memoryConfig;
         this.systemConfig = systemConfig;
@@ -33,10 +35,11 @@ public class ConfigFileService : IConfigFileService
         this.floppyConfig = floppyConfig;
         this.screenConfig = screenConfig;
         this.soundConfig = soundConfig;
+        this.preferencesService = preferencesService;
         this.logConfig = logConfig;
     }
 
-    public string Generate(AtariConfiguration config)
+    private string Generate(AtariConfiguration config)
     {
         StringBuilder builder = new StringBuilder();
 
@@ -74,5 +77,14 @@ public class ConfigFileService : IConfigFileService
         builder.AppendLine("");
 
         return builder.ToString();
+    }
+
+    public async Task Persist(AtariConfiguration config)
+    {
+        var configFileContent = Generate(config);
+        Console.WriteLine($"Over writing hatari config at {preferencesService.Preferences.HatariConfigFile}");
+        await File.WriteAllTextAsync(preferencesService.Preferences.HatariConfigFile,
+            configFileContent);
+
     }
 }
