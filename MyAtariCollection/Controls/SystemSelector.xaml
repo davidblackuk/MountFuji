@@ -15,10 +15,7 @@
     
             <!-- we implement our own header and footer as we don't want em to scroll with the content -->
             
-            <Grid ColumnDefinitions="*,50" >
-                <Label VerticalOptions="Center" Grid.Column="0" Text="Systems" Style="{StaticResource H1Label}"></Label>
-                <Button  Style="{StaticResource MaterialButton}" Grid.Column="1" Text="{x:Static controls:IconFont.Add_circle_outline}" Command="{Binding CreateNewSystemCommand}"></Button>
-            </Grid>
+            <Label VerticalOptions="Center" Grid.Column="0" Text="Systems" Style="{StaticResource H1Label}"></Label>
             
             <HorizontalStackLayout Grid.Row="2">
                 <Label Text="Total: " Style="{StaticResource H2Label}"></Label>

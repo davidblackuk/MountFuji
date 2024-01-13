@@ -10,28 +10,13 @@
                Shell.NavBarIsVisible="False"
                Style="{StaticResource MyPage}"
                >
-    <ContentPage.MenuBarItems>
-        <MenuBarItem Text="Systems">
-            <MenuFlyoutItem Text="New system" Command="{Binding CreateNewSystemCommand}"></MenuFlyoutItem>
-        </MenuBarItem>
-
-        <MenuBarItem Text="File">
-            <MenuFlyoutItem Text="Preferences" Command="{Binding EditPreferencesCommand}"></MenuFlyoutItem>
-        </MenuBarItem>
-
-    </ContentPage.MenuBarItems>
-    
     <ContentPage.Content>
         
         
-        <Grid >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="460" />
-                <ColumnDefinition Width="10" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <controls:SystemSelector Grid.Column="0"/>
-            <controls:SystemEditor Grid.Column="2"/>
+        <Grid RowDefinitions="10,60, 10, *, 10" ColumnDefinitions="10,460, 10, *, 10">
+            <controls:ApplicationMenu Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"/>
+            <controls:SystemSelector Grid.Column="1" Grid.Row="3"/>
+            <controls:SystemEditor Grid.Column="3" Grid.Row="3"/>
         </Grid>
 
 

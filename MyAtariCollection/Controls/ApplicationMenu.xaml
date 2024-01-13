@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+             x:Class="MyAtariCollection.Controls.ApplicationMenu">
+    <Frame  CornerRadius="10"  Style="{StaticResource PanelFrame}" >
+    <HorizontalStackLayout>
+        <Button  Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls:IconFont.Settings}" 
+                 Command="{Binding EditPreferencesCommand}"></Button>
+        <Label Text="Settings"></Label>
+
+        <Button  Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls:IconFont.Add_circle_outline}" 
+                 Command="{Binding CreateNewSystemCommand}"></Button>
+        <Label Text="New system"></Label>
+        
+        <Button Text="{x:Static controls:IconFont.Play_circle_outline}" Style="{StaticResource InlineMaterialButton}" Command="{Binding RunCommand}"></Button>
+        <Label  Text="Run"></Label>
+
+        
+    </HorizontalStackLayout>
+    </Frame>
+</ContentView>

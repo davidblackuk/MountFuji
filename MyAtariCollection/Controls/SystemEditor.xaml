@@ -14,10 +14,7 @@
     <Frame  Style="{StaticResource PanelFrame}" >
         <Grid  IsVisible="{Binding HasSelectedConfig}" RowDefinitions="70, *">
             
-            <Grid ColumnDefinitions="*,auto" >
                 <Label VerticalOptions="Center" Text="{Binding SelectedConfiguration.DisplayName}" Style="{StaticResource H1Label}"></Label>
-                <Button Grid.Column="1" Text="{x:Static controls:IconFont.Play_circle_outline}" Style="{StaticResource MaterialButton}" Command="{Binding RunCommand}"></Button>
-            </Grid>
             
             <ScrollView Grid.Row="1"  >
                 <VerticalStackLayout Spacing="10" Margin="0" Padding="0"  >
