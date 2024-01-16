@@ -4,17 +4,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:MyAtariCollection.Models"
              xmlns:converters="clr-namespace:MyAtariCollection.Converters"
+             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
              x:Class="MyAtariCollection.Controls.SystemSelectorEntry"
              x:DataType="models:AtariConfiguration"
              Padding="10">
+    <FlyoutBase.ContextFlyout>
+        <MenuFlyout>
+            <MenuFlyoutItem Text="Clone" 
+                            Command="{Binding CloneSystemCommand, Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}}" 
+                            CommandParameter="{Binding Id}"/>
+            <MenuFlyoutSeparator></MenuFlyoutSeparator>
+            <MenuFlyoutItem Text="Delete" 
+                            Command="{Binding DeleteSystemCommand, Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}}" 
+                            CommandParameter="{Binding Id}"/>
+        </MenuFlyout>
+    </FlyoutBase.ContextFlyout>
+
     <HorizontalStackLayout.Resources>
         <converters:AtariSystemMemorySummaryConverter x:Key="summaryConverter" />
         <converters:CpuSummaryConverter x:Key="cpuConverter" />
     </HorizontalStackLayout.Resources>
         <RoundRectangle WidthRequest="70" HeightRequest="70" CornerRadius="35" Fill="Gray"></RoundRectangle>
         <VerticalStackLayout Margin="15,0,0,0">
-            <Label Text="{Binding DisplayName}" Style="{StaticResource H3Label}" />
-
+            <HorizontalStackLayout>
+                <Label Text="{Binding DisplayName}" Style="{StaticResource H3Label}" />
+            </HorizontalStackLayout>
             <Label  Padding="0,5,0,0">
                 <Label.Text>
                     <MultiBinding Converter="{StaticResource summaryConverter}">

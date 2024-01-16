@@ -13,7 +13,7 @@
     <ContentPage.Content>
         
         
-        <Grid RowDefinitions="10,60, 10, *, 10" ColumnDefinitions="10,460, 10, *, 10">
+        <Grid RowDefinitions="10, auto , 10, *, 10" ColumnDefinitions="10,460, 10, *, 10">
             <controls:ApplicationMenu Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"/>
             <controls:SystemSelector Grid.Column="1" Grid.Row="3"/>
             <controls:SystemEditor Grid.Column="3" Grid.Row="3"/>

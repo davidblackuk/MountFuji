@@ -20,6 +20,7 @@ global using Mopups.Interfaces;
 
 
 using CommunityToolkit.Maui.Storage;
+using HealthKit;
 using Mopups.Hosting;
 using Mopups.Services;
 using MyAtariCollection.Services.ConfigFileSections;
@@ -48,7 +49,7 @@ public static class MauiProgram
         builder.Services.AddTransient<MainViewModel>();
 
         builder.Services.AddTransient<NewSystemPopup>();
-        builder.Services.AddTransient<NewSystemPopupViewModel>();
+        builder.Services.AddTransient<NewSystemViewModelViewModel>();
 
         builder.Services.AddTransient<PreferencesPopup>();
         builder.Services.AddTransient<PreferencesPopupViewModel>();
@@ -56,7 +57,14 @@ public static class MauiProgram
         builder.Services.AddTransient<FujiFilePickerPopup>();
         builder.Services.AddTransient<FujiFilePickerPopupViewModel>();
 
+        builder.Services.AddTransient<CloneSystemPopup>();
+        builder.Services.AddTransient<CloneSystemPopupViewModel>();
+        
+        builder.Services.AddTransient<DeleteSystemPopup>();
+        builder.Services.AddTransient<DeleteSystemPopupViewModel>();
 
+        
+        
         builder.Services.AddSingleton<IPopupNavigation>(MopupService.Instance);
 
 
@@ -75,19 +83,23 @@ public static class MauiProgram
         
         // Services
         builder.Services.AddSingleton<IMachineTemplateService, MachineTemplateService>();
-        builder.Services.AddSingleton<ISystemsService, SystemsService>();
+        builder.Services.AddSingleton<SystemsService>();
         builder.Services.AddSingleton<IPreferencesService, PreferencesService>();
         builder.Services.AddSingleton<IFujiFilePickerService, FujiFilePickerService>();
+        builder.Services.AddTransient<IPersistance, Persistance>();
 
 
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
 
-        var built =  builder.Build();
+        MauiApp built =  builder.Build();
 
-        var preferencesService = built.Services.GetService<IPreferencesService>();
+        IPreferencesService preferencesService = built.Services.GetService<IPreferencesService>();
         preferencesService.Load();
+
+        SystemsService systemsService = built.Services.GetService<SystemsService>();
+        systemsService.Load();
         
         return built;
     }

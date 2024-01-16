@@ -6,6 +6,14 @@ namespace MyAtariCollection.Models;
 
 public partial class AtariConfiguration: ObservableObject
 {
+    public static AtariConfiguration Empty = new AtariConfiguration { Id = Guid.Empty.ToString() };
+    
+    /// <summary>
+    /// ID needed for CRUD operations
+    /// </summary>
+    [ObservableProperty] private string id;
+    
+    
     /// <summary>
     /// Display name of the system used in lists etc.
     /// </summary>

@@ -19,7 +19,7 @@
             
             <HorizontalStackLayout Grid.Row="2">
                 <Label Text="Total: " Style="{StaticResource H2Label}"></Label>
-                <Label Text="{Binding Systems.Count}" Style="{StaticResource H2Label}"></Label>
+                <Label Text="{Binding NumberOfSystems}" Style="{StaticResource H2Label}"></Label>
             </HorizontalStackLayout>
             
             <CollectionView SelectionMode="Single" 

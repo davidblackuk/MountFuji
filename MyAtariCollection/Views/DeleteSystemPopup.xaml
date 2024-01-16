@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+                  xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+                  xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+
+                  x:DataType="vm:DeleteSystemPopupViewModel"
+                  x:Class="MyAtariCollection.Views.DeleteSystemPopup"
+                  Title="Alert" BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
+
+
+    <Frame WidthRequest="600" HeightRequest="240" Padding="0" Margin="0">
+
+        <Grid RowDefinitions="60, 100, 2, 80" ColumnDefinitions="120,480">
+            <Label Grid.ColumnSpan="2"
+                   Text="Delete system"
+                   HorizontalOptions="Center"
+                   Style="{StaticResource H1Label}" />
+            
+            <Label FontFamily="MaterialIcons" HorizontalTextAlignment="Center" TextColor="DarkRed" FontSize="100"
+                   Grid.Column="0" Grid.Row="1" Text="{x:Static controls:IconFont.Delete_forever}"
+                   HorizontalOptions="Center" />
+            
+            <VerticalStackLayout Grid.Row="1" Spacing="20" VerticalOptions="Center" Grid.Column="1">
+                <Label HorizontalTextAlignment="Center" Style="{StaticResource H3Label}"
+                       Text="Please confirm the deletion of the system " />
+                <Label HorizontalTextAlignment="Center" Style="{StaticResource H4Label}"
+                       Text="{Binding System.DisplayName }" />
+            </VerticalStackLayout>
+            
+            <Border BackgroundColor="Black" Grid.Row="2" HeightRequest="2" Grid.ColumnSpan="2" />
+            
+            <HorizontalStackLayout HorizontalOptions="End" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                <Button VerticalOptions="Center" Text="No" Command="{Binding NoCommand}" Margin="0,12,15,0" />
+                <Button VerticalOptions="Center" Text="Yes" Command="{Binding YesCommand}" Margin="0,12,15,0" />
+            </HorizontalStackLayout>
+        </Grid>
+    </Frame>
+
+
+</mopups:PopupPage>

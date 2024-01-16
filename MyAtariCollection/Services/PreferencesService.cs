@@ -14,9 +14,13 @@ public interface IPreferencesService
 
 public class PreferencesService : IPreferencesService
 {
-    private const string AppPreferencesFilename = "preferences.json";
-    private const string AppDataFolder= "fuji";
+    private readonly IPersistance persistance;
 
+    public PreferencesService(IPersistance persistance)
+    {
+        this.persistance = persistance;
+    }
+    
     public ApplicationPreferences Preferences { get; set; } = new();
     
     /// <summary>
@@ -25,71 +29,16 @@ public class PreferencesService : IPreferencesService
     /// </summary>
     public void Load()
     {
-        Console.WriteLine("Attempting to load preferences from: " + MountFujiPreferencesFile);
-        if (File.Exists(MountFujiPreferencesFile))
-        {
-            try
-            {
-                string data = File.ReadAllText(MountFujiPreferencesFile);
-                ApplicationPreferences? prefs = JsonSerializer.Deserialize<ApplicationPreferences>(data);
-                if (prefs != null)
-                {
-                    Preferences = prefs;
-                }
-                else
-                {
-                    Console.WriteLine("Failed to deserialize preferences: null result");
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Error reading preferences {e.Message}");
-            }
-        }
-        else
-        {
-            Console.WriteLine("No preferences file exists, using empty defaults");
-        }
+        Console.WriteLine("Attempting to load preferences from: " + persistance.MountFujiPreferencesFile);
+        Preferences = persistance.DeSerialize<ApplicationPreferences>(persistance.MountFujiPreferencesFile);
     }
 
+    /// <summary>
+    /// Saves the preferences to the the preferences JSON file.
+    /// </summary>
     public async Task Save()
     {
-        EnsureFolderExists();
-        Console.WriteLine($"Saving preferences to: {MountFujiPreferencesFile}");
-
-        try
-        {
-            using FileStream createStream = File.Create(MountFujiPreferencesFile);
-            await JsonSerializer.SerializeAsync(createStream, Preferences, new JsonSerializerOptions()
-            {
-                WriteIndented = true
-            });
-            //await createStream.DisposeAsync();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"Error serializing preferences: {e.Message}");
-        }
+        Console.WriteLine("Attempting to save preferences to: " + persistance.MountFujiPreferencesFile);
+        await persistance.SerializeAsync(persistance.MountFujiPreferencesFile, Preferences);
     }
-
-    private void EnsureFolderExists()
-    {
-        try
-        {
-            if (!Path.Exists(MountFujiFolder))
-            {
-                Console.WriteLine($"Creating App folder: {MountFujiFolder}");
-                Directory.CreateDirectory(MountFujiFolder);
-            }
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"Error creating Fuji folder {MountFujiFolder} - {e.Message}");
-        }
-    }
-
-    private string MountFujiFolder => Path.Combine(FileSystem.AppDataDirectory, AppDataFolder);
-    private string MountFujiPreferencesFile => Path.Combine(MountFujiFolder, AppPreferencesFilename);
-
-
 }

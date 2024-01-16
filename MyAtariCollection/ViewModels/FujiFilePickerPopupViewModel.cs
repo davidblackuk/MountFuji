@@ -1,4 +1,3 @@
-using UIKit;
 
 namespace MyAtariCollection.ViewModels;
 

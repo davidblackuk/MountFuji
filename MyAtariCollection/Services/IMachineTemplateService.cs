@@ -6,4 +6,6 @@ public interface IMachineTemplateService
 {
     IEnumerable<AtariConfigurationTemplate> All();
     AtariConfiguration CreateConfigurationFromTemplate(string name);
+    
+    
 }

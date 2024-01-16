@@ -5,17 +5,18 @@
              xmlns:controls="clr-namespace:MyAtariCollection.Controls"
              x:Class="MyAtariCollection.Controls.ApplicationMenu">
     <Frame  CornerRadius="10"  Style="{StaticResource PanelFrame}" >
-    <HorizontalStackLayout>
-        <Button  Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls:IconFont.Settings}" 
-                 Command="{Binding EditPreferencesCommand}"></Button>
-        <Label Text="Settings"></Label>
+    <HorizontalStackLayout >
+        <Button  VerticalOptions="Center"  Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls:IconFont.Settings}" 
+                 Command="{Binding EditPreferencesCommand}" ToolTipProperties.Text="Open settings"/>
 
-        <Button  Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls:IconFont.Add_circle_outline}" 
-                 Command="{Binding CreateNewSystemCommand}"></Button>
-        <Label Text="New system"></Label>
+        <Button  VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls:IconFont.Add_circle_outline}" 
+                 Command="{Binding CreateNewSystemCommand}"  ToolTipProperties.Text="New system"/>
         
-        <Button Text="{x:Static controls:IconFont.Play_circle_outline}" Style="{StaticResource InlineMaterialButton}" Command="{Binding RunCommand}"></Button>
-        <Label  Text="Run"></Label>
+        <Button  VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls:IconFont.Save}" 
+                 Command="{Binding SaveSystemsCommand}"  ToolTipProperties.Text="Save all systems"/>
+        
+        <Button  VerticalOptions="Center" Text="{x:Static controls:IconFont.Play_circle_outline}" Style="{StaticResource InlineMaterialButton}" Command="{Binding RunCommand}"
+                 ToolTipProperties.Text="Run the selected system"/>
 
         
     </HorizontalStackLayout>

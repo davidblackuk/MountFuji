@@ -1,12 +1,17 @@
 ﻿using System;
 namespace MyAtariCollection.ViewModels
 {
-    public partial class NewSystemPopupViewModel: TinyViewModel
+    public interface IConfirmableViewModel
+    {
+        bool Confirmed { get; set; }  
+    }
+    
+    public partial class NewSystemViewModelViewModel: TinyViewModel, IConfirmableViewModel
     {
         private readonly IMachineTemplateService templatesService;
         private readonly IPopupNavigation popupNavigation;
 
-        public NewSystemPopupViewModel(IMachineTemplateService templatesService, IPopupNavigation popupNavigation)
+        public NewSystemViewModelViewModel(IMachineTemplateService templatesService, IPopupNavigation popupNavigation)
         {
             this.templatesService = templatesService;
             this.popupNavigation = popupNavigation;

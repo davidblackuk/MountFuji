@@ -2,21 +2,22 @@
 
 namespace MyAtariCollection.Views;
 
+
 public partial class NewSystemPopup: PopupPage
 {
 
-    public NewSystemPopup(NewSystemPopupViewModel viewModel)
+    public NewSystemPopup(NewSystemViewModelViewModel viewModelViewModel)
 	{
 		InitializeComponent();
-        BindingContext = viewModel;
-        ViewModel = viewModel;
+        BindingContext = viewModelViewModel;
+        ViewModelViewModel = viewModelViewModel;
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        ViewModel.SelectFirstTemplate();
+        ViewModelViewModel.SelectFirstTemplate();
     }
 
-    public NewSystemPopupViewModel ViewModel { get; }
+    public NewSystemViewModelViewModel ViewModelViewModel { get; }
 }
