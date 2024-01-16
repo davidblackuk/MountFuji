@@ -43,9 +43,10 @@ public partial class HardDiskCascade
     
     protected override void OnPropertyChanged(string propertyName = null)
     {
-        if (propertyName == nameof(DiskPaths))
+        // we check for null here as it fails on windows when we delete a system
+        // but not on MAC. Write once, fail everywhere else!
+        if (propertyName == nameof(DiskPaths) && DiskPaths is not null)
         {
-
             DiskPaths.PropertyChanged -= OnDiskPathsChanged;
             DiskPaths.PropertyChanged += OnDiskPathsChanged;
         }

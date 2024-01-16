@@ -42,7 +42,7 @@ public partial class MainViewModel : TinyViewModel
     
     [ObservableProperty] private int numberOfSystems;
 
-    public bool HasSelectedConfig => SelectedConfiguration.Id != AtariConfiguration.Empty.Id;
+    public bool HasSelectedConfig => SelectedConfiguration is not null && SelectedConfiguration.Id != AtariConfiguration.Empty.Id;
 
 
     #region ---- RELAY COMMANDS ----

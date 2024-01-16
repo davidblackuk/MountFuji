@@ -18,9 +18,6 @@ global using CommunityToolkit.Mvvm.Input;
 
 global using Mopups.Interfaces;
 
-
-using CommunityToolkit.Maui.Storage;
-using HealthKit;
 using Mopups.Hosting;
 using Mopups.Services;
 using MyAtariCollection.Services.ConfigFileSections;
