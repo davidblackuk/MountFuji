@@ -410,6 +410,12 @@
         <Setter Property="FontSize" Value="35" />
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
+
+    <Style TargetType="Entry" x:Key="H1Entry">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource H1ColorLight}, Dark={StaticResource H1ColorDark}}" />
+        <Setter Property="FontSize" Value="35" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
     
     <Style TargetType="Label" x:Key="H2Label">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource H2ColorLight}, Dark={StaticResource H2ColorDark}}" />

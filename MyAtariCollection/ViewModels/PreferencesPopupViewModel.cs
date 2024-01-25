@@ -6,17 +6,20 @@ namespace MyAtariCollection.ViewModels;
 
 public partial class PreferencesPopupViewModel: TinyViewModel
 {
+    private readonly IPreferencesService preferencesService;
     private readonly IPopupNavigation popupNavigation;
     private readonly IFujiFilePickerService fujiFilePicker;
+    private readonly IAppSelectorStrategy appSelector;
 
-    private string lastUsedFolder;
-
-    public PreferencesPopupViewModel(IPreferencesService preferencesService, IPopupNavigation popupNavigation, 
-        IFujiFilePickerService fujiFilePicker)
+    public PreferencesPopupViewModel(IPreferencesService preferencesService,
+        IPopupNavigation popupNavigation, 
+        IFujiFilePickerService fujiFilePicker,
+        IAppSelectorStrategy appSelector)
     {
+        this.preferencesService = preferencesService;
         this.popupNavigation = popupNavigation;
         this.fujiFilePicker = fujiFilePicker;
-
+        this.appSelector = appSelector;
         Preferences = preferencesService.Preferences;
     }
 
@@ -59,8 +62,7 @@ public partial class PreferencesPopupViewModel: TinyViewModel
     [RelayCommand()]
     private async Task BrowseCartridgeFolder()
     {
-        await fujiFilePicker.PickFolder("Default Cartridge Folder", (filename) => Preferences.CartridgeFolder = filename,
-            lastUsedFolder);
+        await fujiFilePicker.PickFolder("Default Cartridge Folder", (filename) => Preferences.CartridgeFolder = filename);
     }
   
     [RelayCommand()]
@@ -70,8 +72,7 @@ public partial class PreferencesPopupViewModel: TinyViewModel
     [RelayCommand()]
     private async Task BrowseFloppyDiskFolder()
     {
-        await fujiFilePicker.PickFolder("Default Floppies Folder", (filename) => Preferences.FloppyDiskFolder = filename,
-            lastUsedFolder);
+        await fujiFilePicker.PickFolder("Default Floppies Folder", (filename) => Preferences.FloppyDiskFolder = filename);
     }
   
     [RelayCommand()]
@@ -81,8 +82,7 @@ public partial class PreferencesPopupViewModel: TinyViewModel
     [RelayCommand()]
     private async Task BrowseHardDiskFolder()
     {
-        await fujiFilePicker.PickFolder("Default Hard Drive Image Folder", (filename) => Preferences.HardDiskFolder = filename,
-            lastUsedFolder);
+        await fujiFilePicker.PickFolder("Default Hard Drive Image Folder", (filename) => Preferences.HardDiskFolder = filename);
     }
   
     [RelayCommand()]
@@ -92,8 +92,7 @@ public partial class PreferencesPopupViewModel: TinyViewModel
     [RelayCommand()]
     private async Task BrowseGemDosDiskFolder()
     {
-        await fujiFilePicker.PickFolder("Default GEMDOS Folder", (filename) => Preferences.GemDosFolder = filename,
-            lastUsedFolder);
+        await fujiFilePicker.PickFolder("Default GEMDOS Folder", (filename) => Preferences.GemDosFolder = filename);
     }
   
     [RelayCommand()]
@@ -102,12 +101,13 @@ public partial class PreferencesPopupViewModel: TinyViewModel
     [RelayCommand()]
     private async Task BrowseHatariApp()
     {
-        await fujiFilePicker.PickFile("Hatari Executable", 
-            (filename) => Preferences.HatariApplication = filename,
-            lastUsedFolder);
+        await appSelector.SelectApplication("Hatari Executable", 
+            (filename) => {
+                Preferences.HatariApplication = filename;
+                OkCommand.NotifyCanExecuteChanged();
+            });
         
 
-        OkCommand.NotifyCanExecuteChanged();
     }
   
     [RelayCommand()]
@@ -121,11 +121,11 @@ public partial class PreferencesPopupViewModel: TinyViewModel
     private async Task BrowseHatariConfigFile()
     {
         await fujiFilePicker.PickFile("Hatari Config file", 
-            (filename) => Preferences.HatariConfigFile = filename,
-            lastUsedFolder);
+            (filename) => {
+                Preferences.HatariConfigFile = filename;
+                OkCommand.NotifyCanExecuteChanged();
+            });
         
-
-        OkCommand.NotifyCanExecuteChanged();
     }
   
     [RelayCommand()]

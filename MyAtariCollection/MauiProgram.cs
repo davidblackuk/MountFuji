@@ -22,6 +22,7 @@ using Mopups.Hosting;
 using Mopups.Services;
 using MyAtariCollection.Services.ConfigFileSections;
 using MyAtariCollection.Services.Filesystem;
+using MyAtariCollection.Platforms;
 
 namespace MyAtariCollection;
 
@@ -60,8 +61,8 @@ public static class MauiProgram
         builder.Services.AddTransient<DeleteSystemPopup>();
         builder.Services.AddTransient<DeleteSystemPopupViewModel>();
 
-        
-        
+        builder.Services.AddTransient<IAppSelectorStrategy, AppSelectorStrategy>();
+         
         builder.Services.AddSingleton<IPopupNavigation>(MopupService.Instance);
 
 
