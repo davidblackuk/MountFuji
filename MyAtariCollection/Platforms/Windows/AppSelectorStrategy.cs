@@ -4,15 +4,16 @@ namespace MyAtariCollection.Platforms;
 
 public class AppSelectorStrategy: IAppSelectorStrategy
 {
-    private readonly FujiFilePickerService filePickerService;
+    private readonly IFujiFilePickerService pickerService;
 
-    public AppSelectorStrategy(FujiFilePickerService filePickerService)
+    public AppSelectorStrategy(IFujiFilePickerService pickerService)
     {
-        this.filePickerService = filePickerService;
+        this.pickerService = pickerService;
     }
-
-    public string Pick()
+    
+    public async Task<string> SelectApplication(string title, Action<string> complete)
     {
-        return filePickerService.PickFile()
+        return await pickerService.PickFile(title, complete,
+            Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
     }
 }
