@@ -18,14 +18,14 @@ public partial class CloneSystemPopupViewModel: TinyViewModel
     
     
     [RelayCommand]
-    private async void Cancel()
+    private async Task Cancel()
     {
         Confirmed = false;
         await popupNavigation.PopAsync();
     }
 
     [RelayCommand(CanExecute = nameof(OkEnabled))]
-    private async void Ok()
+    private async Task Ok()
     {
         Confirmed = true;
         await popupNavigation.PopAsync();

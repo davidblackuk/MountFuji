@@ -16,14 +16,14 @@ public partial class DeleteSystemPopupViewModel: TinyViewModel
     
     
     [RelayCommand]
-    private async void No()
+    private async Task No()
     {
         Confirmed = false;
         await popupNavigation.PopAsync();
     }
 
     [RelayCommand]
-    private async void Yes()
+    private async Task Yes()
     {
         Confirmed = true;
         await popupNavigation.PopAsync();

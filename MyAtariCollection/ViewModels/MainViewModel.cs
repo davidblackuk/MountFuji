@@ -1,6 +1,4 @@
 using System.Collections.ObjectModel;
-using CommunityToolkit.Maui.Storage;
-using Mopups.Pages;
 using MyAtariCollection.Services.Filesystem;
 
 
@@ -28,27 +26,49 @@ public partial class MainViewModel : TinyViewModel
         this.preferencesService = preferencesService;
         this.systemsService = systemsService;
         this.fujiFilePicker = fujiFilePicker;
-        
+
         UpdateSystemsFromService();
-              
     }
 
     public ObservableCollection<AtariConfiguration> Systems { get; } = new();
-    
+
     [ObservableProperty] [NotifyPropertyChangedFor(nameof(HasSelectedConfig))]
     private AtariConfiguration selectedConfiguration = AtariConfiguration.Empty;
 
     [ObservableProperty] private SectionVisibility sectionVisibility = new SectionVisibility();
-    
+
     [ObservableProperty] private int numberOfSystems;
 
-    public bool HasSelectedConfig => SelectedConfiguration is not null && SelectedConfiguration.Id != AtariConfiguration.Empty.Id;
+    public bool HasSelectedConfig =>
+        SelectedConfiguration is not null && SelectedConfiguration.Id != AtariConfiguration.Empty.Id;
+
+
+    private IDispatcherTimer timer;
+    
+    public override Task OnFirstAppear()
+    {
+        if (Systems is not null && Systems.Count > 0)
+        {
+            SelectedConfiguration = Systems.First();
+        }
+        RunCommand.NotifyCanExecuteChanged();
+
+        timer = Application.Current.Dispatcher.CreateTimer();
+        timer.Interval = TimeSpan.FromSeconds(2);
+        timer.Tick += TimerTick;
+        timer.Start();
+        return base.OnFirstAppear();
+    }
+
+    
+    
+    
 
 
     #region ---- RELAY COMMANDS ----
 
     [RelayCommand()]
-    private async void BrowseRoms()
+    private async Task BrowseRoms()
     {
         var file = await fujiFilePicker.PickFile("ROM Image", (filename) =>
             {
@@ -66,7 +86,7 @@ public partial class MainViewModel : TinyViewModel
     }
 
     [RelayCommand()]
-    private async void BrowseCartridges()
+    private async Task BrowseCartridges()
     {
         await fujiFilePicker.PickFile("Cartridge Image", (filename) => SelectedConfiguration.CartridgeImage = filename,
             preferencesService.Preferences.CartridgeFolder);
@@ -81,7 +101,7 @@ public partial class MainViewModel : TinyViewModel
     #region ---- DISK COMMANDS ----
 
     [RelayCommand()]
-    private async void BrowseAcsiDiskImage(int diskId)
+    private async Task BrowseAcsiDiskImage(int diskId)
     {
         await fujiFilePicker.PickFile("ASCI Disk Image",
             (filename) => SelectedConfiguration.AcsiImagePaths.SetImagePath(diskId, filename),
@@ -93,7 +113,7 @@ public partial class MainViewModel : TinyViewModel
 
 
     [RelayCommand()]
-    private async void BrowseScsiDiskImage(int diskId)
+    private async Task BrowseScsiDiskImage(int diskId)
     {
         await fujiFilePicker.PickFile("SCSI Disk Image",
             (filename) => SelectedConfiguration.ScsiImagePaths.SetImagePath(diskId, filename),
@@ -104,7 +124,7 @@ public partial class MainViewModel : TinyViewModel
     private void ClearScsiDiskImage(int diskId) => SelectedConfiguration.ScsiImagePaths.ClearImagePath(diskId);
 
     [RelayCommand()]
-    private async void BrowseIdeDiskImage(int diskId)
+    private async Task BrowseIdeDiskImage(int diskId)
     {
         await fujiFilePicker.PickFile("IDE Disk Image",
             (filename) => SelectedConfiguration.IdeOptions.SetImagePath(diskId, filename),
@@ -115,7 +135,7 @@ public partial class MainViewModel : TinyViewModel
     private void ClearIdeDiskImage(int diskId) => SelectedConfiguration.IdeOptions.ClearImagePath(diskId);
 
     [RelayCommand()]
-    private async void BrowseFloppyDiskImage(int diskId)
+    private async Task BrowseFloppyDiskImage(int diskId)
     {
         await fujiFilePicker.PickFile("Floppy Disk Image",
             (filename) => SelectedConfiguration.FloppyOptions.SetImagePath(diskId, filename),
@@ -127,14 +147,14 @@ public partial class MainViewModel : TinyViewModel
 
 
     [RelayCommand()]
-    private async void BrowseGemdosFolder()
+    private async Task BrowseGemdosFolder()
     {
         await fujiFilePicker.PickFolder("GEMDOS Folder",
             (filename) => SelectedConfiguration.GdosDriveOptions.GemdosFolder = filename,
             preferencesService.Preferences.GemDosFolder);
     }
-    
-        
+
+
     [RelayCommand()]
     private void ClearGemdosFolder(int diskId) => SelectedConfiguration.GdosDriveOptions.GemdosFolder = string.Empty;
 
@@ -142,63 +162,51 @@ public partial class MainViewModel : TinyViewModel
 
 
     #region ---- CRUD ----
-    
+
     [RelayCommand]
-    private async void CreateNewSystem()
+    private async Task CreateNewSystem()
     {
         var popup = serviceProvider.GetService<NewSystemPopup>();
         await popupNavigation.PushAsync(popup);
 
         popup.Disappearing += (sender, args) =>
         {
-            if (popup.ViewModelViewModel.Confirmed)
-            {
-                var system = popup.ViewModelViewModel.GetConfiguration();
-                systemsService.Add(system);
-                UpdateSystemsFromService();
-                SelectedConfiguration = system;
-            }
+            if (!popup.ViewModelViewModel.Confirmed) return;
+            var system = popup.ViewModelViewModel.GetConfiguration();
+            systemsService.Add(system);
+            UpdateSystemsFromService();
+            SelectedConfiguration = system;
         };
     }
-    
+
     [RelayCommand]
-    private async void DeleteSystem(string id)
+    private async Task DeleteSystem(string id)
     {
         AtariConfiguration system = systemsService.Find(id);
         if (system is null) return;
-        
+
         DeleteSystemPopup popup = serviceProvider.GetService<DeleteSystemPopup>();
         popup.ViewModel.System = system;
         await popupNavigation.PushAsync(popup);
 
-        popup.Disappearing += (sender, args) =>
+        popup.Disappearing += async (sender, args) =>
         {
-            if (popup.ViewModel.Confirmed)
-            {
-                int currentIndex = Systems.IndexOf(system);
-                int newIndex = currentIndex > 0 ? currentIndex - 1 : 0;
-                systemsService.Delete(system.Id);
-                UpdateSystemsFromService();
+            if (!popup.ViewModel.Confirmed) return;
+            int currentIndex = Systems.IndexOf(system);
+            int newIndex = currentIndex > 0 ? currentIndex - 1 : 0;
+            systemsService.Delete(system.Id);
+            UpdateSystemsFromService();
 
-                if (Systems.Count > 0)
-                {
-                    SelectedConfiguration = Systems[newIndex];
-                }
-                else
-                {
-                    SelectedConfiguration = AtariConfiguration.Empty;
-                    // deal with clearing RHS
-                }
-            }
+            SelectedConfiguration = Systems.Count > 0 ? Systems[newIndex] : AtariConfiguration.Empty;
         };
     }
-    
+
     [RelayCommand]
-    private async void CloneSystem(string id)
+    private async Task CloneSystem(string id)
     {
         AtariConfiguration system = systemsService.Find(id);
         if (system is null) return;
-        
+
 
         CloneSystemPopup popup = serviceProvider.GetService<CloneSystemPopup>();
         popup.ViewModel.System = system;
@@ -207,51 +215,52 @@ public partial class MainViewModel : TinyViewModel
 
         popup.Disappearing += (sender, args) =>
         {
-            if (popup.ViewModel.Confirmed)
-            {
-                AtariConfiguration clone = systemsService.Clone(system, popup.ViewModel.NewName);
-                UpdateSystemsFromService();
-                SelectedConfiguration = clone;
-            }
+            if (!popup.ViewModel.Confirmed) return;
+            AtariConfiguration clone = systemsService.Clone(system, popup.ViewModel.NewName);
+            UpdateSystemsFromService();
+            SelectedConfiguration = clone;
         };
     }
-    
-    
-  
+
     #endregion
-    
+
     [RelayCommand]
-    private async void EditPreferences()
+    private async Task EditPreferences()
     {
         var popup = serviceProvider.GetService<PreferencesPopup>();
         await popupNavigation.PushAsync(popup);
 
         popup.Disappearing += async (sender, args) =>
         {
-            if (popup.ViewModel.Confirmed)
-            {
-                await preferencesService.Save();
-                RunCommand.NotifyCanExecuteChanged();
-            }
+            if (!popup.ViewModel.Confirmed) return;
+            await preferencesService.Save();
+            RunCommand.NotifyCanExecuteChanged();
         };
     }
-    
-    [RelayCommand]
-    private async void SaveSystems()
+
+    [RelayCommand(CanExecute = nameof(SaveNeeded))]
+    private async Task SaveSystems()
     {
         await systemsService.Save();
     }
-    
+
     [RelayCommand(CanExecute = nameof(CanRun))]
-    private async void Run()
+    private async Task Run()
     {
         await configFileService.Persist(SelectedConfiguration);
-        
+
         // TODO - Platform specific? is it File:// on PC it is on mac
         var app = preferencesService.Preferences.HatariApplication;
         var applicationUrl = $"file://{app}";
         Console.WriteLine($"Launching application: {applicationUrl}");
         await Launcher.Default.OpenAsync(applicationUrl);
+    }
+
+    [RelayCommand]
+    private  Task Reordered()
+    {
+        ReorderServicesFromDisplayOrder();
+        return Task.CompletedTask;
     }
 
     private bool CanRun()
@@ -266,16 +275,20 @@ public partial class MainViewModel : TinyViewModel
 
         return true;
     }
+
+    private bool SaveNeeded => systemsService.IsDirty;
+    
     
     #endregion
-    
-    
-    #region ---- HELPERS ---- 
+
+
+    #region ---- HELPERS ----
+
     private void UpdateSystemsFromService()
     {
         Systems.Clear();
         int count = 0;
-        foreach (var system in systemsService.All())
+        foreach (var system in  systemsService.All())
         {
             Systems.Add(system);
             count++;
@@ -283,6 +296,23 @@ public partial class MainViewModel : TinyViewModel
 
         NumberOfSystems = count;
     }
-    #endregion
     
+    
+    private void ReorderServicesFromDisplayOrder()
+    {
+        var ids = Systems.Select(s => s.Id).ToList();
+        systemsService.ReorderByIds(ids);
+    }
+
+
+
+    private void TimerTick(object sender, EventArgs e)
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            SaveSystemsCommand.NotifyCanExecuteChanged();
+        });
+    }
+    
+    #endregion
 }

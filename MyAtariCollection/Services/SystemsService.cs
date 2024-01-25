@@ -1,6 +1,10 @@
 
 
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+using System.Threading.Tasks;
+
 
 namespace MyAtariCollection.Services;
 
@@ -9,6 +13,7 @@ public class SystemsService
     private readonly IPersistance persistance;
 
     private List<AtariConfiguration> store = [];
+    private string stateForDirtyCheck;
     public IEnumerable<AtariConfiguration> All() => store.AsEnumerable();
 
     public SystemsService(IPersistance persistance)
@@ -20,6 +25,7 @@ public class SystemsService
     {
         Console.WriteLine("Attempting to load systems from: " + persistance.MountFujiSystemsFile);
         store = persistance.DeSerialize<List<AtariConfiguration>>(persistance.MountFujiSystemsFile);
+        SetStateForDirtyCheck();
     }
     
     /// <summary>
@@ -29,9 +35,23 @@ public class SystemsService
     {
         Console.WriteLine("Attempting to save preferences to: " + persistance.MountFujiSystemsFile);
         await persistance.SerializeAsync(persistance.MountFujiSystemsFile, store);
+        SetStateForDirtyCheck();
     }
 
- 
+    private void SetStateForDirtyCheck()
+    {
+        stateForDirtyCheck = JsonSerializer.Serialize(store);
+    }
+
+    public bool IsDirty
+    {
+        get
+        {
+            string currentState = JsonSerializer.Serialize(store);
+            return !currentState.Equals(stateForDirtyCheck);
+        }
+    }
+
     public void Add(AtariConfiguration newConfiguration)
     {
         newConfiguration.Id = Guid.NewGuid().ToString();
@@ -42,8 +62,8 @@ public class SystemsService
     public AtariConfiguration Clone(AtariConfiguration original, string newName)
     {
         // not the fastest approach but this isn't used in a game loop!
-        var json = JsonConvert.SerializeObject(original);
-        AtariConfiguration clone = JsonConvert.DeserializeObject<AtariConfiguration>(json);
+        var json = JsonSerializer.Serialize<AtariConfiguration>(original);
+        AtariConfiguration clone = JsonSerializer.Deserialize<AtariConfiguration>(json);
         clone.DisplayName = newName;
         Add(clone);
         return clone;
@@ -65,5 +85,9 @@ public class SystemsService
     {
         return store.FirstOrDefault(system => system.Id == id);
     }
-    
+
+    public void ReorderByIds(List<string> ids)
+    {
+        store = store.OrderBy(d => ids.IndexOf(d.Id)).ToList();
+    }
 }

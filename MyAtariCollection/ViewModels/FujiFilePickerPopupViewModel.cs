@@ -1,4 +1,9 @@
 
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+
 namespace MyAtariCollection.ViewModels;
 
 public enum PickerType
@@ -72,7 +77,7 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
     }
 
     [RelayCommand]
-    private async void SelectionChanged()
+    private Task SelectionChanged()
     {
         Console.WriteLine($"Selection changed: Dir?: {SelectedEntry.IsDirectory} - {SelectedEntry.DisplayName}");
         switch (SelectedEntry.EntryType)
@@ -90,17 +95,19 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
             case EntryType.File:
                 break;
         }
+
+        return Task.CompletedTask;
     }
 
     [RelayCommand]
-    private async void Cancel()
+    private async Task Cancel()
     {
         Confirmed = false;
         await popupNavigation.PopAsync();
     }
 
     [RelayCommand(CanExecute = nameof(HasValidData))]
-    private async void Ok()
+    private async Task Ok()
     {
         Confirmed = true;
         await popupNavigation.PopAsync();

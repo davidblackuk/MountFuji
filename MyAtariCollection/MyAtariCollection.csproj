@@ -13,7 +13,7 @@
         either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
         <!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
-<!--        <RuntimeIdentifiers>maccatalyst-arm64</RuntimeIdentifiers>-->
+        <RuntimeIdentifiers>maccatalyst-arm64</RuntimeIdentifiers>
 
         <OutputType>Exe</OutputType>
         <RootNamespace>MyAtariCollection</RootNamespace>
@@ -58,14 +58,14 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="CommunityToolkit.Maui" Version="7.0.0" />
+        <PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
         <PackageReference Include="M.BindableProperty.Generator" Version="0.11.1" />
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="TinyMvvm.Maui" Version="4.2.1" />
-        <PackageReference Include="Mopups" Version="1.2.0" />
+        <PackageReference Include="TinyMvvm.Maui" Version="4.3.1" />
+        <PackageReference Include="Mopups" Version="1.3.0" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 namespace MyAtariCollection.ViewModels
 {
     public interface IConfirmableViewModel
@@ -52,14 +53,22 @@ namespace MyAtariCollection.ViewModels
         [ObservableProperty]
         private string description;
 
+
         [RelayCommand]
-        private async void Cancel()
+        private void SelectionChanged()
+        {
+            Name = SelectedTemplate.DisplayName;
+        }
+        
+        
+        [RelayCommand]
+        private async Task Cancel()
         {
             await popupNavigation.PopAsync();
         }
 
         [RelayCommand(CanExecute = nameof(HasValidData))]
-        private async void Ok()
+        private async Task Ok()
         {
             Confirmed = true;
             await popupNavigation.PopAsync();

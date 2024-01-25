@@ -6,6 +6,7 @@
              xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
              xmlns:controls="clr-namespace:MyAtariCollection.Controls"
              xmlns:models="clr-namespace:MyAtariCollection.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="MyAtariCollection.Controls.SystemSelector"
              x:DataType="vm:MainViewModel"
              WidthRequest="460"
@@ -22,11 +23,17 @@
                 <Label Text="{Binding NumberOfSystems}" Style="{StaticResource H2Label}"></Label>
             </HorizontalStackLayout>
             
-            <CollectionView SelectionMode="Single" 
+            <CollectionView SelectionMode="Single"
                             SelectedItem="{Binding SelectedConfiguration}"
                             Grid.Row="1" 
-                            ItemsSource="{Binding Systems}">
-            <!-- BackgroundColor="{StaticResource ComponentBackground}"> -->
+                            ItemsSource="{Binding Systems}" CanReorderItems="True" >
+                <CollectionView.Behaviors>
+                      <toolkit:EventToCommandBehavior 
+                          EventName="ReorderCompleted" 
+                          Command="{Binding ReorderedCommand }" />
+                </CollectionView.Behaviors>
+
+                <!-- BackgroundColor="{StaticResource ComponentBackground}"> -->
             <CollectionView.EmptyView>
                 <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
                        FontSize="20"

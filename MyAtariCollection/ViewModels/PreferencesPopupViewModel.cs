@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using CommunityToolkit.Maui.Storage;
 using MyAtariCollection.Services.Filesystem;
 
@@ -26,20 +27,20 @@ public partial class PreferencesPopupViewModel: TinyViewModel
 
     
     [RelayCommand]
-    private async void Cancel()
+    private async Task Cancel()
     {
         await popupNavigation.PopAsync();
     }
 
     [RelayCommand(CanExecute = nameof(HasValidData))]
-    private async void Ok()
+    private async Task Ok()
     {
         Confirmed = true;
         await popupNavigation.PopAsync();
     }
 
     [RelayCommand()]
-    private async void BrowseRomFolder()
+    private async Task BrowseRomFolder()
     {
         await fujiFilePicker.PickFolder("Default ROM Folder", (filename) => Preferences.RomFolder = filename,
             GetInitialFolder(Preferences.RomFolder));
@@ -56,7 +57,7 @@ public partial class PreferencesPopupViewModel: TinyViewModel
 
   
     [RelayCommand()]
-    private async void BrowseCartridgeFolder()
+    private async Task BrowseCartridgeFolder()
     {
         await fujiFilePicker.PickFolder("Default Cartridge Folder", (filename) => Preferences.CartridgeFolder = filename,
             lastUsedFolder);
@@ -67,7 +68,7 @@ public partial class PreferencesPopupViewModel: TinyViewModel
 
     
     [RelayCommand()]
-    private async void BrowseFloppyDiskFolder()
+    private async Task BrowseFloppyDiskFolder()
     {
         await fujiFilePicker.PickFolder("Default Floppies Folder", (filename) => Preferences.FloppyDiskFolder = filename,
             lastUsedFolder);
@@ -78,7 +79,7 @@ public partial class PreferencesPopupViewModel: TinyViewModel
 
     
     [RelayCommand()]
-    private async void BrowseHardDiskFolder()
+    private async Task BrowseHardDiskFolder()
     {
         await fujiFilePicker.PickFolder("Default Hard Drive Image Folder", (filename) => Preferences.HardDiskFolder = filename,
             lastUsedFolder);
@@ -89,7 +90,7 @@ public partial class PreferencesPopupViewModel: TinyViewModel
     
 
     [RelayCommand()]
-    private async void BrowseGemDosDiskFolder()
+    private async Task BrowseGemDosDiskFolder()
     {
         await fujiFilePicker.PickFolder("Default GEMDOS Folder", (filename) => Preferences.GemDosFolder = filename,
             lastUsedFolder);
@@ -99,7 +100,7 @@ public partial class PreferencesPopupViewModel: TinyViewModel
     private void ClearGemDosDiskFolder() => Preferences.GemDosFolder = string.Empty;
   
     [RelayCommand()]
-    private async void BrowseHatariApp()
+    private async Task BrowseHatariApp()
     {
         await fujiFilePicker.PickFile("Hatari Executable", 
             (filename) => Preferences.HatariApplication = filename,
@@ -117,7 +118,7 @@ public partial class PreferencesPopupViewModel: TinyViewModel
     }
     
     [RelayCommand()]
-    private async void BrowseHatariConfigFile()
+    private async Task BrowseHatariConfigFile()
     {
         await fujiFilePicker.PickFile("Hatari Config file", 
             (filename) => Preferences.HatariConfigFile = filename,
