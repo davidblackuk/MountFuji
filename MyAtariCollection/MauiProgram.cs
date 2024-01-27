@@ -17,7 +17,7 @@ global using CommunityToolkit.Mvvm.ComponentModel;
 global using CommunityToolkit.Mvvm.Input;
 
 global using Mopups.Interfaces;
-
+using MetroLog.MicrosoftExtensions;
 using Mopups.Hosting;
 using Mopups.Services;
 using MyAtariCollection.Services.ConfigFileSections;
@@ -43,6 +43,16 @@ public static class MauiProgram
             .UseTinyMvvm()
             .UseMauiCommunityToolkit();
 
+        builder.Logging.AddConsoleLogger(_ => { })
+        .AddStreamingFileLogger(options =>
+        {
+            options.RetainDays = 2;
+            options.FolderPath = Path.Combine(FileSystem.AppDataDirectory, "fuji");
+        });
+        
+        
+        
+        
         builder.Services.AddTransient<MainView>();
         builder.Services.AddTransient<MainViewModel>();
 

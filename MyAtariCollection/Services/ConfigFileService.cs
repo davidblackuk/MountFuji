@@ -15,6 +15,7 @@ public class ConfigFileService : IConfigFileService
     private readonly IScreenConfigFileSection screenConfig;
     private readonly ISoundConfigFileSection soundConfig;
     private readonly IPreferencesService preferencesService;
+    private readonly ILogger<ConfigFileService> log;
     private readonly ILogConfigFileSection logConfig;
 
     public ConfigFileService(ILogConfigFileSection logConfig,
@@ -23,7 +24,8 @@ public class ConfigFileService : IConfigFileService
         IHardDiskConfigFileSection hardDiskConfig, IFloppyConfigFileSection floppyConfig,
         IScreenConfigFileSection screenConfig,
         ISoundConfigFileSection soundConfig,
-        IPreferencesService preferencesService)
+        IPreferencesService preferencesService,
+        ILogger<ConfigFileService> log)
     {
         this.memoryConfig = memoryConfig;
         this.systemConfig = systemConfig;
@@ -36,6 +38,7 @@ public class ConfigFileService : IConfigFileService
         this.screenConfig = screenConfig;
         this.soundConfig = soundConfig;
         this.preferencesService = preferencesService;
+        this.log = log;
         this.logConfig = logConfig;
     }
 
@@ -82,7 +85,7 @@ public class ConfigFileService : IConfigFileService
     public async Task Persist(AtariConfiguration config)
     {
         var configFileContent = Generate(config);
-        Console.WriteLine($"Over writing hatari config at {preferencesService.Preferences.HatariConfigFile}");
+        log.LogInformation("Overwriting Hatari config at: {File}", preferencesService.Preferences.HatariConfigFile);
         await File.WriteAllTextAsync(preferencesService.Preferences.HatariConfigFile,
             configFileContent);
 

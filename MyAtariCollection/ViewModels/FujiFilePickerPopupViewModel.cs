@@ -79,7 +79,6 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
     [RelayCommand]
     private Task SelectionChanged()
     {
-        Console.WriteLine($"Selection changed: Dir?: {SelectedEntry.IsDirectory} - {SelectedEntry.DisplayName}");
         switch (SelectedEntry.EntryType)
         {
             case EntryType.ParentNavigation:

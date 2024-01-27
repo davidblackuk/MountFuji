@@ -12,13 +12,15 @@ public partial class MainViewModel : TinyViewModel
     private readonly IPreferencesService preferencesService;
     private readonly SystemsService systemsService;
     private readonly IFujiFilePickerService fujiFilePicker;
+    private readonly ILogger<MainViewModel> log;
 
     public MainViewModel(IConfigFileService configFileService,
         IPopupNavigation popupNavigation,
         IServiceProvider serviceProvider,
         IPreferencesService preferencesService,
         SystemsService systemsService,
-        IFujiFilePickerService fujiFilePicker)
+        IFujiFilePickerService fujiFilePicker,
+        ILogger<MainViewModel> log)
     {
         this.configFileService = configFileService;
         this.popupNavigation = popupNavigation;
@@ -26,6 +28,7 @@ public partial class MainViewModel : TinyViewModel
         this.preferencesService = preferencesService;
         this.systemsService = systemsService;
         this.fujiFilePicker = fujiFilePicker;
+        this.log = log;
 
         UpdateSystemsFromService();
     }
@@ -252,7 +255,7 @@ public partial class MainViewModel : TinyViewModel
         // TODO - Platform specific? is it File:// on PC it is on mac
         var app = preferencesService.Preferences.HatariApplication;
         var applicationUrl = $"file://{app}";
-        Console.WriteLine($"Launching application: {applicationUrl}");
+        log.LogInformation("Launching application: {Url}", applicationUrl);
         await Launcher.Default.OpenAsync(applicationUrl);
     }
 

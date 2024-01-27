@@ -11,21 +11,25 @@ namespace MyAtariCollection.Services;
 public class SystemsService
 {
     private readonly IPersistance persistance;
+    private readonly ILogger<SystemsService> log;
 
     private List<AtariConfiguration> store = [];
     private string stateForDirtyCheck;
     public IEnumerable<AtariConfiguration> All() => store.AsEnumerable();
 
-    public SystemsService(IPersistance persistance)
+    public SystemsService(IPersistance persistance, ILogger<SystemsService> log)
     {
         this.persistance = persistance;
+        this.log = log;
     }
     
     public void Load()
     {
-        Console.WriteLine("Attempting to load systems from: " + persistance.MountFujiSystemsFile);
+        
+        log.LogInformation("Attempting to load systems from: {SaveFile}", persistance.MountFujiSystemsFile);
         store = persistance.DeSerialize<List<AtariConfiguration>>(persistance.MountFujiSystemsFile);
         SetStateForDirtyCheck();
+        log.LogInformation("Loaded {Count} systems", store.Count);
     }
     
     /// <summary>
@@ -33,7 +37,7 @@ public class SystemsService
     /// </summary>
     public async Task Save()
     {
-        Console.WriteLine("Attempting to save preferences to: " + persistance.MountFujiSystemsFile);
+        log.LogInformation("Attempting to save systems to: {SaveFile}", persistance.MountFujiSystemsFile);
         await persistance.SerializeAsync(persistance.MountFujiSystemsFile, store);
         SetStateForDirtyCheck();
     }
@@ -55,6 +59,7 @@ public class SystemsService
     public void Add(AtariConfiguration newConfiguration)
     {
         newConfiguration.Id = Guid.NewGuid().ToString();
+        log.LogInformation("Added new system to store: {System}, Id:{Id}", newConfiguration.DisplayName, newConfiguration.Id);
         store.Add(newConfiguration);
     }
 
@@ -65,7 +70,11 @@ public class SystemsService
         var json = JsonSerializer.Serialize<AtariConfiguration>(original);
         AtariConfiguration clone = JsonSerializer.Deserialize<AtariConfiguration>(json);
         clone.DisplayName = newName;
+        
+        log.LogInformation("Cloning system: {Name}, Id = {Id} to {Name}", original.DisplayName, original.Id, newName);
         Add(clone);
+        
+        log.LogInformation("New system: {Name}, has Id = {Id}", clone.DisplayName, clone.Id);
         return clone;
     }
     
@@ -73,8 +82,10 @@ public class SystemsService
     {
         AtariConfiguration config = Find(id);
         
+        log.LogInformation("Deleting system: {Name}, with Id: {Id}", config.DisplayName, config.Id);
+
         // technically a moot test as List.Remove(null) just returns false if there
-        // are no null entries in the List, which there can be
+        // are no null entries in the List, which it could be
         if (config is not null)
         {
             store.Remove(config);
@@ -83,11 +94,13 @@ public class SystemsService
 
     public AtariConfiguration Find(string id)
     {
+        log.LogInformation("Findong store by ID: {Id}", id);
         return store.FirstOrDefault(system => system.Id == id);
     }
 
     public void ReorderByIds(List<string> ids)
     {
+        log.LogInformation("Re-odering system");
         store = store.OrderBy(d => ids.IndexOf(d.Id)).ToList();
     }
 }

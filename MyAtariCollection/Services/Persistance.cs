@@ -14,6 +14,7 @@ public interface IPersistance
 
 public class Persistance : IPersistance
 {
+    private readonly ILogger<Persistance> log;
     private const string AppPreferencesFilename = "preferences.json";
     private const string AppSystemsFilename = "systems.json";
     private const string AppDataFolder= "fuji";
@@ -21,6 +22,11 @@ public class Persistance : IPersistance
     private string MountFujiFolder => Path.Combine(FileSystem.AppDataDirectory, AppDataFolder);
     public string MountFujiPreferencesFile => Path.Combine(MountFujiFolder, AppPreferencesFilename);
     public string MountFujiSystemsFile => Path.Combine(MountFujiFolder, AppSystemsFilename);
+
+    public Persistance(ILogger<Persistance> log)
+    {
+        this.log = log;
+    }
     
     private void EnsureFolderExists()
     {
@@ -28,13 +34,13 @@ public class Persistance : IPersistance
         {
             if (!Path.Exists(MountFujiFolder))
             {
-                Console.WriteLine($"Creating App folder: {MountFujiFolder}");
+                log.LogInformation("Creating App folder: {MountFujiFolder}", MountFujiFolder);
                 Directory.CreateDirectory(MountFujiFolder);
             }
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Error creating Fuji folder {MountFujiFolder} - {e.Message}");
+            log.LogError(e,"Error creating Fuji folder {MountFujiFolder}", MountFujiFolder);
         }
     }
 
@@ -51,7 +57,7 @@ public class Persistance : IPersistance
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Error serializing {typeof(T).FullName} preferences: {e.Message}");
+            log.LogInformation(e, "Error serializing type: {Type}", typeof(T).FullName);
         }
     }
     
@@ -66,19 +72,18 @@ public class Persistance : IPersistance
                 string data = File.ReadAllText(filename);
                 deserialized = JsonSerializer.Deserialize<T>(data);
                 if (deserialized is null)
-                    Console.WriteLine($"Failed to deserialize {typeof(T).Name} preferences: null result");
+                    log.LogInformation("Error deserializing type: {Type}, result is null", typeof(T).FullName);
+
             }
             else
             {
-                Console.WriteLine($"{filename} does not exist, going with defaults");
+                log.LogInformation("File: {Filename}, does not exist, going with defaults", filename);
             }
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Error reading {typeof(T).FullName} {e.Message}");
+            log.LogInformation(e, "Error deserializing type: {Type}", typeof(T).FullName);
         }
         return deserialized != null ? deserialized : new T();
     } 
-    
-   
 }
