@@ -86,12 +86,11 @@ public static class MauiProgram
         builder.Services.AddSingleton<IFujiFilePickerService, FujiFilePickerService>();
         builder.Services.AddTransient<IPersistance, Persistance>();
 
-
-#if DEBUG
-        builder.Logging.AddDebug();
-#endif
-
+        
         MauiApp built =  builder.Build();
+
+
+
 
         IPreferencesService preferencesService = built.Services.GetService<IPreferencesService>();
         preferencesService.Load();
