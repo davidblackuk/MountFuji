@@ -2,5 +2,7 @@ namespace MyAtariCollection.Services.ConfigFileSections;
 
 public interface IScreenConfigFileSection
 {
-    void Generate(StringBuilder builder, AtariConfiguration config);
+    void ToHatariConfig(StringBuilder builder, AtariConfiguration config);
+    
+    void FromHatariConfig(AtariConfiguration to, Dictionary<string, Dictionary<string, string>> sections);
 }

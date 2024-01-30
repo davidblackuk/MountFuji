@@ -2,9 +2,11 @@ namespace MyAtariCollection.Services.ConfigFileSections;
 
 public class ScreenConfigFileSection: ConfigFileSection, IScreenConfigFileSection
 {
-    public void Generate(StringBuilder builder, AtariConfiguration config)
+    public const string ConfigSectionName = "Screen";
+
+    public void ToHatariConfig(StringBuilder builder, AtariConfiguration config)
     {
-        AddSection(builder, "Screen");
+        AddSection(builder, ConfigSectionName);
         
         AddFlag(builder,"nMonitorType", (int)config.ScreenOptions.MonitorType);
         AddFlag(builder,"nFrameSkips", (int)config.ScreenOptions.FrameSkip);
@@ -24,6 +26,59 @@ public class ScreenConfigFileSection: ConfigFileSection, IScreenConfigFileSectio
         AddFlag(builder,"bResizable", config.ScreenOptions.Resizable);
         AddFlag(builder,"bUseSdlRenderer", config.ScreenOptions.GpuScaling);
 
+        builder.AppendLine();
+    }
+
+    public void FromHatariConfig(AtariConfiguration to, Dictionary<string, Dictionary<string, string>> sections)
+    {
+        var section = sections[ConfigSectionName];
+        to.ScreenOptions.MonitorType = ParseEnumValue<AtariMonitorType>("nMonitorType", section);
+        to.ScreenOptions.FrameSkip = ParseEnumValue<FrameSkip>("nFrameSkips", section);
+        to.ScreenOptions.FullScreen = ParseBool("bFullScreen", section);
+        to.ScreenOptions.ShowBorders = ParseBool("bAllowOverscan", section);
+        
+        to.ScreenOptions.EnableExtendedResolutions = ParseBool("bUseExtVdiResolutions", section);
+        
+        // resolution
+        to.ScreenOptions.ColourDepth = ParseEnumValue<ColorDepth>("nVdiColors", section);
+        
+        to.ScreenOptions.Vsync = ParseBool("bUseVsync", section);
+        to.ScreenOptions.Resizable = ParseBool("bResizable", section);
+        to.ScreenOptions.GpuScaling = ParseBool("bUseSdlRenderer", section);
+        
+        ParseIndicators(to, section);
+    }
+
+    private void ParseIndicators(AtariConfiguration to, Dictionary<string, string> section)
+    {
+        var statusBar = ParseBool("bShowStatusbar", section);
+        var driveLed = ParseBool("bShowDriveLed", section);
+
+        to.ScreenOptions.Indicators = statusBar switch
+        {
+            true when !driveLed => Indicators.StatusBar,
+            false when driveLed => Indicators.DriveLed,
+            _ => Indicators.None
+        };
+    }
+
+    private void AddIndicators(StringBuilder builder, AtariConfiguration config)
+    {
+        switch (config.ScreenOptions.Indicators)
+        {
+            case Indicators.StatusBar:
+                AddFlag(builder,"bShowStatusbar", true);
+                AddFlag(builder,"bShowDriveLed", false);
+                break;
+            case Indicators.DriveLed:
+                AddFlag(builder,"bShowStatusbar", false);
+                AddFlag(builder,"bShowDriveLed", true);
+                break;
+            case Indicators.None:
+                AddFlag(builder,"bShowStatusbar", false);
+                AddFlag(builder,"bShowDriveLed", false);
+                break;
+        }
     }
 
     private void AddResolution(StringBuilder builder, AtariConfiguration config)
@@ -45,24 +100,7 @@ public class ScreenConfigFileSection: ConfigFileSection, IScreenConfigFileSectio
         }
     }
 
-    private void AddIndicators(StringBuilder builder, AtariConfiguration config)
-    {
-        switch (config.ScreenOptions.Indicators)
-        {
-            case Indicators.StatusBar:
-                AddFlag(builder,"bShowStatusbar", true);
-                AddFlag(builder,"bShowDriveLed", false);
-                break;
-            case Indicators.DriveLed:
-                AddFlag(builder,"bShowStatusbar", false);
-                AddFlag(builder,"bShowDriveLed", true);
-                break;
-            case Indicators.None:
-                AddFlag(builder,"bShowStatusbar", false);
-                AddFlag(builder,"bShowDriveLed", false);
-                break;
-        }
-    }
+
 }
 
 /*

@@ -1,6 +1,6 @@
 namespace MyAtariCollection.Services.ConfigFileSections;
 
-public interface IRomConfigFileSection
+public interface IScsiConfigFileSection
 {
     void ToHatariConfig(StringBuilder builder, AtariConfiguration config);
     

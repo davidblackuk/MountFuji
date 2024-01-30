@@ -1,8 +1,9 @@
 # My Atari Collection
 
-## TODO
-- Add config file path to system  section of the preferences!
-- Move code for config write into config service
+To be noted
+- We only import and support simple disks at the mo, the assumption is block size = 512
+- We're not importing VDI resolutions yet
+
 
 ## Thoughts
 

@@ -2,12 +2,28 @@ namespace MyAtariCollection.Services.ConfigFileSections;
 
 public class RomConfigFileSection: ConfigFileSection, IRomConfigFileSection
 {
-    public void Generate(StringBuilder builder, AtariConfiguration config)
+    public const string ConfigSectionName = "ROM";
+
+    private const string TosImageFilenameKey = "szTosImageFileName";
+    private const string CartridgeImageFilenameKey = "szCartridgeImageFileName";
+    
+    public void ToHatariConfig(StringBuilder builder, AtariConfiguration config)
     {
-        AddSection(builder, "ROM");
+        AddSection(builder, ConfigSectionName);
         
-        AddFlag(builder, "szTosImageFileName", config.RomImage);
-        AddFlag(builder, "szCartridgeImageFileName", config.CartridgeImage);
+        AddFlag(builder, TosImageFilenameKey, config.RomImage);
+        AddFlag(builder, CartridgeImageFilenameKey, config.CartridgeImage);
         AddFlag(builder, "bPatchTos", true);
+        
+        builder.AppendLine();
     }
+
+    public void FromHatariConfig(AtariConfiguration to, Dictionary<string, Dictionary<string, string>> sections)
+    {
+        var section = sections[ConfigSectionName];
+
+        to.RomImage = section[TosImageFilenameKey];
+        to.CartridgeImage = section[CartridgeImageFilenameKey];
+    }
+
 }

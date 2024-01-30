@@ -71,6 +71,10 @@ public static class MauiProgram
         builder.Services.AddTransient<DeleteSystemPopup>();
         builder.Services.AddTransient<DeleteSystemPopupViewModel>();
 
+        builder.Services.AddTransient<ImportSystemPopup>();
+        builder.Services.AddTransient<ImportSystemPopupViewModel>();
+
+        
         builder.Services.AddTransient<IAppSelectorStrategy, AppSelectorStrategy>();
          
         builder.Services.AddSingleton<IPopupNavigation>(MopupService.Instance);
@@ -90,6 +94,7 @@ public static class MauiProgram
         builder.Services.AddTransient<IConfigFileService, ConfigFileService>();
         
         // Services
+        builder.Services.AddTransient<IRawHatariConfigFile, RawHatariConfigFile>();
         builder.Services.AddSingleton<IMachineTemplateService, MachineTemplateService>();
         builder.Services.AddSingleton<SystemsService>();
         builder.Services.AddSingleton<IPreferencesService, PreferencesService>();

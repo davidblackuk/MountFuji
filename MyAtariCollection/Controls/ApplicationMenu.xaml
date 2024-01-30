@@ -12,6 +12,9 @@
         <Button  VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls:IconFont.Add_circle_outline}" 
                  Command="{Binding CreateNewSystemCommand}"  ToolTipProperties.Text="New system"/>
         
+        <Button  VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls:IconFont.Arrow_circle_left}" 
+                 Command="{Binding ImportHatariConfigCommand}"  ToolTipProperties.Text="Import Hatari config file"/>
+        
         <Button  VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls:IconFont.Save}" 
                  Command="{Binding SaveSystemsCommand}"  ToolTipProperties.Text="Save all systems"/>
         

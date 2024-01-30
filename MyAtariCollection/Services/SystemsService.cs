@@ -12,15 +12,17 @@ public class SystemsService
 {
     private readonly IPersistance persistance;
     private readonly ILogger<SystemsService> log;
+    private readonly IConfigFileService config;
 
     private List<AtariConfiguration> store = [];
     private string stateForDirtyCheck;
     public IEnumerable<AtariConfiguration> All() => store.AsEnumerable();
 
-    public SystemsService(IPersistance persistance, ILogger<SystemsService> log)
+    public SystemsService(IPersistance persistance, ILogger<SystemsService> log, IConfigFileService config)
     {
         this.persistance = persistance;
         this.log = log;
+        this.config = config;
     }
     
     public void Load()
@@ -102,5 +104,20 @@ public class SystemsService
     {
         log.LogInformation("Re-odering system");
         store = store.OrderBy(d => ids.IndexOf(d.Id)).ToList();
+    }
+
+    /// <summary>
+    /// Imports a hatari .cfg file and creates a new system from it
+    /// </summary>
+    /// <param name="filename">full path to (including name) to the config file we are importing </param>
+    /// <param name="name">The name to give to the new system</param>
+    /// <returns></returns>
+    public async Task<AtariConfiguration> Import(string filename, string name)
+    {
+        log.LogInformation("Importing config from {FileName} and naming it {Name}",  filename, name);
+        var res = await config.Load(filename);
+        res.DisplayName = name;
+        Add(res);
+        return res;
     }
 }

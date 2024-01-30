@@ -192,7 +192,7 @@ public partial class MainViewModel : TinyViewModel
         popup.ViewModel.System = system;
         await popupNavigation.PushAsync(popup);
 
-        popup.Disappearing += async (sender, args) =>
+        popup.Disappearing += (sender, args) =>
         {
             if (!popup.ViewModel.Confirmed) return;
             int currentIndex = Systems.IndexOf(system);
@@ -228,6 +228,21 @@ public partial class MainViewModel : TinyViewModel
     #endregion
 
     [RelayCommand]
+    private async Task ImportHatariConfig()
+    {
+        ImportSystemPopup popup = serviceProvider.GetService<ImportSystemPopup>();
+
+        await popupNavigation.PushAsync(popup);
+
+        popup.Disappearing += async (sender, args) =>
+        {
+            if (!popup.ViewModel.Confirmed) return;
+            AtariConfiguration clone = await systemsService.Import(popup.ViewModel.FileName, popup.ViewModel.DisplayName);
+            UpdateSystemsFromService();
+            SelectedConfiguration = clone;
+        };
+    }
+ [RelayCommand]
     private async Task EditPreferences()
     {
         var popup = serviceProvider.GetService<PreferencesPopup>();
@@ -250,7 +265,7 @@ public partial class MainViewModel : TinyViewModel
     [RelayCommand(CanExecute = nameof(CanRun))]
     private async Task Run()
     {
-        await configFileService.Persist(SelectedConfiguration);
+        await configFileService.Save(SelectedConfiguration);
 
         // TODO - Platform specific? is it File:// on PC it is on mac
         var app = preferencesService.Preferences.HatariApplication;

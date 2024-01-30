@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+                  xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+                  xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+
+                  x:DataType="vm:ImportSystemPopupViewModel"
+                  x:Class="MyAtariCollection.Views.ImportSystemPopup"
+                  Title="Alert" BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
+
+
+    <Frame WidthRequest="700" HeightRequest="340" Padding="0" Margin="0">
+
+        <Grid RowDefinitions="60, 200, 2, 80" ColumnDefinitions="120,580">
+            <Label Grid.ColumnSpan="2"
+                   Text="Import Hatari config"
+                   HorizontalOptions="Center"
+                   Style="{StaticResource H1Label}" />
+            
+            <Label FontFamily="MaterialIcons" HorizontalTextAlignment="Center" TextColor="Goldenrod" FontSize="100"
+                   Grid.Column="0" Grid.Row="1" Text="{x:Static controls:IconFont.Arrow_circle_left}"
+                   HorizontalOptions="Center" />
+            
+            <VerticalStackLayout Grid.Row="1" Spacing="5" VerticalOptions="Center" Grid.Column="1">
+                <Label HorizontalTextAlignment="Start" Style="{StaticResource H3Label}"
+                       Text="System name" />
+                <Entry Margin="0,0,15,0"
+                      Placeholder="name can't be blank"
+                       Text="{Binding DisplayName }" />
+
+                <controls:HardDiskPathEditor
+                    Title="Config file"
+                    DiskImagePath="{Binding FileName}"
+                    ClearDiskImageCommand="{Binding ClearHatariConfigFileCommand}"
+                    BrowseDiskImageCommand="{Binding BrowseHatariConfigFileCommand}"
+                    PickerOpenIcon="{x:Static controls:IconFont.File_open}" />
+
+            </VerticalStackLayout>
+            
+            <Border BackgroundColor="Black" Grid.Row="2" HeightRequest="2" Grid.ColumnSpan="2" />
+            
+            <HorizontalStackLayout HorizontalOptions="End" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,12,15,0" />
+                <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,12,15,0" />
+            </HorizontalStackLayout>
+        </Grid>
+    </Frame>
+
+
+</mopups:PopupPage>

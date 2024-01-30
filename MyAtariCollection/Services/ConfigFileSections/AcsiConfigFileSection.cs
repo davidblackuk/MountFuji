@@ -1,15 +1,12 @@
 namespace MyAtariCollection.Services.ConfigFileSections;
 
-public interface IAcsiConfigFileSection
-{
-    void Generate(StringBuilder builder, AtariConfiguration config);
-}
-
 public class AcsiConfigFileSection : ConfigFileSection, IAcsiConfigFileSection
 {
-    public void Generate(StringBuilder builder, AtariConfiguration config)
+    public const string ConfigSectionName = "ACSI";
+
+    public void ToHatariConfig(StringBuilder builder, AtariConfiguration config)
     {
-        AddSection(builder, "ACSI");
+        AddSection(builder, ConfigSectionName);
 
 
         AddDrive(builder, 0, config.AcsiImagePaths.Disk0);
@@ -20,104 +17,29 @@ public class AcsiConfigFileSection : ConfigFileSection, IAcsiConfigFileSection
         AddDrive(builder, 5, config.AcsiImagePaths.Disk5);
         AddDrive(builder, 6, config.AcsiImagePaths.Disk6);
         AddDrive(builder, 7, config.AcsiImagePaths.Disk7);
+        
+        builder.AppendLine();
     }
-}
 
-public interface IScsiConfigFileSection
-{
-    void Generate(StringBuilder builder, AtariConfiguration config);
-}
-
-public class ScsiConfigFileSection : ConfigFileSection, IScsiConfigFileSection
-{
-    public void Generate(StringBuilder builder, AtariConfiguration config)
+    public void FromHatariConfig(AtariConfiguration to, Dictionary<string, Dictionary<string, string>> sections)
     {
-        AddSection(builder, "SCSI");
-
-
-        AddDrive(builder, 0, config.ScsiImagePaths.Disk0);
-        AddDrive(builder, 1, config.ScsiImagePaths.Disk1);
-        AddDrive(builder, 2, config.ScsiImagePaths.Disk2);
-        AddDrive(builder, 3, config.ScsiImagePaths.Disk3);
-        AddDrive(builder, 4, config.ScsiImagePaths.Disk4);
-        AddDrive(builder, 5, config.ScsiImagePaths.Disk5);
-        AddDrive(builder, 6, config.ScsiImagePaths.Disk6);
-        AddDrive(builder, 7, config.ScsiImagePaths.Disk7);
+        to.AcsiImagePaths.Disk0 = ParseDrive(sections[ConfigSectionName], 0 );
+        to.AcsiImagePaths.Disk1 = ParseDrive(sections[ConfigSectionName], 1 );
+        to.AcsiImagePaths.Disk2 = ParseDrive(sections[ConfigSectionName], 2 );
+        to.AcsiImagePaths.Disk3 = ParseDrive(sections[ConfigSectionName], 3 );
+        to.AcsiImagePaths.Disk4 = ParseDrive(sections[ConfigSectionName], 4 );
+        to.AcsiImagePaths.Disk5 = ParseDrive(sections[ConfigSectionName], 5 );
+        to.AcsiImagePaths.Disk6 = ParseDrive(sections[ConfigSectionName], 6 );
+        to.AcsiImagePaths.Disk7 = ParseDrive(sections[ConfigSectionName], 7 );
     }
-}
-
-public interface IIdeConfigFileSection
-{
-    void Generate(StringBuilder builder, AtariConfiguration config);
-}
-
-public class IdeConfigFileSection : ConfigFileSection, IIdeConfigFileSection
-{
-    public void Generate(StringBuilder builder, AtariConfiguration config)
-    {
-        AddSection(builder, "IDE");
 
 
-        AddDrive(builder, 0, config.IdeOptions.Disk0);
-        AddFlag(builder, "nByteSwap0", (int)config.IdeOptions.ByteSwapDrive0);
 
-        AddDrive(builder, 1, config.IdeOptions.Disk1);
-        AddFlag(builder, "nByteSwap1", (int)config.IdeOptions.ByteSwapDrive1); 
-    }
+    
 }
 
 
-public interface IHardDiskConfigFileSection
-{
-    void Generate(StringBuilder builder, AtariConfiguration config);
-}
 
-public class HardDiskConfigFileSection : ConfigFileSection, IHardDiskConfigFileSection
-{
-    public void Generate(StringBuilder builder, AtariConfiguration config)
-    {
-        AddSection(builder, "HardDisk");
-
-        AddFlag(builder, "nGemdosDrive", config.GdosDriveOptions.AddGemdosAfterPhysicalDrives ? -1 : 0);
-        AddFlag(builder, "bBootFromHardDisk", config.GdosDriveOptions.BootFromHardDisk);
-        AddFlag(builder, "bUseHardDiskDirectory", !string.IsNullOrEmpty(config.GdosDriveOptions.GemdosFolder));
-        AddFlag(builder, "szHardDiskDirectory", config.GdosDriveOptions.GemdosFolder);
- //     AddFlag(builder, "nGemdosCase", );
-        AddFlag(builder, "nWriteProtection", (int) config.GdosDriveOptions.WriteProtection);
-        AddFlag(builder, "bFilenameConversion", config.GdosDriveOptions.AtariHostFilenameConversion );
-
-    }
-}
-
-public interface IFloppyConfigFileSection
-{
-    void Generate(StringBuilder builder, AtariConfiguration config);
-}
-
-public class FloppyConfigFileSection : ConfigFileSection, IFloppyConfigFileSection
-{
-    public void Generate(StringBuilder builder, AtariConfiguration config)
-    {
-        AddSection(builder, "Floppy");
-        
-        
-        AddFlag(builder, "bAutoInsertDiskB", config.FloppyOptions.AutoInsertB);
-        AddFlag(builder, "FastFloppy", config.FloppyOptions.FastFloppyAccess);
-
-        AddFlag(builder, "EnableDriveA", config.FloppyOptions.DriveAEnabled);
-        AddFlag(builder, "szDiskAFileName", config.FloppyOptions.DriveAPath);
-        AddFlag(builder, "DriveA_NumberOfHeads", config.FloppyOptions.DriveADoubleSided ? 2 : 1);
-        
-        
-        
-        AddFlag(builder, "EnableDriveB", config.FloppyOptions.DriveBEnabled);
-        AddFlag(builder, "szDiskBFileName", config.FloppyOptions.DriveBPath);
-        AddFlag(builder, "DriveB_NumberOfHeads", config.FloppyOptions.DriveBDoubleSided ? 2 : 1);
-        
-        AddFlag(builder, "nWriteProtection", (int) config.FloppyOptions.WriteProtection);
-        
-    }
-}
 
 /*
 

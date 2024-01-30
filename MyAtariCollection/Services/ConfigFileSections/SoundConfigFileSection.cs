@@ -1,22 +1,24 @@
 namespace MyAtariCollection.Services.ConfigFileSections;
 
-public interface ISoundConfigFileSection
-{
-    void Generate(StringBuilder builder, AtariConfiguration config);
-}
-
 public class SoundConfigFileSection: ConfigFileSection, ISoundConfigFileSection
 {
-    public void Generate(StringBuilder builder, AtariConfiguration config)
+    public const string ConfigSectionName = "Sound";
+
+    public void ToHatariConfig(StringBuilder builder, AtariConfiguration config)
     {
-        AddSection(builder, "Sound");
+        AddSection(builder, ConfigSectionName);
         
         AddFlag(builder, "bEnableSound", config.SoundOptions.Enabled);
         AddFlag(builder, "bEnableSoundSync", config.SoundOptions.Synchronized);
         
         AddFlag(builder, "nPlaybackFreq", (int)config.SoundOptions.PlaybackQuality);
         AddFlag(builder, "YmVolumeMixing", (int)config.SoundOptions.VoiceMixer);
-        
+
+        builder.AppendLine();
+    }
+
+    public void FromHatariConfig(AtariConfiguration to, Dictionary<string, Dictionary<string, string>> sections)
+    {
     }
 }
 

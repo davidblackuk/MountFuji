@@ -2,15 +2,31 @@ namespace MyAtariCollection.Services.ConfigFileSections;
 
 public class MemoryConfigFileSection: ConfigFileSection, IMemoryConfigFileSection
 {
-    public void Generate(StringBuilder builder, AtariConfiguration config)
+    public const string ConfigSectionName = "Memory";
+
+    private const string MemorySizeKey = "nMemorySize";
+    private const string TtRamSizeKey = "nTTRamSize";
+
+    public void ToHatariConfig(StringBuilder builder, AtariConfiguration config)
     {
-        AddSection(builder, "Memory");
+
+        AddSection(builder, ConfigSectionName);
         
-        AddFlag(builder, "nMemorySize", config.StMemorySize);
-        AddFlag(builder, "nTTRamSize", config.TtMemorySize * 1024);
+        AddFlag(builder, MemorySizeKey, config.StMemorySize);
+        AddFlag(builder, TtRamSizeKey, config.TtMemorySize * 1024);
         AddFlag(builder, "bAutoSave", false);
         // AddFlag(builder, "szMemoryCaptureFileName");
         // AddFlag(builder, "szAutoSaveFileName");
 
+        builder.AppendLine();
+    }
+
+    public void FromHatariConfig(AtariConfiguration to, Dictionary<string, Dictionary<string, string>> sections)
+    {
+        var section = sections[ConfigSectionName];
+
+        to.StMemorySize = ParseInt(MemorySizeKey, section);
+        to.TtMemorySize = ParseInt(TtRamSizeKey, section) / 1024;
+        
     }
 }
