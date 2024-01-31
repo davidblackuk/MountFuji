@@ -19,6 +19,12 @@ public class SoundConfigFileSection: ConfigFileSection, ISoundConfigFileSection
 
     public void FromHatariConfig(AtariConfiguration to, Dictionary<string, Dictionary<string, string>> sections)
     {
+        var section = sections[ConfigSectionName];
+        to.SoundOptions.Enabled = ParseBool("bEnableSound", section);
+        to.SoundOptions.Synchronized = ParseBool("bEnableSoundSync", section);
+
+        to.SoundOptions.PlaybackQuality = ParseEnumValue<PlaybackQuality>("nPlaybackFreq",section);
+        to.SoundOptions.VoiceMixer = ParseEnumValue<YmVoiceMix>("YmVolumeMixing",section);
     }
 }
 
