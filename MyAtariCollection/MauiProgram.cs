@@ -3,6 +3,7 @@ using MetroLog.MicrosoftExtensions;
 using Mopups.Hosting;
 using Mopups.Interfaces;
 using Mopups.Services;
+using MountFuji.Extensions;
 using MountFuji.Services;
 using MountFuji.Services.ConfigFileSections;
 using MountFuji.Services.Filesystem;
@@ -39,61 +40,14 @@ public static class MauiProgram
         
         
         
-        
-        builder.Services.AddTransient<MainView>();
-        builder.Services.AddTransient<MainViewModel>();
-
-        builder.Services.AddTransient<NewSystemPopup>();
-        builder.Services.AddTransient<NewSystemViewModelViewModel>();
-
-        builder.Services.AddTransient<PreferencesPopup>();
-        builder.Services.AddTransient<PreferencesPopupViewModel>();
-        
-        builder.Services.AddTransient<FujiFilePickerPopup>();
-        builder.Services.AddTransient<FujiFilePickerPopupViewModel>();
-
-        builder.Services.AddTransient<CloneSystemPopup>();
-        builder.Services.AddTransient<CloneSystemPopupViewModel>();
-        
-        builder.Services.AddTransient<DeleteSystemPopup>();
-        builder.Services.AddTransient<DeleteSystemPopupViewModel>();
-
-        builder.Services.AddTransient<ImportSystemPopup>();
-        builder.Services.AddTransient<ImportSystemPopupViewModel>();
-
-        
-        builder.Services.AddTransient<IAppSelectorStrategy, AppSelectorStrategy>();
-         
-        builder.Services.AddSingleton<IPopupNavigation>(MopupService.Instance);
-
-
-        builder.Services.AddTransient<ILogConfigFileSection, LogConfigFileSection>();
-        builder.Services.AddTransient<IMemoryConfigFileSection, MemoryConfigFileSection>();
-        builder.Services.AddTransient<ISystemConfigFileSection, SystemConfigFileSection>();
-        builder.Services.AddTransient<IRomConfigFileSection, RomConfigFileSection>();
-        builder.Services.AddTransient<IHardDiskConfigFileSection, HardDiskConfigFileSection>();
-        builder.Services.AddTransient<IFloppyConfigFileSection, FloppyConfigFileSection>();
-        builder.Services.AddTransient<IAcsiConfigFileSection, AcsiConfigFileSection>();
-        builder.Services.AddTransient<IScsiConfigFileSection, ScsiConfigFileSection>();
-        builder.Services.AddTransient<IIdeConfigFileSection, IdeConfigFileSection>();
-        builder.Services.AddTransient<IScreenConfigFileSection, ScreenConfigFileSection>();
-        builder.Services.AddTransient<ISoundConfigFileSection, SoundConfigFileSection>();
-        builder.Services.AddTransient<IConfigFileService, ConfigFileService>();
-        
-        // Services
-        builder.Services.AddTransient<IRawHatariConfigFile, RawHatariConfigFile>();
-        builder.Services.AddSingleton<IMachineTemplateService, MachineTemplateService>();
-        builder.Services.AddSingleton<SystemsService>();
-        builder.Services.AddSingleton<IPreferencesService, PreferencesService>();
-        builder.Services.AddSingleton<IFujiFilePickerService, FujiFilePickerService>();
-        builder.Services.AddTransient<IPersistance, Persistance>();
-
+        builder.Services.AddStrategies();
+        builder.Services.AddViewViewModels();
+        builder.Services.AddConfiService();
+        builder.Services.AddServices();
         
         MauiApp built =  builder.Build();
 
-
-
-
+        
         IPreferencesService preferencesService = built.Services.GetService<IPreferencesService>();
         preferencesService.Load();
 
