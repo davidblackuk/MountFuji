@@ -6,11 +6,14 @@ To be noted
 
 ## Paths
 
+This is where the data files associated with both Mount Fuji and Hatari are usually stored in the app. Check out the about dialog for the 
+settings on your machine for the Mount Fuji's one.
+
 ### PC
 - Mount fuji files
-    - C:\Users\DAVID BLACK\AppData\Local\Packages\com.companyname.myataricollection_9zz4h110yvjzm\LocalState\fuji\
+    - C:\Users\DAVID BLACK\AppData\Local\Packages\com.overtakenbyevents.mountfuji_9zz4h110yvjzm\LocalState\fuji\
 - Hatari config file
-  - C:\Users\DAVID BLACK\AppData\Local\Hatari\hatari.cfg
+    - C:\Users\DAVID BLACK\AppData\Local\Hatari\hatari.cfg
 
 ### MAC
 - Mount fuji files
