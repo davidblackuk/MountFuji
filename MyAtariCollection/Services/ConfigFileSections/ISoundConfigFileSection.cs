@@ -1,4 +1,7 @@
-namespace MyAtariCollection.Services.ConfigFileSections;
+using System.Text;
+using MountFuji.Models;
+
+namespace MountFuji.Services.ConfigFileSections;
 
 public interface ISoundConfigFileSection
 {

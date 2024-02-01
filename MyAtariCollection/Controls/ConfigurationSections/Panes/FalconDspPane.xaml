@@ -2,17 +2,18 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:MyAtariCollection.Models"
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
-             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+             xmlns:models="clr-namespace:MountFuji.Models"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
+             xmlns:models1="using:MountFuji.Models"
              x:DataType="vm:MainViewModel"
-             x:Class="MyAtariCollection.Controls.ConfigurationSections.Panes.FalconDspPane">
+             x:Class="MountFuji.Controls.ConfigurationSections.Panes.FalconDspPane">
     <configurationSections:ConfigurationGroup Title="Falcon DSP">
         <VerticalStackLayout  RadioButtonGroup.GroupName="dsp"
                               RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.FalconDsp}">
-            <RadioButton Content="None" Value="{x:Static models:FalconDspEmulation.None}" />
-            <RadioButton Content="Dummy" Value="{x:Static models:FalconDspEmulation.Dummy}" />
-            <RadioButton Content="Full" Value="{x:Static models:FalconDspEmulation.Full}" />
+            <RadioButton Content="None" Value="{x:Static models1:FalconDspEmulation.None}" />
+            <RadioButton Content="Dummy" Value="{x:Static models1:FalconDspEmulation.Dummy}" />
+            <RadioButton Content="Full" Value="{x:Static models1:FalconDspEmulation.Full}" />
         </VerticalStackLayout>
     </configurationSections:ConfigurationGroup>    
 </ContentView>

@@ -2,20 +2,21 @@
 
 <HorizontalStackLayout xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:MyAtariCollection.Models"
-             xmlns:converters="clr-namespace:MyAtariCollection.Converters"
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
-             x:Class="MyAtariCollection.Controls.SystemSelectorEntry"
+             xmlns:models="clr-namespace:MountFuji.Models"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:viewModels="using:MountFuji.ViewModels"
+             xmlns:converters="using:MountFuji.Converters"
+             x:Class="MountFuji.Controls.SystemSelectorEntry"
              x:DataType="models:AtariConfiguration"
              Padding="10">
     <FlyoutBase.ContextFlyout>
         <MenuFlyout>
             <MenuFlyoutItem Text="Clone" 
-                            Command="{Binding CloneSystemCommand, Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}}" 
+                            Command="{Binding CloneSystemCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}}" 
                             CommandParameter="{Binding Id}"/>
             <MenuFlyoutSeparator></MenuFlyoutSeparator>
             <MenuFlyoutItem Text="Delete" 
-                            Command="{Binding DeleteSystemCommand, Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}}" 
+                            Command="{Binding DeleteSystemCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}}" 
                             CommandParameter="{Binding Id}"/>
         </MenuFlyout>
     </FlyoutBase.ContextFlyout>

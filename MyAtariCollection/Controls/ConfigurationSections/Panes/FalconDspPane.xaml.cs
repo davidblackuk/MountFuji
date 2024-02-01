@@ -1,4 +1,4 @@
-namespace MyAtariCollection.Controls.ConfigurationSections.Panes;
+namespace MountFuji.Controls.ConfigurationSections.Panes;
 
 public partial class FalconDspPane : ContentView
 {

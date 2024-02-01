@@ -2,19 +2,20 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:MyAtariCollection.Models"
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
-             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+             xmlns:models="clr-namespace:MountFuji.Models"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
+             xmlns:models1="using:MountFuji.Models"
              x:DataType="vm:MainViewModel"
-             x:Class="MyAtariCollection.Controls.ConfigurationSections.Panes.ClockSpeedPane">
+             x:Class="MountFuji.Controls.ConfigurationSections.Panes.ClockSpeedPane">
     
     <configurationSections:ConfigurationGroup Title="Clock">
         <VerticalStackLayout  RadioButtonGroup.GroupName="clk"
                               RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.CpuClock}">
   
-            <RadioButton Content="8 Mhz"  Value="{x:Static models:CpuClock.Clock8Mhz}" />
-            <RadioButton Content="16 Mhz" Value="{x:Static models:CpuClock.Clock16Mhz}" />
-            <RadioButton Content="32 Mhz" Value="{x:Static models:CpuClock.Clock32Mhz}" />
+            <RadioButton Content="8 Mhz"  Value="{x:Static models1:CpuClock.Clock8Mhz}" />
+            <RadioButton Content="16 Mhz" Value="{x:Static models1:CpuClock.Clock16Mhz}" />
+            <RadioButton Content="32 Mhz" Value="{x:Static models1:CpuClock.Clock32Mhz}" />
 
         </VerticalStackLayout>
     </configurationSections:ConfigurationGroup>

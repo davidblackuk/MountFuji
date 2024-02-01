@@ -4,7 +4,7 @@ using Microsoft.Maui.Controls.Handlers.Items;
 using ObjCRuntime;
 using UIKit;
 
-namespace MyAtariCollection;
+namespace MountFuji;
 
 public class Program
 {

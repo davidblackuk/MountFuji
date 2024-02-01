@@ -1,6 +1,12 @@
-using MyAtariCollection.Services.Filesystem;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Mopups.Interfaces;
+using MountFuji.Models;
+using MountFuji.Services;
+using MountFuji.Services.Filesystem;
+using TinyMvvm;
 
-namespace MyAtariCollection.ViewModels;
+namespace MountFuji.ViewModels;
 
 public partial class ImportSystemPopupViewModel: TinyViewModel
 {
@@ -11,10 +17,10 @@ public partial class ImportSystemPopupViewModel: TinyViewModel
     
     [ObservableProperty] AtariConfiguration system;
 
-    [NotifyCanExecuteChangedFor(nameof(OkCommand))]
+    [NotifyCanExecuteChangedFor(nameof(MountFuji.ViewModels.ImportSystemPopupViewModel.OkCommand))]
     [ObservableProperty] private string displayName;
 
-    [NotifyCanExecuteChangedFor(nameof(OkCommand))]
+    [NotifyCanExecuteChangedFor(nameof(MountFuji.ViewModels.ImportSystemPopupViewModel.OkCommand))]
     [ObservableProperty] private string fileName;
 
     private string hatariConfigFilePath = String.Empty;
@@ -24,7 +30,7 @@ public partial class ImportSystemPopupViewModel: TinyViewModel
         this.popupNavigation = popupNavigation;
         this.fujiFilePicker = fujiFilePicker;
 
-        this.hatariConfigFilePath = Path.GetDirectoryName(preferences.Preferences.HatariConfigFile);
+        this.hatariConfigFilePath = Path.GetDirectoryName((string)preferences.Preferences.HatariConfigFile);
     }
     
     

@@ -2,24 +2,25 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:MyAtariCollection.Models"
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
-             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+             xmlns:models="clr-namespace:MountFuji.Models"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
+             xmlns:models1="using:MountFuji.Models"
              x:DataType="vm:MainViewModel"
-             x:Class="MyAtariCollection.Controls.ConfigurationSections.Panes.VideoTimingPane">
+             x:Class="MountFuji.Controls.ConfigurationSections.Panes.VideoTimingPane">
 
     <configurationSections:ConfigurationGroup Title="Video timing">
         <HorizontalStackLayout RadioButtonGroup.GroupName="vt"
                                RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.StVideoTiming}">
           
             <VerticalStackLayout>
-                <RadioButton Content="Random" Value="{x:Static models:VideoTiming.Random}" />
-                <RadioButton Content="Wake State 1" Value="{x:Static models:VideoTiming.One}" />
-                <RadioButton Content="Wake State 2" Value="{x:Static models:VideoTiming.Two}" />
+                <RadioButton Content="Random" Value="{x:Static models1:VideoTiming.Random}" />
+                <RadioButton Content="Wake State 1" Value="{x:Static models1:VideoTiming.One}" />
+                <RadioButton Content="Wake State 2" Value="{x:Static models1:VideoTiming.Two}" />
             </VerticalStackLayout>
             <VerticalStackLayout>
-                <RadioButton Content="Wake State 3" Value="{x:Static models:VideoTiming.Three}" />
-                <RadioButton Content="Wake State 4" Value="{x:Static models:VideoTiming.Four}" />
+                <RadioButton Content="Wake State 3" Value="{x:Static models1:VideoTiming.Three}" />
+                <RadioButton Content="Wake State 4" Value="{x:Static models1:VideoTiming.Four}" />
             </VerticalStackLayout>
         </HorizontalStackLayout>
     </configurationSections:ConfigurationGroup>

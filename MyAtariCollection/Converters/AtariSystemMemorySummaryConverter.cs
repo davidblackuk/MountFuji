@@ -1,6 +1,8 @@
 using System.Globalization;
+using MountFuji.Extensions;
+using MountFuji.Models;
 
-namespace MyAtariCollection.Converters;
+namespace MountFuji.Converters;
 
 
 /// <summary>

@@ -1,8 +1,16 @@
 using System.Collections.ObjectModel;
-using MyAtariCollection.Services.Filesystem;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Logging;
+using Mopups.Interfaces;
+using MountFuji.Extensions;
+using MountFuji.Models;
+using MountFuji.Services;
+using MountFuji.Services.Filesystem;
+using MountFuji.Views;
+using TinyMvvm;
 
-
-namespace MyAtariCollection.ViewModels;
+namespace MountFuji.ViewModels;
 
 public partial class MainViewModel : TinyViewModel
 {
@@ -107,46 +115,46 @@ public partial class MainViewModel : TinyViewModel
     private async Task BrowseAcsiDiskImage(int diskId)
     {
         await fujiFilePicker.PickFile("ASCI Disk Image",
-            (filename) => SelectedConfiguration.AcsiImagePaths.SetImagePath(diskId, filename),
+            (filename) => DiskImagePathsExtensions.SetImagePath((AcsiScsiDiskOptions)SelectedConfiguration.AcsiImagePaths, diskId, filename),
             preferencesService.Preferences.HardDiskFolder);
     }
 
     [RelayCommand()]
-    private void ClearAcsiDiskImage(int diskId) => SelectedConfiguration.AcsiImagePaths.ClearImagePath(diskId);
+    private void ClearAcsiDiskImage(int diskId) => DiskImagePathsExtensions.ClearImagePath((AcsiScsiDiskOptions)SelectedConfiguration.AcsiImagePaths, diskId);
 
 
     [RelayCommand()]
     private async Task BrowseScsiDiskImage(int diskId)
     {
         await fujiFilePicker.PickFile("SCSI Disk Image",
-            (filename) => SelectedConfiguration.ScsiImagePaths.SetImagePath(diskId, filename),
+            (filename) => DiskImagePathsExtensions.SetImagePath((AcsiScsiDiskOptions)SelectedConfiguration.ScsiImagePaths, diskId, filename),
             preferencesService.Preferences.HardDiskFolder);
     }
 
     [RelayCommand()]
-    private void ClearScsiDiskImage(int diskId) => SelectedConfiguration.ScsiImagePaths.ClearImagePath(diskId);
+    private void ClearScsiDiskImage(int diskId) => DiskImagePathsExtensions.ClearImagePath((AcsiScsiDiskOptions)SelectedConfiguration.ScsiImagePaths, diskId);
 
     [RelayCommand()]
     private async Task BrowseIdeDiskImage(int diskId)
     {
         await fujiFilePicker.PickFile("IDE Disk Image",
-            (filename) => SelectedConfiguration.IdeOptions.SetImagePath(diskId, filename),
+            (filename) => DiskImagePathsExtensions.SetImagePath((IdeDiskOptions)SelectedConfiguration.IdeOptions, diskId, filename),
             preferencesService.Preferences.HardDiskFolder);
     }
 
     [RelayCommand()]
-    private void ClearIdeDiskImage(int diskId) => SelectedConfiguration.IdeOptions.ClearImagePath(diskId);
+    private void ClearIdeDiskImage(int diskId) => DiskImagePathsExtensions.ClearImagePath((IdeDiskOptions)SelectedConfiguration.IdeOptions, diskId);
 
     [RelayCommand()]
     private async Task BrowseFloppyDiskImage(int diskId)
     {
         await fujiFilePicker.PickFile("Floppy Disk Image",
-            (filename) => SelectedConfiguration.FloppyOptions.SetImagePath(diskId, filename),
+            (filename) => DiskImagePathsExtensions.SetImagePath((FloppyDriveOptions)SelectedConfiguration.FloppyOptions, diskId, filename),
             preferencesService.Preferences.FloppyDiskFolder);
     }
 
     [RelayCommand()]
-    private void ClearFloppyDiskImage(int diskId) => SelectedConfiguration.FloppyOptions.ClearImagePath(diskId);
+    private void ClearFloppyDiskImage(int diskId) => DiskImagePathsExtensions.ClearImagePath((FloppyDriveOptions)SelectedConfiguration.FloppyOptions, diskId);
 
 
     [RelayCommand()]
@@ -318,7 +326,7 @@ public partial class MainViewModel : TinyViewModel
     
     private void ReorderServicesFromDisplayOrder()
     {
-        var ids = Systems.Select(s => s.Id).ToList();
+        var ids = Systems.Select<AtariConfiguration, string>(s => s.Id).ToList();
         systemsService.ReorderByIds(ids);
     }
 

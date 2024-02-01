@@ -2,9 +2,9 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
-             x:Class="MyAtariCollection.Controls.SystemEditorExpander"
+             xmlns:controls="clr-namespace:MountFuji.Controls"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             x:Class="MountFuji.Controls.SystemEditorExpander"
              Loaded="ConfigurationPanelSection_OnLoaded"
              >
     <ContentView.ControlTemplate>

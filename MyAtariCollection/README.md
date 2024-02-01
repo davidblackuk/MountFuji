@@ -4,6 +4,13 @@ To be noted
 - We only import and support simple disks at the mo, the assumption is block size = 512
 - We're not importing VDI resolutions yet
 
+## Paths
+
+### PC
+- Mount fuji files
+    - C:\Users\DAVID BLACK\AppData\Local\Packages\com.companyname.myataricollection_9zz4h110yvjzm\LocalState\fuji\
+- Hatari config file
+  - C:\Users\DAVID BLACK\AppData\Local\Hatari\hatari.cfg
 
 ## Thoughts
 

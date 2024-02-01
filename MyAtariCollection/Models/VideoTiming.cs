@@ -1,4 +1,4 @@
-namespace MyAtariCollection.Models;
+namespace MountFuji.Models;
 
 /// <summary>
 /// Wakeup State for MMU/GLUE (x=ws1/ws2/ws3/ws4/random, default ws3). When powering on, the STF will randomly

@@ -1,4 +1,4 @@
-namespace MyAtariCollection.Models;
+namespace MountFuji.Models;
 
 /// <summary>
 /// Main Atari System types supported by Hatari. At the time of creation the STacy

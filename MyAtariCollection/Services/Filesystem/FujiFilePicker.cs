@@ -1,4 +1,4 @@
-namespace MyAtariCollection.Services.Filesystem;
+namespace MountFuji.Services.Filesystem;
 
 public interface IFujiFilePickerService
 {

@@ -1,10 +1,10 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Mopups.Interfaces;
+using MountFuji.Models;
+using TinyMvvm;
 
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MyAtariCollection.ViewModels;
+namespace MountFuji.ViewModels;
 
 public enum PickerType
 {
@@ -24,7 +24,7 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
     [ObservableProperty] private PickerType pickerType;
     [ObservableProperty] private IEnumerable<FileSystemEntry> entries = new List<FileSystemEntry>();
     
-    [NotifyCanExecuteChangedFor(nameof(OkCommand))]
+    [NotifyCanExecuteChangedFor(nameof(MountFuji.ViewModels.FujiFilePickerPopupViewModel.OkCommand))]
     [ObservableProperty] private FileSystemEntry selectedEntry;
 
     

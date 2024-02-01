@@ -1,4 +1,4 @@
-namespace MyAtariCollection.Controls;
+namespace MountFuji.Controls;
 
 public partial class SystemSelector 
 {

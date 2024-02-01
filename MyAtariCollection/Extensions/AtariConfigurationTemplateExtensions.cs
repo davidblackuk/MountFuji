@@ -1,7 +1,6 @@
-﻿using System;
-using Microsoft.Extensions.Primitives;
+﻿using MountFuji.Models;
 
-namespace MyAtariCollection.Extensions
+namespace MountFuji.Extensions
 {
 	public static class AtariConfigurationTemplateExtensions
 	{

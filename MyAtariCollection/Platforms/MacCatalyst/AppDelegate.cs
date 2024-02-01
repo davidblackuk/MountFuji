@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace MyAtariCollection;
+namespace MountFuji;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

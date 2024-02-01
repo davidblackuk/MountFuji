@@ -2,18 +2,19 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:MyAtariCollection.Models"
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
-             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+             xmlns:models="clr-namespace:MountFuji.Models"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
+             xmlns:models1="using:MountFuji.Models"
              x:DataType="vm:MainViewModel"
-             x:Class="MyAtariCollection.Controls.ConfigurationSections.Panes.SoundMixingPane">
+             x:Class="MountFuji.Controls.ConfigurationSections.Panes.SoundMixingPane">
     <configurationSections:ConfigurationGroup Title="YM voice mixing">
         <VerticalStackLayout RadioButtonGroup.GroupName="mixing"
                                RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.SoundOptions.VoiceMixer}">
 
-                <RadioButton Content="Math model" Value="{x:Static models:YmVoiceMix.MathModel}" />
-                <RadioButton Content="ST table" Value="{x:Static models:YmVoiceMix.StTable}" />
-                <RadioButton Content="Linear" Value="{x:Static models:YmVoiceMix.Linear}" />
+                <RadioButton Content="Math model" Value="{x:Static models1:YmVoiceMix.MathModel}" />
+                <RadioButton Content="ST table" Value="{x:Static models1:YmVoiceMix.StTable}" />
+                <RadioButton Content="Linear" Value="{x:Static models1:YmVoiceMix.Linear}" />
         </VerticalStackLayout>
     </configurationSections:ConfigurationGroup>
     

@@ -1,4 +1,7 @@
-namespace MyAtariCollection.Services.ConfigFileSections;
+using System.Text;
+using MountFuji.Models;
+
+namespace MountFuji.Services.ConfigFileSections;
 
 public class RomConfigFileSection: ConfigFileSection, IRomConfigFileSection
 {
@@ -11,8 +14,8 @@ public class RomConfigFileSection: ConfigFileSection, IRomConfigFileSection
     {
         AddSection(builder, ConfigSectionName);
         
-        AddFlag(builder, TosImageFilenameKey, config.RomImage);
-        AddFlag(builder, CartridgeImageFilenameKey, config.CartridgeImage);
+        AddFlag(builder, (string)TosImageFilenameKey, (string)config.RomImage);
+        AddFlag(builder, (string)CartridgeImageFilenameKey, (string)config.CartridgeImage);
         AddFlag(builder, "bPatchTos", true);
         
         builder.AppendLine();

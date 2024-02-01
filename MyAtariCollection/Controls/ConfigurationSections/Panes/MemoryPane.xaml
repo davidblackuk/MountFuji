@@ -2,11 +2,11 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
-             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
 
              x:DataType="vm:MainViewModel"
-             x:Class="MyAtariCollection.Controls.ConfigurationSections.Panes.MemoryPane">
+             x:Class="MountFuji.Controls.ConfigurationSections.Panes.MemoryPane">
     <configurationSections:ConfigurationGroup Title="ST RAM">
         <VerticalStackLayout>
             <HorizontalStackLayout RadioButtonGroup.GroupName="ram"

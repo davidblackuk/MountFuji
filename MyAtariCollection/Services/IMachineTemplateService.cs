@@ -1,6 +1,6 @@
-using MyAtariCollection.Models;
+using MountFuji.Models;
 
-namespace MyAtariCollection.Services;
+namespace MountFuji.Services;
 
 public interface IMachineTemplateService
 {

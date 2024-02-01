@@ -2,12 +2,13 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+             xmlns:controls="clr-namespace:MountFuji.Controls"
 
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
-             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
+             xmlns:controls1="using:MountFuji.Controls"
              x:DataType="vm:MainViewModel"
-             x:Class="MyAtariCollection.Controls.SystemEditor"
+             x:Class="MountFuji.Controls.SystemEditor"
              Padding="0" Margin="0">
 
     <!-- <Grid BackgroundColor="{StaticResource ComponentBackground}"> -->
@@ -29,9 +30,9 @@
                     <configurationSections:SoundSection/>
 
                  
-                    <controls:SystemEditorExpander Title="Joysticks"/>
-                    <controls:SystemEditorExpander Title="Keyboard"/>
-                    <controls:SystemEditorExpander Title="Devices"/>
+                    <controls1:SystemEditorExpander Title="Joysticks"/>
+                    <controls1:SystemEditorExpander Title="Keyboard"/>
+                    <controls1:SystemEditorExpander Title="Devices"/>
 
                 </VerticalStackLayout>
 

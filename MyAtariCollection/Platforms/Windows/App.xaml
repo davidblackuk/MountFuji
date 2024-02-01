@@ -1,8 +1,8 @@
 ﻿<maui:MauiWinUIApplication
-    x:Class="MyAtariCollection.WinUI.App"
+    x:Class="MountFuji.WinUI.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:maui="using:Microsoft.Maui"
-    xmlns:local="using:MyAtariCollection.WinUI">
+    xmlns:local="using:MountFuji.WinUI">
 
 </maui:MauiWinUIApplication>

@@ -1,4 +1,4 @@
-﻿namespace MyAtariCollection.Controls.ConfigurationSections;
+﻿namespace MountFuji.Controls.ConfigurationSections;
 
 public partial class FloppySection : ContentView
 {

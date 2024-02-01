@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             xmlns:controls="clr-namespace:MountFuji.Controls"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:controls1="using:MountFuji.Controls"
              x:DataType="vm:MainViewModel"
 
-             x:Class="MyAtariCollection.Controls.HardDiskPathEditor">
+             x:Class="MountFuji.Controls.HardDiskPathEditor">
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <Grid Grid.ColumnDefinitions="120,*,40,40" RowDefinitions="*,*" Margin="0,10,0,0">
@@ -18,7 +19,7 @@
 
 
                 <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="2"
-                        Text="{x:Static controls:IconFont.Cancel}" 
+                        Text="{x:Static controls1:IconFont.Cancel}" 
                         Command="{TemplateBinding ClearDiskImageCommand}"
                         CommandParameter="{TemplateBinding DiskId}"
                         VerticalOptions="Center" />

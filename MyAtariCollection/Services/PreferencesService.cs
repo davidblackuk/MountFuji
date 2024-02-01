@@ -1,10 +1,7 @@
+using Microsoft.Extensions.Logging;
+using MountFuji.Models;
 
-
-using System.Text.Json;
-using CommunityToolkit.Maui.Core.Primitives;
-using MetroLog.MicrosoftExtensions;
-
-namespace MyAtariCollection.Services;
+namespace MountFuji.Services;
 
 public interface IPreferencesService
 {

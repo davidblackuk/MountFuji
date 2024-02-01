@@ -1,4 +1,7 @@
-namespace MyAtariCollection.Services.ConfigFileSections;
+using System.Text;
+using MountFuji.Models;
+
+namespace MountFuji.Services.ConfigFileSections;
 
 public class HardDiskConfigFileSection : ConfigFileSection, IHardDiskConfigFileSection
 {
@@ -16,11 +19,11 @@ public class HardDiskConfigFileSection : ConfigFileSection, IHardDiskConfigFileS
         AddSection(builder, ConfigSectionName);
 
         AddFlag(builder, GemdosDriveKey, config.GdosDriveOptions.AddGemdosAfterPhysicalDrives ? -1 : 0);
-        AddFlag(builder, BootFromHardDiskKey, config.GdosDriveOptions.BootFromHardDisk);
+        AddFlag(builder, (string)BootFromHardDiskKey, (bool)config.GdosDriveOptions.BootFromHardDisk);
         AddFlag(builder, UseHdDirectoryKey, !string.IsNullOrEmpty(config.GdosDriveOptions.GemdosFolder));
-        AddFlag(builder, HardDiskDirectoryKey, config.GdosDriveOptions.GemdosFolder);
+        AddFlag(builder, (string)HardDiskDirectoryKey, (string)config.GdosDriveOptions.GemdosFolder);
         AddFlag(builder, WriteProtectionKey, (int) config.GdosDriveOptions.WriteProtection);
-        AddFlag(builder, AtariHostFilenameConversionKey, config.GdosDriveOptions.AtariHostFilenameConversion );
+        AddFlag(builder, (string)AtariHostFilenameConversionKey, (bool)config.GdosDriveOptions.AtariHostFilenameConversion );
 
         //     AddFlag(builder, "nGemdosCase", );
 

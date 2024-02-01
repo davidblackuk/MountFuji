@@ -2,22 +2,24 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
-             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
-             xmlns:models="clr-namespace:MyAtariCollection.Models"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:controls="clr-namespace:MountFuji.Controls"
+             xmlns:models="clr-namespace:MountFuji.Models"
+             xmlns:controls1="using:MountFuji.Controls"
+             xmlns:models1="using:MountFuji.Models"
              x:DataType="vm:MainViewModel"
-             x:Class="MyAtariCollection.Controls.IdeCascade">
+             x:Class="MountFuji.Controls.IdeCascade">
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <Grid Grid.ColumnDefinitions="40, 80, 40,auto,*,40,40" RowDefinitions="20" Margin="0,10,0,0">
 
-                <Button Text="{x:Static controls:IconFont.Navigate_before}"
+                <Button Text="{x:Static controls1:IconFont.Navigate_before}"
                         Clicked="PreviousClicked"
                         Grid.Column="0" Style="{StaticResource InlineMaterialButton}" />
 
                 <Label Text="{TemplateBinding Title}" VerticalOptions="Center" Grid.Column="1" />
 
-                <Button Text="{x:Static controls:IconFont.Navigate_next}"
+                <Button Text="{x:Static controls1:IconFont.Navigate_next}"
                         Clicked="NextClicked"
                         Grid.Column="2" Style="{StaticResource InlineMaterialButton}" />
 
@@ -25,9 +27,9 @@
                 <HorizontalStackLayout Grid.Column="3" RadioButtonGroup.GroupName="ideByteSwapCascade"
                                        RadioButtonGroup.SelectedValue="{TemplateBinding ByteSwap}">
                     <Label Text="Byte swap: " VerticalOptions="Center"></Label>
-                    <RadioButton Content="Off" Value="{x:Static models:IdeByteSwap.Off}" VerticalOptions="Center" />
-                    <RadioButton Content="On" Value="{x:Static models:IdeByteSwap.On}" VerticalOptions="Center" />
-                    <RadioButton Content="Auto" Value="{x:Static models:IdeByteSwap.Auto}" VerticalOptions="Center" />
+                    <RadioButton Content="Off" Value="{x:Static models1:IdeByteSwap.Off}" VerticalOptions="Center" />
+                    <RadioButton Content="On" Value="{x:Static models1:IdeByteSwap.On}" VerticalOptions="Center" />
+                    <RadioButton Content="Auto" Value="{x:Static models1:IdeByteSwap.Auto}" VerticalOptions="Center" />
                 </HorizontalStackLayout>
 
 
@@ -36,11 +38,11 @@
 
 
                 <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="5"
-                        Text="{x:Static controls:IconFont.Cancel}"
+                        Text="{x:Static controls1:IconFont.Cancel}"
                         Clicked="ClearClicked"
                         VerticalOptions="Center" />
                 <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="6"
-                        Text="{x:Static controls:IconFont.File_open}"
+                        Text="{x:Static controls1:IconFont.File_open}"
                         Clicked="BrowseHddImage"
                         VerticalOptions="Center" />
             </Grid>

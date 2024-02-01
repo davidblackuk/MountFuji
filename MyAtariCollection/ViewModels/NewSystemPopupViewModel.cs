@@ -1,6 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-namespace MyAtariCollection.ViewModels
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Mopups.Interfaces;
+using MountFuji.Models;
+using MountFuji.Services;
+using TinyMvvm;
+
+namespace MountFuji.ViewModels
 {
     public interface IConfirmableViewModel
     {
@@ -24,7 +29,7 @@ namespace MyAtariCollection.ViewModels
 
         public void SelectFirstTemplate()
         {
-            SelectedTemplate = Templates.First();
+            SelectedTemplate = Enumerable.First<AtariConfigurationTemplate>(Templates);
         }
         
 

@@ -1,4 +1,6 @@
-namespace MyAtariCollection.Extensions;
+using MountFuji.Models;
+
+namespace MountFuji.Extensions;
 
 public static class DiskImagePathsExtensions
 {

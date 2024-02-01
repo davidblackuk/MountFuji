@@ -1,4 +1,7 @@
-namespace MyAtariCollection.Services.ConfigFileSections;
+using System.Text;
+using MountFuji.Models;
+
+namespace MountFuji.Services.ConfigFileSections;
 
 public class MemoryConfigFileSection: ConfigFileSection, IMemoryConfigFileSection
 {
@@ -12,7 +15,7 @@ public class MemoryConfigFileSection: ConfigFileSection, IMemoryConfigFileSectio
 
         AddSection(builder, ConfigSectionName);
         
-        AddFlag(builder, MemorySizeKey, config.StMemorySize);
+        AddFlag(builder, (string)MemorySizeKey, (int)config.StMemorySize);
         AddFlag(builder, TtRamSizeKey, config.TtMemorySize * 1024);
         AddFlag(builder, "bAutoSave", false);
         // AddFlag(builder, "szMemoryCaptureFileName");

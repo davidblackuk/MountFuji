@@ -2,12 +2,13 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
-             xmlns:panes="clr-namespace:MyAtariCollection.Controls.ConfigurationSections.Panes"
+             xmlns:controls="clr-namespace:MountFuji.Controls"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:controls1="using:MountFuji.Controls"
+             xmlns:panes="using:MountFuji.Controls.ConfigurationSections.Panes"
              x:DataType="vm:MainViewModel"
-             x:Class="MyAtariCollection.Controls.ConfigurationSections.SystemSection">
-    <controls:SystemEditorExpander Title="System" Expanded="{Binding SectionVisibility.ExpandSystemSection}">
+             x:Class="MountFuji.Controls.ConfigurationSections.SystemSection">
+    <controls1:SystemEditorExpander Title="System" Expanded="{Binding SectionVisibility.ExpandSystemSection}">
 
         <HorizontalStackLayout>
             <panes:MachineTypePane />
@@ -16,5 +17,5 @@
             <panes:SystemParametersPane />
         </HorizontalStackLayout>
         
-    </controls:SystemEditorExpander>
+    </controls1:SystemEditorExpander>
 </ContentView>

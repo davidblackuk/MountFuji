@@ -1,8 +1,12 @@
-using System.Threading.Tasks;
-using CommunityToolkit.Maui.Storage;
-using MyAtariCollection.Services.Filesystem;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Mopups.Interfaces;
+using MountFuji.Models;
+using MountFuji.Services;
+using MountFuji.Services.Filesystem;
+using TinyMvvm;
 
-namespace MyAtariCollection.ViewModels;
+namespace MountFuji.ViewModels;
 
 public partial class PreferencesPopupViewModel: TinyViewModel
 {

@@ -1,7 +1,10 @@
 
 
 
-namespace MyAtariCollection.Controls;
+using System.Windows.Input;
+using Maui.BindableProperty.Generator.Core;
+
+namespace MountFuji.Controls;
 
 public partial class HardDiskPathEditor : ContentView
 {

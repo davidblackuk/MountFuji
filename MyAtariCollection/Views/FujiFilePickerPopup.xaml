@@ -2,12 +2,10 @@
 
 <mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                 xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+                 xmlns:vm="clr-namespace:MountFuji.ViewModels"
                  xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
-                 xmlns:models="clr-namespace:MyAtariCollection.Models"
-                 xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
-                 xmlns:converters="clr-namespace:MyAtariCollection.Converters"
-                 x:Class="MyAtariCollection.Views.FujiFilePickerPopup"
+                 xmlns:models="clr-namespace:MountFuji.Models"
+                 x:Class="MountFuji.Views.FujiFilePickerPopup"
                  Title="Fuji picker" BackgroundColor="#80000000"  CloseWhenBackgroundIsClicked="False" >
     
     

@@ -1,4 +1,7 @@
-namespace MyAtariCollection.Services.ConfigFileSections;
+using System.Text;
+using MountFuji.Models;
+
+namespace MountFuji.Services.ConfigFileSections;
 
 public class ScreenConfigFileSection: ConfigFileSection, IScreenConfigFileSection
 {
@@ -10,11 +13,11 @@ public class ScreenConfigFileSection: ConfigFileSection, IScreenConfigFileSectio
         
         AddFlag(builder,"nMonitorType", (int)config.ScreenOptions.MonitorType);
         AddFlag(builder,"nFrameSkips", (int)config.ScreenOptions.FrameSkip);
-        AddFlag(builder,"bFullScreen", config.ScreenOptions.FullScreen);
-        AddFlag(builder,"bAllowOverscan", config.ScreenOptions.ShowBorders);
+        AddFlag(builder,(string)"bFullScreen", (bool)config.ScreenOptions.FullScreen);
+        AddFlag(builder,(string)"bAllowOverscan", (bool)config.ScreenOptions.ShowBorders);
         
         
-        AddFlag(builder,"bUseExtVdiResolutions", config.ScreenOptions.EnableExtendedResolutions);
+        AddFlag(builder,(string)"bUseExtVdiResolutions", (bool)config.ScreenOptions.EnableExtendedResolutions);
 
         AddResolution(builder, config);
         
@@ -22,9 +25,9 @@ public class ScreenConfigFileSection: ConfigFileSection, IScreenConfigFileSectio
 
         AddIndicators(builder, config);
 
-        AddFlag(builder,"bUseVsync", config.ScreenOptions.Vsync);
-        AddFlag(builder,"bResizable", config.ScreenOptions.Resizable);
-        AddFlag(builder,"bUseSdlRenderer", config.ScreenOptions.GpuScaling);
+        AddFlag(builder,(string)"bUseVsync", (bool)config.ScreenOptions.Vsync);
+        AddFlag(builder,(string)"bResizable", (bool)config.ScreenOptions.Resizable);
+        AddFlag(builder,(string)"bUseSdlRenderer", (bool)config.ScreenOptions.GpuScaling);
 
         builder.AppendLine();
     }

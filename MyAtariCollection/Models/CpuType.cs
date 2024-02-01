@@ -1,4 +1,4 @@
-namespace MyAtariCollection.Models;
+namespace MountFuji.Models;
 
 /// <summary>
 /// Processor type in use, notably MC68000 everywhere, except for TT  Falcon (030),

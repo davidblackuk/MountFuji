@@ -2,22 +2,23 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:MyAtariCollection.Models"
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
-             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+             xmlns:models="clr-namespace:MountFuji.Models"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
+             xmlns:models1="using:MountFuji.Models"
              x:DataType="vm:MainViewModel"
-             x:Class="MyAtariCollection.Controls.ConfigurationSections.Panes.CpuPane">
+             x:Class="MountFuji.Controls.ConfigurationSections.Panes.CpuPane">
     <configurationSections:ConfigurationGroup Title="CPU">
         <HorizontalStackLayout RadioButtonGroup.GroupName="cpu"
                                RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.CpuType}">
             
             <VerticalStackLayout>
-                <RadioButton Content="68000" Value="{x:Static models:CpuType.MC68000}" />
-                <RadioButton Content="68010" Value="{x:Static models:CpuType.MC68010}" />
-                <RadioButton Content="68020" Value="{x:Static models:CpuType.MC68020}" />
-                <RadioButton Content="68030" Value="{x:Static models:CpuType.MC68030}" />
-                <RadioButton Content="68040" Value="{x:Static models:CpuType.MC68040}" />
-                <RadioButton Content="68060" Value="{x:Static models:CpuType.MC68060}" />
+                <RadioButton Content="68000" Value="{x:Static models1:CpuType.MC68000}" />
+                <RadioButton Content="68010" Value="{x:Static models1:CpuType.MC68010}" />
+                <RadioButton Content="68020" Value="{x:Static models1:CpuType.MC68020}" />
+                <RadioButton Content="68030" Value="{x:Static models1:CpuType.MC68030}" />
+                <RadioButton Content="68040" Value="{x:Static models1:CpuType.MC68040}" />
+                <RadioButton Content="68060" Value="{x:Static models1:CpuType.MC68060}" />
             </VerticalStackLayout>
             
         </HorizontalStackLayout>

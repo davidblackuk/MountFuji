@@ -1,4 +1,4 @@
-﻿namespace MyAtariCollection;
+﻿namespace MountFuji;
 
 public partial class AppShell : Shell
 {

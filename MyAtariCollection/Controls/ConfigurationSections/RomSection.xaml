@@ -2,13 +2,14 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
-             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+             xmlns:controls="clr-namespace:MountFuji.Controls"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:controls1="using:MountFuji.Controls"
+             xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
 
              x:DataType="vm:MainViewModel"
-             x:Class="MyAtariCollection.Controls.ConfigurationSections.RomSection">
-    <controls:SystemEditorExpander Title="ROM and Cartridge" Expanded="{Binding SectionVisibility.ExpandRomSection}">
+             x:Class="MountFuji.Controls.ConfigurationSections.RomSection">
+    <controls1:SystemEditorExpander Title="ROM and Cartridge" Expanded="{Binding SectionVisibility.ExpandRomSection}">
         <VerticalStackLayout>
 
             <configurationSections:ConfigurationGroup Title="ROM image">
@@ -16,10 +17,10 @@
                 <Grid Grid.ColumnDefinitions="*,auto,auto" Margin="0,10,0,0">
                     <Entry Text="{Binding SelectedConfiguration.RomImage}" />
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="1"
-                            Text="{x:Static controls:IconFont.Cancel}" Command="{Binding ClearRomCommand}">
+                            Text="{x:Static controls1:IconFont.Cancel}" Command="{Binding ClearRomCommand}">
                     </Button>
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="2"
-                            Text="{x:Static controls:IconFont.File_open}" Command="{Binding BrowseRomsCommand}">
+                            Text="{x:Static controls1:IconFont.File_open}" Command="{Binding BrowseRomsCommand}">
                     </Button>
                 </Grid>
             </configurationSections:ConfigurationGroup>
@@ -31,13 +32,13 @@
                 <Grid Grid.ColumnDefinitions="*,auto,auto" Margin="0,10,0,0">
                     <Entry Text="{Binding SelectedConfiguration.CartridgeImage}" />
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="1"
-                            Text="{x:Static controls:IconFont.Cancel}" Command="{Binding ClearCartridgeCommand}">
+                            Text="{x:Static controls1:IconFont.Cancel}" Command="{Binding ClearCartridgeCommand}">
                     </Button>
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="2"
-                            Text="{x:Static controls:IconFont.File_open}" Command="{Binding BrowseCartridgesCommand}">
+                            Text="{x:Static controls1:IconFont.File_open}" Command="{Binding BrowseCartridgesCommand}">
                     </Button>
                 </Grid>
             </configurationSections:ConfigurationGroup>
         </VerticalStackLayout>
-    </controls:SystemEditorExpander>
+    </controls1:SystemEditorExpander>
 </ContentView>

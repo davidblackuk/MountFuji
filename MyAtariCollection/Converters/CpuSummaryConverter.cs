@@ -1,6 +1,7 @@
 using System.Globalization;
+using MountFuji.Models;
 
-namespace MyAtariCollection.Converters;
+namespace MountFuji.Converters;
 
 public class CpuSummaryConverter: NaiveConverter, IMultiValueConverter
 {

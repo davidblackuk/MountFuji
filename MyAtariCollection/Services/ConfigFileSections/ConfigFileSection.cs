@@ -1,6 +1,7 @@
 using System.Globalization;
+using System.Text;
 
-namespace MyAtariCollection.Services.ConfigFileSections;
+namespace MountFuji.Services.ConfigFileSections;
 
 public class ConfigFileSection
 {

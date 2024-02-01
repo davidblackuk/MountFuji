@@ -2,7 +2,7 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyAtariCollection.Controls.ConfigurationSections.ConfigurationGroup">
+             x:Class="MountFuji.Controls.ConfigurationSections.ConfigurationGroup">
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <Frame Margin="10" CornerRadius="10" >

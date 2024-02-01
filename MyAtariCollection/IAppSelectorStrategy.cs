@@ -1,4 +1,4 @@
-namespace MyAtariCollection;
+namespace MountFuji;
 
 public interface IAppSelectorStrategy
 {

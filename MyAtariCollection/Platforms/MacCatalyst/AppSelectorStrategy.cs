@@ -1,6 +1,7 @@
-using MyAtariCollection.Services.Filesystem;
+using MountFuji;
+using MountFuji.Services.Filesystem;
 
-namespace MyAtariCollection.Platforms;
+namespace MountFuji.Platforms;
 
 public class AppSelectorStrategy: IAppSelectorStrategy
 {

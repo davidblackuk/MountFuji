@@ -1,4 +1,4 @@
-namespace MyAtariCollection.Models;
+namespace MountFuji.Models;
 
 /// <summary>
 /// Specifies the Emulation quality of the DSP on the falcon, i'll flesh this out when I know more.

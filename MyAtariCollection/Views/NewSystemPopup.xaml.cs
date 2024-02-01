@@ -1,6 +1,7 @@
 ﻿using Mopups.Pages;
+using MountFuji.ViewModels;
 
-namespace MyAtariCollection.Views;
+namespace MountFuji.Views;
 
 
 public partial class NewSystemPopup: PopupPage

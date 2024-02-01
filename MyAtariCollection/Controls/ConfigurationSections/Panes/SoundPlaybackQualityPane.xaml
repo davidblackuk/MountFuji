@@ -2,29 +2,30 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:MyAtariCollection.Models"
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
-             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+             xmlns:models="clr-namespace:MountFuji.Models"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
+             xmlns:models1="using:MountFuji.Models"
              x:DataType="vm:MainViewModel"
-             x:Class="MyAtariCollection.Controls.ConfigurationSections.Panes.SoundPlaybackQualityPane">
+             x:Class="MountFuji.Controls.ConfigurationSections.Panes.SoundPlaybackQualityPane">
     <configurationSections:ConfigurationGroup Title="Playback quality">
         <HorizontalStackLayout RadioButtonGroup.GroupName="playbackQuality"
                                RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.SoundOptions.PlaybackQuality}">
 
             <VerticalStackLayout>
-                <RadioButton Content="11025 Hz" Value="{x:Static models:PlaybackQuality.Hz11025}" />
-                <RadioButton Content="12517 Hz" Value="{x:Static models:PlaybackQuality.Hz12517}" />
-                <RadioButton Content="16000 Hz" Value="{x:Static models:PlaybackQuality.Hz16000}" />
+                <RadioButton Content="11025 Hz" Value="{x:Static models1:PlaybackQuality.Hz11025}" />
+                <RadioButton Content="12517 Hz" Value="{x:Static models1:PlaybackQuality.Hz12517}" />
+                <RadioButton Content="16000 Hz" Value="{x:Static models1:PlaybackQuality.Hz16000}" />
             </VerticalStackLayout>
             <VerticalStackLayout>
-                <RadioButton Content="22050 Hz" Value="{x:Static models:PlaybackQuality.Hz22050}" />
-                <RadioButton Content="25033 Hz" Value="{x:Static models:PlaybackQuality.Hz25033}" />
-                <RadioButton Content="32000 Hz" Value="{x:Static models:PlaybackQuality.Hz32000}" />
+                <RadioButton Content="22050 Hz" Value="{x:Static models1:PlaybackQuality.Hz22050}" />
+                <RadioButton Content="25033 Hz" Value="{x:Static models1:PlaybackQuality.Hz25033}" />
+                <RadioButton Content="32000 Hz" Value="{x:Static models1:PlaybackQuality.Hz32000}" />
             </VerticalStackLayout>
             <VerticalStackLayout>
-                <RadioButton Content="44100 Hz" Value="{x:Static models:PlaybackQuality.Hz44100}" />
-                <RadioButton Content="48000 Hz" Value="{x:Static models:PlaybackQuality.Hz48000}" />
-                <RadioButton Content="50066 Hz" Value="{x:Static models:PlaybackQuality.Hz50055}" />
+                <RadioButton Content="44100 Hz" Value="{x:Static models1:PlaybackQuality.Hz44100}" />
+                <RadioButton Content="48000 Hz" Value="{x:Static models1:PlaybackQuality.Hz48000}" />
+                <RadioButton Content="50066 Hz" Value="{x:Static models1:PlaybackQuality.Hz50055}" />
             </VerticalStackLayout>
         </HorizontalStackLayout>
     </configurationSections:ConfigurationGroup>

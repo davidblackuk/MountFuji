@@ -1,4 +1,4 @@
-namespace MyAtariCollection.Models;
+namespace MountFuji.Models;
 
 public enum PlaybackQuality
 {

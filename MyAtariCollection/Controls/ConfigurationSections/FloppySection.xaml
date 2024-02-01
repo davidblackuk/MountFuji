@@ -1,24 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+            xmlns:controls="clr-namespace:MountFuji.Controls"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
-             xmlns:models="clr-namespace:MyAtariCollection.Models"
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+             xmlns:models="clr-namespace:MountFuji.Models"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:controls1="using:MountFuji.Controls"
+             xmlns:models1="using:MountFuji.Models"
              x:DataType="vm:MainViewModel"
 
-             x:Class="MyAtariCollection.Controls.ConfigurationSections.FloppySection">
+             x:Class="MountFuji.Controls.ConfigurationSections.FloppySection">
 
-    <controls:SystemEditorExpander Title="Floppy Drives" Expanded="{Binding SectionVisibility.ExpandFloppySection}">
+    <controls1:SystemEditorExpander Title="Floppy Drives" Expanded="{Binding SectionVisibility.ExpandFloppySection}">
 
         <VerticalStackLayout>
 
-            <controls:HardDiskPathEditor
+            <controls1:HardDiskPathEditor
                     Title="Drive A" DiskId="{sys:Int32 0}"
                     DiskImagePath="{Binding SelectedConfiguration.FloppyOptions.DriveAPath}"
                     ClearDiskImageCommand="{Binding ClearFloppyDiskImageCommand}"
                     BrowseDiskImageCommand="{Binding BrowseFloppyDiskImageCommand}" 
-                    PickerOpenIcon="{x:Static controls:IconFont.File_open}"/>
+                    PickerOpenIcon="{x:Static controls1:IconFont.File_open}"/>
 
             <Grid ColumnDefinitions="40,auto,40,*" Margin="60,10,0,20">
                 <CheckBox Grid.Column="0" VerticalOptions="Center" IsChecked="{Binding SelectedConfiguration.FloppyOptions.DriveAEnabled}" />
@@ -27,12 +29,12 @@
                 <Label  Grid.Column="3" Text="Double sided" VerticalOptions="Center" />
             </Grid>
 
-             <controls:HardDiskPathEditor
+             <controls1:HardDiskPathEditor
                     Title="Drive B" DiskId="{sys:Int32 1}"
                     DiskImagePath="{Binding SelectedConfiguration.FloppyOptions.DriveBPath}"
                     ClearDiskImageCommand="{Binding ClearFloppyDiskImageCommand}"
                     BrowseDiskImageCommand="{Binding BrowseFloppyDiskImageCommand}" 
-                    PickerOpenIcon="{x:Static controls:IconFont.File_open}"/>
+                    PickerOpenIcon="{x:Static controls1:IconFont.File_open}"/>
 
             <Grid ColumnDefinitions="40,auto,40,*" Margin="60,10,0,20">
                 <CheckBox Grid.Column="0" VerticalOptions="Center" IsChecked="{Binding SelectedConfiguration.FloppyOptions.DriveBEnabled}" />
@@ -56,12 +58,12 @@
                 <HorizontalStackLayout RadioButtonGroup.GroupName="floppyWriteProtect"
                                      RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.FloppyOptions.WriteProtection}">
                     <Label Margin="10,10,0,20" Text="Write protection:" VerticalOptions="Center"></Label>
-                    <RadioButton Content="Off" Value="{x:Static models:DiskWriteProtection.Off}" />
-                    <RadioButton Content="On" Value="{x:Static models:DiskWriteProtection.On}" />
-                    <RadioButton Content="Auto" Value="{x:Static models:DiskWriteProtection.Auto}" />
+                    <RadioButton Content="Off" Value="{x:Static models1:DiskWriteProtection.Off}" />
+                    <RadioButton Content="On" Value="{x:Static models1:DiskWriteProtection.On}" />
+                    <RadioButton Content="Auto" Value="{x:Static models1:DiskWriteProtection.Auto}" />
                 </HorizontalStackLayout>
         </VerticalStackLayout>
-    </controls:SystemEditorExpander>
+    </controls1:SystemEditorExpander>
 </ContentView>
 
  

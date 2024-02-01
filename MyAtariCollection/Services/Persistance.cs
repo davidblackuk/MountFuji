@@ -1,6 +1,7 @@
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 
-namespace MyAtariCollection.Services;
+namespace MountFuji.Services;
 
 public interface IPersistance
 {
@@ -20,6 +21,7 @@ public class Persistance : IPersistance
     private const string AppDataFolder= "fuji";
 
     private string MountFujiFolder => Path.Combine(FileSystem.AppDataDirectory, AppDataFolder);
+
     public string MountFujiPreferencesFile => Path.Combine(MountFujiFolder, AppPreferencesFilename);
     public string MountFujiSystemsFile => Path.Combine(MountFujiFolder, AppSystemsFilename);
 

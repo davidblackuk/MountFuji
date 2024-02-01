@@ -1,6 +1,4 @@
-﻿using TinyMvvm;
-
-namespace MyAtariCollection;
+﻿namespace MountFuji;
 
 public partial class App
 {

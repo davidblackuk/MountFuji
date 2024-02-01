@@ -1,8 +1,7 @@
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
-
-namespace MyAtariCollection.Models;
+namespace MountFuji.Models;
 
 public partial class AtariConfiguration: ObservableObject
 {

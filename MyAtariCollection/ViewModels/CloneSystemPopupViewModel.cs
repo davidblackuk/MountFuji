@@ -1,4 +1,10 @@
-namespace MyAtariCollection.ViewModels;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Mopups.Interfaces;
+using MountFuji.Models;
+using TinyMvvm;
+
+namespace MountFuji.ViewModels;
 
 public partial class CloneSystemPopupViewModel: TinyViewModel
 {
@@ -8,7 +14,7 @@ public partial class CloneSystemPopupViewModel: TinyViewModel
     
     [ObservableProperty] AtariConfiguration system;
 
-    [NotifyCanExecuteChangedFor(nameof(OkCommand))]
+    [NotifyCanExecuteChangedFor(nameof(MountFuji.ViewModels.CloneSystemPopupViewModel.OkCommand))]
     [ObservableProperty] private string newName;
     
     public CloneSystemPopupViewModel(IPopupNavigation popupNavigation)

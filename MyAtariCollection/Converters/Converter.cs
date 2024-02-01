@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace MyAtariCollection.Converters;
+namespace MountFuji.Converters;
 
 public class NaiveConverter
 {

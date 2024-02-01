@@ -1,4 +1,7 @@
-namespace MyAtariCollection.Services.ConfigFileSections;
+using System.Text;
+using MountFuji.Models;
+
+namespace MountFuji.Services.ConfigFileSections;
 
 public class SoundConfigFileSection: ConfigFileSection, ISoundConfigFileSection
 {
@@ -8,8 +11,8 @@ public class SoundConfigFileSection: ConfigFileSection, ISoundConfigFileSection
     {
         AddSection(builder, ConfigSectionName);
         
-        AddFlag(builder, "bEnableSound", config.SoundOptions.Enabled);
-        AddFlag(builder, "bEnableSoundSync", config.SoundOptions.Synchronized);
+        AddFlag(builder, (string)"bEnableSound", (bool)config.SoundOptions.Enabled);
+        AddFlag(builder, (string)"bEnableSoundSync", (bool)config.SoundOptions.Synchronized);
         
         AddFlag(builder, "nPlaybackFreq", (int)config.SoundOptions.PlaybackQuality);
         AddFlag(builder, "YmVolumeMixing", (int)config.SoundOptions.VoiceMixer);

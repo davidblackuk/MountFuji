@@ -3,23 +3,24 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
-             xmlns:controls="clr-namespace:MyAtariCollection.Controls"
-             
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:controls="clr-namespace:MountFuji.Controls"
+             xmlns:controls1="using:MountFuji.Controls"
+
              x:DataType="vm:MainViewModel"
 
-             x:Class="MyAtariCollection.Controls.HardDiskCascade">
+             x:Class="MountFuji.Controls.HardDiskCascade">
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <Grid Grid.ColumnDefinitions="40, 80, 40,*,40,40" RowDefinitions="*,*" Margin="0,10,0,0">
                 
-                <Button Text="{x:Static controls:IconFont.Navigate_before}" 
+                <Button Text="{x:Static controls1:IconFont.Navigate_before}" 
                         Clicked="PreviousClicked"
                         Grid.Column="0" Style="{StaticResource InlineMaterialButton}" />
                 
                 <Label Text="{TemplateBinding Title}" VerticalOptions="Center" Grid.Column="1"/>
 
-                <Button Text="{x:Static controls:IconFont.Navigate_next}"  
+                <Button Text="{x:Static controls1:IconFont.Navigate_next}"  
                         Clicked="NextClicked"
                         Grid.Column="2" Style="{StaticResource InlineMaterialButton}" />
 
@@ -27,11 +28,11 @@
                        VerticalOptions="Center" />
 
                 <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="4"
-                        Text="{x:Static controls:IconFont.Cancel}" 
+                        Text="{x:Static controls1:IconFont.Cancel}" 
                         Clicked="ClearClicked"
                         VerticalOptions="Center" />
                 <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="5"
-                        Text="{x:Static controls:IconFont.File_open}"
+                        Text="{x:Static controls1:IconFont.File_open}"
                         Clicked="BrowseHddImage"
                         VerticalOptions="Center" />
                 

@@ -1,6 +1,8 @@
 
 
-namespace MyAtariCollection.Services.ConfigFileSections;
+using Microsoft.Extensions.Logging;
+
+namespace MountFuji.Services.ConfigFileSections;
 
 public interface IRawHatariConfigFile
 {

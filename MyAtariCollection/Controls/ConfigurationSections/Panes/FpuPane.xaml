@@ -2,20 +2,21 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:MyAtariCollection.Models"
-             xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
-             xmlns:configurationSections="clr-namespace:MyAtariCollection.Controls.ConfigurationSections"
+             xmlns:models="clr-namespace:MountFuji.Models"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
+             xmlns:models1="using:MountFuji.Models"
              x:DataType="vm:MainViewModel"
-             x:Class="MyAtariCollection.Controls.ConfigurationSections.Panes.FpuPane">
+             x:Class="MountFuji.Controls.ConfigurationSections.Panes.FpuPane">
 
     <configurationSections:ConfigurationGroup Title="FPU">
         <VerticalStackLayout RadioButtonGroup.GroupName="fpu"
                              RadioButtonGroup.SelectedValue="{Binding SelectedConfiguration.FpuType}">
             
-            <RadioButton Content="None" Value="{x:Static models:FpuType.None}" />
-            <RadioButton Content="68881" Value="{x:Static models:FpuType.MC68881}" />
-            <RadioButton Content="68882" Value="{x:Static models:FpuType.MC68882}" />
-            <RadioButton Content="Internal" Value="{x:Static models:FpuType.Internal}" />
+            <RadioButton Content="None" Value="{x:Static models1:FpuType.None}" />
+            <RadioButton Content="68881" Value="{x:Static models1:FpuType.MC68881}" />
+            <RadioButton Content="68882" Value="{x:Static models1:FpuType.MC68882}" />
+            <RadioButton Content="Internal" Value="{x:Static models1:FpuType.Internal}" />
 
         </VerticalStackLayout>
     </configurationSections:ConfigurationGroup>

@@ -3,12 +3,13 @@
 
 <mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                  xmlns:vm="clr-namespace:MyAtariCollection.ViewModels"
+                  xmlns:vm="clr-namespace:MountFuji.ViewModels"
                   xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
-                  xmlns:controls="clr-namespace:MyAtariCollection.Controls"
+                  xmlns:controls="clr-namespace:MountFuji.Controls"
+                  xmlns:controls1="using:MountFuji.Controls"
 
                   x:DataType="vm:ImportSystemPopupViewModel"
-                  x:Class="MyAtariCollection.Views.ImportSystemPopup"
+                  x:Class="MountFuji.Views.ImportSystemPopup"
                   Title="Alert" BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
 
 
@@ -21,7 +22,7 @@
                    Style="{StaticResource H1Label}" />
             
             <Label FontFamily="MaterialIcons" HorizontalTextAlignment="Center" TextColor="Goldenrod" FontSize="100"
-                   Grid.Column="0" Grid.Row="1" Text="{x:Static controls:IconFont.Arrow_circle_left}"
+                   Grid.Column="0" Grid.Row="1" Text="{x:Static controls1:IconFont.Arrow_circle_left}"
                    HorizontalOptions="Center" />
             
             <VerticalStackLayout Grid.Row="1" Spacing="5" VerticalOptions="Center" Grid.Column="1">
@@ -31,12 +32,12 @@
                       Placeholder="name can't be blank"
                        Text="{Binding DisplayName }" />
 
-                <controls:HardDiskPathEditor
+                <controls1:HardDiskPathEditor
                     Title="Config file"
                     DiskImagePath="{Binding FileName}"
                     ClearDiskImageCommand="{Binding ClearHatariConfigFileCommand}"
                     BrowseDiskImageCommand="{Binding BrowseHatariConfigFileCommand}"
-                    PickerOpenIcon="{x:Static controls:IconFont.File_open}" />
+                    PickerOpenIcon="{x:Static controls1:IconFont.File_open}" />
 
             </VerticalStackLayout>
             

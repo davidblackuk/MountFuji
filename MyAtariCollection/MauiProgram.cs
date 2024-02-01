@@ -1,30 +1,17 @@
-﻿global using System;
-global using System.Text;
-global using Microsoft.Extensions.Logging;
-
-global using TinyMvvm;
-global using System.Windows.Input;
-global using Maui.BindableProperty.Generator.Core;
-
-global using MyAtariCollection.Extensions;
-global using MyAtariCollection.Services;
-global using MyAtariCollection.Models;
-global using MyAtariCollection.Views;
-global using MyAtariCollection.ViewModels;
-
-global using CommunityToolkit.Maui;
-global using CommunityToolkit.Mvvm.ComponentModel;
-global using CommunityToolkit.Mvvm.Input;
-
-global using Mopups.Interfaces;
+﻿using CommunityToolkit.Maui;
 using MetroLog.MicrosoftExtensions;
 using Mopups.Hosting;
+using Mopups.Interfaces;
 using Mopups.Services;
-using MyAtariCollection.Services.ConfigFileSections;
-using MyAtariCollection.Services.Filesystem;
-using MyAtariCollection.Platforms;
+using MountFuji.Services;
+using MountFuji.Services.ConfigFileSections;
+using MountFuji.Services.Filesystem;
+using MountFuji.ViewModels;
+using MountFuji.Views;
+using MountFuji.Platforms;
+using TinyMvvm;
 
-namespace MyAtariCollection;
+namespace MountFuji;
 
 public static class MauiProgram
 {

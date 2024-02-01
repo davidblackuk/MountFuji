@@ -1,4 +1,6 @@
-namespace MyAtariCollection.Services;
+using MountFuji.Models;
+
+namespace MountFuji.Services;
 
 public interface IConfigFileService
 {

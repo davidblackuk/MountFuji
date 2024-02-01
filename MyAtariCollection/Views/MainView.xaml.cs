@@ -1,6 +1,6 @@
-using MyAtariCollection.ViewModels;
+using MountFuji.ViewModels;
 
-namespace MyAtariCollection.Views;
+namespace MountFuji.Views;
 public partial class MainView 
 {
     private readonly MainViewModel mainViewModel;

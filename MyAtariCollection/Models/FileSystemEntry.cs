@@ -1,6 +1,6 @@
-using MyAtariCollection.Controls;
+using MountFuji.Controls;
 
-namespace MyAtariCollection.Models;
+namespace MountFuji.Models;
 
 public enum EntryType  
 {

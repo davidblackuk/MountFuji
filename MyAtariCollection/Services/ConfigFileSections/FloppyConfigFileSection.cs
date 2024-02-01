@@ -1,4 +1,7 @@
-namespace MyAtariCollection.Services.ConfigFileSections;
+using System.Text;
+using MountFuji.Models;
+
+namespace MountFuji.Services.ConfigFileSections;
 
 public class FloppyConfigFileSection : ConfigFileSection, IFloppyConfigFileSection
 {
@@ -19,17 +22,17 @@ public class FloppyConfigFileSection : ConfigFileSection, IFloppyConfigFileSecti
         AddSection(builder, ConfigSectionName);
         
         
-        AddFlag(builder, AutoInsertDiskBKey, config.FloppyOptions.AutoInsertB);
-        AddFlag(builder, FastFloppyAccessKey, config.FloppyOptions.FastFloppyAccess);
+        AddFlag(builder, (string)AutoInsertDiskBKey, (bool)config.FloppyOptions.AutoInsertB);
+        AddFlag(builder, (string)FastFloppyAccessKey, (bool)config.FloppyOptions.FastFloppyAccess);
 
-        AddFlag(builder, DriveAEnabledKey, config.FloppyOptions.DriveAEnabled);
-        AddFlag(builder, DriveAPathKey, config.FloppyOptions.DriveAPath);
+        AddFlag(builder, (string)DriveAEnabledKey, (bool)config.FloppyOptions.DriveAEnabled);
+        AddFlag(builder, (string)DriveAPathKey, (string)config.FloppyOptions.DriveAPath);
         AddFlag(builder, DriveANumberOfHeadsKey, config.FloppyOptions.DriveADoubleSided ? 2 : 1);
         
         
         
-        AddFlag(builder, DriveBEnabledKey, config.FloppyOptions.DriveBEnabled);
-        AddFlag(builder, DriveBPathKey, config.FloppyOptions.DriveBPath);
+        AddFlag(builder, (string)DriveBEnabledKey, (bool)config.FloppyOptions.DriveBEnabled);
+        AddFlag(builder, (string)DriveBPathKey, (string)config.FloppyOptions.DriveBPath);
         AddFlag(builder, DriveBNumberOfHeadsKey, config.FloppyOptions.DriveBDoubleSided ? 2 : 1);
         
         AddFlag(builder, WriteProtectionKey, (int) config.FloppyOptions.WriteProtection);

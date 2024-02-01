@@ -1,6 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
+using Mopups.Interfaces;
+using MountFuji.ViewModels;
+using MountFuji.Views;
 
-namespace MyAtariCollection.Services.Filesystem;
+namespace MountFuji.Services.Filesystem;
 
 public class FujiFilePickerService : IFujiFilePickerService
 {

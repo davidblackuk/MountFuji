@@ -1,4 +1,7 @@
-namespace MyAtariCollection.Services.ConfigFileSections;
+using System.Text;
+using MountFuji.Models;
+
+namespace MountFuji.Services.ConfigFileSections;
 
 
 public class SystemConfigFileSection: ConfigFileSection, ISystemConfigFileSection
@@ -29,16 +32,16 @@ public class SystemConfigFileSection: ConfigFileSection, ISystemConfigFileSectio
         AddFlag(builder, ModelTypeKey, (int)config.SystemType);
         AddFlag(builder, VideoTimingKey, (int)config.StVideoTiming);
         AddFlag(builder, DspTypeKey, (int)config.FalconDsp);
-        AddFlag(builder, BlitterInStModeKey, config.BlitterInStMode);
+        AddFlag(builder, (string)BlitterInStModeKey, (bool)config.BlitterInStMode);
         AddFlag(builder, FpuTypeKey, (int)config.FpuType);
         
-        AddFlag(builder, PatchTimerDKey, config.PatchTimerD);
-        AddFlag(builder, FastBootKey, config.FastBootPatch);
-        AddFlag(builder, MmuEmulationKey, config.MmuEmulation);
-        AddFlag(builder, AccurateFpuKey, config.AccurateFpuEmulation);
-        AddFlag(builder, Use24BitAddressingKey, config.Use24BitAddressing);
-        AddFlag(builder, CycleExactKey, config.CycleExact);
-        AddFlag(builder, PrefetchEmulationKey, config.PrefetchEmulation);
+        AddFlag(builder, (string)PatchTimerDKey, (bool)config.PatchTimerD);
+        AddFlag(builder, (string)FastBootKey, (bool)config.FastBootPatch);
+        AddFlag(builder, (string)MmuEmulationKey, (bool)config.MmuEmulation);
+        AddFlag(builder, (string)AccurateFpuKey, (bool)config.AccurateFpuEmulation);
+        AddFlag(builder, (string)Use24BitAddressingKey, (bool)config.Use24BitAddressing);
+        AddFlag(builder, (string)CycleExactKey, (bool)config.CycleExact);
+        AddFlag(builder, (string)PrefetchEmulationKey, (bool)config.PrefetchEmulation);
         
         // nVMEType = 1
         // bFastForward = FALSE
