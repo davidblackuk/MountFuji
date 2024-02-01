@@ -12,6 +12,13 @@ To be noted
 - Hatari config file
   - C:\Users\DAVID BLACK\AppData\Local\Hatari\hatari.cfg
 
+### MAC
+- Mount fuji files
+  - /Users/davidblack/Library/fuji/
+- Hatari config file
+  - /Users/davidblack/Library/Application Support/Hatari/hatari.cfg
+
+
 ## Thoughts
 
 ROM image is an interesting example of a rule that nees to be global in nature. It 
