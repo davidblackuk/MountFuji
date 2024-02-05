@@ -1,13 +1,12 @@
-using MountFuji;
 using MountFuji.Services.Filesystem;
 
-namespace MountFuji.Platforms;
+namespace MountFuji.Strategies;
 
-public class AppSelectorStrategy: IAppSelectorStrategy
+public class MacOsAppSelectorStrategy : IAppSelectorStrategy
 {
     private readonly IFujiFilePickerService pickerService;
 
-    public AppSelectorStrategy(IFujiFilePickerService pickerService)
+    public MacOsAppSelectorStrategy(IFujiFilePickerService pickerService)
     {
         this.pickerService = pickerService;
     }

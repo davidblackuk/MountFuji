@@ -1,15 +1,8 @@
 ﻿using CommunityToolkit.Maui;
 using MetroLog.MicrosoftExtensions;
 using Mopups.Hosting;
-using Mopups.Interfaces;
-using Mopups.Services;
 using MountFuji.Extensions;
 using MountFuji.Services;
-using MountFuji.Services.ConfigFileSections;
-using MountFuji.Services.Filesystem;
-using MountFuji.ViewModels;
-using MountFuji.Views;
-using MountFuji.Platforms;
 using TinyMvvm;
 
 namespace MountFuji;

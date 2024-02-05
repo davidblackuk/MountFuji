@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net8.0-maccatalyst</TargetFrameworks>
+        <TargetFrameworks>net8.0;net8.0-maccatalyst</TargetFrameworks>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
         <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
         <!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
@@ -15,7 +15,10 @@
 
 <!--        <RuntimeIdentifiers>maccatalyst-arm64</RuntimeIdentifiers>-->
 
-        <OutputType>Exe</OutputType>
+<!--        <OutputType>Exe</OutputType>-->
+
+        <OutputType Condition="'$(TargetFramework)' != 'net8.0'">Exe</OutputType>
+
         <RootNamespace>MountFuji</RootNamespace>
         <UseMaui>true</UseMaui>
         <SingleProject>true</SingleProject>
@@ -59,6 +62,7 @@
         <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
         <None Remove="Resources\AppIcon\appiconfg.svg" />
         <MauiIcon Include="Resources\AppIcon\appiconfg.svg" />
+        <None Remove="Strategies\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -89,6 +93,12 @@
         <DependentUpon>HardDiskCascade.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Strategy\AppSelectorStrategy.cs">
+        <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
+      </Compile>
+      <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Strategy\AppSelectorStrategy.cs">
+        <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
+      </Compile>
     </ItemGroup>
     <ItemGroup>
       <Compile Update="Controls\SystemSelector.xaml.cs">
@@ -99,6 +109,7 @@
 
     <ItemGroup>
       <Folder Include="Resources\Images\" />
+      <Folder Include="Strategies\" />
     </ItemGroup>
 
     <!-- Build Properties must be defined within these property groups to ensure successful publishing

@@ -55,13 +55,14 @@ public partial class MainViewModel : TinyViewModel
 
 
     private IDispatcherTimer timer;
-    
+
     public override Task OnFirstAppear()
     {
         if (Systems is not null && Systems.Count > 0)
         {
             SelectedConfiguration = Systems.First();
         }
+
         RunCommand.NotifyCanExecuteChanged();
 
         timer = Application.Current.Dispatcher.CreateTimer();
@@ -70,10 +71,6 @@ public partial class MainViewModel : TinyViewModel
         timer.Start();
         return base.OnFirstAppear();
     }
-
-    
-    
-    
 
 
     #region ---- RELAY COMMANDS ----
@@ -115,46 +112,57 @@ public partial class MainViewModel : TinyViewModel
     private async Task BrowseAcsiDiskImage(int diskId)
     {
         await fujiFilePicker.PickFile("ASCI Disk Image",
-            (filename) => DiskImagePathsExtensions.SetImagePath((AcsiScsiDiskOptions)SelectedConfiguration.AcsiImagePaths, diskId, filename),
+            (filename) =>
+                DiskImagePathsExtensions.SetImagePath((AcsiScsiDiskOptions)SelectedConfiguration.AcsiImagePaths, diskId,
+                    filename),
             preferencesService.Preferences.HardDiskFolder);
     }
 
     [RelayCommand()]
-    private void ClearAcsiDiskImage(int diskId) => DiskImagePathsExtensions.ClearImagePath((AcsiScsiDiskOptions)SelectedConfiguration.AcsiImagePaths, diskId);
+    private void ClearAcsiDiskImage(int diskId) =>
+        DiskImagePathsExtensions.ClearImagePath((AcsiScsiDiskOptions)SelectedConfiguration.AcsiImagePaths, diskId);
 
 
     [RelayCommand()]
     private async Task BrowseScsiDiskImage(int diskId)
     {
         await fujiFilePicker.PickFile("SCSI Disk Image",
-            (filename) => DiskImagePathsExtensions.SetImagePath((AcsiScsiDiskOptions)SelectedConfiguration.ScsiImagePaths, diskId, filename),
+            (filename) =>
+                DiskImagePathsExtensions.SetImagePath((AcsiScsiDiskOptions)SelectedConfiguration.ScsiImagePaths, diskId,
+                    filename),
             preferencesService.Preferences.HardDiskFolder);
     }
 
     [RelayCommand()]
-    private void ClearScsiDiskImage(int diskId) => DiskImagePathsExtensions.ClearImagePath((AcsiScsiDiskOptions)SelectedConfiguration.ScsiImagePaths, diskId);
+    private void ClearScsiDiskImage(int diskId) =>
+        DiskImagePathsExtensions.ClearImagePath((AcsiScsiDiskOptions)SelectedConfiguration.ScsiImagePaths, diskId);
 
     [RelayCommand()]
     private async Task BrowseIdeDiskImage(int diskId)
     {
         await fujiFilePicker.PickFile("IDE Disk Image",
-            (filename) => DiskImagePathsExtensions.SetImagePath((IdeDiskOptions)SelectedConfiguration.IdeOptions, diskId, filename),
+            (filename) =>
+                DiskImagePathsExtensions.SetImagePath((IdeDiskOptions)SelectedConfiguration.IdeOptions, diskId,
+                    filename),
             preferencesService.Preferences.HardDiskFolder);
     }
 
     [RelayCommand()]
-    private void ClearIdeDiskImage(int diskId) => DiskImagePathsExtensions.ClearImagePath((IdeDiskOptions)SelectedConfiguration.IdeOptions, diskId);
+    private void ClearIdeDiskImage(int diskId) =>
+        DiskImagePathsExtensions.ClearImagePath((IdeDiskOptions)SelectedConfiguration.IdeOptions, diskId);
 
     [RelayCommand()]
     private async Task BrowseFloppyDiskImage(int diskId)
     {
         await fujiFilePicker.PickFile("Floppy Disk Image",
-            (filename) => DiskImagePathsExtensions.SetImagePath((FloppyDriveOptions)SelectedConfiguration.FloppyOptions, diskId, filename),
+            (filename) => DiskImagePathsExtensions.SetImagePath((FloppyDriveOptions)SelectedConfiguration.FloppyOptions,
+                diskId, filename),
             preferencesService.Preferences.FloppyDiskFolder);
     }
 
     [RelayCommand()]
-    private void ClearFloppyDiskImage(int diskId) => DiskImagePathsExtensions.ClearImagePath((FloppyDriveOptions)SelectedConfiguration.FloppyOptions, diskId);
+    private void ClearFloppyDiskImage(int diskId) =>
+        DiskImagePathsExtensions.ClearImagePath((FloppyDriveOptions)SelectedConfiguration.FloppyOptions, diskId);
 
 
     [RelayCommand()]
@@ -236,6 +244,15 @@ public partial class MainViewModel : TinyViewModel
     #endregion
 
     [RelayCommand]
+    private async Task About()
+    {
+        AboutPopup popup = serviceProvider.GetService<AboutPopup>();
+
+        await popupNavigation.PushAsync(popup);
+        
+    }
+    
+    [RelayCommand]
     private async Task ImportHatariConfig()
     {
         ImportSystemPopup popup = serviceProvider.GetService<ImportSystemPopup>();
@@ -245,12 +262,14 @@ public partial class MainViewModel : TinyViewModel
         popup.Disappearing += async (sender, args) =>
         {
             if (!popup.ViewModel.Confirmed) return;
-            AtariConfiguration clone = await systemsService.Import(popup.ViewModel.FileName, popup.ViewModel.DisplayName);
+            AtariConfiguration clone =
+                await systemsService.Import(popup.ViewModel.FileName, popup.ViewModel.DisplayName);
             UpdateSystemsFromService();
             SelectedConfiguration = clone;
         };
     }
- [RelayCommand]
+
+    [RelayCommand]
     private async Task EditPreferences()
     {
         var popup = serviceProvider.GetService<PreferencesPopup>();
@@ -283,7 +302,7 @@ public partial class MainViewModel : TinyViewModel
     }
 
     [RelayCommand]
-    private  Task Reordered()
+    private Task Reordered()
     {
         ReorderServicesFromDisplayOrder();
         return Task.CompletedTask;
@@ -303,8 +322,7 @@ public partial class MainViewModel : TinyViewModel
     }
 
     private bool SaveNeeded => systemsService.IsDirty;
-    
-    
+
     #endregion
 
 
@@ -314,7 +332,7 @@ public partial class MainViewModel : TinyViewModel
     {
         Systems.Clear();
         int count = 0;
-        foreach (var system in  systemsService.All())
+        foreach (var system in systemsService.All())
         {
             Systems.Add(system);
             count++;
@@ -322,8 +340,8 @@ public partial class MainViewModel : TinyViewModel
 
         NumberOfSystems = count;
     }
-    
-    
+
+
     private void ReorderServicesFromDisplayOrder()
     {
         var ids = Systems.Select<AtariConfiguration, string>(s => s.Id).ToList();
@@ -331,14 +349,10 @@ public partial class MainViewModel : TinyViewModel
     }
 
 
-
     private void TimerTick(object sender, EventArgs e)
     {
-        MainThread.BeginInvokeOnMainThread(() =>
-        {
-            SaveSystemsCommand.NotifyCanExecuteChanged();
-        });
+        MainThread.BeginInvokeOnMainThread(() => { SaveSystemsCommand.NotifyCanExecuteChanged(); });
     }
-    
+
     #endregion
 }
