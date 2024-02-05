@@ -1,13 +1,13 @@
 using MountFuji;
 using MountFuji.Services.Filesystem;
 
-namespace MountFuji.Platforms;
+namespace MountFuji.Strategies;
 
-public class AppSelectorStrategy: IAppSelectorStrategy
+public class WindowsAppSelectorStrategy : IAppSelectorStrategy
 {
     private readonly IFujiFilePickerService pickerService;
 
-    public AppSelectorStrategy(IFujiFilePickerService pickerService)
+    public WindowsAppSelectorStrategy(IFujiFilePickerService pickerService)
     {
         this.pickerService = pickerService;
     }

@@ -7,6 +7,9 @@
              x:Class="MountFuji.Controls.ApplicationMenu">
     <Frame  CornerRadius="10"  Style="{StaticResource PanelFrame}" >
     <HorizontalStackLayout >
+        <Button  VerticalOptions="Center"  Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls1:IconFont.Info}" 
+                 Command="{Binding AboutCommand}" ToolTipProperties.Text="About Mount Fuji"/>
+
         <Button  VerticalOptions="Center"  Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls1:IconFont.Settings}" 
                  Command="{Binding EditPreferencesCommand}" ToolTipProperties.Text="Open settings"/>
 

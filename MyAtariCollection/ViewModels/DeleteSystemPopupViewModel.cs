@@ -14,12 +14,10 @@ public partial class DeleteSystemPopupViewModel: TinyViewModel
 
     [ObservableProperty] AtariConfiguration system;
     
-    
     public DeleteSystemPopupViewModel(IPopupNavigation popupNavigation)
     {   
         this.popupNavigation = popupNavigation;
     }
-    
     
     [RelayCommand]
     private async Task No()
@@ -34,6 +32,4 @@ public partial class DeleteSystemPopupViewModel: TinyViewModel
         Confirmed = true;
         await popupNavigation.PopAsync();
     }
-
-   
 }

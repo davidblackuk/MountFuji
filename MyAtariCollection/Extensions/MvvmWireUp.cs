@@ -20,16 +20,23 @@ public static class MvvmWireUp {
 
         services.AddTransient<NewSystemPopup>();
         services.AddTransient<NewSystemViewModelViewModel>();
+        
         services.AddTransient<PreferencesPopup>();
         services.AddTransient<PreferencesPopupViewModel>();
+        
         services.AddTransient<FujiFilePickerPopup>();
         services.AddTransient<FujiFilePickerPopupViewModel>();
+        
         services.AddTransient<CloneSystemPopup>();
         services.AddTransient<CloneSystemPopupViewModel>();
+        
         services.AddTransient<DeleteSystemPopup>();
         services.AddTransient<DeleteSystemPopupViewModel>();
+
         services.AddTransient<ImportSystemPopup>();
         services.AddTransient<ImportSystemPopupViewModel>();
         
+        services.AddTransient<AboutPopup>();
+        services.AddTransient<AboutPopupViewModel>();
     }
 }
