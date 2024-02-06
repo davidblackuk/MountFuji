@@ -1,5 +1,9 @@
-﻿global using NUnit.Framework;
+﻿global using System.IO.Enumeration;
+global using NUnit.Framework;
 global using FluentAssertions;
 global using Mopups.Interfaces;
 global using Moq;
+global using MountFuji.Models;
 global using MountFuji.ViewModels;
+global using MountFuji.Services;
+global using MountFuji.Services.Filesystem;

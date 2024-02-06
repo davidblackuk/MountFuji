@@ -1,5 +1,3 @@
-using CommunityToolkit.Mvvm.ComponentModel;
-
 namespace MountFuji.Models;
 
 public partial class ApplicationPreferences: ObservableObject

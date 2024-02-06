@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using Mopups.Interfaces;
 using MountFuji.ViewModels;
 using MountFuji.Views;
 

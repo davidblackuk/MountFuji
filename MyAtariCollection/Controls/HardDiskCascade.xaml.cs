@@ -1,7 +1,6 @@
 using System.ComponentModel;
 using System.Windows.Input;
 using Maui.BindableProperty.Generator.Core;
-using MountFuji.Models;
 
 namespace MountFuji.Controls;
 

@@ -1,11 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Mopups.Interfaces;
-using MountFuji.Models;
-using MountFuji.Services;
-using TinyMvvm;
-
-namespace MountFuji.ViewModels
+﻿namespace MountFuji.ViewModels
 {
     public interface IConfirmableViewModel
     {

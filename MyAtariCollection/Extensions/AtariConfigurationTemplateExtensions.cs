@@ -1,6 +1,4 @@
-﻿using MountFuji.Models;
-
-namespace MountFuji.Extensions
+﻿namespace MountFuji.Extensions
 {
 	public static class AtariConfigurationTemplateExtensions
 	{

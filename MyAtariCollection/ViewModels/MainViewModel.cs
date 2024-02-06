@@ -1,14 +1,7 @@
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
-using Mopups.Interfaces;
 using MountFuji.Extensions;
-using MountFuji.Models;
-using MountFuji.Services;
-using MountFuji.Services.Filesystem;
 using MountFuji.Views;
-using TinyMvvm;
 
 namespace MountFuji.ViewModels;
 
@@ -328,6 +321,9 @@ public partial class MainViewModel : TinyViewModel
 
     #region ---- HELPERS ----
 
+    /// <summary>
+    /// Updates the systems in the MainViewModel from the service.
+    /// </summary>
     private void UpdateSystemsFromService()
     {
         Systems.Clear();
@@ -342,6 +338,9 @@ public partial class MainViewModel : TinyViewModel
     }
 
 
+    /// <summary>
+    /// Reorders the systems in the store based on their display order on screen.
+    /// </summary>
     private void ReorderServicesFromDisplayOrder()
     {
         var ids = Systems.Select<AtariConfiguration, string>(s => s.Id).ToList();

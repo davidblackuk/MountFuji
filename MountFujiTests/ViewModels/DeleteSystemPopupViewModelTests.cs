@@ -1,5 +1,6 @@
 namespace MountFujiTests.ViewModels;
 
+[TestOf(typeof(DeleteSystemPopupViewModel))]
 public class DeleteSystemPopupViewModelTests
 {
     private Mock<IPopupNavigation> popupNavigationMock;
@@ -49,3 +50,4 @@ public class DeleteSystemPopupViewModelTests
     }
     
 }
+

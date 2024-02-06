@@ -1,15 +1,10 @@
-﻿using FluentAssertions;
-using Mopups.Interfaces;
-using Moq;
-using MountFuji.ViewModels;
+﻿namespace MountFujiTests.ViewModels;
 
-namespace MountFujiTests.ViewModels;
-
+[TestOf(typeof(AboutPopupViewModel))]
 public class AboutPopupViewModelTests
 {
     private Mock<IPopupNavigation> popupNavigationMock;
-        
-        
+    
     [SetUp]
     public void Setup()
     {

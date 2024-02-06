@@ -1,5 +1,3 @@
-using MountFuji.Services.Filesystem;
-
 namespace MountFuji.Strategies;
 
 public class MacOsAppSelectorStrategy : IAppSelectorStrategy

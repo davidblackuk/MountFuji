@@ -1,9 +1,3 @@
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Mopups.Interfaces;
-using MountFuji.Models;
-using TinyMvvm;
-
 namespace MountFuji.ViewModels;
 
 public enum PickerType
@@ -12,6 +6,9 @@ public enum PickerType
     Folder
 }
 
+/// <summary>
+/// The view model for the FujiFilePickerPopup View.
+/// </summary>
 public partial class FujiFilePickerPopupViewModel: TinyViewModel
 {
     private readonly IPopupNavigation popupNavigation;
@@ -19,7 +16,6 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
     public bool Confirmed { get; set; }
 
     [ObservableProperty] public string currentFolder;
-    //[ObservableProperty] private string selectedFile;
     [ObservableProperty] private string title;
     [ObservableProperty] private PickerType pickerType;
     [ObservableProperty] private IEnumerable<FileSystemEntry> entries = new List<FileSystemEntry>();
@@ -27,18 +23,29 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
     [NotifyCanExecuteChangedFor(nameof(MountFuji.ViewModels.FujiFilePickerPopupViewModel.OkCommand))]
     [ObservableProperty] private FileSystemEntry selectedEntry;
 
-    
 
+    /// <summary>
+    /// The view model for the FujiFilePickerPopup View.
+    /// </summary>
     public FujiFilePickerPopupViewModel(IPopupNavigation popupNavigation)
     {   
         this.popupNavigation = popupNavigation;
     }
-    
+
+    /// <summary>
+    /// Sets the initial folder for the FujiFilePickerPopupViewModel.
+    /// </summary>
+    /// <param name="initialFolder">The initial folder to set.</param>
     public void SetInitialFolder(string initialFolder)
     {
         SetCurrentWorkingDirectory(initialFolder);
     }
 
+
+    /// <summary>
+    /// Sets the current working directory and updates the file/folder entries.
+    /// </summary>
+    /// <param name="folder">The path of the folder to set as the current working directory.</param>
     private void SetCurrentWorkingDirectory(string folder)
     {
         CurrentFolder = folder;
@@ -72,10 +79,12 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
             all.AddRange(files.Select(dir => new FileSystemEntry(dir, EntryType.File)));
         }
         Entries = all.ToArray();
-        
-        
     }
 
+    /// <summary>
+    /// Handles the selection changed event for the file picker.
+    /// </summary>
+    /// <returns>A task representing the completion of the selection changed event.</returns>
     [RelayCommand]
     private Task SelectionChanged()
     {
@@ -98,6 +107,10 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
         return Task.CompletedTask;
     }
 
+    /// <summary>
+    /// Cancels the current operation and closes the popup.
+    /// </summary>
+    /// <returns>A task representing the async operation.</returns>
     [RelayCommand]
     private async Task Cancel()
     {
@@ -105,6 +118,10 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
         await popupNavigation.PopAsync();
     }
 
+    /// <summary>
+    /// Executes the Ok command to confirm the selection and close the file picker popup.
+    /// </summary>
+    /// <returns>A task representing the asynchronous operation.</returns>
     [RelayCommand(CanExecute = nameof(HasValidData))]
     private async Task Ok()
     {
@@ -113,6 +130,10 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
     }
 
 
+    /// <summary>
+    /// Checks if the data is valid for the file picker popup and that the OK Button should be enabled.
+    /// </summary>
+    /// <returns>True if the data is valid; otherwise, false.</returns>
     private bool HasValidData()
     {
         if (this.PickerType == PickerType.File)

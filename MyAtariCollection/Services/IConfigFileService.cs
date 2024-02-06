@@ -1,5 +1,3 @@
-using MountFuji.Models;
-
 namespace MountFuji.Services;
 
 public interface IConfigFileService

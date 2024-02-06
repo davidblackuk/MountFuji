@@ -1,7 +1,5 @@
 
 
-using MountFuji.Models;
-
 namespace MountFuji.Services;
 
 public class MachineTemplateService : IMachineTemplateService

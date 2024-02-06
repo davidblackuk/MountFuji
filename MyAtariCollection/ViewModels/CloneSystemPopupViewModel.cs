@@ -1,9 +1,3 @@
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Mopups.Interfaces;
-using MountFuji.Models;
-using TinyMvvm;
-
 namespace MountFuji.ViewModels;
 
 public partial class CloneSystemPopupViewModel: TinyViewModel

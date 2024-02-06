@@ -1,4 +1,3 @@
-using Mopups.Interfaces;
 using Mopups.Services;
 using MountFuji.ViewModels;
 using MountFuji.Views;

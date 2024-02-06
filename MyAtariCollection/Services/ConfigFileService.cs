@@ -1,6 +1,5 @@
 using System.Text;
 using Microsoft.Extensions.Logging;
-using MountFuji.Models;
 using MountFuji.Services.ConfigFileSections;
 
 namespace MountFuji.Services;

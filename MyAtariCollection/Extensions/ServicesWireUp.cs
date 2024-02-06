@@ -1,6 +1,3 @@
-using MountFuji.Services;
-using MountFuji.Services.Filesystem;
-
 namespace MountFuji.Extensions;
 
 public static class ServicesWireUp

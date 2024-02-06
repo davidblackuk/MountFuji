@@ -1,6 +1,5 @@
 using System.Globalization;
 using MountFuji.Extensions;
-using MountFuji.Models;
 
 namespace MountFuji.Converters;
 

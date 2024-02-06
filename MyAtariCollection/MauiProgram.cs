@@ -2,8 +2,6 @@
 using MetroLog.MicrosoftExtensions;
 using Mopups.Hosting;
 using MountFuji.Extensions;
-using MountFuji.Services;
-using TinyMvvm;
 
 namespace MountFuji;
 
