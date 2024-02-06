@@ -42,7 +42,7 @@ public static class MauiProgram
         IPreferencesService preferencesService = built.Services.GetService<IPreferencesService>();
         preferencesService.Load();
 
-        SystemsService systemsService = built.Services.GetService<SystemsService>();
+        ISystemsService systemsService = built.Services.GetService<ISystemsService>();
         systemsService.Load();
         
         return built;

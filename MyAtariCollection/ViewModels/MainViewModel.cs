@@ -11,7 +11,7 @@ public partial class MainViewModel : TinyViewModel
     private readonly IPopupNavigation popupNavigation;
     private readonly IServiceProvider serviceProvider;
     private readonly IPreferencesService preferencesService;
-    private readonly SystemsService systemsService;
+    private readonly ISystemsService systemsService;
     private readonly IFujiFilePickerService fujiFilePicker;
     private readonly ILogger<MainViewModel> log;
 
@@ -19,7 +19,7 @@ public partial class MainViewModel : TinyViewModel
         IPopupNavigation popupNavigation,
         IServiceProvider serviceProvider,
         IPreferencesService preferencesService,
-        SystemsService systemsService,
+        ISystemsService systemsService,
         IFujiFilePickerService fujiFilePicker,
         ILogger<MainViewModel> log)
     {

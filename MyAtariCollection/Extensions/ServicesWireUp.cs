@@ -10,7 +10,7 @@ public static class ServicesWireUp
     public static void AddServices(this IServiceCollection services)
     {
         services.AddSingleton<IMachineTemplateService, MachineTemplateService>();
-        services.AddSingleton<SystemsService>();
+        services.AddSingleton<ISystemsService, SystemsService>();
         services.AddSingleton<IPreferencesService, PreferencesService>();
         services.AddSingleton<IFujiFilePickerService, FujiFilePickerService>();
         services.AddTransient<IPersistance, Persistance>();

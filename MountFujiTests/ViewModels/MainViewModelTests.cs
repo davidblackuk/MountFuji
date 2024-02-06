@@ -8,7 +8,7 @@ public class MainViewModelTests
     private Mock<IPopupNavigation> popupNavigationMock;
     private Mock<IServiceProvider> serviceProviderMock;
     private Mock<IPreferencesService> preferencesServiceMock;
-    private Mock<SystemsService> systemsServiceMock;
+    private Mock<ISystemsService> systemsServiceMock;
     private Mock<IFujiFilePickerService> fujiFilePickerMock;
     private Mock<ILogger<MainViewModel>> logMock;
     
@@ -24,7 +24,7 @@ public class MainViewModelTests
         preferencesServiceMock = new Mock<IPreferencesService>();
         configFileServiceMock = new Mock<IConfigFileService>();
         serviceProviderMock = new Mock<IServiceProvider>();
-        systemsServiceMock = new Mock<SystemsService>();
+        systemsServiceMock = new Mock<ISystemsService>();
         logMock = new Mock<ILogger<MainViewModel>>();
         Preferences = new ApplicationPreferences();
         SelectedConfiguration = new AtariConfiguration();
