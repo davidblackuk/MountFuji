@@ -41,14 +41,12 @@ public partial class PreferencesPopupViewModel: TinyViewModel
     [RelayCommand()]
     private async Task BrowseRomFolder()
     {
-        await fujiFilePicker.PickFolder("Default ROM Folder", (filename) => Preferences.RomFolder = filename,
-            GetInitialFolder(Preferences.RomFolder));
+        await fujiFilePicker.PickFolder("Default ROM Folder", (filename) =>
+            {
+                Preferences.RomFolder = filename;
+            });
     }
-
-    private string GetInitialFolder(string preferencesRomFolder)
-    {
-        return preferencesRomFolder;
-    }
+    
 
     [RelayCommand()]
     private void ClearRomFolder() => Preferences.RomFolder = string.Empty;
@@ -102,8 +100,6 @@ public partial class PreferencesPopupViewModel: TinyViewModel
                 Preferences.HatariApplication = filename;
                 OkCommand.NotifyCanExecuteChanged();
             });
-        
-
     }
   
     [RelayCommand()]
