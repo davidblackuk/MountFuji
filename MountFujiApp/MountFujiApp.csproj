@@ -25,7 +25,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
 
         <!-- Display name -->
-        <ApplicationTitle>MountFuji</ApplicationTitle>
+        <ApplicationTitle>Mount Fuji</ApplicationTitle>
 
         <!-- App Identifier -->
         <ApplicationId>com.overtakenbyevents.mountfuji</ApplicationId>
