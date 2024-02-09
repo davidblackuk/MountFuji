@@ -9,15 +9,15 @@
 
                   x:Class="MountFuji.Views.AboutPopup"
                   BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
-    
+
     <Frame WidthRequest="640" HeightRequest="360" Padding="0" Margin="0">
-        
+
         <Grid RowDefinitions="60, *, 2, 70" ColumnDefinitions="230, *">
             <Label Grid.ColumnSpan="2"
                    Text="About Mount Fuji"
                    HorizontalOptions="Center"
                    Style="{StaticResource H1Label}" />
-            
+
             <Frame HeightRequest="200"
                    WidthRequest="200"
                    CornerRadius="20"
@@ -27,29 +27,68 @@
                    Grid.Column="0" Grid.Row="1"
                    Margin="0,0,0,0">
 
-                <Image  Source="fujilogo.png" Aspect="AspectFit" />
+                <Image Source="fujilogo.png" Aspect="AspectFit" />
             </Frame>
-                <Grid Grid.Column="1" Grid.Row="1" ColumnDefinitions="140, *" RowDefinitions="30,50, 30">
+
+            <VerticalStackLayout Grid.Column="1" Grid.Row="1" Spacing="15" VerticalOptions="Center">
+                
+                <Label Style = "{StaticResource H2Label}" Text = "(C) 2024 David Black" ></Label>
+                
+                <Grid  ColumnDefinitions="85, *" RowDefinitions="30,30, 30, 30">
                     <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource H4Label}" Text="Version:"></Label>
-                    <Label Grid.Column="1" Grid.Row="0"  Text="{Binding Version}" />
-
-                    <Label Grid.Column="0" Grid.Row="1" Style="{StaticResource H4Label}" Text="Data folder:"></Label>
-                    <Editor IsEnabled="False" HeightRequest="50" Grid.Column="1" Grid.Row="1" Text="{Binding MountFujiFolder}" />
+                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Version}" />
                     
+                    <!-- License row -->
+                    <Label Grid.Column="0" Grid.Row="1" Style="{StaticResource H4Label}" Text="License:"></Label>
+                    <HorizontalStackLayout Spacing="4" Grid.Column="1" Grid.Row="1">
+                        <Label Text="Open sourced using the"></Label>
+                        <Label Grid.Column="1" Grid.Row="3" Text="GPL V3.0"
+                               TextColor="Blue"
+                               TextDecorations="Underline">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenUrlCommand}"
+                                                      CommandParameter="https://github.com/davidblackuk/HatariConfigTool/blob/main/license.txt" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </HorizontalStackLayout>
+
+                    <!-- Source code row -->
                     <Label Grid.Column="0" Grid.Row="2" Style="{StaticResource H4Label}" Text="Git repo:"></Label>
-                    <Label Grid.Column="1" Grid.Row="3"  Text="https://github.com/davidblackuk/HatariConfigTool" />
-                    
-                    
-                    
-                </Grid>
+                    <HorizontalStackLayout Spacing="2" Grid.Column="1" Grid.Row="2">
+                        <Label Text="Source code is available on"></Label>
+                        <Label Grid.Column="1" Grid.Row="3" Text="github"
+                               TextColor="Blue"
+                               TextDecorations="Underline">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenUrlCommand}"
+                                                      CommandParameter="https://github.com/davidblackuk/HatariConfigTool" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </HorizontalStackLayout>
 
+                    <!-- data files row -->
+                    <Label Grid.Column="0" Grid.Row="3" Style="{StaticResource H4Label}" Text="Data:"></Label>
+                    <HorizontalStackLayout Spacing="2" Grid.Column="1" Grid.Row="3">
+                        <Label Text="Access save files and logs"></Label>
+                        <Label Grid.Column="1" Grid.Row="3" Text="here"
+                               TextColor="Blue"
+                               TextDecorations="Underline">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenDataFolderCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </HorizontalStackLayout>
+
+
+                </Grid>
+            </VerticalStackLayout>
             <Frame BackgroundColor="Bisque" Grid.Row="2" Grid.ColumnSpan="2"></Frame>
-            
-            <Button WidthRequest="200" VerticalOptions="Center" Text="Close" Command="{Binding CloseCommand}" Grid.Row="3" Grid.ColumnSpan="2" />
-            
+
+            <Button WidthRequest="200" VerticalOptions="Center" Text="Close" Command="{Binding CloseCommand}"
+                    Grid.Row="3" Grid.ColumnSpan="2" />
+
         </Grid>
-        
-        
-            
+
+
     </Frame>
 </mopups:PopupPage>
