@@ -1,2 +1,11 @@
-# HatariConfigTool
-A very simple tool to generate commandline options for Hatari to allow you to manage multiple Emulated systems without chuffing around with config files
+![image info](Img/logo-round.png)
+
+# Mount Fuji
+
+Mount Fuji is a a front end for Hatari allowing you to edit different configurations for multiple 32 bit Atari machines and to execute them easily.
+
+Fuji allow you to quickly find, see the configuration of and launch different Hatari Systems.
+
+Fuji is open sourced under the GNU General Public license v3.0. So feel free to have at it!.
+
+
