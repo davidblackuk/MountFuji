@@ -34,13 +34,14 @@ To discover what the actual configuration of an emulated system is, involves cli
 
 Mount Fuji was birthed out of my lack of organization and like any problem that a developer has, the solution wasn't, get more organized, it was write some code!
 
-So Fuji was born and has started growing. It's certainly not finished yet, but it's at a point where I am using it most of the time for simple configurations. We'll cover the gaps later.
+So Fuji was born and has started growing. It's certainly not finished yet, but it's at a point where I am using it most of the time for most configurations. We'll cover the gaps later.
 
 ![Mount fuji running in all it's glory](Img/fuji-running.png)
 
 Mount Fuji is implemented in .NET Maui a somewhat cross platform development system, at the moment I'm targeting MacOS (shown) and Windows. Windows as it stands isn't ready for release yet, but hopefully will be soon.
 
-Unfortunately Maui does not (at the moment) support Linux, so that will remain a future goal if Microsoft get the finger out and support it. I wouldn't hold your breath for that.
+Unfortunately Maui does not support Linux currently, so that will remain a future goal if Microsoft get their finger out and support it. I wouldn't hold your breath for that.
+
 
 ## The what
 
