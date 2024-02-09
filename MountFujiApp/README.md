@@ -32,3 +32,8 @@ the system list entry?
 
 Does that get into the area of error ckecking CRCs for ROMS?
 
+### future
+
+- ROM Selector
+- Persist the open / closed sections
+- 

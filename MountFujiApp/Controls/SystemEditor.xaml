@@ -20,7 +20,6 @@
             
             <ScrollView Grid.Row="1"  >
                 <VerticalStackLayout Spacing="10" Margin="0" Padding="0"  >
-                    
                     <configurationSections:SystemSection />
                     <configurationSections:CpuSection />
                     <configurationSections:RomSection/>
@@ -28,12 +27,6 @@
                     <configurationSections:FloppySection />
                     <configurationSections:ScreenSection/>
                     <configurationSections:SoundSection/>
-
-                 
-                    <controls1:SystemEditorExpander Title="Joysticks"/>
-                    <controls1:SystemEditorExpander Title="Keyboard"/>
-                    <controls1:SystemEditorExpander Title="Devices"/>
-
                 </VerticalStackLayout>
 
             </ScrollView>
