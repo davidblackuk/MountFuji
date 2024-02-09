@@ -40,5 +40,17 @@ public partial class AboutPopupViewModel: TinyViewModel
     {
         await popupNavigation.PopAsync();
     }
+
+    [RelayCommand]
+    private async Task OpenUrl(string url)
+    {
+        await Launcher.OpenAsync(new Uri(url));
+    }
+    
+    [RelayCommand]
+    private async Task OpenDataFolder()
+    {
+        await Launcher.OpenAsync($"file://{persistance.MountFujiFolder}");
+    }
 }
 
