@@ -5,6 +5,7 @@ namespace MountFuji.Services;
 
 public interface IPersistance
 {
+    string MountFujiFolder { get; }
     string MountFujiPreferencesFile { get; }
     string MountFujiSystemsFile { get; }
     
@@ -20,7 +21,7 @@ public class Persistance : IPersistance
     private const string AppSystemsFilename = "systems.json";
     private const string AppDataFolder= "fuji";
 
-    private string MountFujiFolder => Path.Combine(FileSystem.AppDataDirectory, AppDataFolder);
+    public string MountFujiFolder => Path.Combine(FileSystem.AppDataDirectory, AppDataFolder);
 
     public string MountFujiPreferencesFile => Path.Combine(MountFujiFolder, AppPreferencesFilename);
     public string MountFujiSystemsFile => Path.Combine(MountFujiFolder, AppSystemsFilename);

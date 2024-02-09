@@ -2,23 +2,54 @@
 
 <mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                   xmlns:vm="clr-namespace:MountFuji.ViewModels"
                   xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
                   x:DataType="vm:AboutPopupViewModel"
 
-                  x:Class="MountFuji.Views.AboutPopup">
-    <Frame WidthRequest="600" HeightRequest="240" Padding="0" Margin="0">
+                  x:Class="MountFuji.Views.AboutPopup"
+                  BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
+    
+    <Frame WidthRequest="640" HeightRequest="360" Padding="0" Margin="0">
         
-        
-        
-        <VerticalStackLayout>
+        <Grid RowDefinitions="60, *, 2, 70" ColumnDefinitions="230, *">
             <Label Grid.ColumnSpan="2"
                    Text="About Mount Fuji"
                    HorizontalOptions="Center"
                    Style="{StaticResource H1Label}" />
             
-            <Button VerticalOptions="Center" Text="Close" Command="{Binding CloseCommand}" Margin="0,12,15,0" />
-        </VerticalStackLayout>
+            <Frame HeightRequest="200"
+                   WidthRequest="200"
+                   CornerRadius="20"
+                   HorizontalOptions="Center"
+                   IsClippedToBounds="True"
+                   Padding="0"
+                   Grid.Column="0" Grid.Row="1"
+                   Margin="0,0,0,0">
+
+                <Image  Source="fujilogo.png" Aspect="AspectFit" />
+            </Frame>
+                <Grid Grid.Column="1" Grid.Row="1" ColumnDefinitions="140, *" RowDefinitions="30,50, 30">
+                    <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource H4Label}" Text="Version:"></Label>
+                    <Label Grid.Column="1" Grid.Row="0"  Text="{Binding Version}" />
+
+                    <Label Grid.Column="0" Grid.Row="1" Style="{StaticResource H4Label}" Text="Data folder:"></Label>
+                    <Editor IsEnabled="False" HeightRequest="50" Grid.Column="1" Grid.Row="1" Text="{Binding MountFujiFolder}" />
+                    
+                    <Label Grid.Column="0" Grid.Row="2" Style="{StaticResource H4Label}" Text="Git repo:"></Label>
+                    <Label Grid.Column="1" Grid.Row="3"  Text="https://github.com/davidblackuk/HatariConfigTool" />
+                    
+                    
+                    
+                </Grid>
+
+            <Frame BackgroundColor="Bisque" Grid.Row="2" Grid.ColumnSpan="2"></Frame>
+            
+            <Button WidthRequest="200" VerticalOptions="Center" Text="Close" Command="{Binding CloseCommand}" Grid.Row="3" Grid.ColumnSpan="2" />
+            
+        </Grid>
         
+        
+            
     </Frame>
 </mopups:PopupPage>

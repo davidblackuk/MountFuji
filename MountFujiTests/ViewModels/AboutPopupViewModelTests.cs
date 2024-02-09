@@ -4,11 +4,14 @@
 public class AboutPopupViewModelTests
 {
     private Mock<IPopupNavigation> popupNavigationMock;
+    private Mock<IPersistance> persistanceMock;
     
     [SetUp]
     public void Setup()
     {
         popupNavigationMock = new Mock<IPopupNavigation>();
+        persistanceMock = new Mock<IPersistance>();
+
     }
 
     [Test]
@@ -22,7 +25,7 @@ public class AboutPopupViewModelTests
 
     private AboutPopupViewModel CreateSut()
     {
-        return new AboutPopupViewModel(popupNavigationMock.Object);
+        return new AboutPopupViewModel(popupNavigationMock.Object, persistanceMock.Object);
     }
     
 }

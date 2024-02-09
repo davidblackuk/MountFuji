@@ -20,7 +20,7 @@ public static class MvvmWireUp {
         services.AddTransient<NewSystemPopup>();
         services.AddTransient<NewSystemViewModelViewModel>();
         
-        services.AddTransient<PreferencesPopup>();
+        services.AddTransient<IPreferencesPopup, PreferencesPopup>();
         services.AddTransient<PreferencesPopupViewModel>();
         
         services.AddTransient<FujiFilePickerPopup>();
