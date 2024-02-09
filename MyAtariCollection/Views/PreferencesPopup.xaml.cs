@@ -1,8 +1,20 @@
+using Mopups.Pages;
 using MountFuji.ViewModels;
 
 namespace MountFuji.Views;
 
-public partial class PreferencesPopup 
+public interface IPreferencesPopup
+{
+    
+    PreferencesPopupViewModel ViewModel { get; set; }
+    
+    event EventHandler Disappearing;
+
+    PopupPage AsPopUp();
+
+}
+
+public partial class PreferencesPopup : IPreferencesPopup
 {
     public PreferencesPopup(PreferencesPopupViewModel viewModel)
     {
@@ -13,4 +25,9 @@ public partial class PreferencesPopup
     }
 
     public PreferencesPopupViewModel ViewModel { get; set; }
+    
+    public PopupPage AsPopUp()
+    {
+        return this;
+    }
 }

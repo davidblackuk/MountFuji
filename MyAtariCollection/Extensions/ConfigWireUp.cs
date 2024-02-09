@@ -24,3 +24,4 @@ public static class ConfigWireUp
         services.AddTransient<IRawHatariConfigFile, RawHatariConfigFile>();
     }
 }
+

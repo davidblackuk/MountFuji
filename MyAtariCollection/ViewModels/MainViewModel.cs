@@ -66,7 +66,8 @@ public partial class MainViewModel : TinyViewModel
     }
 
 
-    #region ---- RELAY COMMANDS ----
+   
+    #region ----- ROM -----
 
     [RelayCommand()]
     private async Task BrowseRoms()
@@ -86,6 +87,10 @@ public partial class MainViewModel : TinyViewModel
         RunCommand.NotifyCanExecuteChanged();
     }
 
+    #endregion
+    
+    #region ----- CART -----
+    
     [RelayCommand()]
     private async Task BrowseCartridges()
     {
@@ -99,8 +104,10 @@ public partial class MainViewModel : TinyViewModel
         SelectedConfiguration.CartridgeImage = String.Empty;
     }
 
-    #region ---- DISK COMMANDS ----
-
+    #endregion
+    
+    #region ----- ACSI -----
+    
     [RelayCommand()]
     private async Task BrowseAcsiDiskImage(int diskId)
     {
@@ -115,7 +122,10 @@ public partial class MainViewModel : TinyViewModel
     private void ClearAcsiDiskImage(int diskId) =>
         DiskImagePathsExtensions.ClearImagePath((AcsiScsiDiskOptions)SelectedConfiguration.AcsiImagePaths, diskId);
 
+    #endregion
 
+    #region ----- SCSI -----
+    
     [RelayCommand()]
     private async Task BrowseScsiDiskImage(int diskId)
     {
@@ -130,6 +140,9 @@ public partial class MainViewModel : TinyViewModel
     private void ClearScsiDiskImage(int diskId) =>
         DiskImagePathsExtensions.ClearImagePath((AcsiScsiDiskOptions)SelectedConfiguration.ScsiImagePaths, diskId);
 
+    #endregion
+    
+    #region ----- IDE -----
     [RelayCommand()]
     private async Task BrowseIdeDiskImage(int diskId)
     {
@@ -144,6 +157,10 @@ public partial class MainViewModel : TinyViewModel
     private void ClearIdeDiskImage(int diskId) =>
         DiskImagePathsExtensions.ClearImagePath((IdeDiskOptions)SelectedConfiguration.IdeOptions, diskId);
 
+    #endregion
+    
+    #region ----- FLOPPY -----
+    
     [RelayCommand()]
     private async Task BrowseFloppyDiskImage(int diskId)
     {
@@ -157,7 +174,10 @@ public partial class MainViewModel : TinyViewModel
     private void ClearFloppyDiskImage(int diskId) =>
         DiskImagePathsExtensions.ClearImagePath((FloppyDriveOptions)SelectedConfiguration.FloppyOptions, diskId);
 
+    #endregion
 
+    #region ----- GEMDOS -----
+    
     [RelayCommand()]
     private async Task BrowseGemdosFolder()
     {
@@ -165,32 +185,13 @@ public partial class MainViewModel : TinyViewModel
             (filename) => SelectedConfiguration.GdosDriveOptions.GemdosFolder = filename,
             preferencesService.Preferences.GemDosFolder);
     }
-
-
+    
     [RelayCommand()]
-    private void ClearGemdosFolder(int diskId) => SelectedConfiguration.GdosDriveOptions.GemdosFolder = string.Empty;
+    private void ClearGemdosFolder() => SelectedConfiguration.GdosDriveOptions.GemdosFolder = string.Empty;
 
     #endregion
 
-
-    #region ---- CRUD ----
-
-    [RelayCommand]
-    private async Task CreateNewSystem()
-    {
-        var popup = serviceProvider.GetService<NewSystemPopup>();
-        await popupNavigation.PushAsync(popup);
-
-        popup.Disappearing += (sender, args) =>
-        {
-            if (!popup.ViewModelViewModel.Confirmed) return;
-            var system = popup.ViewModelViewModel.GetConfiguration();
-            systemsService.Add(system);
-            UpdateSystemsFromService();
-            SelectedConfiguration = system;
-        };
-    }
-
+ 
     [RelayCommand]
     private async Task DeleteSystem(string id)
     {
@@ -234,16 +235,55 @@ public partial class MainViewModel : TinyViewModel
         };
     }
 
-    #endregion
 
+    #region ----- APPLICATION TOOL BAR -----
+    
     [RelayCommand]
     private async Task About()
     {
         AboutPopup popup = serviceProvider.GetService<AboutPopup>();
 
         await popupNavigation.PushAsync(popup);
-        
     }
+    
+    [RelayCommand(CanExecute = nameof(SaveNeeded))]
+    private async Task SaveSystems()
+    {
+        await systemsService.Save();
+    }
+    
+    [RelayCommand]
+    private async Task EditPreferences()
+    {
+        var popup = serviceProvider.GetService<IPreferencesPopup>();
+        await popupNavigation.PushAsync(popup.AsPopUp());
+
+        popup.Disappearing += async (sender, args) =>
+        {
+            if (!popup.ViewModel.Confirmed) return;
+            await preferencesService.Save();
+            RunCommand.NotifyCanExecuteChanged();
+        };
+    }
+
+    
+    [RelayCommand]
+    private async Task CreateNewSystem()
+    {
+        var popup = serviceProvider.GetService<NewSystemPopup>();
+        await popupNavigation.PushAsync(popup);
+
+        popup.Disappearing += (sender, args) =>
+        {
+            if (!popup.ViewModelViewModel.Confirmed) return;
+            var system = popup.ViewModelViewModel.GetConfiguration();
+            systemsService.Add(system);
+            UpdateSystemsFromService();
+            SelectedConfiguration = system;
+        };
+    }
+    
+    #endregion
     
     [RelayCommand]
     private async Task ImportHatariConfig()
@@ -262,32 +302,13 @@ public partial class MainViewModel : TinyViewModel
         };
     }
 
-    [RelayCommand]
-    private async Task EditPreferences()
-    {
-        var popup = serviceProvider.GetService<PreferencesPopup>();
-        await popupNavigation.PushAsync(popup);
-
-        popup.Disappearing += async (sender, args) =>
-        {
-            if (!popup.ViewModel.Confirmed) return;
-            await preferencesService.Save();
-            RunCommand.NotifyCanExecuteChanged();
-        };
-    }
-
-    [RelayCommand(CanExecute = nameof(SaveNeeded))]
-    private async Task SaveSystems()
-    {
-        await systemsService.Save();
-    }
+  
 
     [RelayCommand(CanExecute = nameof(CanRun))]
     private async Task Run()
     {
         await configFileService.Save(SelectedConfiguration);
-
-        // TODO - Platform specific? is it File:// on PC it is on mac
+        
         var app = preferencesService.Preferences.HatariApplication;
         var applicationUrl = $"file://{app}";
         log.LogInformation("Launching application: {Url}", applicationUrl);
@@ -315,8 +336,6 @@ public partial class MainViewModel : TinyViewModel
     }
 
     private bool SaveNeeded => systemsService.IsDirty;
-
-    #endregion
 
 
     #region ---- HELPERS ----
