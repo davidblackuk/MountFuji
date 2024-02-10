@@ -11,7 +11,7 @@
              x:Class="MountFuji.Controls.IdeCascade">
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            <Grid Grid.ColumnDefinitions="40, 80, 40,auto,*,40,40" RowDefinitions="20" Margin="0,10,0,0">
+            <Grid  Grid.ColumnDefinitions="40, 80, 40,auto,*,40,40"  Margin="0,10,0,0">
 
                 <Button Text="{x:Static controls1:IconFont.Navigate_before}"
                         Clicked="PreviousClicked"
@@ -25,9 +25,9 @@
 
 
                 <HorizontalStackLayout Grid.Column="3" RadioButtonGroup.GroupName="ideByteSwapCascade"
-                                       RadioButtonGroup.SelectedValue="{TemplateBinding ByteSwap}">
+                                       RadioButtonGroup.SelectedValue="{TemplateBinding ByteSwap}" VerticalOptions="Center">
                     <Label Text="Byte swap: " VerticalOptions="Center"></Label>
-                    <RadioButton Content="Off" Value="{x:Static models1:IdeByteSwap.Off}" VerticalOptions="Center" />
+                    <RadioButton Margin="0" Padding="0" Content="Off" Value="{x:Static models1:IdeByteSwap.Off}" VerticalOptions="Center" />
                     <RadioButton Content="On" Value="{x:Static models1:IdeByteSwap.On}" VerticalOptions="Center" />
                     <RadioButton Content="Auto" Value="{x:Static models1:IdeByteSwap.Auto}" VerticalOptions="Center" />
                 </HorizontalStackLayout>
