@@ -14,7 +14,7 @@
         <converters:TemplateSummaryConverter x:Key="templateConverter" />
     </mopups:PopupPage.Resources>
 
-    <Frame WidthRequest="850" HeightRequest="620">
+    <Frame WidthRequest="850" HeightRequest="620" Padding="0" Margin="0">
         <Grid RowDefinitions="50,480,90" ColumnDefinitions="440,10,*">
             <Label 
                 Grid.Row="0"
