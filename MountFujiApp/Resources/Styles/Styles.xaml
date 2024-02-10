@@ -403,6 +403,16 @@
         <Setter Property="CornerRadius" Value="15" />
     </Style>
     
+    <Style TargetType="Border" x:Key="PanelBorder">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PanelBorderBackgroundLight}, Dark={StaticResource PanelBorderBackgroundDark}}" />
+        <Setter Property="Padding" Value="10"></Setter>
+        <Setter Property="Margin" Value="0"></Setter>
+        <Setter Property="Opacity" Value="0.7" />
+        <Setter Property="StrokeShape"  >
+            <RoundRectangle CornerRadius="15,15,15,15" />
+        </Setter>
+    </Style>
+    
     <!-- Headers -->
     
     <Style TargetType="Label" x:Key="H1Label">

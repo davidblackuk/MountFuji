@@ -12,7 +12,10 @@
              x:DataType="vm:MainViewModel"
              WidthRequest="460"
              >
-    <Frame Style="{StaticResource PanelFrame}" >
+    <Border  Style="{StaticResource PanelBorder}">
+        <!-- <Border.StrokeShape> -->
+        <!--     <RoundRectangle CornerRadius="10,10,10,10" /> -->
+        <!-- </Border.StrokeShape> -->
         <Grid RowDefinitions="70,*,25">
     
             <!-- we implement our own header and footer as we don't want em to scroll with the content -->
@@ -52,5 +55,5 @@
         </CollectionView>
             
         </Grid>
-    </Frame>
+    </Border>
 </ContentView>

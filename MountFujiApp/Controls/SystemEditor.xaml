@@ -10,9 +10,7 @@
              x:DataType="vm:MainViewModel"
              x:Class="MountFuji.Controls.SystemEditor"
              Padding="0" Margin="0">
-
-    <!-- <Grid BackgroundColor="{StaticResource ComponentBackground}"> -->
-    <Frame  Style="{StaticResource PanelFrame}" >
+    <Border  Style="{StaticResource PanelBorder}">
         <Grid  IsVisible="{Binding HasSelectedConfig}" RowDefinitions="70, *">
             
                 <!-- <Label VerticalOptions="Center" Text="{Binding SelectedConfiguration.DisplayName}" Style="{StaticResource H1Label}"></Label> -->
@@ -31,5 +29,5 @@
 
             </ScrollView>
         </Grid>
-    </Frame>
+    </Border>
 </ContentView>

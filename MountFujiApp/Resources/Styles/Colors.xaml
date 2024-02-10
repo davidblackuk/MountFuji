@@ -42,7 +42,8 @@
   <Color x:Key="ContentViewUnselectedDark">#00000000</Color>
     <Color x:Key="ContentViewSelectedDark">#2C2C2C</Color>
 
-    
+    <Color x:Key="PanelBorderBackgroundDark">#000000</Color>
+    <Color x:Key="PanelBorderBackgroundLight">#ffffff</Color>
     
     <Color x:Key="PlaceHolderText">#ACACAC</Color>
     

@@ -14,7 +14,7 @@
 
     <ContentPage.Content>
 
-        <Frame WidthRequest="850" HeightRequest="700" Margin="0" Padding="0">
+        <Frame WidthRequest="850" HeightRequest="660" Margin="0" Padding="0">
             <VerticalStackLayout>
 
                 <Label Text="Preferences" HorizontalOptions="Center" Style="{StaticResource H1Label}" />
