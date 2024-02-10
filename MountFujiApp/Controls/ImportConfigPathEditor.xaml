@@ -1,29 +1,28 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MountFuji.ViewModels"
              xmlns:controls1="using:MountFuji.Controls"
              x:DataType="vm:MainViewModel"
-
-             x:Class="MountFuji.Controls.HardDiskPathEditor">
+             x:Class="MountFuji.Controls.ImportConfigPathEditor">
+    
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            <Grid Grid.ColumnDefinitions="120,*,40,40" RowDefinitions="*,*" Margin="0,10,0,0">
+            <Grid Grid.ColumnDefinitions="*,40,40" RowDefinitions="*,*" Margin="0,0,0,0">
                 
-                
-                <Label Text="{TemplateBinding Title}" VerticalOptions="Center" Grid.Column="0"/>
 
-                <Entry IsReadOnly="True" Text="{TemplateBinding DiskImagePath}" Grid.Column="1" Grid.Row="0"
-                       VerticalOptions="Center" />
+                <Entry IsReadOnly="True" Text="{TemplateBinding DiskImagePath}" Grid.Column="0" Grid.Row="0"
+                       VerticalOptions="Center" Placeholder="Please select a config file"/>
 
 
-                <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="2"
+                <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="1"
                         Text="{x:Static controls1:IconFont.Cancel}" 
                         Command="{TemplateBinding ClearDiskImageCommand}"
                         CommandParameter="{TemplateBinding DiskId}"
                         VerticalOptions="Center" />
                 
-                <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="3"
+                <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="2"
                         Text="{TemplateBinding PickerOpenIcon}"
                         Command="{TemplateBinding BrowseDiskImageCommand}" 
                         CommandParameter="{TemplateBinding DiskId}"
