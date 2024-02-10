@@ -9,8 +9,8 @@
                  Title="Fuji picker" BackgroundColor="#80000000"  CloseWhenBackgroundIsClicked="False" >
     
     
-    <Frame WidthRequest="850" HeightRequest="645">
-        <Grid RowDefinitions="50,25,480,90" >
+    <Frame WidthRequest="850" HeightRequest="635" Margin="0" Padding="0">
+        <Grid RowDefinitions="50,25,480,2,60" Margin="10">
             <Label 
                 Grid.Row="0"
                 Grid.Column="0"
@@ -46,10 +46,11 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
                 
+            <Frame Grid.Row="3" ></Frame>
            
-            <HorizontalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End" HeightRequest="90" >
-                <Button VerticalOptions="Start" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,12,15,0" />
-                <Button VerticalOptions="Start" Text="OK" Command="{Binding OkCommand}" Margin="0,12,15,0" />
+            <HorizontalStackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End" >
+                <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />
+                <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,0,0" />
             </HorizontalStackLayout>
         </Grid>
     </Frame>

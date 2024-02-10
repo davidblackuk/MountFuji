@@ -16,6 +16,8 @@
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using Microsoft.Extensions.Logging;
+
 namespace MountFuji.ViewModels;
 
 public enum PickerType
@@ -30,6 +32,7 @@ public enum PickerType
 public partial class FujiFilePickerPopupViewModel: TinyViewModel
 {
     private readonly IPopupNavigation popupNavigation;
+    private readonly ILogger<FujiFilePickerPopupViewModel> log;
 
     public bool Confirmed { get; set; }
 
@@ -45,9 +48,10 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
     /// <summary>
     /// The view model for the FujiFilePickerPopup View.
     /// </summary>
-    public FujiFilePickerPopupViewModel(IPopupNavigation popupNavigation)
-    {   
+    public FujiFilePickerPopupViewModel(IPopupNavigation popupNavigation, ILogger<FujiFilePickerPopupViewModel> log)
+    {
         this.popupNavigation = popupNavigation;
+        this.log = log;
     }
 
     /// <summary>
@@ -69,8 +73,15 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
         CurrentFolder = folder;
         List<FileSystemEntry> all = new List<FileSystemEntry>();
 
-        var dirs = Directory.GetDirectories(folder);
-        
+        string[] dirs = [];
+        try
+        {
+            dirs = Directory.GetDirectories(folder);
+        }
+        catch (Exception e)
+        {
+            log.LogError(e, "Could not iterate folders in the Fuji picker");
+        }
 
         DirectoryInfo info = new DirectoryInfo(folder);
         if (info.Parent != null)
@@ -84,13 +95,23 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
 
         if (PickerType == PickerType.File)
         {
+            string [] files = [];
             // TODO is the *.* on windows and * on mac???
-            var files = Directory.GetFiles(folder, "*", new EnumerationOptions()
+
+            try
             {
-                ReturnSpecialDirectories = false,
-                IgnoreInaccessible = true,
-                RecurseSubdirectories = false,
-            });
+                files = Directory.GetFiles(folder, "*", new EnumerationOptions()
+                {
+                    ReturnSpecialDirectories = false,
+                    IgnoreInaccessible = true,
+                    RecurseSubdirectories = false,
+                });
+
+            }
+            catch (Exception e)
+            {
+                log.LogError(e, "Could not iterate files in the Fuji picker");
+            }
             
   
             Array.Sort(files, String.Compare);
