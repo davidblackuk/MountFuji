@@ -82,7 +82,7 @@
 
                 </Grid>
             </VerticalStackLayout>
-            <Frame BackgroundColor="Bisque" Grid.Row="2" Grid.ColumnSpan="2"></Frame>
+            <Frame Grid.Row="2" Grid.ColumnSpan="2"></Frame>
 
             <Button WidthRequest="200" VerticalOptions="Center" Text="Close" Command="{Binding CloseCommand}"
                     Grid.Row="3" Grid.ColumnSpan="2" />

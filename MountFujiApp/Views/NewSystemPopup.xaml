@@ -14,8 +14,8 @@
         <converters:TemplateSummaryConverter x:Key="templateConverter" />
     </mopups:PopupPage.Resources>
 
-    <Frame WidthRequest="850" HeightRequest="590" Padding="0" Margin="0">
-        <Grid RowDefinitions="50,480,70" ColumnDefinitions="440,10,*">
+    <Frame WidthRequest="850" HeightRequest="600" Padding="0" Margin="0">
+        <Grid RowDefinitions="50,480,60" ColumnDefinitions="440,10,*">
             <Label 
                 Grid.Row="0"
                 Grid.Column="0"
@@ -72,9 +72,9 @@
                 </VerticalStackLayout>
             </configurationSections:ConfigurationGroup>
 
-            <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End" HeightRequest="90" >
-                <Button VerticalOptions="Start" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,12,15,0" />
-                <Button VerticalOptions="Start" Text="OK" Command="{Binding OkCommand}" Margin="0,12,15,0" />
+            <HorizontalStackLayout  Margin="0" Padding="0" Spacing="0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End" >
+                <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />
+                <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,15,0" />
             </HorizontalStackLayout>
         </Grid>
     </Frame>

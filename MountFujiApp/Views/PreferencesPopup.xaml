@@ -14,7 +14,7 @@
 
     <ContentPage.Content>
 
-        <Frame WidthRequest="850" HeightRequest="770">
+        <Frame WidthRequest="850" HeightRequest="700" Margin="0" Padding="0">
             <VerticalStackLayout>
 
                 <Label Text="Preferences" HorizontalOptions="Center" Style="{StaticResource H1Label}" />
@@ -78,11 +78,11 @@
 
                     </configurationSections:ConfigurationGroup>
 
-                    <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End"
-                                           HeightRequest="90">
-                        <Button VerticalOptions="Start" Text="Cancel" Command="{Binding CancelCommand}"
-                                Margin="0,12,15,0" />
-                        <Button VerticalOptions="Start" Text="OK" Command="{Binding OkCommand}" Margin="0,12,15,0" />
+                    <HorizontalStackLayout HorizontalOptions="End"
+                                           HeightRequest="60" >
+                        <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}"
+                                Margin="0,0,15,0" />
+                        <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,15,0" />
                     </HorizontalStackLayout>
 
                 </VerticalStackLayout>
