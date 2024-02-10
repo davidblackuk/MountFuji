@@ -26,11 +26,11 @@ public partial class SectionVisibility: ObservableObject
 
     [ObservableProperty] private bool expandRomSection = true;
     
-    [ObservableProperty] private bool expandAcsiHddSection = false;
+    [ObservableProperty] private bool expandAcsiHddSection = true;
     
-    [ObservableProperty] private bool expandFloppySection = false;
+    [ObservableProperty] private bool expandFloppySection = true;
     
-    [ObservableProperty] private bool expandScreenSection = false;
+    [ObservableProperty] private bool expandScreenSection = true;
     
-    [ObservableProperty] private bool expandSoundSection = false;
+    [ObservableProperty] private bool expandSoundSection = true;
 }
