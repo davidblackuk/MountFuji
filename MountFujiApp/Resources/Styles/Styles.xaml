@@ -398,7 +398,11 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PageBgColorLight}, Dark={StaticResource PageBgColorDark}}" />
     </Style>
     
-
+    <Style TargetType="Border" x:Key="DesignLibraryDemoPage">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PageBgColorLight}, Dark={StaticResource PageBgColorDark}}" />
+    </Style>
+    
+        
     
     <Style TargetType="Border" x:Key="PanelBorder">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PanelBorderBackgroundLight}, Dark={StaticResource PanelBorderBackgroundDark}}" />

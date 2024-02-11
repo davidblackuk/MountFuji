@@ -9,7 +9,7 @@
 
     <ShellContent
         Title="Configurations"
-        ContentTemplate="{DataTemplate views:MainView}"
+        ContentTemplate="{DataTemplate views:DesignLibrary}"
         Route="MainPage" />
 
 </Shell>

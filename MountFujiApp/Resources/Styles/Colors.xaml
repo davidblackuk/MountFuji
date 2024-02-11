@@ -10,7 +10,7 @@
     <Color x:Key="WindowBackground">#141414</Color>
 
     <Color x:Key="PageBgColorLight">#D3D1D2</Color>
-    <Color x:Key="PageBgColorDark">#1B191A</Color>
+    <Color x:Key="PageBgColorDark">#222222</Color>
 
     
     <Color x:Key="H1ColorDark">#B98AFF</Color>

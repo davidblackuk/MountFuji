@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MountFuji.Controls"
+             x:Class="MountFuji.Views.DesignLibrary" 
+             Shell.NavBarIsVisible="False"
+             Style="{StaticResource MyPage}"
+             Padding="20">
+    <ContentPage.Content>
+        <VerticalStackLayout>
+               
+               
+               <Border  Style="{StaticResource PanelBorder}">
+                      <VerticalStackLayout>         
+                      <Label Style="{StaticResource H1Label}">Welcome to the design library</Label>
+
+            <Label LineBreakMode="WordWrap" MaxLines="3"
+                   Text="This is the design library for Mount Fuji. And this is the default label type. Set to Wrap on words.">
+            </Label>
+
+            <Label Style="{StaticResource H1Label}">Heading level 1</Label>
+            <Label LineBreakMode="WordWrap" MaxLines="2"
+                   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+
+            <Label Style="{StaticResource H2Label}">Heading level 2</Label>
+            <Label LineBreakMode="WordWrap" MaxLines="2"
+                   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+
+            <Label Style="{StaticResource H3Label}">Heading level 3</Label>
+            <Label LineBreakMode="WordWrap" MaxLines="2"
+                   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+
+            <Label Style="{StaticResource H4Label}">Heading level 4</Label>
+            <Label LineBreakMode="WordWrap" MaxLines="2"
+                   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+                      </VerticalStackLayout>      
+</Border>
+               
+               
+               <Border Style="{StaticResource PanelBorder}">
+                      <VerticalStackLayout>
+                             <Label Style="{StaticResource H1Label}">Labels</Label>
+                             <Label Text="Two label objects stacked with both a single and multiline version" />
+                             <Label LineBreakMode="WordWrap"
+                                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+
+                      </VerticalStackLayout>
+               </Border>
+
+               <Border Style="{StaticResource PanelBorder}">
+                      <VerticalStackLayout>
+                             <Label Style="{StaticResource H1Label}">Buttons</Label>
+                             <Label Text="The following buttons are  supported"></Label>
+
+                             <Grid ColumnDefinitions="auto, auto" RowDefinitions="*,*,*,*, *">
+                                    <Label Text="Style name" FontAttributes="Bold" Grid.Column="0" Grid.Row="0" />
+                                    <Label Text="Appearance" FontAttributes="Bold" Grid.Column="1" Grid.Row="0" />
+
+                                    <Label Text="Normal" Grid.Column="0" Grid.Row="1" />
+                                    <Button Text="Hello" Grid.Column="1" Grid.Row="1" />
+
+                                    <Label Text="DeleteButton" Grid.Column="0" Grid.Row="2" />
+                                    <Button Text="Delete" Style="{StaticResource DeleteButton}" Grid.Column="1" Grid.Row="2" />
+
+                                    <Label Text="InlineMaterialButton" Grid.Column="0" Grid.Row="3" />
+                                    <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Grid.Row="3"
+                                            Text="{x:Static controls:IconFont.Info}"
+                                            ToolTipProperties.Text="THis is a tooltip" />
+
+                                    <Label Text="MaterialButton" Grid.Column="0" Grid.Row="4" />
+                                    <Button Style="{StaticResource MaterialButton}" Grid.Column="1" Grid.Row="4"
+                                            Text="{x:Static controls:IconFont.Info}"
+                                            ToolTipProperties.Text="With a tooltip" />
+                             </Grid>
+                      </VerticalStackLayout>
+               </Border>
+
+
+            <Label Style="{StaticResource H2Label}">The application menu</Label>
+
+
+            <Border Style="{StaticResource DesignLibraryDemoPage}">
+              </Border>
+
+               <Border Style="{StaticResource PanelBorder}">
+                      <VerticalStackLayout>
+                             <Label Style="{StaticResource H1Label}">The application menu</Label>
+
+                             <Label Text="The application menu is styled with a border and uses InlineMaterialButtons and supports tooltips. "></Label>
+                             <controls:ApplicationMenu />
+                      </VerticalStackLayout>
+               </Border>
+
+
+               
+               
+               
+            <Border Style="{StaticResource PanelBorder}">
+                   <VerticalStackLayout>
+                          <Label Style="{StaticResource H1Label}">Title</Label>
+                   </VerticalStackLayout>
+            </Border>
+            
+            
+        </VerticalStackLayout>
+
+
+    </ContentPage.Content>
+</ContentPage>
