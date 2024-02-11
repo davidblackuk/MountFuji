@@ -14,21 +14,26 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MountFuji.ViewModels;
+namespace MountFuji.ViewModels;
 
-namespace MountFuji.Views;
-
-public partial class DesignLibrary : ContentPage
+public partial class DesignLibraryViewModel: TinyViewModel
 {
-    public DesignLibrary()
+  
+    public DesignLibraryViewModel()
     {
-        // bit naif but not production code
-        InitializeComponent();
-        BindingContext = new DesignLibraryViewModel();
+        
+    }
+
+    [RelayCommand]
+    private void ToggleTheme()
+    {
+        if (App.Current.UserAppTheme != AppTheme.Dark)
+        {
+            App.Current.UserAppTheme = AppTheme.Dark;
+        }
+        else
+        {
+            App.Current.UserAppTheme = AppTheme.Light;
+        }
     }
 }

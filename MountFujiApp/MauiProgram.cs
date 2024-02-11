@@ -34,8 +34,11 @@ public static class MauiProgram
             .UseMauiApp<App>()
             .ConfigureFonts(fonts =>
             {
-                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                fonts.AddFont("Roboto-Regular.ttf", "FontRegular");
+                fonts.AddFont("Roboto-Bold.ttf", "FontBold");
+                fonts.AddFont("Roboto-Italic.ttf", "FontItalic");
+                fonts.AddFont("Roboto-Black.ttf", "FontBlack");
+                
                 fonts.AddFont("MaterialIconsOutlined-Regular.otf", "MaterialIcons");
             }) 
             .ConfigureMopups()
