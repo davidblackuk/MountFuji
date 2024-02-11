@@ -44,6 +44,9 @@
 
     <Color x:Key="PanelBorderBackgroundDark">#000000</Color>
     <Color x:Key="PanelBorderBackgroundLight">#ffffff</Color>
+
+    <Color x:Key="DeleteButtonDark">#EB5545</Color>
+    <Color x:Key="DeleteButtonLight">#EB4E3D</Color>
     
     <Color x:Key="PlaceHolderText">#ACACAC</Color>
     

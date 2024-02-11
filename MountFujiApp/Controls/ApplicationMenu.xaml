@@ -5,7 +5,7 @@
              xmlns:controls="clr-namespace:MountFuji.Controls"
              xmlns:controls1="using:MountFuji.Controls"
              x:Class="MountFuji.Controls.ApplicationMenu">
-    <Frame  CornerRadius="10"  Style="{StaticResource PanelFrame}" >
+    <Border   Style="{StaticResource PanelBorder}" >
     <HorizontalStackLayout >
         <Button  VerticalOptions="Center"  Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls1:IconFont.Info}" 
                  Command="{Binding AboutCommand}" ToolTipProperties.Text="About Mount Fuji"/>
@@ -27,5 +27,5 @@
 
         
     </HorizontalStackLayout>
-    </Frame>
+    </Border>
 </ContentView>

@@ -398,10 +398,7 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PageBgColorLight}, Dark={StaticResource PageBgColorDark}}" />
     </Style>
     
-    <Style TargetType="Frame" x:Key="PanelFrame">
-        <Setter Property="Opacity" Value="0.7" />
-        <Setter Property="CornerRadius" Value="15" />
-    </Style>
+
     
     <Style TargetType="Border" x:Key="PanelBorder">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PanelBorderBackgroundLight}, Dark={StaticResource PanelBorderBackgroundDark}}" />
@@ -411,6 +408,27 @@
         <Setter Property="StrokeShape"  >
             <RoundRectangle CornerRadius="15,15,15,15" />
         </Setter>
+    </Style>
+    
+    <!-- Dialogs -->
+    
+    <Style TargetType="Border" x:Key="DialogWindow">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PanelBorderBackgroundLight}, Dark={StaticResource PanelBorderBackgroundDark}}" />
+        <Setter Property="Padding" Value="10"></Setter>
+        <Setter Property="Margin" Value="0"></Setter>
+        <Setter Property="StrokeShape"  >
+            <RoundRectangle CornerRadius="15,15,15,15" />
+        </Setter>
+    </Style>
+    
+    <Style TargetType="Rectangle" x:Key="DialogButtonsSeparator" >
+        
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" />
+    </Style>    
+    
+    <Style TargetType="Button" x:Key="DeleteButton">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource DeleteButtonLight}, Dark={StaticResource DeleteButtonDark}}" />
     </Style>
     
     <!-- Headers -->

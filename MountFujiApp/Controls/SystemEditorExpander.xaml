@@ -9,7 +9,7 @@
              >
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            <Frame  CornerRadius="10">
+            <Border  Style="{StaticResource PanelBorder}">
                 <VerticalStackLayout Spacing="10">
                     <HorizontalStackLayout Spacing="10">
                         
@@ -23,7 +23,7 @@
                     <BoxView IsVisible="{TemplateBinding Expanded}" HeightRequest="1" Color="{StaticResource Gray600}"></BoxView>
                     <ContentPresenter IsVisible="{TemplateBinding Expanded}" />
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
         </ControlTemplate>
     </ContentView.ControlTemplate>
 </ContentView>

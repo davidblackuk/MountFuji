@@ -12,9 +12,9 @@
                   Title="Alert" BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
 
 
-    <Frame WidthRequest="600" HeightRequest="240" Padding="0" Margin="0">
+    <Border WidthRequest="600" HeightRequest="240" Style="{StaticResource DialogWindow}">
 
-        <Grid RowDefinitions="60, 100, 2, 80" ColumnDefinitions="120,480">
+        <Grid RowDefinitions="60, 100, 2, 80" ColumnDefinitions="120,*">
             <Label Grid.ColumnSpan="2"
                    Text="Clone system"
                    HorizontalOptions="Center"
@@ -32,14 +32,14 @@
                        Text="{Binding NewName }" />
             </VerticalStackLayout>
             
-            <Border BackgroundColor="Black" Grid.Row="2" HeightRequest="2" Grid.ColumnSpan="2" />
-            
-            <HorizontalStackLayout HorizontalOptions="End" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
-                <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,12,15,0" />
-                <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,12,15,0" />
+            <Rectangle Grid.Row="3" Grid.ColumnSpan="2"  Style="{StaticResource DialogButtonsSeparator}"></Rectangle>
+  
+            <HorizontalStackLayout HorizontalOptions="End" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+                <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />
+                <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,15,0" />
             </HorizontalStackLayout>
         </Grid>
-    </Frame>
+    </Border>
 
 
 </mopups:PopupPage>

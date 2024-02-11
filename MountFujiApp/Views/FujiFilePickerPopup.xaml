@@ -9,7 +9,7 @@
                  Title="Fuji picker" BackgroundColor="#80000000"  CloseWhenBackgroundIsClicked="False" >
     
     
-    <Frame WidthRequest="850" HeightRequest="635" Margin="0" Padding="0">
+    <Border WidthRequest="850" HeightRequest="635"  Style="{StaticResource DialogWindow}">
         <Grid RowDefinitions="50,25,480,2,60" Margin="10">
             <Label 
                 Grid.Row="0"
@@ -46,14 +46,15 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
                 
-            <Frame Grid.Row="3" ></Frame>
+            <Rectangle Grid.Row="3"   Style="{StaticResource DialogButtonsSeparator}"></Rectangle>
+
            
             <HorizontalStackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End" >
                 <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />
                 <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,0,0" />
             </HorizontalStackLayout>
         </Grid>
-    </Frame>
+    </Border>
     
     
     

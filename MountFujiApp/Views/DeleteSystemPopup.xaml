@@ -12,15 +12,15 @@
                   Title="Alert" BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
 
 
-    <Frame WidthRequest="600" HeightRequest="240" Padding="0" Margin="0">
+    <Border WidthRequest="600" HeightRequest="240" Style="{StaticResource DialogWindow}">
 
-        <Grid RowDefinitions="60, 100, 2, 80" ColumnDefinitions="120,480">
+        <Grid RowDefinitions="60, 100, 2, 80" ColumnDefinitions="120,*">
             <Label Grid.ColumnSpan="2"
                    Text="Delete system"
                    HorizontalOptions="Center"
                    Style="{StaticResource H1Label}" />
             
-            <Label FontFamily="MaterialIcons" HorizontalTextAlignment="Center" TextColor="DarkRed" FontSize="100"
+            <Label FontFamily="MaterialIcons" HorizontalTextAlignment="Center" TextColor="Goldenrod" FontSize="100"
                    Grid.Column="0" Grid.Row="1" Text="{x:Static controls1:IconFont.Delete_forever}"
                    HorizontalOptions="Center" />
             
@@ -31,14 +31,14 @@
                        Text="{Binding System.DisplayName }" />
             </VerticalStackLayout>
             
-            <Border BackgroundColor="Black" Grid.Row="2" HeightRequest="2" Grid.ColumnSpan="2" />
-            
-            <HorizontalStackLayout HorizontalOptions="End" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
-                <Button VerticalOptions="Center" Text="No" Command="{Binding NoCommand}" Margin="0,12,15,0" />
-                <Button VerticalOptions="Center" Text="Yes" Command="{Binding YesCommand}" Margin="0,12,15,0" />
+            <Rectangle Grid.Row="3" Grid.ColumnSpan="2"  Style="{StaticResource DialogButtonsSeparator}"></Rectangle>
+
+            <HorizontalStackLayout HorizontalOptions="End" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+                <Button VerticalOptions="Center" Text="Cancel" Command="{Binding NoCommand}" Margin="0,0,15,0" />
+                <Button VerticalOptions="Center" Text="Delete" Command="{Binding YesCommand}" Margin="0,0,15,0" Style="{StaticResource DeleteButton}" />
             </HorizontalStackLayout>
         </Grid>
-    </Frame>
+    </Border>
 
 
 </mopups:PopupPage>

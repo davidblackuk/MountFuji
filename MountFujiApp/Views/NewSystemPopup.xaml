@@ -14,7 +14,7 @@
         <converters:TemplateSummaryConverter x:Key="templateConverter" />
     </mopups:PopupPage.Resources>
 
-    <Frame WidthRequest="850" HeightRequest="600" Padding="0" Margin="0">
+    <Border WidthRequest="850" HeightRequest="600" Style="{StaticResource DialogWindow}">
         <Grid RowDefinitions="50,480,60" ColumnDefinitions="440,10,*">
             <Label 
                 Grid.Row="0"
@@ -77,5 +77,5 @@
                 <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,15,0" />
             </HorizontalStackLayout>
         </Grid>
-    </Frame>
+    </Border>
 </mopups:PopupPage>
