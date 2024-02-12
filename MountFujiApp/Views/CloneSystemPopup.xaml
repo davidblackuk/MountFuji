@@ -32,7 +32,7 @@
                        Text="{Binding NewName }" />
             </VerticalStackLayout>
             
-            <Rectangle Grid.Row="3" Grid.ColumnSpan="2"  Style="{StaticResource DialogButtonsSeparator}"></Rectangle>
+            <Rectangle Grid.Row="2" Grid.ColumnSpan="2"  Style="{StaticResource DialogButtonsSeparator}"></Rectangle>
   
             <HorizontalStackLayout HorizontalOptions="End" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
                 <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />

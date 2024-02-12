@@ -7,9 +7,14 @@
     Shell.FlyoutBehavior="Disabled"
     Title="Mount Fuji">
 
+    <!-- <ShellContent -->
+    <!--     Title="Configurations" -->
+    <!--     ContentTemplate="{DataTemplate views:DesignLibrary}" -->
+    <!--     Route="MainPage" /> -->
+
     <ShellContent
         Title="Configurations"
-        ContentTemplate="{DataTemplate views:DesignLibrary}"
+        ContentTemplate="{DataTemplate views:MainView}"
         Route="MainPage" />
 
 </Shell>

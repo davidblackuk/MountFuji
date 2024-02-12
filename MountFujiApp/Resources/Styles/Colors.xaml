@@ -13,19 +13,14 @@
     <Color x:Key="PageBgColorDark">#222222</Color>
 
     
-    <Color x:Key="H1ColorDark">#B98AFF</Color>
-    <Color x:Key="H1ColorLight">#8124FF</Color>
-    
-    <Color x:Key="H2ColorDark">#C3FFB8</Color>
-    <Color x:Key="H2ColorLight">#2B8E2B</Color>
+    <Color x:Key="ControlColorDark">#B98AFF</Color>
+    <Color x:Key="ControlColorLightLight">#8124FF</Color>
 
-    <Color x:Key="H3ColorDark">#F4FFAF</Color>
-    <Color x:Key="H3ColorLight">#7F7E28</Color>
     
-    <Color x:Key="H4ColorDark">#C1FCFE</Color>
-    <Color x:Key="H4ColorLight">#1E8B99</Color>
+   <Color x:Key="TitleColorDark">#5E5CE6</Color>
+    <Color x:Key="TitleColorLight">#5856D6</Color>
     
-    
+
 
     <Color x:Key="WarningColorDark">#FFCAE8</Color>
     <Color x:Key="WarningColorLight">#7F3E4C</Color>

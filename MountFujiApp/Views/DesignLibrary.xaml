@@ -25,7 +25,7 @@
             </Border>
 
             <Border Style="{StaticResource PanelBorder}">
-                <VerticalStackLayout>
+                <VerticalStackLayout Margin="20">
                     <Label Style="{StaticResource H1Label}">Heading level 1</Label>
                     <Label Style="{StaticResource H2Label}">Heading level 2</Label>
                     <Label Style="{StaticResource H3Label}">Heading level 3</Label>
@@ -49,26 +49,35 @@
                     <Label Style="{StaticResource H1Label}">Buttons</Label>
                     <Label Text="The following buttons are  supported"></Label>
 
-                    <Grid ColumnDefinitions="auto, auto" RowDefinitions="30,50,50,50, 50" Margin="20">
+                    <Grid ColumnDefinitions="auto, auto, auto" RowDefinitions="30,50,50,50, 50" Margin="20">
                         <Label  Text="Style name" FontFamily="FontBold" Grid.Column="0" Grid.Row="0" />
                         <Label Text="Appearance" FontFamily="FontBold" FontAttributes="Bold" Grid.Column="1"
                                Grid.Row="0" />
 
                         <Label Text="Normal" Grid.Column="0" Grid.Row="1" />
-                        <Button HeightRequest="35" Text="Hello" Grid.Column="1" Grid.Row="1" />
+                        <Button Text="Hello" Grid.Column="1" Grid.Row="1" />
+                        <Button Text="Hello" Grid.Column="2" Grid.Row="1" IsEnabled="False"/>
 
                         <Label Text="DeleteButton" Grid.Column="0" Grid.Row="2" />
-                        <Button HeightRequest="35" Text="Delete" Style="{StaticResource DeleteButton}" Grid.Column="1" Grid.Row="2" />
+                        <Button Text="Delete" Style="{StaticResource DeleteButton}" Grid.Column="1" Grid.Row="2" />
+                        <Button Text="Delete" Style="{StaticResource DeleteButton}" Grid.Column="2" Grid.Row="2" IsEnabled="False" />
 
                         <Label Text="InlineMaterialButton" Grid.Column="0" Grid.Row="3" />
                         <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Grid.Row="3"
                                 Text="{x:Static controls:IconFont.Info}"
                                 ToolTipProperties.Text="This is a tooltip" />
 
+                        <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="2" Grid.Row="3"
+                                Text="{x:Static controls:IconFont.Info}"
+                                ToolTipProperties.Text="This is a tooltip" IsEnabled="False" />
+
                         <Label Text="MaterialButton" Grid.Column="0" Grid.Row="4" />
                         <Button Style="{StaticResource MaterialButton}" Grid.Column="1" Grid.Row="4"
                                 Text="{x:Static controls:IconFont.Info}"
                                 ToolTipProperties.Text="With a tooltip" />
+                        <Button Style="{StaticResource MaterialButton}" Grid.Column="2" Grid.Row="4"
+                                Text="{x:Static controls:IconFont.Info}"
+                                ToolTipProperties.Text="With a tooltip" IsEnabled="False"/>
                     </Grid>
                 </VerticalStackLayout>
             </Border>
