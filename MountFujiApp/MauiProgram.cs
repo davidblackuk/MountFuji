@@ -38,27 +38,31 @@ public static class MauiProgram
                 fonts.AddFont("Roboto-Bold.ttf", "FontBold");
                 fonts.AddFont("Roboto-Italic.ttf", "FontItalic");
                 fonts.AddFont("Roboto-Black.ttf", "FontBlack");
-                
+
                 fonts.AddFont("MaterialIconsOutlined-Regular.otf", "MaterialIcons");
-            }) 
+            })
             .ConfigureMopups()
             .UseTinyMvvm()
             .UseMauiCommunityToolkit();
 
         builder.Logging.AddConsoleLogger(_ => { })
-        .AddStreamingFileLogger(options =>
-        {
-            options.RetainDays = 2;
-            options.FolderPath = Path.Combine(FileSystem.AppDataDirectory, "fuji");
-        });
+            .AddStreamingFileLogger(options =>
+            {
+                options.RetainDays = 2;
+                options.FolderPath = Path.Combine(FileSystem.AppDataDirectory, "fuji");
+            });
+
+        // hopfully this defers the wiring up of application until after the app is initialized
+        builder.Services.AddSingleton<Application>((provider => Application.Current));
         
-        builder.Services.AddStrategies();
+    builder.Services.AddStrategies();
         builder.Services.AddViewViewModels();
-        builder.Services.AddConfiService();
+        builder.Services.AddConfigService();
         builder.Services.AddServices();
         
         MauiApp built =  builder.Build();
-        
+  
+ 
         IPreferencesService preferencesService = built.Services.GetService<IPreferencesService>();
         preferencesService.Load();
 

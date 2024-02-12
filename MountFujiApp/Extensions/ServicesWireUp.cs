@@ -30,6 +30,7 @@ public static class ServicesWireUp
         services.AddSingleton<IMachineTemplateService, MachineTemplateService>();
         services.AddSingleton<ISystemsService, SystemsService>();
         services.AddSingleton<IPreferencesService, PreferencesService>();
+        services.AddSingleton<IApplicationResolver, ApplicationResolver>();
         services.AddSingleton<IFujiFilePickerService, FujiFilePickerService>();
         services.AddTransient<IPersistance, Persistance>();
         services.AddTransient<IConfigFileService, ConfigFileService>();

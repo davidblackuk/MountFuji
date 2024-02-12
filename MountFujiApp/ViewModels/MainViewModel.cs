@@ -18,6 +18,7 @@
 
 using System.Collections.ObjectModel;
 using Microsoft.Extensions.Logging;
+using MountFuji.Controls;
 using MountFuji.Extensions;
 using MountFuji.Views;
 
@@ -340,6 +341,16 @@ public partial class MainViewModel : TinyViewModel
         return Task.CompletedTask;
     }
 
+    [RelayCommand]
+    private void SwapTheme()
+    {
+        preferencesService.ToggleTheme();
+        OnPropertyChanged(nameof(ThemeIcon));
+    }
+
+    public string ThemeIcon => preferencesService.Preferences.Theme == AppTheme.Dark ? IconFont.Dark_mode : IconFont.Light_mode;
+
+
     private bool CanRun()
     {
         if (string.IsNullOrWhiteSpace(preferencesService.Preferences.HatariApplication) ||
@@ -353,6 +364,7 @@ public partial class MainViewModel : TinyViewModel
         return true;
     }
 
+    
     private bool SaveNeeded => systemsService.IsDirty;
 
 

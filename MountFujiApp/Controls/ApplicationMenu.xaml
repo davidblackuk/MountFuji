@@ -6,26 +6,30 @@
              xmlns:controls1="using:MountFuji.Controls"
              x:Class="MountFuji.Controls.ApplicationMenu">
     <Border   Style="{StaticResource PanelBorder}" >
-    <HorizontalStackLayout >
-        <Button  VerticalOptions="Center"  Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls1:IconFont.Info}" 
+    <Grid ColumnDefinitions="auto,auto,auto,auto,auto,auto,*,auto" >
+        <Button  VerticalOptions="Center"  Style="{StaticResource InlineMaterialButton}" Grid.Column="0" Text="{x:Static controls1:IconFont.Info}" 
                  Command="{Binding AboutCommand}" ToolTipProperties.Text="About Mount Fuji"/>
 
         <Button  VerticalOptions="Center"  Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls1:IconFont.Settings}" 
                  Command="{Binding EditPreferencesCommand}" ToolTipProperties.Text="Open settings"/>
 
-        <Button  VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls1:IconFont.Add_circle_outline}" 
+        <Button  VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}" Grid.Column="2" Text="{x:Static controls1:IconFont.Add_circle_outline}" 
                  Command="{Binding CreateNewSystemCommand}"  ToolTipProperties.Text="New system"/>
         
-        <Button  VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls1:IconFont.Arrow_circle_left}" 
+        <Button  VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}" Grid.Column="3" Text="{x:Static controls1:IconFont.Arrow_circle_left}" 
                  Command="{Binding ImportHatariConfigCommand}"  ToolTipProperties.Text="Import Hatari config file"/>
         
-        <Button  VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}" Grid.Column="1" Text="{x:Static controls1:IconFont.Save}" 
+        <Button  VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}" Grid.Column="4" Text="{x:Static controls1:IconFont.Save}" 
                  Command="{Binding SaveSystemsCommand}"  ToolTipProperties.Text="Save all systems"/>
         
-        <Button  VerticalOptions="Center" Text="{x:Static controls1:IconFont.Play_circle_outline}" Style="{StaticResource InlineMaterialButton}" Command="{Binding RunCommand}"
+        <Button  VerticalOptions="Center" Text="{x:Static controls1:IconFont.Play_circle_outline}" Grid.Column="5" Style="{StaticResource InlineMaterialButton}" Command="{Binding RunCommand}"
+                 ToolTipProperties.Text="Run the selected system"/>
+
+
+        <Button  VerticalOptions="Center" HorizontalOptions="End" Grid.Column="7" Text="{Binding ThemeIcon }" Style="{StaticResource InlineMaterialButton}" Command="{Binding SwapThemeCommand}"
                  ToolTipProperties.Text="Run the selected system"/>
 
         
-    </HorizontalStackLayout>
+    </Grid>
     </Border>
 </ContentView>

@@ -26,7 +26,7 @@ public static class ConfigWireUp
     /// Adds support for config file processing, import and export
     /// </summary>
     /// <param name="services"></param>
-    public static void AddConfiService(this IServiceCollection services)
+    public static void AddConfigService(this IServiceCollection services)
     {
         services.AddTransient<ILogConfigFileSection, LogConfigFileSection>();
         services.AddTransient<IMemoryConfigFileSection, MemoryConfigFileSection>();
