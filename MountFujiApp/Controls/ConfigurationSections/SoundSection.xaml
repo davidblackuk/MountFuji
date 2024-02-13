@@ -10,7 +10,7 @@
              x:DataType="vm:MainViewModel"
              x:Class="MountFuji.Controls.ConfigurationSections.SoundSection">
     <controls1:SystemEditorExpander Title="Sound" Expanded="{Binding SectionVisibility.ExpandSoundSection}">
-        <HorizontalStackLayout>
+        <HorizontalStackLayout Style="{StaticResource SystemSectionPanelRow}">
             
             <panes:SoundSettingsPane />
             <panes:SoundPlaybackQualityPane />

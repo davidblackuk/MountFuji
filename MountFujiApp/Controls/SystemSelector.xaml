@@ -12,10 +12,7 @@
              x:DataType="vm:MainViewModel"
              WidthRequest="460"
              >
-    <Border  Style="{StaticResource PanelBorder}">
-        <!-- <Border.StrokeShape> -->
-        <!--     <RoundRectangle CornerRadius="10,10,10,10" /> -->
-        <!-- </Border.StrokeShape> -->
+    <Border  Style="{StaticResource Level1Panel}">
         <Grid RowDefinitions="70,*,25">
     
             <!-- we implement our own header and footer as we don't want em to scroll with the content -->
@@ -37,7 +34,6 @@
                           Command="{Binding ReorderedCommand }" />
                 </CollectionView.Behaviors>
 
-                <!-- BackgroundColor="{StaticResource ComponentBackground}"> -->
             <CollectionView.EmptyView>
                 <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
                        FontSize="20"

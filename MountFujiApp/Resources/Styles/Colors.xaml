@@ -6,30 +6,43 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
-    <Color x:Key="ComponentBackground">#212121</Color>
-    <Color x:Key="WindowBackground">#141414</Color>
 
-    <Color x:Key="PageBgColorLight">#D3D1D2</Color>
-    <Color x:Key="PageBgColorDark">#222222</Color>
+    <!-- Level 0: Implicit 0% white overlay in dark mode-->
+    <Color x:Key="Level0BgColorLight">#D3D1D2</Color>
+    <Color x:Key="Level0BgColorDark">#121212</Color>
+
+    <!-- Level 1: 5% white overlay in dark mode -->
+    <Color x:Key="Level1BgColorLight">#ffffff</Color>
+    <Color x:Key="Level1BgColorDark">#1E1E1E</Color>
+
+    <!-- level 2: 7% white overlay in dark mode -->
+    <Color x:Key="Level2BgColorLight">#ffffff</Color>
+    <Color x:Key="Level2BgColorDark">#222222</Color>
+
+    <!-- level 3: 8% white overlay in dark mode -->
+    <Color x:Key="Level3BgColorLight">#ffffff</Color>
+    <Color x:Key="Level3BgColorDark">#242424</Color>
 
     
     <Color x:Key="ControlColorDark">#B98AFF</Color>
     <Color x:Key="ControlColorLightLight">#8124FF</Color>
 
     
-   <Color x:Key="TitleColorDark">#5E5CE6</Color>
-    <Color x:Key="TitleColorLight">#5856D6</Color>
+    <Color x:Key="HighEmphasisTextColorDark">#DEDEDE</Color>
+    <Color x:Key="HighEmphasisTextColorLight">#5856D6</Color>
+   
+    <Color x:Key="MediumEmphasisTextColorDark">#999999</Color>
+    <Color x:Key="MediumEmphasisTextColorLight">#9956D6</Color>
+    
+    <Color x:Key="DisabledEmphasisTextColorDark">#616161</Color>
+    <Color x:Key="DisabledEmphasisTextColorLight">#212121</Color>
     
 
 
     <Color x:Key="WarningColorDark">#FFCAE8</Color>
     <Color x:Key="WarningColorLight">#7F3E4C</Color>
 
-    <Color x:Key="MaterialButtonTextEnabledDark">#1FD6E4</Color>
-    <Color x:Key="MaterialButtonTextDisabledDark">#403D44</Color>
 
-    <Color x:Key="MaterialButtonTextEnabledLight">#1E8B99</Color>
-    <Color x:Key="MaterialButtonTextDisabledLight">#C6C1CA</Color>
 
     <Color x:Key="ContentViewUnselectedLight">#FFFFFF</Color>
     <Color x:Key="ContentViewSelectedLight">#C8CDFE</Color>
@@ -37,8 +50,7 @@
   <Color x:Key="ContentViewUnselectedDark">#00000000</Color>
     <Color x:Key="ContentViewSelectedDark">#2C2C2C</Color>
 
-    <Color x:Key="PanelBorderBackgroundDark">#000000</Color>
-    <Color x:Key="PanelBorderBackgroundLight">#ffffff</Color>
+
 
     <Color x:Key="DeleteButtonDark">#EB5545</Color>
     <Color x:Key="DeleteButtonLight">#EB4E3D</Color>

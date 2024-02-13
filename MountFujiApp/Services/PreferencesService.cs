@@ -103,7 +103,7 @@ public class PreferencesService : IPreferencesService
         // When we first run toggle the preferences theme will be Unspecified, in that situation
         // we set the theme to the current one, then the toggle will work
         Preferences.Theme = Preferences.Theme == AppTheme.Unspecified
-            ? appResolver.Application.UserAppTheme
+            ? appResolver.Application.PlatformAppTheme
             : Preferences.Theme;
         
         // Toggle the theme, store the result.

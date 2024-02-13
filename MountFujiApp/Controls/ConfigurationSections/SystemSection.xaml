@@ -10,7 +10,7 @@
              x:Class="MountFuji.Controls.ConfigurationSections.SystemSection">
     <controls1:SystemEditorExpander Title="System" Expanded="{Binding SectionVisibility.ExpandSystemSection}">
 
-        <HorizontalStackLayout>
+        <HorizontalStackLayout Style="{StaticResource SystemSectionPanelRow}">
             <panes:MachineTypePane />
             <panes:VideoTimingPane />
             <panes:FalconDspPane />

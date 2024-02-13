@@ -11,7 +11,7 @@
 
     <controls1:SystemEditorExpander Title="CPU" Expanded="{Binding SectionVisibility.ExpandCpuSection}">
 
-        <HorizontalStackLayout>
+        <HorizontalStackLayout Style="{StaticResource SystemSectionPanelRow}">
             <panes:CpuPane />
             <panes:ClockSpeedPane />
             <panes:FpuPane />

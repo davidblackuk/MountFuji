@@ -39,7 +39,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:FileSystemEntry">
                             <HorizontalStackLayout>
-                                <Label  Text="{Binding Icon}" Style="{StaticResource MaterialIcon}" VerticalOptions="Center"/>
+                                <Label  Text="{Binding Icon}" Style="{StaticResource FujiPickerIcon}" VerticalOptions="Center"/>
                                 <Label Text="{Binding DisplayName}" FontSize="20" VerticalOptions="Center" Margin="10,0,0,0"/>
                             </HorizontalStackLayout>
                         </DataTemplate>

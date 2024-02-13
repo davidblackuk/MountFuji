@@ -42,7 +42,7 @@
             <HorizontalStackLayout>
                 <Label Text="{Binding DisplayName}" Style="{StaticResource H3Label}" />
             </HorizontalStackLayout>
-            <Label  Padding="0,5,0,0">
+            <Label Style="{StaticResource SystemSelectorEntryLabel}">
                 <Label.Text>
                     <MultiBinding Converter="{StaticResource summaryConverter}">
                         <Binding Path="SystemType"></Binding>
@@ -53,7 +53,7 @@
                 </Label.Text>
             </Label>
 
-            <Label Padding="0,5,0,0">
+            <Label  Style="{StaticResource SystemSelectorEntryLabel}">
                 <Label.Text>
                     <MultiBinding Converter="{StaticResource cpuConverter}">
                         <Binding Path="CpuType"></Binding>

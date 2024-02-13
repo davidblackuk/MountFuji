@@ -5,7 +5,7 @@
              xmlns:controls="clr-namespace:MountFuji.Controls"
              xmlns:controls1="using:MountFuji.Controls"
              x:Class="MountFuji.Controls.ApplicationMenu">
-    <Border   Style="{StaticResource PanelBorder}" >
+    <Border   Style="{StaticResource Level1Panel}" >
     <Grid ColumnDefinitions="auto,auto,auto,auto,auto,auto,*,auto" >
         <Button  VerticalOptions="Center"  Style="{StaticResource InlineMaterialButton}" Grid.Column="0" Text="{x:Static controls1:IconFont.Info}" 
                  Command="{Binding AboutCommand}" ToolTipProperties.Text="About Mount Fuji"/>

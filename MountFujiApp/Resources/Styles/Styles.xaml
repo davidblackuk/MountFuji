@@ -371,29 +371,55 @@
     <!-- Backgrounds -->
     
     <Style TargetType="Page" x:Key="MyPage">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PageBgColorLight}, Dark={StaticResource PageBgColorDark}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Level0BgColorLight}, Dark={StaticResource Level0BgColorDark}}" />
     </Style>
     
     <Style TargetType="Border" x:Key="DesignLibraryDemoPage">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PageBgColorLight}, Dark={StaticResource PageBgColorDark}}" />
+        <Setter Property="BackgroundColor" 
+                Value="{AppThemeBinding Light={StaticResource Level0BgColorLight}, Dark={StaticResource Level0BgColorDark}}" />
     </Style>
     
         
     
     <Style TargetType="Border" x:Key="PanelBorder">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PanelBorderBackgroundLight}, Dark={StaticResource PanelBorderBackgroundDark}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Level1BgColorLight}, Dark={StaticResource Level1BgColorDark}}" />
         <Setter Property="Padding" Value="10"></Setter>
         <Setter Property="Margin" Value="0"></Setter>
         <Setter Property="Opacity" Value="1.0" />
-        <Setter Property="StrokeShape"  >
-            <RoundRectangle CornerRadius="15,15,15,15" />
-        </Setter>
     </Style>
+    
+    <Style TargetType="Border" x:Key="Level1Panel">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Level1BgColorLight}, Dark={StaticResource Level1BgColorDark}}" />
+        <Setter Property="Padding" Value="10"></Setter>
+        <Setter Property="Margin" Value="0"></Setter>
+        <Setter Property="Opacity" Value="1.0" />
+    </Style>
+    
+    <Style TargetType="Border" x:Key="Level2Panel">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Level2BgColorLight}, Dark={StaticResource Level2BgColorDark}}" />
+        <Setter Property="Padding" Value="10"></Setter>
+        <Setter Property="Margin" Value="0"></Setter>
+        <Setter Property="Opacity" Value="1.0" />
+    </Style>
+    
+    <Style TargetType="Border" x:Key="Level3Panel">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Level3BgColorLight}, Dark={StaticResource Level3BgColorDark}}" />
+        <Setter Property="Padding" Value="10"></Setter>
+        <Setter Property="Margin" Value="0"></Setter>
+        <Setter Property="Opacity" Value="1.0" />
+    </Style>
+    
+    <Style TargetType="HorizontalStackLayout" x:Key="SystemSectionPanelRow">
+        <Setter Property="Spacing" Value="20" />
+        <Setter Property="Padding" Value="10"></Setter>
+        <Setter Property="Margin" Value="0"></Setter>
+    </Style>
+    
     
     <!-- Dialogs -->
     
     <Style TargetType="Border" x:Key="DialogWindow">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PanelBorderBackgroundLight}, Dark={StaticResource PanelBorderBackgroundDark}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Level1BgColorLight}, Dark={StaticResource Level1BgColorDark}}" />
         <Setter Property="Padding" Value="10"></Setter>
         <Setter Property="Margin" Value="0"></Setter>
         <Setter Property="StrokeShape"  >
@@ -415,7 +441,7 @@
     
     
     <Style TargetType="Label" x:Key="HLabelBase">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TitleColorLight}, Dark={StaticResource TitleColorDark}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource HighEmphasisTextColorLight}, Dark={StaticResource HighEmphasisTextColorDark}}" />
     </Style>
     
     
@@ -427,6 +453,7 @@
     <Style TargetType="Entry" x:Key="H1Entry" >
         <Setter Property="FontSize" Value="36" />
         <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource HighEmphasisTextColorLight}, Dark={StaticResource HighEmphasisTextColorDark}}" />
     </Style>
     
     <Style TargetType="Label" x:Key="H2Label" BasedOn="{StaticResource HLabelBase}">
@@ -447,6 +474,11 @@
     <Style TargetType="Label"  x:Key="H3Offset" BasedOn="{StaticResource H3Label}">
         <Setter Property="Margin" Value="0,10,0,0"></Setter>
     </Style>
+
+    <Style TargetType="Label"  x:Key="SystemSelectorEntryLabel" BasedOn="{StaticResource H3Label}">
+        <Setter Property="Padding" Value="0,5,0,0"></Setter>
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MediumEmphasisTextColorLight}, Dark={StaticResource MediumEmphasisTextColorDark}}" />
+    </Style>
     
 
     <Style TargetType="Label"  x:Key="Warning">
@@ -456,7 +488,7 @@
     </Style>
 
     <Style TargetType="Button" x:Key="MaterialButton">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource ControlColorLightLight}, Dark={StaticResource ControlColorDark}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MediumEmphasisTextColorLight}, Dark={StaticResource MediumEmphasisTextColorDark}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="MaterialIcons"/>
         <Setter Property="FontSize" Value="50"/>
@@ -471,11 +503,16 @@
                     <VisualState x:Name="Normal" />
                     <VisualState x:Name="Disabled">
                         <VisualState.Setters>
-                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MaterialButtonTextDisabledLight}, Dark={StaticResource MaterialButtonTextDisabledDark}}" />
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource DisabledEmphasisTextColorLight}, Dark={StaticResource DisabledEmphasisTextColorDark}}" />
                             <Setter Property="BackgroundColor" Value="Transparent" />
                         </VisualState.Setters>
                     </VisualState>
-                    <VisualState x:Name="PointerOver" />
+                    <VisualState x:Name="PointerOver" >
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource HighEmphasisTextColorLight}, Dark={StaticResource HighEmphasisTextColorDark}}" />
+                            <Setter Property="BackgroundColor" Value="Transparent" />
+                        </VisualState.Setters>
+                    </VisualState>
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>
@@ -485,16 +522,15 @@
         <Setter Property="FontSize" Value="35"/>
     </Style>
     
-    <Style TargetType="Label" x:Key="MaterialIcon">
+    <Style TargetType="Label" x:Key="FujiPickerIcon">
         <Setter Property="FontSize" Value="25"/>
         <Setter Property="FontFamily" Value="MaterialIcons"/>
-        <Setter Property="TextColor" Value="#A4CBAD"/>
     </Style>
     
     <!-- Modified system -->
     
     <Style TargetType="Button">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
+        <Setter Property="TextColor" Value="White" />
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource ControlColorLightLight}, Dark={StaticResource ControlColorDark}}"/>
         <Setter Property="FontFamily" Value="FontRegular"/>
         <Setter Property="FontSize" Value="14"/>
@@ -539,7 +575,7 @@
 
     
     <Style TargetType="Label">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MediumEmphasisTextColorLight}, Dark={StaticResource MediumEmphasisTextColorDark}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="FontRegular" />
         <Setter Property="FontSize" Value="17" />
@@ -549,7 +585,7 @@
                     <VisualState x:Name="Normal" />
                     <VisualState x:Name="Disabled">
                         <VisualState.Setters>
-                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource DisabledEmphasisTextColorLight}, Dark={StaticResource DisabledEmphasisTextColorDark}}" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>

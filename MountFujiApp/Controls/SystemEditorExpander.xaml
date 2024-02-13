@@ -9,7 +9,7 @@
              >
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            <Border  Style="{StaticResource PanelBorder}">
+            <Border  Style="{StaticResource Level2Panel}">
                 <VerticalStackLayout Spacing="10">
                     <HorizontalStackLayout Spacing="10">
                         

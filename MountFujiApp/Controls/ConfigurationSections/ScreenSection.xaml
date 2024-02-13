@@ -9,7 +9,7 @@
              x:DataType="vm:MainViewModel"
              x:Class="MountFuji.Controls.ConfigurationSections.ScreenSection">
     <controls1:SystemEditorExpander Title="Screen"  Expanded="{Binding SectionVisibility.ExpandScreenSection}">
-        <HorizontalStackLayout>
+        <HorizontalStackLayout Style="{StaticResource SystemSectionPanelRow}">
             <panes:AtariMonitorPane/>
             <panes:VdiResolutionPane />
             <panes:HatariScreenPane />
