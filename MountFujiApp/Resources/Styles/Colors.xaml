@@ -37,7 +37,19 @@
     <Color x:Key="DisabledEmphasisTextColorDark">#616161</Color>
     <Color x:Key="DisabledEmphasisTextColorLight">#212121</Color>
     
+    <Color x:Key="ButtonBackgroundColorDark">#21262d</Color>
+    <Color x:Key="ButtonBackgroundColorLight">#212121</Color>
+   
+    <Color x:Key="ButtonBorderColorDark">#2E333A</Color>
+    <Color x:Key="ButtonBorderColorLight">#212121</Color>
 
+    <!-- -->
+    <!-- <Color x:Key="ButtonTextColorDark">#c9d1d9</Color> -->
+    <!-- <Color x:Key="ButtonTextColorLight">#212121</Color> -->
+    <!-- -->
+
+    
+    
 
     <Color x:Key="WarningColorDark">#FFCAE8</Color>
     <Color x:Key="WarningColorLight">#7F3E4C</Color>
@@ -55,7 +67,7 @@
 
 
 
-    <Color x:Key="DeleteButtonDark">#EB5545</Color>
+    <Color x:Key="DeleteButtonDark">#B44435</Color>
     <Color x:Key="DeleteButtonLight">#EB4E3D</Color>
     
     <Color x:Key="PlaceHolderText">#ACACAC</Color>

@@ -422,9 +422,6 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Level1BgColorLight}, Dark={StaticResource Level1BgColorDark}}" />
         <Setter Property="Padding" Value="10"></Setter>
         <Setter Property="Margin" Value="0"></Setter>
-        <Setter Property="StrokeShape"  >
-            <RoundRectangle CornerRadius="15,15,15,15" />
-        </Setter>
     </Style>
     
     <Style TargetType="Rectangle" x:Key="DialogButtonsSeparator" >
@@ -486,7 +483,8 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontAttributes" Value="Italic" />
     </Style>
-
+    
+    
     <Style TargetType="Button" x:Key="MaterialButton">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MediumEmphasisTextColorLight}, Dark={StaticResource MediumEmphasisTextColorDark}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
@@ -527,14 +525,29 @@
         <Setter Property="FontFamily" Value="MaterialIcons"/>
     </Style>
     
+    <Style TargetType="Label" x:Key="Url">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MediumEmphasisTextColorLight}, Dark={StaticResource MediumEmphasisTextColorDark}}" />
+        <Setter Property="TextDecorations" Value="Underline"/>
+    </Style>
+    
+    <Style TargetType="Label" x:Key="DialogTypeIcon">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MediumEmphasisTextColorLight}, Dark={StaticResource MediumEmphasisTextColorDark}}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="MaterialIcons"/>
+        <Setter Property="FontSize" Value="100"/>
+    </Style>
+
+    
+    
     <!-- Modified system -->
     
     <Style TargetType="Button">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource HighEmphasisTextColorLight}, Dark={StaticResource Black}}" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource ControlColorLightLight}, Dark={StaticResource ControlColorDark}}"/>
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MediumEmphasisTextColorLight}, Dark={StaticResource MediumEmphasisTextColorDark}}" />
+        <Setter Property="BackgroundColor" Value="Transparent"/>
         <Setter Property="FontFamily" Value="FontRegular"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="BorderWidth" Value="0"/>
+        <Setter Property="BorderWidth" Value="2"/>
+        <Setter Property="BorderColor"  Value="{AppThemeBinding Light={StaticResource ButtonBorderColorLight}, Dark={StaticResource ButtonBorderColorDark}}" />
         <Setter Property="CornerRadius" Value="8"/>
         <Setter Property="Padding" Value="14,10"/>
         <Setter Property="HeightRequest" Value="35"/>
@@ -545,13 +558,14 @@
                     <VisualState x:Name="Normal" />
                     <VisualState x:Name="Disabled">
                         <VisualState.Setters>
-                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource DisabledEmphasisTextColorLight}, Dark={StaticResource DisabledEmphasisTextColorDark}}" />
-                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MediumEmphasisTextColorLight}, Dark={StaticResource MediumEmphasisTextColorDark}}" />
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource DisabledEmphasisTextColorLight}, Dark={StaticResource DisabledEmphasisTextColorDark}}" />
+                            <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource DisabledEmphasisTextColorLight}, Dark={StaticResource DisabledEmphasisTextColorDark}}" />
                         </VisualState.Setters>
                     </VisualState>
                     <VisualState x:Name="PointerOver" >
                         <VisualState.Setters>
-                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource HighEmphasisTextColorLight}, Dark={StaticResource White}}" />
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource HighEmphasisTextColorLight}, Dark={StaticResource HighEmphasisTextColorDark}}" />
+                            <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource HighEmphasisTextColorLight}, Dark={StaticResource HighEmphasisTextColorDark}}" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>

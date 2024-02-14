@@ -21,7 +21,7 @@
                    HorizontalOptions="Center"
                    Style="{StaticResource H1Label}" />
             
-            <Label FontFamily="MaterialIcons" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" TextColor="Goldenrod" FontSize="100"
+            <Label  HorizontalTextAlignment="Center" VerticalTextAlignment="Start" Style="{StaticResource DialogTypeIcon}"
                    Grid.Column="0" Grid.Row="1" Text="{x:Static controls1:IconFont.Arrow_circle_left}"
                    HorizontalOptions="Center"  />
             

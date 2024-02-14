@@ -20,7 +20,7 @@
                    HorizontalOptions="Center"
                    Style="{StaticResource H1Label}" />
             
-            <Label FontFamily="MaterialIcons" HorizontalTextAlignment="Center" TextColor="Goldenrod" FontSize="100"
+            <Label  HorizontalTextAlignment="Center" Style="{StaticResource DialogTypeIcon}"
                    Grid.Column="0" Grid.Row="1" Text="{x:Static controls1:IconFont.Delete_forever}"
                    HorizontalOptions="Center" />
             
