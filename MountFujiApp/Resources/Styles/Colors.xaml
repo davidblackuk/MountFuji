@@ -29,16 +29,14 @@
 
     
     <Color x:Key="HighEmphasisTextColorDark">#DEDEDE</Color>
-    <Color x:Key="HighEmphasisTextColorLight">#5856D6</Color>
+    <Color x:Key="HighEmphasisTextColorLight">#191919</Color>
    
     <Color x:Key="MediumEmphasisTextColorDark">#999999</Color>
-    <Color x:Key="MediumEmphasisTextColorLight">#9956D6</Color>
+    <Color x:Key="MediumEmphasisTextColorLight">#8D8D8D</Color>
     
     <Color x:Key="DisabledEmphasisTextColorDark">#616161</Color>
-    <Color x:Key="DisabledEmphasisTextColorLight">#212121</Color>
+    <Color x:Key="DisabledEmphasisTextColorLight">#BFBFBF</Color>
     
-    <Color x:Key="ButtonBackgroundColorDark">#21262d</Color>
-    <Color x:Key="ButtonBackgroundColorLight">#212121</Color>
    
     <Color x:Key="ButtonBorderColorDark">#2E333A</Color>
     <Color x:Key="ButtonBorderColorLight">#212121</Color>
@@ -49,7 +47,7 @@
     <!-- -->
 
     
-    
+    <Color x:Key="Transparent">#00000000</Color> 
 
     <Color x:Key="WarningColorDark">#FFCAE8</Color>
     <Color x:Key="WarningColorLight">#7F3E4C</Color>
