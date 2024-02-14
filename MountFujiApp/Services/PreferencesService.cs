@@ -44,9 +44,16 @@ public interface IPreferencesService
     Task Save();
 
     /// <summary>
-    /// Toggles the theme between ligh and dark modes
+    /// Toggles the theme between light and dark modes
     /// </summary>
     void ToggleTheme();
+
+    /// <summary>
+    /// Gets the current them to use, since this isn't a single variable but
+    /// a combination of several, the logic is encapsulated here in a single place.
+    /// </summary>
+    /// <returns>THe theme to use for the app</returns>
+    AppTheme GetTheme();
 }
 
 public class PreferencesService : IPreferencesService
@@ -83,7 +90,6 @@ public class PreferencesService : IPreferencesService
         log.LogInformation("Preference {Pref}: {Value}", "HatariApplication", Preferences.HatariApplication);
         log.LogInformation("Preference {Pref}: {Value}", "HatariConfigFile", Preferences.HatariConfigFile);
         log.LogInformation("Preference {Pref}: {Value}", "RomFolder", Preferences.RomFolder);
-        log.LogInformation("Preference {Pref}: {Value}", "Theme", Preferences.Theme);
     }
 
     /// <summary>
@@ -100,16 +106,27 @@ public class PreferencesService : IPreferencesService
     /// </summary>
     public void ToggleTheme()
     {
-        // When we first run toggle the preferences theme will be Unspecified, in that situation
-        // we set the theme to the current one, then the toggle will work
-        Preferences.Theme = Preferences.Theme == AppTheme.Unspecified
-            ? appResolver.Application.PlatformAppTheme
-            : Preferences.Theme;
+        var current = GetTheme();
         
         // Toggle the theme, store the result.
-        Preferences.Theme = (Preferences.Theme == AppTheme.Light) ? AppTheme.Dark : AppTheme.Light;
+        var next = (current == AppTheme.Light) ? AppTheme.Dark : AppTheme.Light;
         
         // Change the application theme
-        appResolver.Application.UserAppTheme = Preferences.Theme;
+        appResolver.Application.UserAppTheme = next;
+    }
+
+    /// <summary>
+    /// Gets the current them to use, since this isn't a single variable but
+    /// a combination of several, the logic is encapsulated here in a single place.
+    /// </summary>
+    /// <returns>THe theme to use for the app</returns>
+    public AppTheme GetTheme()
+    {
+        // When we first access the user theme, it Will be will be Unspecified, in that situation
+        // we get the theme to the current platform one.
+        return appResolver.Application.UserAppTheme == AppTheme.Unspecified
+            ? appResolver.Application.PlatformAppTheme
+            : appResolver.Application.UserAppTheme;
+        
     }
 }

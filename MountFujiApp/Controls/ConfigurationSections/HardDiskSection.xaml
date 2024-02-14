@@ -41,14 +41,14 @@
 
             <configurationSections:ConfigurationGroup Title="GEMDOS">
                 <VerticalStackLayout>
-                    <controls1:HardDiskPathEditor Title="Folder"
-                                                 BrowseDiskImageCommand="{Binding BrowseGemdosFolderCommand}"
-                                                 ClearDiskImageCommand="{Binding ClearGemdosFolderCommand}"
-                                                 DiskImagePath="{Binding SelectedConfiguration.GdosDriveOptions.GemdosFolder}" 
-                                                 PickerOpenIcon="{x:Static controls1:IconFont.Folder_open}"/>
+                    <controls1:UntitledPathEditor PlaceHolder="Select a GEMDOS folder (Optional)"
+                                                      BrowseDiskImageCommand="{Binding BrowseGemdosFolderCommand}"
+                                                      ClearDiskImageCommand="{Binding ClearGemdosFolderCommand}"
+                                                      DiskImagePath="{Binding SelectedConfiguration.GdosDriveOptions.GemdosFolder}" 
+                                                      PickerOpenIcon="{x:Static controls1:IconFont.Folder_open}"/>
 
 
-                    <VerticalStackLayout Margin="60,0,0,0">
+                    <VerticalStackLayout >
                         <HorizontalStackLayout>
                             <CheckBox VerticalOptions="Center"
                                       IsChecked="{Binding Path=SelectedConfiguration.GdosDriveOptions.AtariHostFilenameConversion}" />

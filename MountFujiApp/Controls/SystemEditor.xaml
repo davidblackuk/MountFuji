@@ -13,11 +13,10 @@
     <Border  Style="{StaticResource Level1Panel}">
         <Grid  IsVisible="{Binding HasSelectedConfig}" RowDefinitions="70, *">
             
-                <!-- <Label VerticalOptions="Center" Text="{Binding SelectedConfiguration.DisplayName}" Style="{StaticResource H1Label}"></Label> -->
-                <Entry   VerticalOptions="Center" Text="{Binding SelectedConfiguration.DisplayName}" Style="{StaticResource H1Entry}" />
+            <Entry   VerticalOptions="Center" Text="{Binding SelectedConfiguration.DisplayName}" Style="{StaticResource H1Entry}" />
             
             <ScrollView Grid.Row="1"  >
-                <VerticalStackLayout Spacing="10" Margin="0" Padding="0"  >
+                <VerticalStackLayout Spacing="10" Margin="20,0,20,0" >
                     <configurationSections:SystemSection />
                     <configurationSections:CpuSection />
                     <configurationSections:RomSection/>

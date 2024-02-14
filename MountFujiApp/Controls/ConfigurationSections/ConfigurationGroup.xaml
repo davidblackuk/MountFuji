@@ -5,7 +5,7 @@
              x:Class="MountFuji.Controls.ConfigurationSections.ConfigurationGroup">
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            <Border Style="{StaticResource Level3Panel}">
+            <Border Style="{StaticResource Level2Panel}"  Margin="0,0,0, 20">
                 <VerticalStackLayout Spacing="10">
                     <Label Text="{TemplateBinding Title}" Style="{StaticResource H3Label}"></Label>
                     <ContentPresenter />

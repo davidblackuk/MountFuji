@@ -64,15 +64,4 @@ public partial class ApplicationPreferences: ObservableObject
     /// </summary>
     [ObservableProperty] public string floppyDiskFolder;
     
-    /// <summary>
-    /// The theme setting is store for the duration of a run, it is not persisted. It
-    /// is picked up on start from the application config. So the app will always operate
-    /// on the system theme but can be swapped over to the alternate theme if the user so wishes
-    /// <para>
-    ///  I might revisit this in the future
-    /// </para>
-    /// </summary>
-    [property: JsonIgnore]
-    [ObservableProperty] public AppTheme theme;
-    
 }

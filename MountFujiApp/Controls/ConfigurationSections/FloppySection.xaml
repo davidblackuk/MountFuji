@@ -7,11 +7,12 @@
              xmlns:vm="clr-namespace:MountFuji.ViewModels"
              xmlns:controls1="using:MountFuji.Controls"
              xmlns:models1="using:MountFuji.Models"
+             xmlns:configurationSections="clr-namespace:MountFuji.Controls.ConfigurationSections"
              x:DataType="vm:MainViewModel"
 
              x:Class="MountFuji.Controls.ConfigurationSections.FloppySection">
 
-    <controls1:SystemEditorExpander Title="Floppy Drives" Expanded="{Binding SectionVisibility.ExpandFloppySection}">
+    <configurationSections:ConfigurationGroup Title="Floppy disks">
 
         <VerticalStackLayout>
 
@@ -63,7 +64,7 @@
                     <RadioButton Content="Auto" Value="{x:Static models1:DiskWriteProtection.Auto}" />
                 </HorizontalStackLayout>
         </VerticalStackLayout>
-    </controls1:SystemEditorExpander>
+    </configurationSections:ConfigurationGroup>
 </ContentView>
 
  

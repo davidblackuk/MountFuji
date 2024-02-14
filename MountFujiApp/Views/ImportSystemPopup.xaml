@@ -35,8 +35,8 @@
                 <Label HorizontalTextAlignment="Start" Style="{StaticResource H3Label}"
                        Text="Config file" Margin="0,10,0,0"/>
 
-                <controls1:ImportConfigPathEditor
-                    Title="Config file"
+                <controls1:UntitledPathEditor
+                    PlaceHolder="Please select a Hatari config file"
                     Margin="0,0, 15,0 "
                     DiskImagePath="{Binding FileName}"
                     ClearDiskImageCommand="{Binding ClearHatariConfigFileCommand}"

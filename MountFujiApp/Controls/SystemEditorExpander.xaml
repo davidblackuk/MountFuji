@@ -9,21 +9,10 @@
              >
     <ContentView.ControlTemplate>
         <ControlTemplate>
-            <Border  Style="{StaticResource Level2Panel}">
-                <VerticalStackLayout Spacing="10">
-                    <HorizontalStackLayout Spacing="10">
-                        
-                        <Button Style="{StaticResource InlineMaterialButton}"
-                                Text="{TemplateBinding ExpandedButtonIcon}" x:Name="ToggleExpand"
-                                Clicked="ToggleExpandedClicked"
-                                VerticalOptions="Center" 
-                               />
-                        <Label Text="{TemplateBinding Title}" Style="{StaticResource H2Label}" VerticalOptions="Center"></Label>
-                    </HorizontalStackLayout>
-                    <BoxView IsVisible="{TemplateBinding Expanded}" HeightRequest="1" Color="{StaticResource Gray600}"></BoxView>
-                    <ContentPresenter IsVisible="{TemplateBinding Expanded}" />
-                </VerticalStackLayout>
-            </Border>
+            <VerticalStackLayout Spacing="10" Margin="0">
+                <Label Text="{TemplateBinding Title}" Style="{StaticResource H2Label}" VerticalOptions="Center"></Label>
+                <ContentPresenter  />
+            </VerticalStackLayout>
         </ControlTemplate>
     </ContentView.ControlTemplate>
 </ContentView>

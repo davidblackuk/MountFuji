@@ -19,12 +19,12 @@ using Maui.BindableProperty.Generator.Core;
 
 namespace MountFuji.Controls;
 
-public partial class ImportConfigPathEditor : ContentView
+public partial class UntitledPathEditor : ContentView
 {
 #pragma warning disable CS0169
     
     [AutoBindable]
-    private readonly string title;
+    private readonly string placeHolder;
     
     [AutoBindable]
     private readonly string diskImagePath;
@@ -43,7 +43,7 @@ public partial class ImportConfigPathEditor : ContentView
     
 #pragma warning restore CS0169
 
-    public ImportConfigPathEditor()
+    public UntitledPathEditor()
     {
         InitializeComponent();
     }

@@ -348,7 +348,7 @@ public partial class MainViewModel : TinyViewModel
         OnPropertyChanged(nameof(ThemeIcon));
     }
 
-    public string ThemeIcon => preferencesService.Preferences.Theme == AppTheme.Dark ? IconFont.Dark_mode : IconFont.Light_mode;
+    public string ThemeIcon => preferencesService.GetTheme() == AppTheme.Dark ? IconFont.Dark_mode : IconFont.Light_mode;
 
 
     private bool CanRun()
