@@ -85,7 +85,7 @@ public partial class MainViewModel : TinyViewModel
     }
 
 
-   
+
     #region ----- ROM -----
 
     [RelayCommand()]
@@ -399,7 +399,17 @@ public partial class MainViewModel : TinyViewModel
 
     private void TimerTick(object sender, EventArgs e)
     {
-        MainThread.BeginInvokeOnMainThread(() => { SaveSystemsCommand.NotifyCanExecuteChanged(); });
+        
+        
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            // this should be backed out when MAUI fixes initial selection on windows
+            if (Systems is not null && Systems.Count > 0 && SelectedConfiguration is null)
+            {
+                SelectedConfiguration = Systems.First();
+            }
+            SaveSystemsCommand.NotifyCanExecuteChanged();
+        });
     }
 
     #endregion
