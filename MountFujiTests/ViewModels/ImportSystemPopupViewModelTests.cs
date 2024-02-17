@@ -95,7 +95,7 @@ public class ImportSystemPopupViewModelTests
         fujiFilePickerMock.Setup(x => x.PickFile(It.IsAny<string>(), It.IsAny<Action<string>>(), ""))
             .ReturnsAsync("hello");
         await sut.BrowseHatariConfigFileCommand.ExecuteAsync(null);
-        fujiFilePickerMock.Verify(x => x.PickFile(It.IsAny<string>(), It.IsAny<Action<string>>(), ""),
+        fujiFilePickerMock.Verify(x => x.PickFile(It.IsAny<string>(), It.IsAny<Action<string>>(), It.IsAny<string>()),
             Times.Once);
     }
 
@@ -106,7 +106,7 @@ public class ImportSystemPopupViewModelTests
 
         var sut = CreateSut();
         sut.DisplayName = "A display name";
-        fujiFilePickerMock.Setup(x => x.PickFile(It.IsAny<string>(), It.IsAny<Action<string>>(), ""))
+        fujiFilePickerMock.Setup(x => x.PickFile(It.IsAny<string>(), It.IsAny<Action<string>>(), It.IsAny<string>()))
             .Callback((string title, Action<string> action, string x) => action(expectedValue));
 
         sut.OkCommand.CanExecute(null).Should().BeFalse();
