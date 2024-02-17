@@ -16,6 +16,7 @@
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using Microsoft.Extensions.Logging;
 using FileSystemEntry = MountFuji.Models.FileSystemEntry;
 
 namespace MountFujiTests.ViewModels;
@@ -23,11 +24,12 @@ namespace MountFujiTests.ViewModels;
 public class FujiFilePickerPopupViewModelTests
 {
     private Mock<IPopupNavigation> popupNavigationMock;
-
+    private Mock<ILogger<FujiFilePickerPopupViewModel>> loggerMock;
     [SetUp]
     public void Setup()
     {
         popupNavigationMock = new Mock<IPopupNavigation>();
+        loggerMock = new Mock<ILogger<FujiFilePickerPopupViewModel>>();
     }
 
        
@@ -146,6 +148,6 @@ public class FujiFilePickerPopupViewModelTests
 
     private FujiFilePickerPopupViewModel CreateSut()
     {
-        return new FujiFilePickerPopupViewModel(popupNavigationMock.Object);
+        return new FujiFilePickerPopupViewModel(popupNavigationMock.Object, loggerMock.Object);
     }
 }

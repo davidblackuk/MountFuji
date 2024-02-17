@@ -77,7 +77,7 @@ public class PreferencesPopupViewModelTests
     }
 
     [Test]
-    [TestCase(null, false)]
+    [TestCase(null!, false)]
     [TestCase("", false)]
     [TestCase("/path/to/file", true)]
     public void OkCommand_CanExecute_ShouldNotBeTrueIfThereIsNoAppPathPresentInThePreferences(string path, bool expectedValue)
