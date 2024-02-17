@@ -444,28 +444,27 @@
     
     <Style TargetType="Label" x:Key="H1Label" BasedOn="{StaticResource HLabelBase}">
         <Setter Property="FontSize" Value="36" />
-        <Setter Property="HeightRequest" Value="40" />
     </Style>
 
     <Style TargetType="Entry" x:Key="H1Entry" >
         <Setter Property="FontSize" Value="36" />
-        <Setter Property="HeightRequest" Value="40" />
+        
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource HighEmphasisTextColorLight}, Dark={StaticResource HighEmphasisTextColorDark}}" />
     </Style>
     
     <Style TargetType="Label" x:Key="H2Label" BasedOn="{StaticResource HLabelBase}">
         <Setter Property="FontSize" Value="30" />
-        <Setter Property="HeightRequest" Value="40" />
+
     </Style>
     
     <Style TargetType="Label"  x:Key="H3Label" BasedOn="{StaticResource HLabelBase}">
         <Setter Property="FontSize" Value="24" />
-        <Setter Property="HeightRequest" Value="26" />
+     
     </Style>
 
     <Style TargetType="Label"  x:Key="H4Label" BasedOn="{StaticResource HLabelBase}">
         <Setter Property="FontSize" Value="18" />
-        <Setter Property="HeightRequest" Value="20" />
+
     </Style>
     
     <Style TargetType="Label"  x:Key="H3Offset" BasedOn="{StaticResource H3Label}">
