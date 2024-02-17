@@ -420,7 +420,7 @@
     
     <Style TargetType="Border" x:Key="DialogWindow">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Level1BgColorLight}, Dark={StaticResource Level1BgColorDark}}" />
-        <Setter Property="Padding" Value="10"></Setter>
+        <Setter Property="Padding" Value="0"></Setter>
         <Setter Property="Margin" Value="0"></Setter>
     </Style>
     
