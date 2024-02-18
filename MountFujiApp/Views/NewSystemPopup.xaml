@@ -38,11 +38,6 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:AtariConfigurationTemplate">
                                 <HorizontalStackLayout Padding="10" Style="{StaticResource ContentViewItem}">
-                                  
-                                    <!-- -->
-                                    <!-- <RoundRectangle CornerRadius="24" HeightRequest="48" WidthRequest="48" Fill="LightGray"/> -->
-                                    
-                                    
                                     <Frame HeightRequest="48"
                                            WidthRequest="48"
                                            CornerRadius="24"
@@ -52,7 +47,6 @@
                                            Margin="0">
                                         <Image Source="fujilogo.png" Aspect="AspectFit" />
                                     </Frame>
-
                                     
                                     <VerticalStackLayout Margin="15,0,0,0">
                                         <Label Text="{Binding DisplayName}" Style="{StaticResource H3Label}" />
