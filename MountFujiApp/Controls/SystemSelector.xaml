@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MountFuji.ViewModels"
@@ -10,46 +9,45 @@
              xmlns:controls1="using:MountFuji.Controls"
              x:Class="MountFuji.Controls.SystemSelector"
              x:DataType="vm:MainViewModel"
-             WidthRequest="460"
-             >
-    <Border  Style="{StaticResource Level1Panel}">
+             WidthRequest="460">
+    <Border Style="{StaticResource Level1Panel}">
         <Grid RowDefinitions="70,*,25">
-    
+
             <!-- we implement our own header and footer as we don't want em to scroll with the content -->
-            
+
             <Label VerticalOptions="Center" Grid.Column="0" Text="Systems" Style="{StaticResource H1Label}"></Label>
-            
+
             <HorizontalStackLayout Grid.Row="2">
                 <Label Text="Total: " Style="{StaticResource H2Label}"></Label>
                 <Label Text="{Binding NumberOfSystems}" Style="{StaticResource H2Label}"></Label>
             </HorizontalStackLayout>
-            
+
             <CollectionView SelectionMode="Single"
                             SelectedItem="{Binding SelectedConfiguration}"
-                            Grid.Row="1" 
-                            ItemsSource="{Binding Systems}" CanReorderItems="True" >
+                            Grid.Row="1"
+                            ItemsSource="{Binding Systems}" CanReorderItems="True">
                 <CollectionView.Behaviors>
-                      <toolkit:EventToCommandBehavior 
-                          EventName="ReorderCompleted" 
-                          Command="{Binding ReorderedCommand }" />
+                    <toolkit:EventToCommandBehavior
+                        EventName="ReorderCompleted"
+                        Command="{Binding ReorderedCommand }" />
                 </CollectionView.Behaviors>
 
-            <CollectionView.EmptyView>
-                <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
-                       FontSize="20"
-                       Text="To Get Started, you can create a new system using the + button in the header bar">
-                </Label>
-            </CollectionView.EmptyView>
-            
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:AtariConfiguration">
-                    <controls1:SystemSelectorEntry  Style="{StaticResource ContentViewItem}"/>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-            
-            
-        </CollectionView>
-            
+                <CollectionView.EmptyView>
+                    <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           FontSize="20"
+                           Text="To Get Started, you can create a new system using the + button in the header bar">
+                    </Label>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:AtariConfiguration">
+                        <controls1:SystemSelectorEntry Style="{StaticResource ContentViewItem}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+
+            </CollectionView>
+
         </Grid>
     </Border>
 </ContentView>

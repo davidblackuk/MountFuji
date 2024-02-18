@@ -39,8 +39,21 @@
                         <DataTemplate x:DataType="models:AtariConfigurationTemplate">
                                 <HorizontalStackLayout Padding="10" Style="{StaticResource ContentViewItem}">
                                   
+                                    <!-- -->
+                                    <!-- <RoundRectangle CornerRadius="24" HeightRequest="48" WidthRequest="48" Fill="LightGray"/> -->
+                                    
+                                    
+                                    <Frame HeightRequest="48"
+                                           WidthRequest="48"
+                                           CornerRadius="24"
+                                           HorizontalOptions="Center"
+                                           IsClippedToBounds="True"
+                                           Padding="0"
+                                           Margin="0">
+                                        <Image Source="fujilogo.png" Aspect="AspectFit" />
+                                    </Frame>
 
-                                    <RoundRectangle CornerRadius="24" HeightRequest="48" WidthRequest="48" Fill="LightGray"/>
+                                    
                                     <VerticalStackLayout Margin="15,0,0,0">
                                         <Label Text="{Binding DisplayName}" Style="{StaticResource H3Label}" />
                                         <Label Padding="0,5,0,0">
