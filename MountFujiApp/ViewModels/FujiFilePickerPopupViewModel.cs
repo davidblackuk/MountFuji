@@ -106,6 +106,7 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
                     IgnoreInaccessible = true,
                     RecurseSubdirectories = false,
                 });
+                files = Directory.GetFiles(folder);
 
             }
             catch (Exception e)
