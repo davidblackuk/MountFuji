@@ -6,6 +6,8 @@
                  xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
                  xmlns:models="clr-namespace:MountFuji.Models"
                  x:Class="MountFuji.Views.FujiFilePickerPopup"
+                 x:DataType="vm:FujiFilePickerPopupViewModel"
+
                  Title="Fuji picker" BackgroundColor="#80000000"  CloseWhenBackgroundIsClicked="False" >
     
     

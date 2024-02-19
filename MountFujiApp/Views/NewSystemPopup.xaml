@@ -7,6 +7,7 @@
                   xmlns:models="clr-namespace:MountFuji.Models"
                   xmlns:converters="using:MountFuji.Converters"
                   xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
+                  x:DataType="vm:NewSystemViewModelViewModel"
 
                   x:Class="MountFuji.Views.NewSystemPopup"
                   Title="NewSystemPopup" BackgroundColor="#80000000"  CloseWhenBackgroundIsClicked="False" >
