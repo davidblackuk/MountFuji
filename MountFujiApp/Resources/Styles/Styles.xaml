@@ -347,6 +347,7 @@
     
     <!-- ========================== My Styles  ========================== -->
     
+
     <Style TargetType="HorizontalStackLayout" x:Key="ContentViewItem">
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>

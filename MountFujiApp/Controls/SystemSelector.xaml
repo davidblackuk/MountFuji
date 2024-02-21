@@ -16,7 +16,7 @@
             <!-- we implement our own header and footer as we don't want em to scroll with the content -->
 
             <Label VerticalOptions="Center" Grid.Column="0" Text="Systems" Style="{StaticResource H1Label}"></Label>
-            
+
             <CollectionView SelectionMode="Single"
                             SelectedItem="{Binding SelectedConfiguration}"
                             Grid.Row="1"
@@ -28,10 +28,21 @@
                 </CollectionView.Behaviors>
 
                 <CollectionView.EmptyView>
-                    <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
-                           FontSize="20"
-                           Text="To Get Started, you can create a new system using the + button in the header bar">
-                    </Label>
+                    <Grid RowDefinitions="*">
+                        <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label HorizontalTextAlignment="Center"
+                                   FontSize="25" Text="Getting started" FontFamily="FontBold" />
+                            <Label HorizontalTextAlignment="Center"
+                                   FontSize="20"
+                                   Text="Click the cog icon above to edit your preferences and set the Hatari application and config file paths. " />
+                            <Label HorizontalTextAlignment="Center"
+                                   FontSize="20" Text="You can also set the default folders for ROMs, floppies etc." />
+                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                                   Text="Then you can create a new system using the + button in the header bar"
+                                   FontSize="20" />
+
+                        </VerticalStackLayout>
+                    </Grid>
                 </CollectionView.EmptyView>
 
                 <CollectionView.ItemTemplate>
