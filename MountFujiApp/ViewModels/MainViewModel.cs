@@ -77,9 +77,11 @@ public partial class MainViewModel : TinyViewModel
 
         RunCommand.NotifyCanExecuteChanged();
 
+        // Setup our one shot timer to initialize selected item and fix that issue on windows
         timer = Application.Current.Dispatcher.CreateTimer();
-        timer.Interval = TimeSpan.FromSeconds(2);
-        timer.Tick += TimerTick;
+        timer.Interval = TimeSpan.FromSeconds(1);
+        timer.IsRepeating = false;
+        timer.Tick += SingleShotTimerTick;
         timer.Start();
         return base.OnFirstAppear();
     }
@@ -265,7 +267,11 @@ public partial class MainViewModel : TinyViewModel
         await popupNavigation.PushAsync(popup);
     }
     
-    [RelayCommand(CanExecute = nameof(SaveNeeded))]
+    /// <summary>
+    /// Saves the systems I removed the can execute check as I'm worried that timer based check
+    /// was causing crashes
+    /// </summary>
+    [RelayCommand]
     private async Task SaveSystems()
     {
         await systemsService.Save();
@@ -397,10 +403,8 @@ public partial class MainViewModel : TinyViewModel
     }
 
 
-    private void TimerTick(object sender, EventArgs e)
+    private void SingleShotTimerTick(object sender, EventArgs e)
     {
-        
-        
         MainThread.BeginInvokeOnMainThread(() =>
         {
             // this should be backed out when MAUI fixes initial selection on windows
@@ -408,7 +412,6 @@ public partial class MainViewModel : TinyViewModel
             {
                 SelectedConfiguration = Systems.First();
             }
-            SaveSystemsCommand.NotifyCanExecuteChanged();
         });
     }
 
