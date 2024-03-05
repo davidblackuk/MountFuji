@@ -89,7 +89,7 @@ public class NewSystemViewModelViewModelTests
     
     
     [Test]
-    public async Task SelectionChangedCommand_WhenInvoked_ShouldSetNameToTheSelectedTemplateName()
+    public void SelectionChangedCommand_WhenInvoked_ShouldSetNameToTheSelectedTemplateName()
     {
         var sut = CreateSut();
         var expectedValue = "The name";

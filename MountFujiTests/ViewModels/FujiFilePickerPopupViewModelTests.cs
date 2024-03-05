@@ -142,7 +142,7 @@ public class FujiFilePickerPopupViewModelTests
         
         await sut.SelectionChangedCommand.ExecuteAsync(null);
         var expectedFolder = Directory.GetParent(initialFolder);
-        sut.CurrentFolder.Should().Be(expectedFolder.FullName);
+        sut.CurrentFolder.Should().Be(expectedFolder?.FullName);
     }
     
 

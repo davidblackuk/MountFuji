@@ -18,6 +18,7 @@
 
 using System.Configuration;
 using Microsoft.Extensions.Logging;
+using Mopups.Pages;
 using MountFuji;
 using MountFuji.Views;
 
@@ -315,7 +316,7 @@ public class MainViewModelTests
         
         await sut.EditPreferencesCommand.ExecuteAsync(null);
         
-        popupNavigationMock.Verify(n => n.PushAsync(null, true), Times.Once);
+        popupNavigationMock.Verify(n => n.PushAsync(It.IsAny<PopupPage>(), true), Times.Once);
     }
 
     [Test]
