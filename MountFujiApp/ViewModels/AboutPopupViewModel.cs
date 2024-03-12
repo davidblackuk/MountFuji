@@ -27,8 +27,6 @@ public partial class AboutPopupViewModel: TinyViewModel
     public string BuildInfo => AppInfo.BuildString;
     public string MountFujiFolder => persistance.MountFujiFolder;
     
-    public string P => Path.Combine(FileSystem.AppDataDirectory, "fuji");
-    
     public AboutPopupViewModel(IPopupNavigation popupNavigation, IPersistance persistance)
     {
         this.popupNavigation = popupNavigation;
