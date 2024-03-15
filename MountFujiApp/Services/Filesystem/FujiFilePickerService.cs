@@ -65,7 +65,8 @@ public class FujiFilePickerService : IFujiFilePickerService
             if (complete is not null & popup.ViewModel.Confirmed && pickerType == PickerType.File)
             {
                 lastFolderAccessed = popup.ViewModel.CurrentFolder;
-                complete(popup.ViewModel.SelectedEntry.Path);
+                // TODO selected file i guess
+                complete(popup.ViewModel.SelectedFile.Path);
             }
             else  if (complete is not null & popup.ViewModel.Confirmed && pickerType == PickerType.Folder)
             {

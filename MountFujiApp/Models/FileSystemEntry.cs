@@ -25,20 +25,15 @@ public enum EntryType
 
     ParentNavigation,
     Folder,
-    File
-    
+    File,
+    Null
 }
 
-public class FileSystemEntry
+public class FileSystemEntry(string path, EntryType entryType)
 {
-    public string Path { get; set; }
-    public EntryType EntryType { get; private set; }
-    
-    public FileSystemEntry(string path, EntryType entryType)
-    {
-        this.Path = path;
-        this.EntryType = entryType;
-    }
+    public static FileSystemEntry Null = new FileSystemEntry("",EntryType.Null);
+    public string Path { get; set; } = path;
+    public EntryType EntryType { get; private set; } = entryType;
 
     public string DisplayName => (EntryType == EntryType.ParentNavigation) ? ".." : new DirectoryInfo(Path).Name;
 
@@ -47,4 +42,13 @@ public class FileSystemEntry
     public bool IsParentNavigation => EntryType == EntryType.ParentNavigation;
     
     public string Icon => (EntryType == EntryType.Folder || EntryType == EntryType.ParentNavigation) ? IconFont.Folder_open : IconFont.Description;
+}
+
+public class FileSystemDrive(string path, string displayName)
+{
+    public string Path { get; set; } = path;
+
+    public string DisplayName { get; set; } = displayName;
+
+    public string Icon => IconFont.Folder_special;
 }

@@ -28,7 +28,12 @@ public static class StratergiesWireUp
     /// <param name="services"></param>
     public static void AddStrategies(this IServiceCollection services)
     {
-
+        // I don't like this approach and prefer adding the strategy to the platform specific 
+        // projects, BUT, when unit testing we use net8 as a platform and that doesn't have
+        // a platform folder in the project and so its build fails.
+        //
+        // But once nasty #if here is better than smearing it all over the code
+        
 #if MACCATALYST
         AddMacStrategies(services);
 #elif WINDOWS
@@ -42,11 +47,13 @@ public static class StratergiesWireUp
     private static void AddMacStrategies(IServiceCollection services)
     {
         services.AddTransient<IAppSelectorStrategy, MacOsAppSelectorStrategy>();
+        services.AddTransient<IDriveRetrievalStrategy, MacOsDriveRetrievalStrategy>();
     }
 
     private static void AddWindowsStrategies(IServiceCollection services)
     {
         services.AddTransient<IAppSelectorStrategy, WindowsAppSelectorStrategy>();
+        services.AddTransient<IDriveRetrievalStrategy, WindowsDriveRetrievalStrategy>();
     }
 
 

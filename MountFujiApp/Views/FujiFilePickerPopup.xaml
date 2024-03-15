@@ -1,63 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                 xmlns:vm="clr-namespace:MountFuji.ViewModels"
-                 xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
-                 xmlns:models="clr-namespace:MountFuji.Models"
-                 x:Class="MountFuji.Views.FujiFilePickerPopup"
-                 x:DataType="vm:FujiFilePickerPopupViewModel"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:vm="clr-namespace:MountFuji.ViewModels"
+                  xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+                  xmlns:models="clr-namespace:MountFuji.Models"
+                  x:Class="MountFuji.Views.FujiFilePickerPopup"
+                  x:DataType="vm:FujiFilePickerPopupViewModel"
 
-                 Title="Fuji picker" BackgroundColor="#80000000"  CloseWhenBackgroundIsClicked="False" >
-    
-    
-    <Border WidthRequest="850" HeightRequest="635"  Style="{StaticResource DialogWindow}">
+                  Title="Fuji picker" BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
+
+
+    <Border WidthRequest="850" HeightRequest="635" Style="{StaticResource DialogWindow}">
         <Grid RowDefinitions="50,25,480,2,60" Margin="10">
-            <Label 
+            <Label
                 Grid.Row="0"
                 Grid.Column="0"
-    
+
                 Text="{Binding Title}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 Style="{StaticResource H1Label}" />
-            
-                <HorizontalStackLayout Grid.Row="1">
-                    <Label Text="Folder: "></Label>
-                    <Label Text="{Binding CurrentFolder}"></Label>
-                </HorizontalStackLayout>
-            
-                <CollectionView
-                    SelectionMode="Single"
-                    SelectedItem="{Binding SelectedEntry}"
-                    ItemsSource="{Binding Entries}"
-                    
-                    Grid.Row="2"
-                    Grid.ColumnSpan="3"
-                    
-                    SelectionChangedCommand="{Binding SelectionChangedCommand}"
-                    >
-                  
+
+            <HorizontalStackLayout Grid.Row="1">
+                <Label Text="Folder: "></Label>
+                <Label Text="{Binding CurrentFolder}"></Label>
+            </HorizontalStackLayout>
+
+            <Grid Grid.ColumnSpan="3" Grid.Row="2" ColumnDefinitions="220,2,288,2,288">
+
+                <!-- Dividers -->
+                <Rectangle Style="{StaticResource DialogButtonsSeparator}" Grid.Column="1"></Rectangle>
+                <Rectangle Style="{StaticResource DialogButtonsSeparator}" Grid.Column="3"></Rectangle>
+                
+                
+                <!-- Drives list -->
+                <CollectionView Grid.Column="0"
+                                SelectionMode="Single"
+                                SelectedItem="{Binding SelectedDrive}"
+                                ItemsSource="{Binding Drives}"
+                                >
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:FileSystemDrive">
+                            <HorizontalStackLayout Style="{StaticResource ContentViewItem}">
+                                <HorizontalStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Path=DriveTappedCommand, Source={RelativeSource AncestorType={x:Type vm:FujiFilePickerPopupViewModel}}}"
+                                        CommandParameter="{Binding .}" />
+                                </HorizontalStackLayout.GestureRecognizers>
+                                <Label Text="{Binding Icon}" Style="{StaticResource FujiPickerIcon}"
+                                       VerticalOptions="Center" />
+                                <Label Text="{Binding DisplayName}" FontSize="20" VerticalOptions="Center"
+                                       Margin="10,0,0,0" />
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Folder list -->
+                <CollectionView Grid.Column="2"
+                                SelectionMode="Single"
+                                SelectedItem="{Binding SelectedFolder}"
+                                ItemsSource="{Binding Folders}"
+                                SelectionChangedCommand="{Binding SelectedFolderChangedCommand}"
+                                >
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:FileSystemEntry">
                             <HorizontalStackLayout Style="{StaticResource ContentViewItem}" >
-                                <Label  Text="{Binding Icon}" Style="{StaticResource FujiPickerIcon}" VerticalOptions="Center"/>
-                                <Label Text="{Binding DisplayName}" FontSize="20" VerticalOptions="Center" Margin="10,0,0,0"/>
+                                <Label Text="{Binding Icon}" Style="{StaticResource FujiPickerIcon}"
+                                       VerticalOptions="Center" />
+                                <Label Text="{Binding DisplayName}" FontSize="20" VerticalOptions="Center"
+                                       Margin="10,0,0,0" />
                             </HorizontalStackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
                 
-            <Rectangle Grid.Row="3"   Style="{StaticResource DialogButtonsSeparator}"></Rectangle>
+                <!-- File list -->
+                <CollectionView Grid.Column="4"
+                                SelectionMode="Single"
+                                SelectedItem="{Binding SelectedFile}"
+                                ItemsSource="{Binding Files}"
+                                SelectionChangedCommand="{Binding SelectedFileChangedCommand}">
 
-           
-            <HorizontalStackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:FileSystemEntry">
+                            <HorizontalStackLayout Style="{StaticResource ContentViewItem}">
+                                <Label Text="{Binding Icon}" Style="{StaticResource FujiPickerIcon}"
+                                       VerticalOptions="Center" />
+                                <Label Text="{Binding DisplayName}" FontSize="20" VerticalOptions="Center"
+                                       Margin="10,0,0,0" />
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                
+                
+            </Grid>
+            <Rectangle Grid.Row="3" Style="{StaticResource DialogButtonsSeparator}"></Rectangle>
+
+
+            <HorizontalStackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End">
                 <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />
                 <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,0,0" />
             </HorizontalStackLayout>
         </Grid>
     </Border>
-    
-    
-    
+
+
 </mopups:PopupPage>
