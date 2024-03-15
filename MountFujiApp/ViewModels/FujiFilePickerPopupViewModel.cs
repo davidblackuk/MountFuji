@@ -16,7 +16,9 @@
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using System.Collections.ObjectModel;
 using Microsoft.Extensions.Logging;
+using MountFuji.Strategies;
 
 namespace MountFuji.ViewModels;
 
@@ -31,6 +33,7 @@ public enum PickerType
 /// </summary>
 public partial class FujiFilePickerPopupViewModel: TinyViewModel
 {
+    private readonly IDriveRetrievalStrategy driveRetrievalStrategy;
     private readonly IPopupNavigation popupNavigation;
     private readonly ILogger<FujiFilePickerPopupViewModel> log;
 
@@ -39,17 +42,26 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
     [ObservableProperty] public string currentFolder;
     [ObservableProperty] private string title;
     [ObservableProperty] private PickerType pickerType;
-    [ObservableProperty] private IEnumerable<FileSystemEntry> entries = new List<FileSystemEntry>();
     
+    [ObservableProperty] private IEnumerable<FileSystemEntry> folders = new List<FileSystemEntry>();
     [NotifyCanExecuteChangedFor(nameof(MountFuji.ViewModels.FujiFilePickerPopupViewModel.OkCommand))]
-    [ObservableProperty] private FileSystemEntry selectedEntry;
+    [ObservableProperty] private FileSystemEntry selectedFolder;
+
+    [ObservableProperty] private IEnumerable<FileSystemDrive> drives = new List<FileSystemDrive>();
+    [NotifyCanExecuteChangedFor(nameof(MountFuji.ViewModels.FujiFilePickerPopupViewModel.OkCommand))]
+    [ObservableProperty] private FileSystemDrive selectedDrive;
+    
+    [ObservableProperty] private IEnumerable<FileSystemEntry> files = new List<FileSystemEntry>();
+    [NotifyCanExecuteChangedFor(nameof(MountFuji.ViewModels.FujiFilePickerPopupViewModel.OkCommand))]
+    [ObservableProperty] private FileSystemEntry selectedFile = FileSystemEntry.Null;
 
 
     /// <summary>
     /// The view model for the FujiFilePickerPopup View.
     /// </summary>
-    public FujiFilePickerPopupViewModel(IPopupNavigation popupNavigation, ILogger<FujiFilePickerPopupViewModel> log)
+    public FujiFilePickerPopupViewModel(IDriveRetrievalStrategy driveRetrievalStrategy, IPopupNavigation popupNavigation, ILogger<FujiFilePickerPopupViewModel> log)
     {
+        this.driveRetrievalStrategy = driveRetrievalStrategy;
         this.popupNavigation = popupNavigation;
         this.log = log;
     }
@@ -60,7 +72,18 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
     /// <param name="initialFolder">The initial folder to set.</param>
     public void SetInitialFolder(string initialFolder)
     {
+        FillDriveList();
         SetCurrentWorkingDirectory(initialFolder);
+    }
+
+    /// <summary>
+    /// Sets the drive list, on mac this is root mounted external drives, on windows this is all root drives c:, d: etc
+    /// </summary>
+    /// <exception cref="NotImplementedException"></exception>
+    private void FillDriveList()
+    {
+        Drives = driveRetrievalStrategy.RetrieveDrives();
+        SelectedDrive = Drives.First();
     }
 
 
@@ -71,6 +94,13 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
     private void SetCurrentWorkingDirectory(string folder)
     {
         CurrentFolder = folder;
+        InitializeFolders(folder);
+        InitializeFiles(folder);
+    }
+
+    private void InitializeFolders(string folder)
+    {
+
         List<FileSystemEntry> all = new List<FileSystemEntry>();
 
         string[] dirs = [];
@@ -88,16 +118,18 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
         {
             all.Add(new FileSystemEntry(folder, EntryType.ParentNavigation));
         }
-        
-        
         Array.Sort(dirs, String.Compare);
         all.AddRange(dirs.Select(dir => new FileSystemEntry(dir, EntryType.Folder)));
-
+        Folders = all.ToArray();
+    }
+    
+    private void InitializeFiles(string folder)
+    {
         if (PickerType == PickerType.File)
         {
-            string [] files = [];
-            // TODO is the *.* on windows and * on mac???
+            List<FileSystemEntry> all = new List<FileSystemEntry>();
 
+            string [] files = [];
             try
             {
                 files = Directory.GetFiles(folder, "*", new EnumerationOptions()
@@ -107,7 +139,6 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
                     RecurseSubdirectories = false,
                 });
                 files = Directory.GetFiles(folder);
-
             }
             catch (Exception e)
             {
@@ -117,8 +148,8 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
   
             Array.Sort(files, String.Compare);
             all.AddRange(files.Select(dir => new FileSystemEntry(dir, EntryType.File)));
+            Files = all.ToArray();
         }
-        Entries = all.ToArray();
     }
 
     /// <summary>
@@ -126,26 +157,43 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
     /// </summary>
     /// <returns>A task representing the completion of the selection changed event.</returns>
     [RelayCommand]
-    private Task SelectionChanged()
+    private Task SelectedFolderChanged()
     {
-        switch (SelectedEntry.EntryType)
+        SelectedFile = FileSystemEntry.Null;
+        if (SelectedFolder.EntryType == EntryType.ParentNavigation)
         {
-            case EntryType.ParentNavigation:
-                DirectoryInfo info = new DirectoryInfo(SelectedEntry.Path);
-                if (info.Parent != null)
-                {
-                    SetCurrentWorkingDirectory(info.Parent.FullName);
-                }
-                break;
-            case EntryType.Folder:
-                SetCurrentWorkingDirectory(SelectedEntry.Path);
-                break;
-            case EntryType.File:
-                break;
+            DirectoryInfo info = new DirectoryInfo(SelectedFolder.Path);
+            if (info.Parent != null)
+            {
+                SetCurrentWorkingDirectory(info.Parent.FullName);
+            }
+        }
+        else
+        {
+            SetCurrentWorkingDirectory(SelectedFolder.Path);
         }
 
         return Task.CompletedTask;
     }
+
+    [RelayCommand]
+    private Task SelectedFileChanged()
+    {
+
+        return Task.CompletedTask;
+    }
+    
+    
+    [RelayCommand]
+    private Task DriveTapped(FileSystemDrive selectedDrive)
+    {
+        SelectedFile = FileSystemEntry.Null;
+        SelectedDrive = selectedDrive;
+        SetCurrentWorkingDirectory(selectedDrive.Path);
+        return Task.CompletedTask;
+    }
+    
+    
 
     /// <summary>
     /// Cancels the current operation and closes the popup.
@@ -178,7 +226,8 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
     {
         if (this.PickerType == PickerType.File)
         {
-            return SelectedEntry != null && SelectedEntry.EntryType == EntryType.File;
+            
+            return SelectedFile != FileSystemEntry.Null;
         }
         return true;
     }
