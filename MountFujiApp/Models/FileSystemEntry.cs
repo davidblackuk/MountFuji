@@ -31,11 +31,23 @@ public enum EntryType
 
 public class FileSystemEntry(string path, EntryType entryType)
 {
-    public static FileSystemEntry Null = new FileSystemEntry("",EntryType.Null);
+    public static FileSystemEntry Null = new FileSystemEntry(null, EntryType.Null);
     public string Path { get; set; } = path;
     public EntryType EntryType { get; private set; } = entryType;
 
-    public string DisplayName => (EntryType == EntryType.ParentNavigation) ? ".." : new DirectoryInfo(Path).Name;
+    public string DisplayName
+    {
+        get
+        {
+            if (EntryType == EntryType.ParentNavigation)
+            {
+                return "..";
+            }
+            
+            // We need to handle a null path as the Null FilesystemEntry does not have a path
+            return Path is not null ? new DirectoryInfo(Path).Name : String.Empty;
+        }
+    }
 
     public bool IsDirectory => EntryType == EntryType.Folder;
 
@@ -51,4 +63,18 @@ public class FileSystemDrive(string path, string displayName)
     public string DisplayName { get; set; } = displayName;
 
     public string Icon => IconFont.Folder_special;
+}
+
+public class BreadcrumbEntry(string path)
+{
+    public string Path { get; set; } = path;
+
+    public string DisplayName => new DirectoryInfo(Path).Name;
+
+    public bool IsRootFolder { get; set; }
+    public bool IsNonRootFolder => !IsRootFolder;
+
+    public bool IsTerminalFolder { get; set; }
+
+    public bool IsNonTerminalFolder => !IsTerminalFolder;
 }

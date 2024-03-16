@@ -132,7 +132,7 @@ public partial class MainViewModel : TinyViewModel
     [RelayCommand()]
     private async Task BrowseAcsiDiskImage(int diskId)
     {
-        await fujiFilePicker.PickFile("ASCI Disk Image",
+        await fujiFilePicker.PickFile("ACSI Disk Image",
             (filename) =>
                 DiskImagePathsExtensions.SetImagePath((AcsiScsiDiskOptions)SelectedConfiguration.AcsiImagePaths, diskId,
                     filename),
