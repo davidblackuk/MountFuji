@@ -537,7 +537,21 @@
         <Setter Property="FontSize" Value="100"/>
     </Style>
 
-    
+    <Style TargetType="Label" x:Key="BreadCrumbFolder">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="PointerOver" >
+                        <VisualState.Setters>
+                            <Setter Property="TextDecorations" Value="Underline"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
     
     <!-- Modified system -->
     

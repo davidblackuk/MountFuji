@@ -35,6 +35,7 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
 {
     private readonly IDriveRetrievalStrategy driveRetrievalStrategy;
     private readonly IPopupNavigation popupNavigation;
+    private readonly IFileSystemService fileSystem;
     private readonly ILogger<FujiFilePickerPopupViewModel> log;
 
     public bool Confirmed { get; set; }
@@ -54,15 +55,18 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
     [ObservableProperty] private IEnumerable<FileSystemEntry> files = new List<FileSystemEntry>();
     [NotifyCanExecuteChangedFor(nameof(MountFuji.ViewModels.FujiFilePickerPopupViewModel.OkCommand))]
     [ObservableProperty] private FileSystemEntry selectedFile = FileSystemEntry.Null;
+    
+    [ObservableProperty] private IEnumerable<BreadcrumbEntry> breadcrumb = new List<BreadcrumbEntry>();
 
 
     /// <summary>
     /// The view model for the FujiFilePickerPopup View.
     /// </summary>
-    public FujiFilePickerPopupViewModel(IDriveRetrievalStrategy driveRetrievalStrategy, IPopupNavigation popupNavigation, ILogger<FujiFilePickerPopupViewModel> log)
+    public FujiFilePickerPopupViewModel(IDriveRetrievalStrategy driveRetrievalStrategy, IPopupNavigation popupNavigation, IFileSystemService fileSystem, ILogger<FujiFilePickerPopupViewModel> log)
     {
         this.driveRetrievalStrategy = driveRetrievalStrategy;
         this.popupNavigation = popupNavigation;
+        this.fileSystem = fileSystem;
         this.log = log;
     }
 
@@ -74,6 +78,7 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
     {
         FillDriveList();
         SetCurrentWorkingDirectory(initialFolder);
+
     }
 
     /// <summary>
@@ -94,66 +99,19 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
     private void SetCurrentWorkingDirectory(string folder)
     {
         CurrentFolder = folder;
-        InitializeFolders(folder);
-        InitializeFiles(folder);
-    }
+        log.LogInformation("SetCurrentWorkingDirectory - setting folders");
 
-    private void InitializeFolders(string folder)
-    {
-
-        List<FileSystemEntry> all = new List<FileSystemEntry>();
-
-        string[] dirs = [];
-        try
-        {
-            dirs = Directory.GetDirectories(folder);
-        }
-        catch (Exception e)
-        {
-            log.LogError(e, "Could not iterate folders in the Fuji picker");
-        }
-
-        DirectoryInfo info = new DirectoryInfo(folder);
-        if (info.Parent != null)
-        {
-            all.Add(new FileSystemEntry(folder, EntryType.ParentNavigation));
-        }
-        Array.Sort(dirs, String.Compare);
-        all.AddRange(dirs.Select(dir => new FileSystemEntry(dir, EntryType.Folder)));
-        Folders = all.ToArray();
-    }
-    
-    private void InitializeFiles(string folder)
-    {
+        Folders = fileSystem.GetChildFolders(folder);
+        Breadcrumb = fileSystem.GetBreadCrumbFromRoot(folder);
         if (PickerType == PickerType.File)
         {
-            List<FileSystemEntry> all = new List<FileSystemEntry>();
-
-            string [] files = [];
-            try
-            {
-                files = Directory.GetFiles(folder, "*", new EnumerationOptions()
-                {
-                    ReturnSpecialDirectories = false,
-                    IgnoreInaccessible = true,
-                    RecurseSubdirectories = false,
-                });
-                files = Directory.GetFiles(folder);
-            }
-            catch (Exception e)
-            {
-                log.LogError(e, "Could not iterate files in the Fuji picker");
-            }
-            
-  
-            Array.Sort(files, String.Compare);
-            all.AddRange(files.Select(dir => new FileSystemEntry(dir, EntryType.File)));
-            Files = all.ToArray();
+            Files = fileSystem.GetChildFiles(folder);
         }
     }
 
     /// <summary>
-    /// Handles the selection changed event for the file picker.
+    /// Handles the event when the selected folder changes. Updates the list of sub-folders and contained files,
+    /// then sets the selected file to none
     /// </summary>
     /// <returns>A task representing the completion of the selection changed event.</returns>
     [RelayCommand]
@@ -176,6 +134,10 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
         return Task.CompletedTask;
     }
 
+    /// <summary>
+    /// Handles the event when the selected file changes. Updates selected file property
+    /// </summary>
+    /// <returns>A task representing the completion of the selection changed event.</returns>
     [RelayCommand]
     private Task SelectedFileChanged()
     {
@@ -217,6 +179,11 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
         await popupNavigation.PopAsync();
     }
 
+    [RelayCommand]
+    private void BreadCrumbSelected(BreadcrumbEntry entry)
+    {
+        SetCurrentWorkingDirectory(entry.Path);
+    }
 
     /// <summary>
     /// Checks if the data is valid for the file picker popup and that the OK Button should be enabled.

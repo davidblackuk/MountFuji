@@ -34,6 +34,7 @@ public static class ServicesWireUp
         services.AddSingleton<IFujiFilePickerService, FujiFilePickerService>();
         services.AddTransient<IPersistance, Persistance>();
         services.AddTransient<IConfigFileService, ConfigFileService>();
+        services.AddTransient<IFileSystemService, FileSystemService>();
     }
 
 }

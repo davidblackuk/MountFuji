@@ -5,14 +5,15 @@
                   xmlns:vm="clr-namespace:MountFuji.ViewModels"
                   xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
                   xmlns:models="clr-namespace:MountFuji.Models"
+                  xmlns:controls="using:MountFuji.Controls"
                   x:Class="MountFuji.Views.FujiFilePickerPopup"
                   x:DataType="vm:FujiFilePickerPopupViewModel"
 
                   Title="Fuji picker" BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
 
 
-    <Border WidthRequest="850" HeightRequest="635" Style="{StaticResource DialogWindow}">
-        <Grid RowDefinitions="50,25,480,2,60" Margin="10">
+    <Border WidthRequest="850" HeightRequest="645" Style="{StaticResource DialogWindow}">
+        <Grid RowDefinitions="50,35,480,2,60" Margin="10">
             <Label
                 Grid.Row="0"
                 Grid.Column="0"
@@ -22,11 +23,9 @@
                 HorizontalOptions="Center"
                 Style="{StaticResource H1Label}" />
 
-            <HorizontalStackLayout Grid.Row="1">
-                <Label Text="Folder: "></Label>
-                <Label Text="{Binding CurrentFolder}"></Label>
-            </HorizontalStackLayout>
+            <controls:FilePickerBreadCrumb BreadCrumbSelectedCommand="{Binding BreadCrumbSelectedCommand}" Grid.Row="1"/>
 
+            
             <Grid Grid.ColumnSpan="3" Grid.Row="2" ColumnDefinitions="220,2,288,2,288">
 
                 <!-- Dividers -->
