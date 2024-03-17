@@ -17,6 +17,7 @@
 */
 
 using Microsoft.Extensions.Logging;
+using MountFuji.Strategies;
 using FileSystemEntry = MountFuji.Models.FileSystemEntry;
 
 namespace MountFujiTests.ViewModels;
@@ -25,11 +26,16 @@ public class FujiFilePickerPopupViewModelTests
 {
     private Mock<IPopupNavigation> popupNavigationMock;
     private Mock<ILogger<FujiFilePickerPopupViewModel>> loggerMock;
+    private Mock<IFileSystemService> fileSystemServiceMock;
+    private Mock<IDriveRetrievalStrategy> driveRetrievalStragtegyMock;
+    
     [SetUp]
     public void Setup()
     {
         popupNavigationMock = new Mock<IPopupNavigation>();
         loggerMock = new Mock<ILogger<FujiFilePickerPopupViewModel>>();
+        fileSystemServiceMock = new Mock<IFileSystemService>();
+        driveRetrievalStragtegyMock = new Mock<IDriveRetrievalStrategy>();
     }
 
        
@@ -80,7 +86,7 @@ public class FujiFilePickerPopupViewModelTests
         var sut = CreateSut();
         await sut.OkCommand.ExecuteAsync(null);
         sut.PickerType = PickerType.File;
-        sut.SelectedEntry = new FileSystemEntry(Directory.GetCurrentDirectory(), EntryType.File);
+        sut.SelectedFile = new FileSystemEntry(Directory.GetCurrentDirectory(), EntryType.File);
         sut.OkCommand.CanExecute(null).Should().BeTrue();
     }
 
@@ -98,7 +104,9 @@ public class FujiFilePickerPopupViewModelTests
     [Test]
     public void SetInitialFolder_WhenInvoked_ShouldInitialize()
     {
+        driveRetrievalStragtegyMock.Setup(ds => ds.RetrieveDrives()).Returns([new FileSystemDrive("","")]);
         var sut = CreateSut();
+        
         var initialFolder = Directory.GetCurrentDirectory();
         sut.SetInitialFolder(initialFolder);
         sut.CurrentFolder.Should().Be(initialFolder);
@@ -107,26 +115,28 @@ public class FujiFilePickerPopupViewModelTests
     [Test]
     public async Task SelectionChangedCommand_WhenInvoked_ShouldRefreshTheFolder()
     {
+        driveRetrievalStragtegyMock.Setup(ds => ds.RetrieveDrives()).Returns([new FileSystemDrive("","")]);
         var sut = CreateSut();
-
+        
         var initialFolder = Directory.GetCurrentDirectory();
         sut.SetInitialFolder(initialFolder);
-        sut.SelectedEntry = new MountFuji.Models.FileSystemEntry(initialFolder, EntryType.Folder);
+        sut.SelectedFolder = new MountFuji.Models.FileSystemEntry(initialFolder, EntryType.Folder);
         
-        await sut.SelectionChangedCommand.ExecuteAsync(null);
+        await sut.SelectedFolderChangedCommand.ExecuteAsync(null);
         sut.CurrentFolder.Should().Be(initialFolder);
     }
     
     [Test]
     public async Task SelectionChangedCommand_WhenInvokedWithAFileEntryType_ShouldNotRefreshTheFolder()
     {
+        driveRetrievalStragtegyMock.Setup(ds => ds.RetrieveDrives()).Returns([new FileSystemDrive("","")]);
         var sut = CreateSut();
 
         var initialFolder = Directory.GetCurrentDirectory();
         sut.SetInitialFolder(initialFolder);
-        sut.SelectedEntry = new MountFuji.Models.FileSystemEntry(initialFolder, EntryType.File);
+        sut.SelectedFile = new MountFuji.Models.FileSystemEntry(initialFolder, EntryType.File);
         
-        await sut.SelectionChangedCommand.ExecuteAsync(null);
+        await sut.SelectedFileChangedCommand.ExecuteAsync(null);
         sut.CurrentFolder.Should().Be(initialFolder);
     }
     
@@ -134,13 +144,15 @@ public class FujiFilePickerPopupViewModelTests
     [Test]
     public async Task SelectionChangedCommand_WhenInvokedWithAParentFolderEntry_ShouldChangeDirectoryUpALevel()
     {
+        driveRetrievalStragtegyMock.Setup(ds => ds.RetrieveDrives()).Returns([new FileSystemDrive("","")]);
+
         var sut = CreateSut();
 
         var initialFolder = Directory.GetCurrentDirectory();
         sut.SetInitialFolder(initialFolder);
-        sut.SelectedEntry = new MountFuji.Models.FileSystemEntry(initialFolder, EntryType.ParentNavigation);
+        sut.SelectedFolder = new MountFuji.Models.FileSystemEntry(initialFolder, EntryType.ParentNavigation);
         
-        await sut.SelectionChangedCommand.ExecuteAsync(null);
+        await sut.SelectedFolderChangedCommand.ExecuteAsync(null);
         var expectedFolder = Directory.GetParent(initialFolder);
         sut.CurrentFolder.Should().Be(expectedFolder?.FullName);
     }
@@ -148,6 +160,6 @@ public class FujiFilePickerPopupViewModelTests
 
     private FujiFilePickerPopupViewModel CreateSut()
     {
-        return new FujiFilePickerPopupViewModel(popupNavigationMock.Object, loggerMock.Object);
+        return new FujiFilePickerPopupViewModel(driveRetrievalStragtegyMock?.Object, popupNavigationMock.Object, fileSystemServiceMock?.Object, loggerMock.Object );
     }
 }
