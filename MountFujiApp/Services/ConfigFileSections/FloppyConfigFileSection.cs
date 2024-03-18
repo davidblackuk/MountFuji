@@ -22,6 +22,7 @@ namespace MountFuji.Services.ConfigFileSections;
 
 public class FloppyConfigFileSection : ConfigFileSection, IFloppyConfigFileSection
 {
+    private readonly IPreferencesService preferencesService;
     public const string ConfigSectionName = "Floppy";
 
     private const string AutoInsertDiskBKey = "bAutoInsertDiskB";
@@ -33,26 +34,46 @@ public class FloppyConfigFileSection : ConfigFileSection, IFloppyConfigFileSecti
     private const string DriveANumberOfHeadsKey = "DriveA_NumberOfHeads";
     private const string DriveBNumberOfHeadsKey = "DriveB_NumberOfHeads";
     private const string WriteProtectionKey = "nWriteProtection";
+    private const string DefaultDiskImageKey = "szDiskImageDirectory";
+
+    public FloppyConfigFileSection(IPreferencesService preferencesService)
+    {
+        this.preferencesService = preferencesService;
+    }
     
     public void ToHatariConfig(StringBuilder builder, AtariConfiguration config)
     {
         AddSection(builder, ConfigSectionName);
         
         
-        AddFlag(builder, (string)AutoInsertDiskBKey, (bool)config.FloppyOptions.AutoInsertB);
-        AddFlag(builder, (string)FastFloppyAccessKey, (bool)config.FloppyOptions.FastFloppyAccess);
+        AddFlag(builder, AutoInsertDiskBKey, config.FloppyOptions.AutoInsertB);
+        AddFlag(builder, FastFloppyAccessKey, config.FloppyOptions.FastFloppyAccess);
 
-        AddFlag(builder, (string)DriveAEnabledKey, (bool)config.FloppyOptions.DriveAEnabled);
-        AddFlag(builder, (string)DriveAPathKey, (string)config.FloppyOptions.DriveAPath);
+        AddFlag(builder, DriveAEnabledKey, config.FloppyOptions.DriveAEnabled);
+        AddFlag(builder, DriveAPathKey, config.FloppyOptions.DriveAPath);
         AddFlag(builder, DriveANumberOfHeadsKey, config.FloppyOptions.DriveADoubleSided ? 2 : 1);
         
         
         
-        AddFlag(builder, (string)DriveBEnabledKey, (bool)config.FloppyOptions.DriveBEnabled);
-        AddFlag(builder, (string)DriveBPathKey, (string)config.FloppyOptions.DriveBPath);
+        AddFlag(builder, DriveBEnabledKey, config.FloppyOptions.DriveBEnabled);
+        AddFlag(builder, DriveBPathKey, config.FloppyOptions.DriveBPath);
         AddFlag(builder, DriveBNumberOfHeadsKey, config.FloppyOptions.DriveBDoubleSided ? 2 : 1);
         
         AddFlag(builder, WriteProtectionKey, (int) config.FloppyOptions.WriteProtection);
+
+        if (!String.IsNullOrEmpty(config.FloppyOptions.DriveAPath))
+        {
+            // if we have a floppy disk specified, set the default floppy folder to the containing folder
+            string floppyFolder = Path.GetDirectoryName(config.FloppyOptions.DriveAPath);
+            AddFlag(builder, DefaultDiskImageKey , floppyFolder);
+        }
+        else
+        {
+            // if we don't have a floppy specified, set the default folder to the preferences floppy folder
+            AddFlag(builder, DefaultDiskImageKey , preferencesService.Preferences.FloppyDiskFolder);
+        }
+        
+        
         
         builder.AppendLine();
     }
