@@ -45,3 +45,34 @@ Unfortunately Maui does not support Linux currently, so that will remain a futur
 
 ## The what
 
+You can see a video showing how Mount Fuji works and how to download and install it
+
+
+[![Watch the video](img/thumbnail.png)](https://youtu.be/Qz4iEh8EcBo)
+
+
+## Release notes
+
+Here are the release notes for The different version of Mount Fuji
+
+### Version 1.0.3
+
+This release introduced:
+
+- A new file picker implementation
+  - Added the ability to access all drives both internal and external
+  - added shortcuts to your Home and documents folders.
+  - moved to a three column design with devices, then folders, the files
+  - Modified the folder path to be a clickable breadcrumb to allow fast file system navigation
+- Added a quality of life improvement, by setting Hatari's default floppy folder according to the configuration
+  - The folder containing the floppy image if you specified one
+  - Otherwise your Fuji Floppy folder from your preferences
+- Fixed a typo where ACSi was spelled ASCI
+- updated to Maui SR3, in the hopes it addressed that crashing issue in the CollectionView
+
+
+
+
+### Version 1.0.2
+
+This was the release version of Fuji, its features are shown in the video above.
