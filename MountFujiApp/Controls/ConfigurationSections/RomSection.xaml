@@ -14,14 +14,17 @@
 
             <configurationSections:ConfigurationGroup Title="ROM image">
 
-                <Grid Grid.ColumnDefinitions="*,10,40, 40" >
+                <Grid Grid.ColumnDefinitions="*,10,40, 40, 40" >
                     <Label Text="{Binding SelectedConfiguration.RomImage}" />
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="2"
-                            Text="{x:Static controls1:IconFont.Cancel}" Command="{Binding ClearRomCommand}">
-                    </Button>
+                            Text="{x:Static controls1:IconFont.Cancel}" Command="{Binding ClearRomCommand}"
+                            ToolTipProperties.Text="Clear selected ROM"/>
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="3"
-                            Text="{x:Static controls1:IconFont.File_open}" Command="{Binding BrowseRomsCommand}">
-                    </Button>
+                            Text="{x:Static controls1:IconFont.File_open}" Command="{Binding BrowseRomsCommand}"
+                            ToolTipProperties.Text="Browse for a ROM"/>
+                    <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="4"
+                            Text="{x:Static controls1:IconFont.List_alt}" Command="{Binding OpenRomPickerCommand}"
+                            ToolTipProperties.Text="Open the ROM picker"/>
                 </Grid>
             </configurationSections:ConfigurationGroup>
 

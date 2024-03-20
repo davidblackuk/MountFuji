@@ -35,6 +35,7 @@ public static class ServicesWireUp
         services.AddTransient<IPersistance, Persistance>();
         services.AddTransient<IConfigFileService, ConfigFileService>();
         services.AddTransient<IFileSystemService, FileSystemService>();
+        services.AddTransient<IRomService, RomService>();
     }
 
 }
