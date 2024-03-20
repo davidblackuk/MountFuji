@@ -54,6 +54,9 @@ public static class MvvmWireUp {
         services.AddTransient<ImportSystemPopupViewModel>();
         
         services.AddTransient<AboutPopup>();
-        services.AddTransient<AboutPopupViewModel>();
+        services.AddTransient<AboutPopupViewModel>();  
+        
+        services.AddTransient<RomPickerPopup>();
+        services.AddTransient<RomPickerPopupViewModel>();
     }
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:vm="clr-namespace:MountFuji.ViewModels"
+                  xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+                  xmlns:models="clr-namespace:MountFuji.Models"
+                  x:DataType="vm:RomPickerPopupViewModel"
+                  x:Class="MountFuji.Views.RomPickerPopup"
+                  Title="ROM picker" BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
+
+    <Border WidthRequest="580" HeightRequest="620" Style="{StaticResource DialogWindow}">
+        <Grid RowDefinitions="50,480,2,60" Margin="10">
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+
+                Text="ROM Picker"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Style="{StaticResource H1Label}" />
+
+            <CollectionView Grid.Row="1" ItemsSource="{Binding Roms}" SelectionMode="Single" SelectedItem="{Binding SelectedRom}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Rom">
+                        <Grid ColumnDefinitions="56,70,250,200" Style="{StaticResource RomPickerRow}" Margin="0,0,0,10">
+                            <Image WidthRequest="36" HeightRequest="24" Source="{Binding CountryFlag}" ></Image>
+                            <Label Grid.Column="1"  Text="{Binding DisplayVersion}" Style="{StaticResource RomPickerLabel}" Margin="10,0,0,0"/>
+                            <Label Grid.Column="2" Text="{Binding Name}" Style="{StaticResource RomPickerLabel}" FontAttributes="Bold"/>
+                            <Label Grid.Column="3" Text="{Binding DisplayReleaseDate}"  Style="{StaticResource RomPickerLabel}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                
+            </CollectionView>
+
+            <Rectangle Grid.Row="2" Style="{StaticResource DialogButtonsSeparator}"></Rectangle>
+
+
+            <HorizontalStackLayout Grid.Row="3" Grid.Column="0" HorizontalOptions="End">
+                <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />
+                <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,0,0" />
+            </HorizontalStackLayout>
+        </Grid>
+    </Border>
+
+</mopups:PopupPage>

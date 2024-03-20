@@ -91,6 +91,23 @@ public partial class MainViewModel : TinyViewModel
     #region ----- ROM -----
 
     [RelayCommand()]
+    private async Task OpenRomPicker()
+    {
+        RomPickerPopup popup = serviceProvider.GetService<RomPickerPopup>();
+
+        await popupNavigation.PushAsync(popup);
+
+        popup.Disappearing += async (sender, args) =>
+        {
+            if (!popup.ViewModel.Confirmed) return;
+            Rom rom = popup.ViewModel.SelectedRom;
+            SelectedConfiguration.RomImage = rom!.Path;
+            RunCommand.NotifyCanExecuteChanged();
+            log.LogInformation("Rom Selected via the ROM Picker {ROM}", rom);
+        };
+    }
+
+    [RelayCommand()]
     private async Task BrowseRoms()
     {
         var file = await fujiFilePicker.PickFile("ROM Image", (filename) =>
@@ -212,7 +229,8 @@ public partial class MainViewModel : TinyViewModel
 
     #endregion
 
- 
+    #region ----- APPLICATION TOOL BAR -----
+    
     [RelayCommand]
     private async Task DeleteSystem(string id)
     {
@@ -255,9 +273,6 @@ public partial class MainViewModel : TinyViewModel
             SelectedConfiguration = clone;
         };
     }
-
-
-    #region ----- APPLICATION TOOL BAR -----
     
     [RelayCommand]
     private async Task About()
@@ -308,8 +323,6 @@ public partial class MainViewModel : TinyViewModel
         };
     }
     
-    #endregion
-    
     [RelayCommand]
     private async Task ImportHatariConfig()
     {
@@ -340,6 +353,8 @@ public partial class MainViewModel : TinyViewModel
         await Launcher.Default.OpenAsync(applicationUrl);
     }
 
+    #endregion
+    
     [RelayCommand]
     private Task Reordered()
     {
