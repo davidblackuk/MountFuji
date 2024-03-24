@@ -64,6 +64,13 @@ This release introduced:
   - added shortcuts to your Home and documents folders.
   - moved to a three column design with devices, then folders, the files
   - Modified the folder path to be a clickable breadcrumb to allow fast file system navigation
+- Added a new Rom Selector
+  - Shows version info from the ROM image
+  - shows the ROM language as a country flag
+  - Shows the release date of the ROM
+  - Loads content for the ROMs from the ROMS folder in the preferences
+    - Does not allow file system navigation
+    - But the original file picker is if you need to navigate
 - Added a quality of life improvement, by setting Hatari's default floppy folder according to the configuration
   - The folder containing the floppy image if you specified one
   - Otherwise your Fuji Floppy folder from your preferences
