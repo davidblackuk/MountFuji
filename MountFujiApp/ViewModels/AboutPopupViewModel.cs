@@ -36,6 +36,7 @@ public partial class AboutPopupViewModel: TinyViewModel
     [RelayCommand]
     private async Task Close()
     {
+        var temp = $"{Version} {BuildInfo}";
         await popupNavigation.PopAsync();
     }
 

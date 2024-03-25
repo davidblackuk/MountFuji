@@ -38,10 +38,11 @@ public partial class UntitledPathEditor : ContentView
     [AutoBindable]
     private readonly ICommand browseDiskImageCommand;
 
+#pragma warning disable CS0414
+    // this is used in the template binding, rider gets confused i think
     [AutoBindable] 
     private readonly string pickerOpenIcon = IconFont.Folder_open;
-    
-#pragma warning restore CS0169
+#pragma warning restore CS0414
 
     public UntitledPathEditor()
     {

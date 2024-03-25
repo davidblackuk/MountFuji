@@ -97,7 +97,7 @@ public partial class MainViewModel : TinyViewModel
 
         await popupNavigation.PushAsync(popup);
 
-        popup.Disappearing += async (sender, args) =>
+        popup.Disappearing += (sender, args) =>
         {
             if (!popup.ViewModel.Confirmed) return;
             Rom rom = popup.ViewModel.SelectedRom;

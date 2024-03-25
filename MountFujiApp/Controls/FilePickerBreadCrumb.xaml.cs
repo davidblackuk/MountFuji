@@ -22,9 +22,12 @@ namespace MountFuji.Controls;
 
 public partial class FilePickerBreadCrumb 
 {
+#pragma warning disable CS0169
+    
     [AutoBindable]
     private readonly ICommand breadCrumbSelectedCommand;
-    
+ 
+#pragma warning restore CS0169
     
     public FilePickerBreadCrumb()
     {
