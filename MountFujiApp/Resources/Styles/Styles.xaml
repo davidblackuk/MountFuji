@@ -183,29 +183,6 @@
         </Setter>
     </Style>
 
-    <Style TargetType="RadioButton">
-        <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="TextColor"
-                Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-        <Setter Property="FontFamily" Value="FontRegular" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="MinimumHeightRequest" Value="44" />
-        <Setter Property="MinimumWidthRequest" Value="44" />
-        <Setter Property="VisualStateManager.VisualStateGroups">
-            <VisualStateGroupList>
-                <VisualStateGroup x:Name="CommonStates">
-                    <VisualState x:Name="Normal" />
-                    <VisualState x:Name="Disabled">
-                        <VisualState.Setters>
-                            <Setter Property="TextColor"
-                                    Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
-                        </VisualState.Setters>
-                    </VisualState>
-                </VisualStateGroup>
-            </VisualStateGroupList>
-        </Setter>
-    </Style>
-
     <Style TargetType="RefreshView">
         <Setter Property="RefreshColor"
                 Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
@@ -744,5 +721,63 @@
             </VisualStateGroupList>
         </Setter>
     </Style>
+
+
+	<ControlTemplate x:Key="RadioButtonTemplate">
+		<Border Margin="10" Background="Transparent" StrokeThickness="0">
+			<VisualStateManager.VisualStateGroups>
+				<VisualStateGroupList>
+					<VisualStateGroup x:Name="CheckedStates">
+						<VisualState x:Name="Checked">
+							<VisualState.Setters>
+								<Setter TargetName="_check" Property="Opacity" Value="1" />
+							</VisualState.Setters>
+						</VisualState>
+						<VisualState x:Name="Unchecked">
+							<VisualState.Setters>
+								<Setter TargetName="_check" Property="Opacity" Value="0" />
+							</VisualState.Setters>
+						</VisualState>
+					</VisualStateGroup>
+				</VisualStateGroupList>
+			</VisualStateManager.VisualStateGroups>
+			<Grid HorizontalOptions="Fill" VerticalOptions="Fill" ColumnDefinitions="Auto,Auto">
+				<Ellipse Grid.Column="0" HeightRequest="22" WidthRequest="22" HorizontalOptions="Center" VerticalOptions="Center" StrokeThickness="1"
+						 Fill="Transparent"
+						 Stroke="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+				<Ellipse Grid.Column="0" x:Name="_check" HeightRequest="10" WidthRequest="10" HorizontalOptions="Center" VerticalOptions="Center" StrokeThickness="1"						 
+						 Fill="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+						 Stroke="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+				<ContentPresenter Grid.Column="1" Margin="10" HorizontalOptions="Start" VerticalOptions="Center" />
+			</Grid>
+
+		</Border>
+	</ControlTemplate>
+
+	<Style TargetType="RadioButton">
+		<Setter Property="BackgroundColor" Value="Transparent" />
+		<Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+		<Setter Property="FontFamily" Value="FontRegular" />
+		<Setter Property="FontSize" Value="14" />
+		<Setter Property="MinimumHeightRequest" Value="44" />
+		<Setter Property="MinimumWidthRequest" Value="44" />
+		<Setter Property="ControlTemplate" Value="{OnPlatform WinUI={StaticResource RadioButtonTemplate}}" />
+		<Setter Property="VisualStateManager.VisualStateGroups">
+			<VisualStateGroupList>
+				<VisualStateGroup x:Name="CommonStates">
+					<VisualState x:Name="Normal">
+						<VisualState.Setters>
+							<Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+						</VisualState.Setters>
+					</VisualState>
+					<VisualState x:Name="Disabled">
+						<VisualState.Setters>
+							<Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+						</VisualState.Setters>
+					</VisualState>
+				</VisualStateGroup>
+			</VisualStateGroupList>
+		</Setter>
+	</Style>
 
 </ResourceDictionary>
