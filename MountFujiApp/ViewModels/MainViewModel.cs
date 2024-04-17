@@ -143,6 +143,23 @@ public partial class MainViewModel : TinyViewModel
     }
 
     #endregion
+      
+    #region ----- Keyboard Mapping -----
+    
+    [RelayCommand()]
+    private async Task BrowseKeyboardMapping()
+    {
+        await fujiFilePicker.PickFile("Keyboard Mapping File", (filename) => SelectedConfiguration.KeyboardOptions.MappingFile = filename,
+            preferencesService.Preferences.CartridgeFolder);
+    }
+
+    [RelayCommand]
+    private void ClearKeyboardMapping()
+    {
+        SelectedConfiguration.KeyboardOptions.MappingFile = String.Empty;
+    }
+
+    #endregion
     
     #region ----- ACSI -----
     

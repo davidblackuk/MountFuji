@@ -40,6 +40,7 @@ public static class ConfigWireUp
         services.AddTransient<IScreenConfigFileSection, ScreenConfigFileSection>();
         services.AddTransient<ISoundConfigFileSection, SoundConfigFileSection>();
         services.AddTransient<IRawHatariConfigFile, RawHatariConfigFile>();
+        services.AddTransient<IKeyboardConfigFileSection, KeyboardConfigFileSection>();
     }
 }
 

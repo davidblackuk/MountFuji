@@ -34,6 +34,7 @@ public class ConfigFileService : IConfigFileService
     private readonly IFloppyConfigFileSection floppyConfig;
     private readonly IScreenConfigFileSection screenConfig;
     private readonly ISoundConfigFileSection soundConfig;
+    private readonly IKeyboardConfigFileSection keyboardConfig;
     private readonly IPreferencesService preferencesService;
     private readonly IRawHatariConfigFile rawFileReader;
     private readonly ILogger<ConfigFileService> log;
@@ -45,6 +46,7 @@ public class ConfigFileService : IConfigFileService
         IHardDiskConfigFileSection hardDiskConfig, IFloppyConfigFileSection floppyConfig,
         IScreenConfigFileSection screenConfig,
         ISoundConfigFileSection soundConfig,
+        IKeyboardConfigFileSection keyboardConfig,
         IPreferencesService preferencesService,
         IRawHatariConfigFile rawFileReader,
         ILogger<ConfigFileService> log)
@@ -59,6 +61,7 @@ public class ConfigFileService : IConfigFileService
         this.floppyConfig = floppyConfig;
         this.screenConfig = screenConfig;
         this.soundConfig = soundConfig;
+        this.keyboardConfig = keyboardConfig;
         this.preferencesService = preferencesService;
         this.rawFileReader = rawFileReader;
         this.log = log;
@@ -69,6 +72,7 @@ public class ConfigFileService : IConfigFileService
     {
         StringBuilder builder = new StringBuilder();
 
+        keyboardConfig.ToHatariConfig(builder, from);
         systemConfig.ToHatariConfig(builder, from);
         memoryConfig.ToHatariConfig(builder, from);
         romConfig.ToHatariConfig(builder, from);
@@ -127,6 +131,9 @@ public class ConfigFileService : IConfigFileService
                 case ScreenConfigFileSection.ConfigSectionName:
                     screenConfig.FromHatariConfig(to, rawFileReader.Sections);
                     break;
+                case KeyboardConfigFileSection.ConfigSectionName:
+                    keyboardConfig.FromHatariConfig(to, rawFileReader.Sections);
+                    break;
                 
                 case "Log":
                 case "Debugger":
@@ -140,7 +147,6 @@ public class ConfigFileService : IConfigFileService
                 case "Joystick3":
                 case "Joystick4":
                 case "Joystick5":
-                case "Keyboard":
                 case "LILO":
                 case "KeyShortcutsWithMod":
                 case "KeyShortcutsWithoutMod":
