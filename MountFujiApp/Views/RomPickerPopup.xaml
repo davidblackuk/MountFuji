@@ -5,7 +5,8 @@
                   xmlns:vm="clr-namespace:MountFuji.ViewModels"
                   xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
                   xmlns:models="clr-namespace:MountFuji.Models"
-                  x:DataType="vm:RomPickerPopupViewModel"
+				  xmlns:controls1="using:MountFuji.Controls"
+				  x:DataType="vm:RomPickerPopupViewModel"
                   x:Class="MountFuji.Views.RomPickerPopup"
                   Title="ROM picker" BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
 
@@ -37,11 +38,17 @@
             <Rectangle Grid.Row="2" Style="{StaticResource DialogButtonsSeparator}"></Rectangle>
 
 
-            <HorizontalStackLayout Grid.Row="3" Grid.Column="0" HorizontalOptions="End">
+            <!--<HorizontalStackLayout Grid.Row="3" Grid.Column="0" HorizontalOptions="End">
                 <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />
                 <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,0,0" />
-            </HorizontalStackLayout>
-        </Grid>
+            </HorizontalStackLayout>-->
+
+			<controls1:DialogButtons Margin="0,0,15,0" Grid.Row="3" Grid.Column="0" HorizontalOptions="End"
+									IsButtonSizeEqual="True"
+									CancelCommand="{Binding CancelCommand}"
+									OKCommand="{Binding OkCommand}" />
+
+		</Grid>
     </Border>
 
 </mopups:PopupPage>

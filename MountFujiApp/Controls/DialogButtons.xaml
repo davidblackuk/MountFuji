@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:ctrl="clr-namespace:MountFuji.Controls"
+             x:Class="MountFuji.Controls.DialogButtons"
+			 x:Name="this">
+	
+	<FlexLayout BindingContext="{Binding Source={x:Reference this}}"
+				x:DataType="ctrl:DialogButtons"
+				Direction="{Binding Direction}"
+				AlignItems="Center"
+				JustifyContent="Start">
+
+		<Button x:Name="CancelButton"
+				FlexLayout.Order="{Binding CancelOrder}"
+				MinimumWidthRequest="{Binding CancelButtonMinimumWidthRequest}"
+				Style="{Binding CancelButtonStyle}"
+				Text="{Binding CancelText}"
+				Command="{Binding CancelCommand}"
+				CommandParameter="{Binding CancelCommandParameter}" />
+
+		<BoxView FlexLayout.Order="{Binding SpacerOrder}"
+				 Color="Transparent"
+				 Margin="{Binding ButtonMargin}" />
+
+		<Button x:Name="OKButton"
+				FlexLayout.Order="{Binding OKOrder}"
+				MinimumWidthRequest="{Binding OKButtonMinimumWidthRequest}"
+				Style="{Binding OKButtonStyle}"
+				Text="{Binding OKText}"
+				Command="{Binding OKCommand}"
+				CommandParameter="{Binding OKCommandParameter}" />
+
+	</FlexLayout>
+
+</ContentView>

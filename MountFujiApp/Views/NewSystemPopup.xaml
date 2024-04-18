@@ -7,7 +7,8 @@
                   xmlns:models="clr-namespace:MountFuji.Models"
                   xmlns:converters="using:MountFuji.Converters"
                   xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
-                  x:DataType="vm:NewSystemViewModelViewModel"
+				  xmlns:controls1="using:MountFuji.Controls"
+				  x:DataType="vm:NewSystemViewModelViewModel"
 
                   x:Class="MountFuji.Views.NewSystemPopup"
                   Title="NewSystemPopup" BackgroundColor="#80000000"  CloseWhenBackgroundIsClicked="False" >
@@ -80,10 +81,16 @@
                 </VerticalStackLayout>
             </configurationSections:ConfigurationGroup>
 
-            <HorizontalStackLayout  Margin="0" Padding="0" Spacing="0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End" >
+            <!--<HorizontalStackLayout  Margin="0" Padding="0" Spacing="0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End" >
                 <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />
                 <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,15,0" />
-            </HorizontalStackLayout>
-        </Grid>
+            </HorizontalStackLayout>-->
+			
+			<controls1:DialogButtons Margin="0,0,15,0" Padding="0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End"
+				IsButtonSizeEqual="True"
+				CancelCommand="{Binding CancelCommand}"
+				OKCommand="{Binding OkCommand}" />
+
+		</Grid>
     </Border>
 </mopups:PopupPage>

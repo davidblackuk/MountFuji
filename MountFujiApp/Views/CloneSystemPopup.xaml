@@ -34,11 +34,17 @@
             
             <Rectangle Grid.Row="2" Grid.ColumnSpan="2"  Style="{StaticResource DialogButtonsSeparator}"></Rectangle>
   
-            <HorizontalStackLayout HorizontalOptions="End" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+            <!--<HorizontalStackLayout HorizontalOptions="End" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
                 <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />
                 <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,15,0" />
-            </HorizontalStackLayout>
-        </Grid>
+            </HorizontalStackLayout>-->
+			
+			<controls1:DialogButtons Margin="0,0,15,0" HorizontalOptions="End" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+									 IsButtonSizeEqual="True"
+									 CancelCommand="{Binding CancelCommand}"
+									 OKCommand="{Binding OkCommand}" />
+
+		</Grid>
     </Border>
 
 
