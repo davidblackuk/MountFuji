@@ -78,6 +78,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <MauiXaml Update="Controls\DialogButtons.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
       <MauiXaml Update="Controls\SystemSelector.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
