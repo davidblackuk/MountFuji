@@ -157,8 +157,4 @@ public class AtariConfigurationTemplate
     /// </summary>
     public SoundOptions SoundOptions = new();
 
-    /// <summary>
-    /// Keyboard options
-    /// </summary>
-    public KeyboardOptions KeyboardOptions = new();
 }

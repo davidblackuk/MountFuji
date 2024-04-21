@@ -20,17 +20,17 @@ namespace MountFuji.ViewModels;
 
 public partial class AboutPopupViewModel: TinyViewModel
 {
-    private readonly IPersistance persistance;
+    private readonly IPersistence persistence;
     private readonly IPopupNavigation popupNavigation;
     
     public string Version => AppInfo.VersionString;
     public string BuildInfo => AppInfo.BuildString;
-    public string MountFujiFolder => persistance.MountFujiFolder;
+    public string MountFujiFolder => persistence.MountFujiFolder;
     
-    public AboutPopupViewModel(IPopupNavigation popupNavigation, IPersistance persistance)
+    public AboutPopupViewModel(IPopupNavigation popupNavigation, IPersistence persistence)
     {
         this.popupNavigation = popupNavigation;
-        this.persistance = persistance;
+        this.persistence = persistence;
     }
     
     [RelayCommand]
@@ -49,7 +49,7 @@ public partial class AboutPopupViewModel: TinyViewModel
     [RelayCommand]
     private async Task OpenDataFolder()
     {
-        await Launcher.OpenAsync($"file://{persistance.MountFujiFolder}");
+        await Launcher.OpenAsync($"file://{persistence.MountFujiFolder}");
     }
 }
 

@@ -9,7 +9,7 @@
              x:Class="MountFuji.Controls.ApplicationMenu"
              >
     <Border   Style="{StaticResource Level1Panel}" >
-    <Grid ColumnDefinitions="auto,auto,auto,auto,auto,auto,*,auto" >
+    <Grid ColumnDefinitions="40,40,40,40,40,40,40,*,40" >
         <Button  VerticalOptions="Center"  Style="{StaticResource InlineMaterialButton}" Grid.Column="0" Text="{x:Static controls1:IconFont.Info}" 
                  Command="{Binding AboutCommand}" ToolTipProperties.Text="About Mount Fuji"/>
 
@@ -28,8 +28,11 @@
         <Button  VerticalOptions="Center" Text="{x:Static controls1:IconFont.Play_circle_outline}" Grid.Column="5" Style="{StaticResource InlineMaterialButton}" Command="{Binding RunCommand}"
                  ToolTipProperties.Text="Run the selected system"/>
 
+        <Button  VerticalOptions="Center" Text="{x:Static controls1:IconFont.Keyboard}" Grid.Column="6" Style="{StaticResource InlineMaterialButton}" Command="{Binding OpenGlobalKeyboardConfigPopupCommand}"
+                 ToolTipProperties.Text="Set keyboard options for all systems"/>
 
-        <Button  VerticalOptions="Center" HorizontalOptions="End" Grid.Column="7" Text="{Binding ThemeIcon }" Style="{StaticResource InlineMaterialButton}" Command="{Binding SwapThemeCommand}"
+
+        <Button  VerticalOptions="Center" HorizontalOptions="End" Grid.Column="8" Text="{Binding ThemeIcon }" Style="{StaticResource InlineMaterialButton}" Command="{Binding SwapThemeCommand}"
                  ToolTipProperties.Text="Run the selected system"/>
 
         

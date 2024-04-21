@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:vm="clr-namespace:MountFuji.ViewModels"
+                  xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+                  xmlns:models="clr-namespace:MountFuji.Models"
+                  xmlns:controls="using:MountFuji.Controls"
+                  xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
+                  x:DataType="vm:GlobalKeyboardOptionsPopupViewModel"
+
+                  x:Class="MountFuji.Views.GlobalKeyboardConfigurationPopup"
+                  Title="Keyboard Settings" BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
+    <Border WidthRequest="850" HeightRequest="715" Style="{StaticResource DialogWindow}">
+
+
+        <Grid RowDefinitions="50,580,2,60" Margin="10">
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+
+                Text="Keyboard settings for all systems"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Style="{StaticResource H1Label}" />
+
+            <ScrollView Grid.Row="1">
+                <VerticalStackLayout Margin="0,0,30,0">
+                    <configurationSections:KeyboardSection Grid.Row="1"/>
+                    <configurationSections:KeyboardShortcutSection/>
+                </VerticalStackLayout>
+            </ScrollView>
+            <Rectangle Grid.Row="2" Style="{StaticResource DialogButtonsSeparator}"></Rectangle>
+
+
+            <HorizontalStackLayout Grid.Row="3" Grid.Column="0"  HorizontalOptions="End">
+                <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />
+                <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,0,0" />
+            </HorizontalStackLayout>
+        </Grid>
+    </Border>
+
+
+</mopups:PopupPage>

@@ -32,10 +32,11 @@ public static class ServicesWireUp
         services.AddSingleton<IPreferencesService, PreferencesService>();
         services.AddSingleton<IApplicationResolver, ApplicationResolver>();
         services.AddSingleton<IFujiFilePickerService, FujiFilePickerService>();
-        services.AddTransient<IPersistance, Persistance>();
+        services.AddTransient<IPersistence, Persistence>();
         services.AddTransient<IConfigFileService, ConfigFileService>();
         services.AddTransient<IFileSystemService, FileSystemService>();
         services.AddTransient<IRomService, RomService>();
+        services.AddSingleton<IGlobalSystemConfigurationService, GlobalSystemConfigurationService>();
     }
 
 }

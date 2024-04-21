@@ -37,6 +37,7 @@ public class ConfigFileService : IConfigFileService
     private readonly IKeyboardConfigFileSection keyboardConfig;
     private readonly IPreferencesService preferencesService;
     private readonly IRawHatariConfigFile rawFileReader;
+    private readonly IGlobalSystemConfigurationService globalConfig;
     private readonly ILogger<ConfigFileService> log;
     private readonly ILogConfigFileSection logConfig;
 
@@ -49,6 +50,7 @@ public class ConfigFileService : IConfigFileService
         IKeyboardConfigFileSection keyboardConfig,
         IPreferencesService preferencesService,
         IRawHatariConfigFile rawFileReader,
+        IGlobalSystemConfigurationService globalConfig,
         ILogger<ConfigFileService> log)
     {
         this.memoryConfig = memoryConfig;
@@ -64,6 +66,7 @@ public class ConfigFileService : IConfigFileService
         this.keyboardConfig = keyboardConfig;
         this.preferencesService = preferencesService;
         this.rawFileReader = rawFileReader;
+        this.globalConfig = globalConfig;
         this.log = log;
         this.logConfig = logConfig;
     }
@@ -72,7 +75,7 @@ public class ConfigFileService : IConfigFileService
     {
         StringBuilder builder = new StringBuilder();
 
-        keyboardConfig.ToHatariConfig(builder, from);
+        keyboardConfig.ToHatariConfig(builder, globalConfig.Configuration);
         systemConfig.ToHatariConfig(builder, from);
         memoryConfig.ToHatariConfig(builder, from);
         romConfig.ToHatariConfig(builder, from);
@@ -131,8 +134,10 @@ public class ConfigFileService : IConfigFileService
                 case ScreenConfigFileSection.ConfigSectionName:
                     screenConfig.FromHatariConfig(to, rawFileReader.Sections);
                     break;
-                case KeyboardConfigFileSection.ConfigSectionName:
-                    keyboardConfig.FromHatariConfig(to, rawFileReader.Sections);
+                case KeyboardConfigFileSection.KeyboardConfigSectionName:
+                case KeyboardConfigFileSection.KeyboardShortcutsWithModSectionName:
+                case KeyboardConfigFileSection.KeyboardShortcutsWithoutModSectionName:
+                    // these are  imported via the Global system config service, but put here to avoid a warning below
                     break;
                 
                 case "Log":
@@ -148,8 +153,7 @@ public class ConfigFileService : IConfigFileService
                 case "Joystick4":
                 case "Joystick5":
                 case "LILO":
-                case "KeyShortcutsWithMod":
-                case "KeyShortcutsWithoutMod":
+
                     // listed here to show explicitly what we don't support at the moment
                     break;
                 default:

@@ -174,12 +174,5 @@ public partial class AtariConfiguration: ObservableObject
     /// Sound options, playback quality etc
     /// </summary>
     [ObservableProperty] private SoundOptions soundOptions = new();
- 
-    /// <summary>
-    /// Keyboard options, mapping type etc
-    /// </summary>
-    [ObservableProperty] private KeyboardOptions keyboardOptions = new();
-    
-    
     
 }

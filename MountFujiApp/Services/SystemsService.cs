@@ -51,7 +51,7 @@ public interface ISystemsService
 
 public class SystemsService: ISystemsService
 {
-    private readonly IPersistance persistance;
+    private readonly IPersistence persistence;
     private readonly ILogger<SystemsService> log;
     private readonly IConfigFileService config;
 
@@ -59,9 +59,9 @@ public class SystemsService: ISystemsService
     private string stateForDirtyCheck;
     public IEnumerable<AtariConfiguration> All() => store.AsEnumerable();
 
-    public SystemsService(IPersistance persistance, ILogger<SystemsService> log, IConfigFileService config)
+    public SystemsService(IPersistence persistence, ILogger<SystemsService> log, IConfigFileService config)
     {
-        this.persistance = persistance;
+        this.persistence = persistence;
         this.log = log;
         this.config = config;
     }
@@ -69,8 +69,8 @@ public class SystemsService: ISystemsService
     public void Load()
     {
         
-        log.LogInformation("Attempting to load systems from: {SaveFile}", persistance.MountFujiSystemsFile);
-        store = persistance.DeSerialize<List<AtariConfiguration>>(persistance.MountFujiSystemsFile);
+        log.LogInformation("Attempting to load systems from: {SaveFile}", persistence.MountFujiSystemsFile);
+        store = persistence.DeSerialize<List<AtariConfiguration>>(persistence.MountFujiSystemsFile);
         SetStateForDirtyCheck();
         log.LogInformation("Loaded {Count} systems", store.Count);
     }
@@ -80,8 +80,8 @@ public class SystemsService: ISystemsService
     /// </summary>
     public async Task Save()
     {
-        log.LogInformation("Attempting to save systems to: {SaveFile}", persistance.MountFujiSystemsFile);
-        await persistance.SerializeAsync(persistance.MountFujiSystemsFile, store);
+        log.LogInformation("Attempting to save systems to: {SaveFile}", persistence.MountFujiSystemsFile);
+        await persistence.SerializeAsync(persistence.MountFujiSystemsFile, store);
         SetStateForDirtyCheck();
     }
 

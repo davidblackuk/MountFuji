@@ -22,13 +22,13 @@ namespace MountFujiTests.ViewModels;
 public class AboutPopupViewModelTests
 {
     private Mock<IPopupNavigation> popupNavigationMock;
-    private Mock<IPersistance> persistanceMock;
+    private Mock<IPersistence> persistanceMock;
     
     [SetUp]
     public void Setup()
     {
         popupNavigationMock = new Mock<IPopupNavigation>();
-        persistanceMock = new Mock<IPersistance>();
+        persistanceMock = new Mock<IPersistence>();
 
     }
 

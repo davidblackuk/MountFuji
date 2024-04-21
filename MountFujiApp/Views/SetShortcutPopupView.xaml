@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:vm="clr-namespace:MountFuji.ViewModels"
+                  xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+                  xmlns:models="clr-namespace:MountFuji.Models"
+                  xmlns:converters="using:MountFuji.Converters"
+                  xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
+                  x:DataType="vm:SetShortcutPopupViewModel"
+                  x:Class="MountFuji.Views.SetShortcutPopupView"
+                  Title="NewSystemPopup" BackgroundColor="#80000000"  CloseWhenBackgroundIsClicked="False"
+                  
+                  >
+    <Border WidthRequest="200" HeightRequest="260" Style="{StaticResource DialogWindow}">
+
+        <VerticalStackLayout>
+            <Label 
+                Text="Set key for"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Style="{StaticResource H1Label}" />
+            
+            <Label 
+                Text="{Binding OriginalShortcut.Description}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Style="{StaticResource H3Offset}" />
+            
+            <Label 
+                Text="{Binding OriginalShortcut.DisplayValue}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Style="{StaticResource H1Label}" />
+
+            <HorizontalStackLayout  Margin="0" Padding="0" Spacing="0" HorizontalOptions="End" >
+                <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />
+                <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,15,0" />
+            </HorizontalStackLayout>
+            
+        </VerticalStackLayout>
+    </Border>
+</mopups:PopupPage>

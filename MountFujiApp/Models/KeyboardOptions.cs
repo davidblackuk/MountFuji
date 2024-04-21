@@ -14,6 +14,8 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+using System.Text.Json.Serialization;
+
 namespace MountFuji.Models;
 
 public partial class KeyboardOptions: ObservableObject
@@ -21,6 +23,7 @@ public partial class KeyboardOptions: ObservableObject
     /// <summary>
     /// What type of mapping to use
     /// </summary>
+    [NotifyPropertyChangedFor(nameof(IsUsingAMappingFile))]
     [ObservableProperty] private  KeyboardMapping mapping  = KeyboardMapping.Scancode;
 
     /// <summary>
@@ -33,6 +36,10 @@ public partial class KeyboardOptions: ObservableObject
     /// </summary>
     [ObservableProperty] private bool disableRepeat;
 
+    [JsonIgnore]
+    public bool IsUsingAMappingFile => Mapping == KeyboardMapping.FromFile;
+    
+    
     [ObservableProperty] private KeyboardShortcuts shortcutsWithModifier = new()
     {
         Options = "O",

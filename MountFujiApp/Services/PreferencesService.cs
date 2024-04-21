@@ -41,7 +41,7 @@ public interface IPreferencesService
     /// location of that file from the about dialog
     /// </summary>
     /// <returns></returns>
-    Task Save();
+    Task SaveAsync();
 
     /// <summary>
     /// Toggles the theme between light and dark modes
@@ -58,7 +58,7 @@ public interface IPreferencesService
 
 public class PreferencesService : IPreferencesService
 {
-    private readonly IPersistance persistance;
+    private readonly IPersistence persistence;
     private readonly ILogger<PreferencesService> log;
     private readonly IApplicationResolver appResolver;
 
@@ -66,14 +66,14 @@ public class PreferencesService : IPreferencesService
     /// <summary>
     /// Represents a service for managing user preferences.
     /// </summary>
-    public PreferencesService(IPersistance persistance, ILogger<PreferencesService> log, IApplicationResolver appResolver)
+    public PreferencesService(IPersistence persistence, ILogger<PreferencesService> log, IApplicationResolver appResolver)
     {
-        this.persistance = persistance;
+        this.persistence = persistence;
         this.log = log;
         this.appResolver = appResolver;
     }
     
-    public ApplicationPreferences Preferences { get; set; } = new();
+    public ApplicationPreferences Preferences { get; private set; } = new();
     
     /// <summary>
     /// Loads the preferences, if they exist. Note this isn't async because it is run during
@@ -81,8 +81,8 @@ public class PreferencesService : IPreferencesService
     /// </summary>
     public void Load()
     {
-        log.LogInformation("Attempting to load preferences from: {PreferencesFile}", persistance.MountFujiPreferencesFile);
-        Preferences = persistance.DeSerialize<ApplicationPreferences>(persistance.MountFujiPreferencesFile);
+        log.LogInformation("Attempting to load preferences from: {File}", persistence.MountFujiPreferencesFile);
+        Preferences = persistence.DeSerialize<ApplicationPreferences>(persistence.MountFujiPreferencesFile);
         log.LogInformation("Preference {Pref}: {Value}", "CartridgeFolder", Preferences.CartridgeFolder);
         log.LogInformation("Preference {Pref}: {Value}", "FloppyDiskFolder", Preferences.FloppyDiskFolder);
         log.LogInformation("Preference {Pref}: {Value}", "GemDosFolder", Preferences.GemDosFolder);
@@ -95,10 +95,10 @@ public class PreferencesService : IPreferencesService
     /// <summary>
     /// Saves the preferences to the the preferences JSON file.
     /// </summary>
-    public async Task Save()
+    public async Task SaveAsync()
     {
-        log.LogInformation("Attempting to save preferences to: {PreferencesFile}", persistance.MountFujiPreferencesFile);
-        await persistance.SerializeAsync(persistance.MountFujiPreferencesFile, Preferences);
+        log.LogInformation("Attempting to save preferences to: {File}", persistence.MountFujiPreferencesFile);
+        await persistence.SerializeAsync(persistence.MountFujiPreferencesFile, Preferences);
     }
 
     /// <summary>

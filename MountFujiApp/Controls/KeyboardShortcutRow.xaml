@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             x:DataType="vm:GlobalKeyboardOptionsPopupViewModel"
+             xmlns:converters="using:MountFuji.Converters"
+             xmlns:models="clr-namespace:MountFuji.Models"
+             x:Class="MountFuji.Controls.KeyboardShortcutRow">
+    <ContentView.Resources>
+        <converters:KeyboardShortcutConverter x:Key="ShortcutConverter" />
+        <converters:KeyboardShortcutTextDisplayConverter x:Key="LabelTextConverter" />
+        <models:ShortcutModifier x:Key="WithModifier">WithModifier</models:ShortcutModifier>
+        <models:ShortcutModifier x:Key="WithoutModifier">WithoutModifier</models:ShortcutModifier>
+    </ContentView.Resources>
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <Grid Grid.ColumnDefinitions="340,140,6,140" RowDefinitions="45">
+
+                <Label Grid.Column="0" Grid.Row="1" Text="{TemplateBinding Title}" Style="{StaticResource H3Label}" />
+                
+                <Label Grid.Column="1" Grid.Row="1"
+                       Text="{TemplateBinding KeyWithModifier, Converter={StaticResource LabelTextConverter}}"
+                       HorizontalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Path=SetKeyCommand}">
+                            <TapGestureRecognizer.CommandParameter>
+                                <MultiBinding Converter="{StaticResource ShortcutConverter}">
+                                    <Binding Source="{StaticResource WithModifier}"></Binding>
+                                    <Binding Path="Key" Source="{RelativeSource TemplatedParent}"></Binding>
+                                    <Binding Path="Title" Source="{RelativeSource TemplatedParent}"></Binding>
+                                    <Binding Path="KeyWithModifier" Source="{RelativeSource TemplatedParent}"></Binding>
+
+                                </MultiBinding>
+                            </TapGestureRecognizer.CommandParameter>
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Grid.Column="3" Grid.Row="1"
+                       Text="{TemplateBinding KeyWithoutModifier, Converter={StaticResource LabelTextConverter}}"
+                       HorizontalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Path=SetKeyCommand}">
+                            <TapGestureRecognizer.CommandParameter>
+                                <MultiBinding Converter="{StaticResource ShortcutConverter}">
+                                    <Binding Source="{StaticResource WithoutModifier}"></Binding>
+                                    <Binding Path="Key" Source="{RelativeSource TemplatedParent}"></Binding>
+                                    <Binding Path="Title" Source="{RelativeSource TemplatedParent}"></Binding>
+                                    <Binding Path="KeyWithoutModifier" Source="{RelativeSource TemplatedParent}"></Binding>
+                                </MultiBinding>
+                            </TapGestureRecognizer.CommandParameter>
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>

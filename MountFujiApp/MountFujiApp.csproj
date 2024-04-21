@@ -84,6 +84,9 @@
       <MauiXaml Update="Controls\HardDiskCascade.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
+      <MauiXaml Update="Controls\KeyboardShortcutRow.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
@@ -98,6 +101,10 @@
       </Compile>
       <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Strategy\AppSelectorStrategy.cs">
         <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
+      </Compile>
+      <Compile Update="Controls\KeyboardShortcutRow.xaml.cs">
+        <DependentUpon>KeyboardShortcutRow.xaml</DependentUpon>
+        <SubType>Code</SubType>
       </Compile>
     </ItemGroup>
     <ItemGroup>

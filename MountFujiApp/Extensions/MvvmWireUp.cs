@@ -58,5 +58,13 @@ public static class MvvmWireUp {
         
         services.AddTransient<RomPickerPopup>();
         services.AddTransient<RomPickerPopupViewModel>();
+
+        services.AddTransient<GlobalKeyboardConfigurationPopup>();
+        services.AddTransient<GlobalKeyboardOptionsPopupViewModel>();
+        
+        services.AddTransient<SetShortcutPopupView>();
+        services.AddTransient<SetShortcutPopupViewModel>();
+        
+        
     }
 }

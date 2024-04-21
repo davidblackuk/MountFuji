@@ -23,7 +23,6 @@
                     <configurationSections:HardDiskSection/>
                     <configurationSections:FloppySection />
                     <configurationSections:ScreenSection/>
-                    <configurationSections:KeyboardSection/>
                     <configurationSections:SoundSection/>
                 </VerticalStackLayout>
 

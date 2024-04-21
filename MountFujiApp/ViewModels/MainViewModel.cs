@@ -144,22 +144,7 @@ public partial class MainViewModel : TinyViewModel
 
     #endregion
       
-    #region ----- Keyboard Mapping -----
-    
-    [RelayCommand()]
-    private async Task BrowseKeyboardMapping()
-    {
-        await fujiFilePicker.PickFile("Keyboard Mapping File", (filename) => SelectedConfiguration.KeyboardOptions.MappingFile = filename,
-            preferencesService.Preferences.CartridgeFolder);
-    }
-
-    [RelayCommand]
-    private void ClearKeyboardMapping()
-    {
-        SelectedConfiguration.KeyboardOptions.MappingFile = String.Empty;
-    }
-
-    #endregion
+  
     
     #region ----- ACSI -----
     
@@ -318,7 +303,7 @@ public partial class MainViewModel : TinyViewModel
         popup.Disappearing += async (sender, args) =>
         {
             if (!popup.ViewModel.Confirmed) return;
-            await preferencesService.Save();
+            await preferencesService.SaveAsync();
             RunCommand.NotifyCanExecuteChanged();
         };
     }
@@ -350,8 +335,8 @@ public partial class MainViewModel : TinyViewModel
         popup.Disappearing += async (sender, args) =>
         {
             if (!popup.ViewModel.Confirmed) return;
-            AtariConfiguration clone =
-                await systemsService.Import(popup.ViewModel.FileName, popup.ViewModel.DisplayName);
+           AtariConfiguration clone =
+                await systemsService.Import(popup.ViewModel.FileName, popup.ViewModel.DisplayName); 
             UpdateSystemsFromService();
             SelectedConfiguration = clone;
         };
@@ -370,6 +355,14 @@ public partial class MainViewModel : TinyViewModel
         await Launcher.Default.OpenAsync(applicationUrl);
     }
 
+    [RelayCommand]
+    private async Task OpenGlobalKeyboardConfigPopup()
+    { 
+        GlobalKeyboardConfigurationPopup popup = serviceProvider.GetService<GlobalKeyboardConfigurationPopup>();
+        await popupNavigation.PushAsync(popup);
+    }
+
+    
     #endregion
     
     [RelayCommand]
