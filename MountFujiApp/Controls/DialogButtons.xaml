@@ -19,7 +19,7 @@
 				Command="{Binding CancelCommand}"
 				CommandParameter="{Binding CancelCommandParameter}" />
 
-		<BoxView FlexLayout.Order="{Binding SpacerOrder}"
+		<BoxView FlexLayout.Order="2"
 				 Color="Transparent"
 				 Margin="{Binding ButtonMargin}" />
 
