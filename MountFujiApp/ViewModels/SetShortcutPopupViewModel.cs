@@ -57,7 +57,7 @@ public partial class SetShortcutPopupViewModel: TinyViewModel
     private async Task Ok()
     {
         Confirmed = true;
-        originalShortcut.DisplayValue = CurrentShortcut;
+        //originalShortcut.DisplayValue = CurrentShortcut;
         await popupNavigation.PopAsync();
     }
 }
