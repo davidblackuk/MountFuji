@@ -27,11 +27,12 @@
                 HorizontalOptions="Center"
                 Style="{StaticResource H3Offset}" />
             
-            <Label 
-                Text="{Binding OriginalShortcut.DisplayValue}"
+            <Entry
+                Text="{Binding CurrentShortcut}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
-                Style="{StaticResource H1Label}" />
+                
+                />
 
             <HorizontalStackLayout  Margin="0" Padding="0" Spacing="0" HorizontalOptions="End" >
                 <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />

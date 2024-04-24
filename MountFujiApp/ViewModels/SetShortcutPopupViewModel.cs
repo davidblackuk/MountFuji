@@ -22,6 +22,7 @@ public partial class SetShortcutPopupViewModel: TinyViewModel
 
     [ObservableProperty] private HatariShortcut originalShortcut;
 
+    [ObservableProperty] private string currentShortcut;
 
     [ObservableProperty] private string key;
     
@@ -41,7 +42,7 @@ public partial class SetShortcutPopupViewModel: TinyViewModel
 
     public void SetInitialState(HatariShortcut shortcut)
     {
-        
+        CurrentShortcut = shortcut.DisplayValue;    
         OriginalShortcut = shortcut;
     }
     
@@ -56,6 +57,7 @@ public partial class SetShortcutPopupViewModel: TinyViewModel
     private async Task Ok()
     {
         Confirmed = true;
+        originalShortcut.DisplayValue = CurrentShortcut;
         await popupNavigation.PopAsync();
     }
 }
