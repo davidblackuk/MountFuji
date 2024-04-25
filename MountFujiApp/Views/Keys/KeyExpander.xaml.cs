@@ -14,29 +14,47 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Maui.BindableProperty.Generator.Core;
-using MountFuji.Models.Keyboard;
+using Microsoft.Maui.Layouts;
+using MountFuji.Controls;
 
-namespace MountFuji.Controls;
+namespace MountFuji.Views.Keys;
 
-public partial class KeyboardShortcutRow : ContentView
+public partial class KeyExpander : ContentView
 {
-         
+    private const string CollapsedIcon = IconFont.Expand_more;
+    private const string ExpandedIcon = IconFont.Expand_less;
+    
+    
 #pragma warning disable CS0169
     
-    [AutoBindable] private readonly string title;
-    
-    [AutoBindable] private readonly string keyWithModifier;
-    
-    [AutoBindable] private readonly string keyWithoutModifier;
-    
-    [AutoBindable] private readonly ShortcutKey key;
+    [AutoBindable]
+    private readonly string title;
+
+    [AutoBindable(OnChanged = nameof(UpdateExpanderImage))]
+    private readonly bool isExpanded;
+
+    [AutoBindable(DefaultValue = CollapsedIcon, OnChanged = nameof(UpdateExpanderImage))]
+    private readonly string expanderIcon;
+
     
 #pragma warning restore CS0169
     
+    private void UpdateExpanderImage()
+    {
+        
+        ExpanderIcon = IsExpanded ? ExpandedIcon : CollapsedIcon;
+    }
     
-    public KeyboardShortcutRow()
+    public KeyExpander()
     {
         InitializeComponent();
     }
+
+    
 }

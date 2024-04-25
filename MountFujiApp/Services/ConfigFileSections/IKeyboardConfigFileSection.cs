@@ -1,4 +1,5 @@
 using System.Text;
+using KeyboardOptions = MountFuji.Models.Keyboard.KeyboardOptions;
 
 namespace MountFuji.Services.ConfigFileSections;
 

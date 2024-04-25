@@ -7,63 +7,14 @@
 //    (at your option) any later version.
 // 
 //    This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY, without even the implied warranty of
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
 //    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //    GNU General Public License for more details.
 // 
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace MountFuji.Models;
-
-public enum ShortcutModifier
-{
-    /// <summary>
-    /// The shortcut runs with no modifier
-    /// </summary>
-    WithoutModifier,
-
-    /// <summary>
-    /// The short cut works only when the modifier key is pressed
-    /// </summary>
-    WithModifier,
-    
-    /// <summary>
-    /// Used in the null object only
-    /// </summary>
-    Null
-}
-
-/// <summary>
-/// Short cut keys
-/// </summary>
-public enum ShortcutKey
-{
-    Options,
-    FullScreen,
-    Borders,
-    MouseMode,
-    ColdReset,
-    WarmReset,
-    ScreenShot,
-    BossKey,
-    CursorEmu,
-    FastForward,
-    RecAnim,
-    RecSound,
-    Sound,
-    Pause,
-    Debugger,
-    Quit,
-    LoadMem,
-    SaveMem,
-    InsertDiskA,
-    SwitchJoy0,
-    SwitchJoy1,
-    SwitchPadA,
-    SwitchPadB,
-    Null
-}
+namespace MountFuji.Models.Keyboard;
 
 public class HatariShortcut(ShortcutModifier modifier, ShortcutKey key, String description, string displayValue)
 {

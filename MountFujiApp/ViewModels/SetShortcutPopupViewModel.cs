@@ -14,11 +14,14 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+using MountFuji.Models.Keyboard;
+
 namespace MountFuji.ViewModels;
 
 public partial class SetShortcutPopupViewModel: TinyViewModel
 {
     private readonly IPopupNavigation popupNavigation;
+    private readonly IGlobalSystemConfigurationService configService;
 
     [ObservableProperty] private HatariShortcut originalShortcut;
 
@@ -26,18 +29,10 @@ public partial class SetShortcutPopupViewModel: TinyViewModel
 
     [ObservableProperty] private string key;
     
-    public bool Confirmed { get; private set; }
-    
-    
-    public SetShortcutPopupViewModel(IPopupNavigation popupNavigation)
+    public SetShortcutPopupViewModel(IPopupNavigation popupNavigation, IGlobalSystemConfigurationService configService)
     {
         this.popupNavigation = popupNavigation;
-    }
-
-    public override Task OnFirstAppear()
-    {
-        OnPropertyChanged(nameof(OriginalShortcut));
-        return base.OnFirstAppear();
+        this.configService = configService;
     }
 
     public void SetInitialState(HatariShortcut shortcut)
@@ -45,19 +40,23 @@ public partial class SetShortcutPopupViewModel: TinyViewModel
         CurrentShortcut = shortcut.DisplayValue;    
         OriginalShortcut = shortcut;
     }
+
+    [RelayCommand]
+    private void SetKey(string keyText)
+    {
+        CurrentShortcut = keyText;
+    }
     
     [RelayCommand]
     private async Task Cancel()
     {
-        Confirmed = false;
         await popupNavigation.PopAsync();
     }
 
     [RelayCommand]
     private async Task Ok()
     {
-        Confirmed = true;
-        //originalShortcut.DisplayValue = CurrentShortcut;
+        configService.SetShortcutKey(OriginalShortcut.Modifier, originalShortcut.Key, currentShortcut);
         await popupNavigation.PopAsync();
     }
 }

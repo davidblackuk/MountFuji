@@ -14,12 +14,35 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace MountFuji.Models;
+namespace MountFuji.Models.Keyboard;
 
-public partial class GlobalSystemConfiguration: ObservableObject
+/// <summary>
+/// Short cut keys
+/// </summary>
+public enum ShortcutKey
 {
-    /// <summary>
-    /// Keyboard options, mapping type etc
-    /// </summary>
-    [ObservableProperty] private Keyboard.KeyboardOptions keyboardOptions = new();
+    Options,
+    FullScreen,
+    Borders,
+    MouseMode,
+    ColdReset,
+    WarmReset,
+    ScreenShot,
+    BossKey,
+    CursorEmu,
+    FastForward,
+    RecAnim,
+    RecSound,
+    Sound,
+    Pause,
+    Debugger,
+    Quit,
+    LoadMem,
+    SaveMem,
+    InsertDiskA,
+    SwitchJoy0,
+    SwitchJoy1,
+    SwitchPadA,
+    SwitchPadB,
+    Null
 }

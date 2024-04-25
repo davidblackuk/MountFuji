@@ -16,6 +16,8 @@
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using MountFuji.Services.GlobalConfig;
+
 namespace MountFuji.Extensions;
 
 public static class ServicesWireUp
@@ -36,6 +38,7 @@ public static class ServicesWireUp
         services.AddTransient<IConfigFileService, ConfigFileService>();
         services.AddTransient<IFileSystemService, FileSystemService>();
         services.AddTransient<IRomService, RomService>();
+        services.AddSingleton<ISortcutKeySetter, SortcutKeySetter>();
         services.AddSingleton<IGlobalSystemConfigurationService, GlobalSystemConfigurationService>();
     }
 

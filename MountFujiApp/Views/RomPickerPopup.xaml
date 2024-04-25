@@ -37,12 +37,6 @@
 
             <Rectangle Grid.Row="2" Style="{StaticResource DialogButtonsSeparator}"></Rectangle>
 
-
-            <!--<HorizontalStackLayout Grid.Row="3" Grid.Column="0" HorizontalOptions="End">
-                <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />
-                <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,0,0" />
-            </HorizontalStackLayout>-->
-
 			<controls1:DialogButtons Margin="0,0,15,0" Grid.Row="3" Grid.Column="0" HorizontalOptions="End"
 									IsButtonSizeEqual="True"
 									CancelCommand="{Binding CancelCommand}"

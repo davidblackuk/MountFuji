@@ -14,67 +14,7 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-using System.Text.Json.Serialization;
-
-namespace MountFuji.Models;
-
-public partial class KeyboardOptions: ObservableObject
-{
-    /// <summary>
-    /// What type of mapping to use
-    /// </summary>
-    [NotifyPropertyChangedFor(nameof(IsUsingAMappingFile))]
-    [ObservableProperty] private  KeyboardMapping mapping  = KeyboardMapping.Scancode;
-
-    /// <summary>
-    /// When the mapping type of fromFile, this value specifies the full path to the mapping file
-    /// </summary>
-    [ObservableProperty] private string mappingFile = String.Empty;
-
-    /// <summary>
-    /// When set, hatari will not use key repeats when the System is in fast forward mode
-    /// </summary>
-    [ObservableProperty] private bool disableRepeat;
-
-    [JsonIgnore]
-    public bool IsUsingAMappingFile => Mapping == KeyboardMapping.FromFile;
-    
-    
-    [ObservableProperty] private KeyboardShortcuts shortcutsWithModifier = new()
-    {
-        Options = "O",
-        FullScreen = "F",
-        Borders = "B",
-        MouseMode = "M",
-        ColdReset = "C",
-        WarmReset = "R",
-        ScreenShot = "G",
-        BossKey = "I",
-        CursorEmu = "J",
-        FastForward = "X",
-        RecAnim = "A",
-        RecSound = "Y",
-        Sound = "S",
-        Pause = "",
-        Debugger = "Pause",
-        Quit = "Q",
-        LoadMem = "L",
-        SaveMem = "K",
-        InsertDiskA = "D",
-        SwitchJoy0 = "F1",
-        SwitchJoy1 = "F2",
-        SwitchPadA = "F3",
-        SwitchPadB = "F4",
-    };
-
-    [ObservableProperty] private KeyboardShortcuts shortcutsWithoutModifier = new()
-    {
-        Options = "F12",
-        FullScreen = "F11",
-        Pause = "Pause",
-    };
-}
-
+namespace MountFuji.Models.Keyboard;
 
 public partial class KeyboardShortcuts: ObservableObject
 {

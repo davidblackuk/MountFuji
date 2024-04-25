@@ -17,7 +17,11 @@
 using System.Xml.Linq;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Animations;
+using MountFuji.Models.Keyboard;
 using MountFuji.Services.ConfigFileSections;
+using MountFuji.Services.GlobalConfig;
+using KeyboardOptions = MountFuji.Models.Keyboard.KeyboardOptions;
+using KeyboardShortcuts = MountFuji.Models.Keyboard.KeyboardShortcuts;
 
 namespace MountFuji.Services;
 
@@ -50,6 +54,9 @@ public interface IGlobalSystemConfigurationService
     /// <param name="filename"></param>
     /// <returns></returns>
     Task<KeyboardOptions> ImportKeyboardOptionsFromConfigFile(string filename);
+    
+    // sets a short cut key, does not persist the result
+    void SetShortcutKey(ShortcutModifier modifier, ShortcutKey key, string newValue);
 }
 
 public class GlobalSystemConfigurationService : IGlobalSystemConfigurationService
@@ -57,17 +64,20 @@ public class GlobalSystemConfigurationService : IGlobalSystemConfigurationServic
     private readonly IKeyboardConfigFileSection keyboardConfigSection;
     private readonly IPersistence persistence;
     private readonly IRawHatariConfigFile rawFileReader;
+    private readonly ISortcutKeySetter shortcutKeySetter;
     private readonly ILogger<GlobalSystemConfigurationService> logger;
     public GlobalSystemConfiguration Configuration { get; private set; } = new();
 
     public GlobalSystemConfigurationService(IKeyboardConfigFileSection keyboardConfigSection,
         IPersistence persistence,
         IRawHatariConfigFile rawFileReader,
+        ISortcutKeySetter shortcutKeySetter,
         ILogger<GlobalSystemConfigurationService> logger)
     {
         this.keyboardConfigSection = keyboardConfigSection;
         this.persistence = persistence;
         this.rawFileReader = rawFileReader;
+        this.shortcutKeySetter = shortcutKeySetter;
         this.logger = logger;
     }
     
@@ -79,6 +89,9 @@ public class GlobalSystemConfigurationService : IGlobalSystemConfigurationServic
 
     public async Task LoadAsync()
     {
+        logger.LogInformation("Attempting to load global system config from: {File}", persistence.MountFujiGlobalSystemConfigurationFile);
+        Configuration = await persistence.DeSerializeAsync<GlobalSystemConfiguration>(persistence.MountFujiGlobalSystemConfigurationFile);
+
     }
 
     public async Task SaveAsync()
@@ -94,5 +107,16 @@ public class GlobalSystemConfigurationService : IGlobalSystemConfigurationServic
         keyboardConfigSection.FromHatariConfig(res, rawFileReader.Sections);
         return res;
     }
-
+    
+    public void SetShortcutKey(ShortcutModifier modifier, ShortcutKey key, string newValue)
+    {
+        if (modifier == ShortcutModifier.WithModifier)
+        {
+            shortcutKeySetter.SetShortcutKey(Configuration.KeyboardOptions.ShortcutsWithModifier, key, newValue);
+        }
+        else
+        {
+            shortcutKeySetter.SetShortcutKey(Configuration.KeyboardOptions.ShortcutsWithoutModifier, key, newValue);
+        }
+    }
 }

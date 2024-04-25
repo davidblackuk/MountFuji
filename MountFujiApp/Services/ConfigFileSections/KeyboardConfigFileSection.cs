@@ -15,6 +15,9 @@
 //    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 using System.Text;
+using MountFuji.Models.Keyboard;
+using KeyboardOptions = MountFuji.Models.Keyboard.KeyboardOptions;
+using KeyboardShortcuts = MountFuji.Models.Keyboard.KeyboardShortcuts;
 
 namespace MountFuji.Services.ConfigFileSections;
 

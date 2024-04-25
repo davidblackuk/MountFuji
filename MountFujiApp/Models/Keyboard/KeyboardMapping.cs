@@ -14,12 +14,16 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace MountFuji.Models;
+namespace MountFuji.Models.Keyboard;
 
-public partial class GlobalSystemConfiguration: ObservableObject
+/// <summary>
+/// Specifies the keyboard mapping type
+/// </summary>
+public enum KeyboardMapping
 {
-    /// <summary>
-    /// Keyboard options, mapping type etc
-    /// </summary>
-    [ObservableProperty] private Keyboard.KeyboardOptions keyboardOptions = new();
+    Symbolic = 0,
+    
+    Scancode = 1,
+    
+    FromFile = 2
 }

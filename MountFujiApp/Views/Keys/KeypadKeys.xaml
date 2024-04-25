@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FlexLayout xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="MountFuji.Views.Keys.KeypadKeys" Wrap="Wrap">
+    
+    <Button WidthRequest="110" Text="Num lock" CommandParameter="Numlock" Command="{Binding SetKeyCommand}" />
+    <Button WidthRequest="110" Text="=" CommandParameter="Keypad =" Command="{Binding SetKeyCommand}" />
+    <Button WidthRequest="110" Text="/" CommandParameter="Keypad /" Command="{Binding SetKeyCommand}" />
+    <Button WidthRequest="110" Text="*" CommandParameter="Keypad *" Command="{Binding SetKeyCommand}" />
+    
+    <Button WidthRequest="110" Text="7" CommandParameter="Keypad 7" Command="{Binding SetKeyCommand}" />
+    <Button WidthRequest="110" Text="8" CommandParameter="Keypad 8" Command="{Binding SetKeyCommand}" />
+    <Button WidthRequest="110" Text="9" CommandParameter="Keypad 9" Command="{Binding SetKeyCommand}" />
+    <Button WidthRequest="110" Text="-" CommandParameter="Keypad -" Command="{Binding SetKeyCommand}" />
+
+    <Button WidthRequest="110" Text="4" CommandParameter="Keypad 4" Command="{Binding SetKeyCommand}" />
+    <Button WidthRequest="110" Text="5" CommandParameter="Keypad 5" Command="{Binding SetKeyCommand}" />
+    <Button WidthRequest="110" Text="6" CommandParameter="Keypad 6" Command="{Binding SetKeyCommand}" />
+    <Button WidthRequest="110" Text="+" CommandParameter="Keypad +" Command="{Binding SetKeyCommand}" />
+    
+    <Button WidthRequest="110" Text="1" CommandParameter="Keypad 1" Command="{Binding SetKeyCommand}" />
+    <Button WidthRequest="110" Text="2" CommandParameter="Keypad 2" Command="{Binding SetKeyCommand}" />
+    <Button WidthRequest="110" Text="3" CommandParameter="Keypad 3" Command="{Binding SetKeyCommand}" />
+    <Button WidthRequest="110" Text="Enter" CommandParameter="Keypad Enter" Command="{Binding SetKeyCommand}" />
+
+    <Button WidthRequest="110" Text="0" CommandParameter="Keypad 0" Command="{Binding SetKeyCommand}" />
+    <Button WidthRequest="110" Text="." CommandParameter="Keypad ." Command="{Binding SetKeyCommand}" />
+
+    
+    
+</FlexLayout>

@@ -80,11 +80,6 @@
                     </Border>
                 </VerticalStackLayout>
             </configurationSections:ConfigurationGroup>
-
-            <!--<HorizontalStackLayout  Margin="0" Padding="0" Spacing="0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End" >
-                <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />
-                <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,15,0" />
-            </HorizontalStackLayout>-->
 			
 			<controls1:DialogButtons Margin="0,0,15,0" Padding="0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="End"
 				IsButtonSizeEqual="True"

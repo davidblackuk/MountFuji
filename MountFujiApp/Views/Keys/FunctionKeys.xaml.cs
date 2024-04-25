@@ -14,12 +14,18 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace MountFuji.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public partial class GlobalSystemConfiguration: ObservableObject
+namespace MountFuji.Views.Keys;
+
+public partial class FunctionKeys 
 {
-    /// <summary>
-    /// Keyboard options, mapping type etc
-    /// </summary>
-    [ObservableProperty] private Keyboard.KeyboardOptions keyboardOptions = new();
+    public FunctionKeys()
+    {
+        InitializeComponent();
+    }
 }

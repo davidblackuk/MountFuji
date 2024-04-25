@@ -6,12 +6,13 @@
              x:DataType="vm:GlobalKeyboardOptionsPopupViewModel"
              xmlns:converters="using:MountFuji.Converters"
              xmlns:models="clr-namespace:MountFuji.Models"
+             xmlns:keyboard="clr-namespace:MountFuji.Models.Keyboard"
              x:Class="MountFuji.Controls.KeyboardShortcutRow">
     <ContentView.Resources>
         <converters:KeyboardShortcutConverter x:Key="ShortcutConverter" />
         <converters:KeyboardShortcutTextDisplayConverter x:Key="LabelTextConverter" />
-        <models:ShortcutModifier x:Key="WithModifier">WithModifier</models:ShortcutModifier>
-        <models:ShortcutModifier x:Key="WithoutModifier">WithoutModifier</models:ShortcutModifier>
+        <keyboard:ShortcutModifier x:Key="WithModifier">WithModifier</keyboard:ShortcutModifier>
+        <keyboard:ShortcutModifier x:Key="WithoutModifier">WithoutModifier</keyboard:ShortcutModifier>
     </ContentView.Resources>
     <ContentView.ControlTemplate>
         <ControlTemplate>

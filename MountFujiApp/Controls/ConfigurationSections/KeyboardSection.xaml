@@ -9,6 +9,7 @@
              xmlns:controls1="using:MountFuji.Controls"
              xmlns:models1="using:MountFuji.Models"
              xmlns:configurationSections="clr-namespace:MountFuji.Controls.ConfigurationSections"
+             xmlns:keyboard="clr-namespace:MountFuji.Models.Keyboard"
              x:DataType="vm:GlobalKeyboardOptionsPopupViewModel"
              x:Class="MountFuji.Controls.ConfigurationSections.KeyboardSection">
 
@@ -19,9 +20,9 @@
 
             <HorizontalStackLayout RadioButtonGroup.GroupName="keboard_map"
                                    RadioButtonGroup.SelectedValue="{Binding Configuration.KeyboardOptions.Mapping}">
-                <RadioButton Content="Symbolic" Value="{x:Static models1:KeyboardMapping.Symbolic}" />
-                <RadioButton Content="Scancode" Value="{x:Static models1:KeyboardMapping.Scancode}" />
-                <RadioButton Content="From file" Value="{x:Static models1:KeyboardMapping.FromFile}" />
+                <RadioButton Content="Symbolic" Value="{x:Static keyboard:KeyboardMapping.Symbolic}" />
+                <RadioButton Content="Scancode" Value="{x:Static keyboard:KeyboardMapping.Scancode}" />
+                <RadioButton Content="From file" Value="{x:Static keyboard:KeyboardMapping.FromFile}" />
             </HorizontalStackLayout>
 
             <Label Text="Mapping file" Style="{StaticResource H3Offset}"></Label>

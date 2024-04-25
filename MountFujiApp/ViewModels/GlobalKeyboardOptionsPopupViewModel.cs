@@ -16,7 +16,9 @@
 
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Platform;
+using MountFuji.Models.Keyboard;
 using MountFuji.Views;
+using KeyboardOptions = MountFuji.Models.Keyboard.KeyboardOptions;
 
 namespace MountFuji.ViewModels;
 
@@ -84,22 +86,18 @@ public partial class GlobalKeyboardOptionsPopupViewModel: TinyViewModel
     {
         log.LogInformation("Setting key for {Key}", key);
         SetShortcutPopupView popup = serviceProvider.GetService<SetShortcutPopupView>();
-        
+
+        popup.ViewModel.SetInitialState(key);
         await popupNavigation.PushAsync(popup);
         
-        popup.ViewModel.SetInitialState(key);
         
-        popup.Disappearing += async (sender, args) =>
-        {
-            if (!popup.ViewModel.Confirmed) return;
-        };
     }
 
     
     [RelayCommand]
     private async Task Cancel()
     {
-        Configuration.KeyboardOptions = originalOptions;
+        await globalConfigService.LoadAsync();
         await popupNavigation.PopAsync();
     }
 

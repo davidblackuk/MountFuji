@@ -76,19 +76,12 @@
                         </VerticalStackLayout>
 
                     </configurationSections:ConfigurationGroup>
-
-                    <!--<HorizontalStackLayout HorizontalOptions="End"
-                                           HeightRequest="60" >
-                        <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}"
-                                Margin="0,0,15,0" />
-                        <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,15,0" />
-                    </HorizontalStackLayout>-->
-
 					<controls1:DialogButtons
 						HorizontalOptions="End"
 						HeightRequest="60"
 						Margin="0,0,15,0"
 						IsButtonSizeEqual="True"
+                        OKText="Apply"
 						CancelCommand="{Binding CancelCommand}"
 						OKCommand="{Binding OkCommand}" />
 

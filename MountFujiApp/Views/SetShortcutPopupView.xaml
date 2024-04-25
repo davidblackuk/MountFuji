@@ -4,41 +4,69 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                   xmlns:vm="clr-namespace:MountFuji.ViewModels"
                   xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
-                  xmlns:models="clr-namespace:MountFuji.Models"
-                  xmlns:converters="using:MountFuji.Converters"
-                  xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
+                  xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                  xmlns:keys="clr-namespace:MountFuji.Views.Keys"
+                  xmlns:controls="clr-namespace:MountFuji.Controls"
                   x:DataType="vm:SetShortcutPopupViewModel"
                   x:Class="MountFuji.Views.SetShortcutPopupView"
-                  Title="NewSystemPopup" BackgroundColor="#80000000"  CloseWhenBackgroundIsClicked="False"
-                  
-                  >
-    <Border WidthRequest="200" HeightRequest="260" Style="{StaticResource DialogWindow}">
+                  Title="NewSystemPopup" BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
+    <Border WidthRequest="764" HeightRequest="380" Style="{StaticResource DialogWindow}">
 
-        <VerticalStackLayout>
-            <Label 
-                Text="Set key for"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                Style="{StaticResource H1Label}" />
-            
-            <Label 
-                Text="{Binding OriginalShortcut.Description}"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                Style="{StaticResource H3Offset}" />
-            
-            <Entry
-                Text="{Binding CurrentShortcut}"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                
-                />
+        <Grid RowDefinitions="*,60" Grid.ColumnDefinitions="300, 4, 460">
 
-            <HorizontalStackLayout  Margin="0" Padding="0" Spacing="0" HorizontalOptions="End" >
-                <Button VerticalOptions="Center" Text="Cancel" Command="{Binding CancelCommand}" Margin="0,0,15,0" />
-                <Button VerticalOptions="Center" Text="OK" Command="{Binding OkCommand}" Margin="0,0,15,0" />
-            </HorizontalStackLayout>
+            <VerticalStackLayout  Margin="0,10,0,0" Spacing="20">
+            <Label 
+
+                   Text="Set key for"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   Style="{StaticResource H2Label}" />
+
+            <Label 
+                   Text="{Binding OriginalShortcut.Description}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   Style="{StaticResource H3Offset}" />
+
+            <Entry 
+                   WidthRequest="270"
+                   HeightRequest="150"
+                   HorizontalTextAlignment="Center"
+                    Margin="0,20,0,0"
+                   Text="{Binding CurrentShortcut}"
+                   FontSize="35"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center" />
+            </VerticalStackLayout>
             
-        </VerticalStackLayout>
+            <Rectangle Grid.Column="1" Style="{StaticResource DialogButtonsSeparator}"></Rectangle>
+
+            
+            <ScrollView Grid.Row="0"  Grid.Column="2">
+                <VerticalStackLayout Spacing="20" Margin="10,10,10,0">
+
+                    <keys:KeyExpander Title="Function keys" IsExpanded="True">
+                        <keys:FunctionKeys/>
+                    </keys:KeyExpander>
+                    
+                    <keys:KeyExpander Title="Miscellaneous keys">
+                        <keys:MiscellaneousKeys/>
+                    </keys:KeyExpander>
+                    
+                    <keys:KeyExpander Title="Keypad keys">
+                        <keys:KeypadKeys/>
+                    </keys:KeyExpander>
+                    
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <controls:DialogButtons Margin="0,0,15,0" HorizontalOptions="End" Grid.Row="4" Grid.Column="0"
+                                    Grid.ColumnSpan="4"
+                                    IsButtonSizeEqual="True"
+                                    CancelCommand="{Binding CancelCommand}"
+                                    OKCommand="{Binding OkCommand}" />
+
+
+        </Grid>
     </Border>
 </mopups:PopupPage>

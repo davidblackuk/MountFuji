@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Runtime.InteropServices.JavaScript;
 using CommunityToolkit.Maui.Converters;
+using MountFuji.Models.Keyboard;
 
 namespace MountFuji.Converters;
 
