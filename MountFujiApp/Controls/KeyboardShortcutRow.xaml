@@ -19,41 +19,31 @@
             <Grid Grid.ColumnDefinitions="340,140,6,140" RowDefinitions="45">
 
                 <Label Grid.Column="0" Grid.Row="1" Text="{TemplateBinding Title}" Style="{StaticResource H3Label}" />
-                
-                <Label Grid.Column="1" Grid.Row="1"
-                       Text="{TemplateBinding KeyWithModifier, Converter={StaticResource LabelTextConverter}}"
-                       HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding Path=SetKeyCommand}">
-                            <TapGestureRecognizer.CommandParameter>
-                                <MultiBinding Converter="{StaticResource ShortcutConverter}">
-                                    <Binding Source="{StaticResource WithModifier}"></Binding>
-                                    <Binding Path="Key" Source="{RelativeSource TemplatedParent}"></Binding>
-                                    <Binding Path="Title" Source="{RelativeSource TemplatedParent}"></Binding>
-                                    <Binding Path="KeyWithModifier" Source="{RelativeSource TemplatedParent}"></Binding>
 
-                                </MultiBinding>
-                            </TapGestureRecognizer.CommandParameter>
-                        </TapGestureRecognizer>
-                    </Label.GestureRecognizers>
-                </Label>
+                <Button Grid.Column="1" Grid.Row="1" Command="{Binding Path=SetKeyCommand}" WidthRequest="140"
+                        Text="{TemplateBinding KeyWithModifier, Converter={StaticResource LabelTextConverter}}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource ShortcutConverter}">
+                            <Binding Source="{StaticResource WithModifier}"></Binding>
+                            <Binding Path="Key" Source="{RelativeSource TemplatedParent}"></Binding>
+                            <Binding Path="Title" Source="{RelativeSource TemplatedParent}"></Binding>
+                            <Binding Path="KeyWithModifier" Source="{RelativeSource TemplatedParent}"></Binding>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
 
-                <Label Grid.Column="3" Grid.Row="1"
-                       Text="{TemplateBinding KeyWithoutModifier, Converter={StaticResource LabelTextConverter}}"
-                       HorizontalOptions="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding Path=SetKeyCommand}">
-                            <TapGestureRecognizer.CommandParameter>
-                                <MultiBinding Converter="{StaticResource ShortcutConverter}">
-                                    <Binding Source="{StaticResource WithoutModifier}"></Binding>
-                                    <Binding Path="Key" Source="{RelativeSource TemplatedParent}"></Binding>
-                                    <Binding Path="Title" Source="{RelativeSource TemplatedParent}"></Binding>
-                                    <Binding Path="KeyWithoutModifier" Source="{RelativeSource TemplatedParent}"></Binding>
-                                </MultiBinding>
-                            </TapGestureRecognizer.CommandParameter>
-                        </TapGestureRecognizer>
-                    </Label.GestureRecognizers>
-                </Label>
+                <Button Grid.Column="3" Grid.Row="1" Command="{Binding Path=SetKeyCommand}" WidthRequest="140"
+                        Text="{TemplateBinding KeyWithoutModifier, Converter={StaticResource LabelTextConverter}}"
+                        HorizontalOptions="Center">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource ShortcutConverter}">
+                            <Binding Source="{StaticResource WithoutModifier}"></Binding>
+                            <Binding Path="Key" Source="{RelativeSource TemplatedParent}"></Binding>
+                            <Binding Path="Title" Source="{RelativeSource TemplatedParent}"></Binding>
+                            <Binding Path="KeyWithoutModifier" Source="{RelativeSource TemplatedParent}"></Binding>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
             </Grid>
         </ControlTemplate>
     </ContentView.ControlTemplate>
