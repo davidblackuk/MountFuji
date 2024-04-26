@@ -51,11 +51,31 @@ You can see a video showing how Mount Fuji works and how to download and install
 [![Watch the video](img/thumbnail.png)](https://youtu.be/Qz4iEh8EcBo)
 
 
-## Release notes
+## What's new 
 
-Here are the release notes for The different version of Mount Fuji
+Here's what's in the different version of Mount Fuji. See the GitHub release notes for more information and update instructions.
 
-### Version 1.0.3
+### Version V.Next (date TBD)
+
+- **\#22** [_RSH_] - Modified RadioButton control template and styling to provide consistent look on supported platforms.
+  - Previously themed stying on Windows was broken. Light mode and dark mode both worked when they were the OS default. However changing theme modes on windows led to problems. This is fixed now. 
+- **\#24** [_RSH_] - Added a dialog buttons control to properly order OK / Cancel buttons on different platforms
+  - Previously we used the Mac idiom `[Cancel] [OK]` on MacOS and Windows Now we use Now we use  `[Cancel] [OK]` on Mac and  `[OK] [Cancel]` on windows
+- **\#25** [_RSH_] - Internal refactoring to reduce code complexity
+  - Not visible, but needed.
+- **\#24** [_DB_] Added support for keyboard configuration
+  - Supports all functionality present in Hatari in a minimal way, supports setting the mapping type, specifying a mapping file etc.
+  - More limited support for specifying shortcut keys (not all possible keys supported due to a limitation in Maui 8, may need to wait till Maui 9 for full Support)
+  - supports importing shortcuts from a specific Hatari config file
+  - there is a single global set of keyboard setting for all systems as I can't see them changing across them.
+
+#### Contributers
+
+- [DB] David Black: [GitHub](https://github.com/davidblackuk), [YouTube](https://www.youtube.com/channel/UC--sLs1pvHWkTxa9J-zIzAw), [Twitter](twitter.com/david_black_uk)
+- [RSH] Randy S. Hunsaker [GitHub](https://github.com/hunsra)
+
+
+### Version 1.0.3 (Mar 25th 2024)
 
 This release introduced:
 
@@ -77,9 +97,16 @@ This release introduced:
 - Fixed a typo where ACSi was spelled ASCI
 - updated to Maui SR3, in the hopes it addressed that crashing issue in the CollectionView
 
+There is a preview video of the [new features in this release](https://youtu.be/PhFcQSdW230?si=jqi8VCxyoWoT3Kqa)
 
+#### Contributers
 
+- [DB] David Black: [GitHub](https://github.com/davidblackuk), [YouTube](https://www.youtube.com/channel/UC--sLs1pvHWkTxa9J-zIzAw), [Twitter](twitter.com/david_black_uk)
 
-### Version 1.0.2
+### Version 1.0.2 (Feb 22nd 2024)
 
 This was the release version of Fuji, its features are shown in the video above.
+
+#### Contributers
+
+- [DB] David Black: [GitHub](https://github.com/davidblackuk), [YouTube](https://www.youtube.com/channel/UC--sLs1pvHWkTxa9J-zIzAw), [Twitter](twitter.com/david_black_uk)
