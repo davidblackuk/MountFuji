@@ -23,6 +23,7 @@
     <Color x:Key="Level3BgColorLight">#ffffff</Color>
     <Color x:Key="Level3BgColorDark">#242424</Color>
 
+    <Color x:Key="ControlColorHoverLight">#D5CAE6</Color>
     
     <Color x:Key="ControlColorDark">#BB86FC</Color>
     <Color x:Key="ControlColorLightLight">#8124FF</Color>
@@ -39,7 +40,7 @@
     
    
     <Color x:Key="ButtonBorderColorDark">#2E333A</Color>
-    <Color x:Key="ButtonBorderColorLight">#212121</Color>
+    <Color x:Key="ButtonBorderColorLight">#BEBEBE</Color>
 
     <!-- -->
     <!-- <Color x:Key="ButtonTextColorDark">#c9d1d9</Color> -->

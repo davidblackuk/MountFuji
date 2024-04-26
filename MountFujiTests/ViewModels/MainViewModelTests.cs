@@ -336,7 +336,7 @@ public class MainViewModelTests
         await sut.EditPreferencesCommand.ExecuteAsync(null);
         
         prefsPopupMock.Raise(pp => pp.Disappearing += null, EventArgs.Empty);
-        preferencesServiceMock.Verify(p => p.Save(), Times.Never);
+        preferencesServiceMock.Verify(p => p.SaveAsync(), Times.Never);
     }
 
     
@@ -358,7 +358,7 @@ public class MainViewModelTests
         await sut.EditPreferencesCommand.ExecuteAsync(null);
         
         prefsPopupMock.Raise(pp => pp.Disappearing += null, EventArgs.Empty);
-        preferencesServiceMock.Verify(p => p.Save(), Times.Once);
+        preferencesServiceMock.Verify(p => p.SaveAsync(), Times.Once);
 
         
     }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FlexLayout xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="MountFuji.Views.Keys.MiscellaneousKeys" Wrap="Wrap">
+    
+    <Button Margin="1" CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" Text="Left Ctrl" Command="{Binding SetKeyCommand}" />
+    <Button Margin="1" CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" Text="Left Option" Command="{Binding SetKeyCommand}" />
+    <Button Margin="1" CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" Text="Space" Command="{Binding SetKeyCommand}" />
+    <Button Margin="1" CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" Text="Right Command" Command="{Binding SetKeyCommand}" />
+    <Button Margin="1" CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" Text="Right Option" Command="{Binding SetKeyCommand}" />
+    <Button Margin="1" CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" Text="Right Ctrl" Command="{Binding SetKeyCommand}" />
+    <Button Margin="1" CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" Text="Backspace" Command="{Binding SetKeyCommand}" />
+    <Button Margin="1" CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" Text="Delete" Command="{Binding SetKeyCommand}" />
+    <Button Margin="1" CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" Text="Home" Command="{Binding SetKeyCommand}" />
+    <Button Margin="1" CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" Text="End" Command="{Binding SetKeyCommand}" />
+    <Button Margin="1" CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" Text="PageUp" Command="{Binding SetKeyCommand}" />
+    <Button Margin="1" CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" Text="PageDown" Command="{Binding SetKeyCommand}" />
+    
+</FlexLayout>

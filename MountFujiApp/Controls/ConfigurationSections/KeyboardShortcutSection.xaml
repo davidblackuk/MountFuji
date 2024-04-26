@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MountFuji.Controls"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             xmlns:models="clr-namespace:MountFuji.Models"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             xmlns:models1="using:MountFuji.Models"
+             xmlns:configurationSections="clr-namespace:MountFuji.Controls.ConfigurationSections"
+             x:DataType="vm:GlobalKeyboardOptionsPopupViewModel"
+             x:Class="MountFuji.Controls.ConfigurationSections.KeyboardShortcutSection">
+
+        <VerticalStackLayout>
+            <FlexLayout Direction="Row" >
+                <Label Text="Shortcuts" FlexLayout.Grow="1" Style="{StaticResource H2Label}" VerticalOptions="Center"></Label>
+                <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="5"
+                        Text="{x:Static controls:IconFont.File_open}"
+                        Command="{Binding ImportFromKeyboardConfigFileCommand}"
+                        VerticalOptions="Center"  ToolTipProperties.Text="Import keyboard config from file." />
+                
+            </FlexLayout>
+            
+            <Grid Grid.ColumnDefinitions="340,140,6,140" RowDefinitions="45">
+                <Label Grid.Column="1" Grid.Row="0" Text="With modifier" FontAttributes="Bold"
+                       Style="{StaticResource H4Label}" HorizontalTextAlignment="Center" />
+                <Label Grid.Column="3" Grid.Row="0" Text="Without" FontAttributes="Bold"
+                       Style="{StaticResource H4Label}" HorizontalTextAlignment="Center" />
+            </Grid>
+
+            <controls:KeyboardShortcutRow
+                Title="Edit settings"
+                Key="Options"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.Options}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.Options}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Toggle fullscreen"
+                Key="FullScreen"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.FullScreen}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.FullScreen}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Toggle borders"
+                Key="Borders"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.Borders}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.Borders}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Grab mouse"
+                Key="MouseMode"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.MouseMode}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.MouseMode}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Cold reset"
+                Key="ColdReset"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.ColdReset}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.ColdReset}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Warm reset"
+                Key="WarmReset"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.WarmReset}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.WarmReset}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Take screenshot"
+                Key="ScreenShot"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.ScreenShot}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.ScreenShot}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Boss key"
+                Key="BossKey"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.BossKey}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.BossKey}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Joystick cursor emulation"
+                Key="CursorEmu"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.CursorEmu}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.CursorEmu}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Fast forward"
+                Key="FastForward"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.FastForward}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.FastForward}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Record animation"
+                Key="RecAnim"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.RecAnim}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.RecAnim}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Record sound"
+                Key="RecSound"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.RecSound}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.RecSound}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Toggle sound"
+                Key="Sound"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.Sound}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.Sound}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Enter debugger"
+                Key="Debugger"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.Debugger}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.Debugger}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Pause emulation"
+                Key="Pause"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.Pause}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.Pause}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Quit Hatari"
+                Key="Quit"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.Quit}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.Quit}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Load memory snapshot"
+                Key="LoadMem"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.LoadMem}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.LoadMem}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Save memory snapshot"
+                Key="SaveMem"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.SaveMem}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.SaveMem}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Insert disk A:"
+                Key="InsertDiskA"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.InsertDiskA}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.InsertDiskA}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Toggle joystick 0"
+                Key="SwitchJoy0"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.SwitchJoy0}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.SwitchJoy0}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Toggle joystick 1"
+                Key="SwitchJoy1"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.SwitchJoy1}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.SwitchJoy1}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Toggle joypad A"
+                Key="SwitchPadA"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.SwitchPadA}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.SwitchPadA}" />
+
+            <controls:KeyboardShortcutRow
+                Title="Toggle joypad B"
+                Key="SwitchPadB"
+                KeyWithModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithModifier.SwitchPadB}"
+                KeyWithoutModifier="{Binding Configuration.KeyboardOptions.ShortcutsWithoutModifier.SwitchPadB}" />
+        </VerticalStackLayout>
+
+</ContentView>

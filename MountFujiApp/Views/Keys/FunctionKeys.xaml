@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FlexLayout xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="MountFuji.Views.Keys.FunctionKeys" Wrap="Wrap" >
+    <Button Margin="1" Text="F1" Command="{Binding SetKeyCommand}" 
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}">
+    </Button>
+    <Button Margin="1" Text="F2" Command="{Binding SetKeyCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}">
+    </Button>
+    <Button Margin="1" Text="F3" Command="{Binding SetKeyCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}">
+    </Button>
+    <Button Margin="1" Text="F4" Command="{Binding SetKeyCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}">
+    </Button>
+    <Button Margin="1" Text="F5" Command="{Binding SetKeyCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}">
+    </Button>
+    <Button Margin="1" Text="F6" Command="{Binding SetKeyCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}">
+    </Button>
+    <Button Margin="1" Text="F7" Command="{Binding SetKeyCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}">
+    </Button>
+    <Button Margin="1" Text="F8" Command="{Binding SetKeyCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}">
+    </Button>
+    <Button Margin="1" Text="F9" Command="{Binding SetKeyCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}">
+    </Button>
+    <Button Margin="1" Text="F10" Command="{Binding SetKeyCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}">
+    </Button>
+    <Button Margin="1" Text="F11" Command="{Binding SetKeyCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}">
+    </Button>
+    <Button Margin="1" Text="F12" Command="{Binding SetKeyCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}">
+    </Button>
+    <Button Margin="1" Text="F13" Command="{Binding SetKeyCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}">
+    </Button>
+    <Button Margin="1" Text="F14" Command="{Binding SetKeyCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}">
+    </Button>
+    <Button Margin="1" Text="F15" Command="{Binding SetKeyCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}">
+    </Button>
+
+</FlexLayout>

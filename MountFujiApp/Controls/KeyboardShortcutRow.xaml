@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MountFuji.ViewModels"
+             x:DataType="vm:GlobalKeyboardOptionsPopupViewModel"
+             xmlns:converters="using:MountFuji.Converters"
+             xmlns:models="clr-namespace:MountFuji.Models"
+             xmlns:keyboard="clr-namespace:MountFuji.Models.Keyboard"
+             x:Class="MountFuji.Controls.KeyboardShortcutRow">
+    <ContentView.Resources>
+        <converters:KeyboardShortcutConverter x:Key="ShortcutConverter" />
+        <converters:KeyboardShortcutTextDisplayConverter x:Key="LabelTextConverter" />
+        <keyboard:ShortcutModifier x:Key="WithModifier">WithModifier</keyboard:ShortcutModifier>
+        <keyboard:ShortcutModifier x:Key="WithoutModifier">WithoutModifier</keyboard:ShortcutModifier>
+    </ContentView.Resources>
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <Grid Grid.ColumnDefinitions="340,140,6,140" RowDefinitions="45">
+
+                <Label Grid.Column="0" Grid.Row="1" Text="{TemplateBinding Title}" Style="{StaticResource H3Label}" />
+
+                <Button Grid.Column="1" Grid.Row="1" Command="{Binding Path=SetKeyCommand}" WidthRequest="140"
+                        Text="{TemplateBinding KeyWithModifier, Converter={StaticResource LabelTextConverter}}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource ShortcutConverter}">
+                            <Binding Source="{StaticResource WithModifier}"></Binding>
+                            <Binding Path="Key" Source="{RelativeSource TemplatedParent}"></Binding>
+                            <Binding Path="Title" Source="{RelativeSource TemplatedParent}"></Binding>
+                            <Binding Path="KeyWithModifier" Source="{RelativeSource TemplatedParent}"></Binding>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+
+                <Button Grid.Column="3" Grid.Row="1" Command="{Binding Path=SetKeyCommand}" WidthRequest="140"
+                        Text="{TemplateBinding KeyWithoutModifier, Converter={StaticResource LabelTextConverter}}"
+                        HorizontalOptions="Center">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource ShortcutConverter}">
+                            <Binding Source="{StaticResource WithoutModifier}"></Binding>
+                            <Binding Path="Key" Source="{RelativeSource TemplatedParent}"></Binding>
+                            <Binding Path="Title" Source="{RelativeSource TemplatedParent}"></Binding>
+                            <Binding Path="KeyWithoutModifier" Source="{RelativeSource TemplatedParent}"></Binding>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+            </Grid>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>

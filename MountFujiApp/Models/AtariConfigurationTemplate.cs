@@ -70,8 +70,7 @@ public class AtariConfigurationTemplate
     /// Floating point unit type 
     /// </summary>
     public FpuType FpuType { get; init; }
-
-
+    
     /// <summary>
     /// Use a more compatible 68000 CPU mode with better prefetch accuracy and cycle counting
     /// </summary>
@@ -105,8 +104,7 @@ public class AtariConfigurationTemplate
     /// Full path to the cartridge image to use for this device
     /// </summary>
     public string CartridgeImage { get; init; } = "";
-
-
+    
     /// <summary>
     /// Amount of St memory in kilobytes (KiB), valid values are
     /// 256 (rare original ST), 512 (stock ST),vales 1 to 14 are MB sizes!
@@ -159,5 +157,4 @@ public class AtariConfigurationTemplate
     /// </summary>
     public SoundOptions SoundOptions = new();
 
-    
 }

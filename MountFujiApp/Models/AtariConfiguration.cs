@@ -175,6 +175,4 @@ public partial class AtariConfiguration: ObservableObject
     /// </summary>
     [ObservableProperty] private SoundOptions soundOptions = new();
     
-    
-    
 }

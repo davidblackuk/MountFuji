@@ -19,6 +19,7 @@
 using System.Diagnostics.CodeAnalysis;
 using CommunityToolkit.Maui;
 using MetroLog.MicrosoftExtensions;
+using Microsoft.Maui.Handlers;
 using Mopups.Hosting;
 using MountFuji.Extensions;
 
@@ -52,23 +53,27 @@ public static class MauiProgram
                 options.FolderPath = Path.Combine(FileSystem.AppDataDirectory, "fuji");
             });
 
+        
         // hopfully this defers the wiring up of application until after the app is initialized
         builder.Services.AddSingleton<Application>((provider => Application.Current));
-        
-    builder.Services.AddStrategies();
+
+        builder.Services.AddStrategies();
         builder.Services.AddViewViewModels();
         builder.Services.AddConfigService();
         builder.Services.AddServices();
-        
-        MauiApp built =  builder.Build();
-  
- 
+
+        MauiApp built = builder.Build();
+
         IPreferencesService preferencesService = built.Services.GetService<IPreferencesService>();
         preferencesService.Load();
 
+        IGlobalSystemConfigurationService globalConfigService =
+            built.Services.GetService<IGlobalSystemConfigurationService>();
+        globalConfigService.Load();
+
         ISystemsService systemsService = built.Services.GetService<ISystemsService>();
         systemsService.Load();
-        
+
         return built;
     }
 }

@@ -34,8 +34,10 @@ public class ConfigFileService : IConfigFileService
     private readonly IFloppyConfigFileSection floppyConfig;
     private readonly IScreenConfigFileSection screenConfig;
     private readonly ISoundConfigFileSection soundConfig;
+    private readonly IKeyboardConfigFileSection keyboardConfig;
     private readonly IPreferencesService preferencesService;
     private readonly IRawHatariConfigFile rawFileReader;
+    private readonly IGlobalSystemConfigurationService globalConfig;
     private readonly ILogger<ConfigFileService> log;
     private readonly ILogConfigFileSection logConfig;
 
@@ -45,8 +47,10 @@ public class ConfigFileService : IConfigFileService
         IHardDiskConfigFileSection hardDiskConfig, IFloppyConfigFileSection floppyConfig,
         IScreenConfigFileSection screenConfig,
         ISoundConfigFileSection soundConfig,
+        IKeyboardConfigFileSection keyboardConfig,
         IPreferencesService preferencesService,
         IRawHatariConfigFile rawFileReader,
+        IGlobalSystemConfigurationService globalConfig,
         ILogger<ConfigFileService> log)
     {
         this.memoryConfig = memoryConfig;
@@ -59,8 +63,10 @@ public class ConfigFileService : IConfigFileService
         this.floppyConfig = floppyConfig;
         this.screenConfig = screenConfig;
         this.soundConfig = soundConfig;
+        this.keyboardConfig = keyboardConfig;
         this.preferencesService = preferencesService;
         this.rawFileReader = rawFileReader;
+        this.globalConfig = globalConfig;
         this.log = log;
         this.logConfig = logConfig;
     }
@@ -69,6 +75,7 @@ public class ConfigFileService : IConfigFileService
     {
         StringBuilder builder = new StringBuilder();
 
+        keyboardConfig.ToHatariConfig(builder, globalConfig.Configuration);
         systemConfig.ToHatariConfig(builder, from);
         memoryConfig.ToHatariConfig(builder, from);
         romConfig.ToHatariConfig(builder, from);
@@ -127,6 +134,11 @@ public class ConfigFileService : IConfigFileService
                 case ScreenConfigFileSection.ConfigSectionName:
                     screenConfig.FromHatariConfig(to, rawFileReader.Sections);
                     break;
+                case KeyboardConfigFileSection.KeyboardConfigSectionName:
+                case KeyboardConfigFileSection.KeyboardShortcutsWithModSectionName:
+                case KeyboardConfigFileSection.KeyboardShortcutsWithoutModSectionName:
+                    // these are  imported via the Global system config service, but put here to avoid a warning below
+                    break;
                 
                 case "Log":
                 case "Debugger":
@@ -140,10 +152,8 @@ public class ConfigFileService : IConfigFileService
                 case "Joystick3":
                 case "Joystick4":
                 case "Joystick5":
-                case "Keyboard":
                 case "LILO":
-                case "KeyShortcutsWithMod":
-                case "KeyShortcutsWithoutMod":
+
                     // listed here to show explicitly what we don't support at the moment
                     break;
                 default:
