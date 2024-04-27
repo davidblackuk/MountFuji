@@ -656,7 +656,7 @@
         <Setter Property="BorderColor"
                 Value="{AppThemeBinding Light={StaticResource ButtonBorderColorLight}, Dark={StaticResource ButtonBorderColorDark}}" />
         <Setter Property="CornerRadius" Value="8" />
-        <Setter Property="Padding" Value="14,10" />
+        <Setter Property="Padding" Value="14,5" />
         <Setter Property="HeightRequest" Value="35" />
         <Setter Property="MinimumWidthRequest" Value="80" />
         <Setter Property="VisualStateManager.VisualStateGroups">
