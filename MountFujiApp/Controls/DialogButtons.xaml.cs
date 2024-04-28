@@ -28,7 +28,7 @@ public partial class DialogButtons : ContentView
 	[AutoBindable(PropertyName = "OKOrder", DefaultValue = "DeviceInfo.Platform == DevicePlatform.MacCatalyst || DeviceInfo.Platform == DevicePlatform.iOS ? 3 : 1")]
 	private readonly int _okOrder;
 
-	[AutoBindable(DefaultValue = DefaultCancelText)]
+	[AutoBindable(DefaultValue = DefaultCancelText, OnChanged = nameof(OnChange))]
 	private readonly string _cancelText;
 
 	[AutoBindable(DefaultValue = nameof(DefaultSize), OnChanged = nameof(OnChange))]
@@ -40,13 +40,13 @@ public partial class DialogButtons : ContentView
 	[AutoBindable(DefaultValue = "null")]
 	private readonly Style _cancelButtonStyle;
 
-	[AutoBindable(PropertyName = "OKText", DefaultValue = DefaultOKText)]
+	[AutoBindable(PropertyName = "OKText", DefaultValue = DefaultOKText, OnChanged = nameof(OnChange))]
 	private readonly string _okText;
 
-	[AutoBindable(PropertyName = "OKButtonMinimumWidthRequest", DefaultValue = "DefaultSize", OnChanged = nameof(OnChange))]
+	[AutoBindable(PropertyName = "OKButtonMinimumWidthRequest", DefaultValue = nameof(DefaultSize), OnChanged = nameof(OnChange))]
 	private readonly double _okButtonMinimumWidthRequest;
 
-	[AutoBindable(PropertyName = "OKButtonMinimumHeightRequest", DefaultValue = "DefaultSize", OnChanged = nameof(OnChange))]
+	[AutoBindable(PropertyName = "OKButtonMinimumHeightRequest", DefaultValue = nameof(DefaultSize), OnChanged = nameof(OnChange))]
 	private readonly double _okButtonMinimumHeightRequest;
 
 	[AutoBindable(PropertyName = "OKButtonStyle", DefaultValue = "null")]
