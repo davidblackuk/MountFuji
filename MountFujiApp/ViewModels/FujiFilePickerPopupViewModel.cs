@@ -144,7 +144,12 @@ public partial class FujiFilePickerPopupViewModel: TinyViewModel
 
         return Task.CompletedTask;
     }
-    
+
+    [RelayCommand]
+    private async Task OpenBreadCrumbFolderInExplorer()
+    {
+        await Launcher.OpenAsync($"file://{CurrentFolder}");
+    }
     
     [RelayCommand]
     private Task DriveTapped(FileSystemDrive selectedDrive)

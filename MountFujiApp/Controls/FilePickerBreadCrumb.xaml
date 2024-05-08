@@ -7,24 +7,31 @@
              xmlns:controls="clr-namespace:MountFuji.Controls"
              x:DataType="vm:FujiFilePickerPopupViewModel"
              x:Class="MountFuji.Controls.FilePickerBreadCrumb">
-  <CollectionView ItemsSource="{Binding Breadcrumb}" ItemsLayout="HorizontalList">
-      <CollectionView.ItemTemplate>
-          <DataTemplate x:DataType="models:BreadcrumbEntry">
-              <HorizontalStackLayout>
-                  <Label FontFamily="MaterialIcons" Text="{x:Static controls:IconFont.Home}" IsVisible="{Binding IsRootFolder}"  Style="{StaticResource BreadCrumbFolder}" VerticalOptions="Center">
-                      <Label.GestureRecognizers>
-                          <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"></TapGestureRecognizer>
-                      </Label.GestureRecognizers>
-                  </Label>
-                  <Label Text="{Binding DisplayName}" IsVisible="{Binding IsNonRootFolder}" Style="{StaticResource BreadCrumbFolder}" VerticalOptions="Center">
-                      <Label.GestureRecognizers>
-                          <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"></TapGestureRecognizer>
-                      </Label.GestureRecognizers>
-                  </Label>
-                  
-                  <Label FontFamily="MaterialIcons" Text="{x:Static controls:IconFont.Chevron_right}" IsVisible="{Binding IsNonTerminalFolder}"  VerticalOptions="Center" />
-              </HorizontalStackLayout>
-          </DataTemplate>
-      </CollectionView.ItemTemplate>
-  </CollectionView>
+    <Grid Grid.ColumnDefinitions="*,20">
+        <CollectionView ItemsSource="{Binding Breadcrumb}" ItemsLayout="HorizontalList" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:BreadcrumbEntry">
+                    <HorizontalStackLayout>
+                        <Label FontFamily="MaterialIcons" Text="{x:Static controls:IconFont.Home}"
+                               IsVisible="{Binding IsRootFolder}" Style="{StaticResource BreadCrumbFolder}"
+                               VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label Text="{Binding DisplayName}" IsVisible="{Binding IsNonRootFolder}"
+                               Style="{StaticResource BreadCrumbFolder}" VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <Label FontFamily="MaterialIcons" Text="{x:Static controls:IconFont.Chevron_right}"
+                               IsVisible="{Binding IsNonTerminalFolder}" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="{x:Static controls:IconFont.Folder_open}" Style="{StaticResource InlineMaterialButton}" Command="{Binding OpenBreadCrumbFolderInExplorerCommand}" FontSize="20" Grid.Column="1"></Button>
+    </Grid>
 </ContentView>
