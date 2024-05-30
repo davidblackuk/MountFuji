@@ -7,7 +7,7 @@
              xmlns:controls="clr-namespace:MountFuji.Controls"
              x:DataType="vm:FujiFilePickerPopupViewModel"
              x:Class="MountFuji.Controls.FilePickerBreadCrumb">
-    <Grid Grid.ColumnDefinitions="*,20">
+    <Grid Grid.ColumnDefinitions="*,30">
         <CollectionView ItemsSource="{Binding Breadcrumb}" ItemsLayout="HorizontalList" >
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:BreadcrumbEntry">
@@ -32,6 +32,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Text="{x:Static controls:IconFont.Folder_open}" Style="{StaticResource InlineMaterialButton}" Command="{Binding OpenBreadCrumbFolderInExplorerCommand}" FontSize="20" Grid.Column="1"></Button>
+        <Button Text="{x:Static controls:IconFont.Folder_open}" ToolTipProperties.Text="Open folder in file explorer" Style="{StaticResource InlineMaterialButton}" Command="{Binding OpenBreadCrumbFolderInExplorerCommand}" FontSize="20" Grid.Column="1"></Button>
     </Grid>
 </ContentView>
