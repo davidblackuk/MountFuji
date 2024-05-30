@@ -5,7 +5,9 @@ VisualStudioVersion = 17.8.34302.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MountFujiApp", "MountFujiApp\MountFujiApp.csproj", "{66E8D80E-4314-4CCD-A5E8-4EE9443A4FF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MountFujiTests", "MountFujiTests\MountFujiTests.csproj", "{7A3F8300-A323-422F-B9C3-9D62F582EDA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MountFujiTests", "MountFujiTests\MountFujiTests.csproj", "{7A3F8300-A323-422F-B9C3-9D62F582EDA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MountFujiWindowsInstaller", "MountFujiWindowsInstaller\MountFujiWindowsInstaller.csproj", "{DAEC2DB0-93E1-475C-ACA8-14FD42B10A66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,8 +24,13 @@ Global
 		{7A3F8300-A323-422F-B9C3-9D62F582EDA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A3F8300-A323-422F-B9C3-9D62F582EDA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A3F8300-A323-422F-B9C3-9D62F582EDA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAEC2DB0-93E1-475C-ACA8-14FD42B10A66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAEC2DB0-93E1-475C-ACA8-14FD42B10A66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74E44CFA-5160-4B60-9031-B719DFAFFF18}
 	EndGlobalSection
 EndGlobal

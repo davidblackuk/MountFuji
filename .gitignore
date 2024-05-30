@@ -376,3 +376,5 @@ Directory.Build.Override.props
 
 # Only the "snapshots" directory should be added to Git, not the "snapshots-diff" directory
 snapshots-diff/
+/MountFujiWindowsInstaller/Dependencies/dotnet-runtime-8.0.4-win-x64.exe
+/MountFujiWindowsInstaller/Dependencies/dotnet-runtime-8.0.4-win-x86.exe

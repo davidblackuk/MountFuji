@@ -1,0 +1,9 @@
+{
+  "HatariApplication": "$HatariFolder\\hatari.mfhat",
+  "HatariConfigFile": null,
+  "RomFolder": null,
+  "CartridgeFolder": null,
+  "HardDiskFolder": null,
+  "GemDosFolder": null,
+  "FloppyDiskFolder": null
+}

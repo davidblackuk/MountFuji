@@ -42,6 +42,10 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
         <AssemblyName>MountFuji</AssemblyName>
         <Authors>David Black</Authors>
+
+		<!-- To control WinUI app packaging type -->
+		<WindowsPackageType Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">None</WindowsPackageType>
+
     </PropertyGroup>
 
     <ItemGroup>
@@ -99,6 +103,11 @@
         <DependentUpon>HardDiskCascade.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Properties\Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.resx</DependentUpon>
+      </Compile>
       <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Strategy\AppSelectorStrategy.cs">
         <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
       </Compile>
@@ -125,6 +134,35 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Services\GlobalConfig\" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Update="Properties\Resources.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+    <ItemGroup>
+      <MauiFont Update="Resources\Fonts\MaterialIconsOutlined-Regular.otf">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </MauiFont>
+      <MauiFont Update="Resources\Fonts\OpenSans-Regular.ttf">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </MauiFont>
+      <MauiFont Update="Resources\Fonts\OpenSans-Semibold.ttf">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </MauiFont>
+      <MauiFont Update="Resources\Fonts\Roboto-Black.ttf">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </MauiFont>
+      <MauiFont Update="Resources\Fonts\Roboto-Bold.ttf">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </MauiFont>
+      <MauiFont Update="Resources\Fonts\Roboto-Italic.ttf">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </MauiFont>
+      <MauiFont Update="Resources\Fonts\Roboto-Regular.ttf">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </MauiFont>
     </ItemGroup>
     <PropertyGroup Condition="$(TargetFramework.Contains('-maccatalyst')) and '$(Configuration)' == 'Debug'">
         <CodesignEntitlements>Platforms/MacCatalyst/Entitlements.Debug.plist</CodesignEntitlements>
