@@ -44,7 +44,7 @@
         <Authors>David Black</Authors>
 
 		<!-- To control WinUI app packaging type -->
-		<WindowsPackageType Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">None</WindowsPackageType>
+		<!--<WindowsPackageType Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">None</WindowsPackageType>-->
 
     </PropertyGroup>
 

@@ -33,6 +33,10 @@
   #define MSIXRoot "MountFujiApp_" + MyAppVersion + "_Test"
   #define MSIXPackageName "MountFujiApp_" + MyAppVersion + "_x64"
 #endif
+#define PreferencesFileName "preferences.json"
+#define HaratiApplicationPropertyPath "/HatariApplication"
+#define PackagedMountFujiFolder "{localappdata}\Packages\com.overtakenbyevents.mountfuji_9s7pqp8tfze56\LocalState\fuji"
+#define UnpackagesMountFujiDataFolder "{userappdata}\David Black\com.overtakenbyevents.mountfuji\Data\fuji"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -90,6 +94,8 @@ Source: "..\..\{#CustomHatariVersionFolder}\hatari.mfhat"; DestDir: "{app}\Hatar
 Source: "..\Dependencies\dotnet-runtime-{#DotNetRuntimeVersion}-win-x64.exe"; DestDir: "{tmp}"; Flags: 64bit nocompression deleteafterinstall; Check: IsWin64
 Source: "..\Dependencies\dotnet-runtime-{#DotNetRuntimeVersion}-win-x86.exe"; DestDir: "{tmp}"; Flags: 32bit nocompression deleteafterinstall; Check: Not IsWin64
 Source: "..\Assets\MountFuji.ico"; DestDir: "{app}";
+Source: "..\Assets\{#PreferencesFileName}"; DestDir: "{tmp}"; Flags: dontcopy;
+Source: "..\Assets\jsonconfig.dll"; Flags: dontcopy;
 
 [Icons]
 #ifndef PACKAGED_APP
@@ -109,3 +115,46 @@ Filename: "cmd.exe"; Parameters: "/c ftype hatarifile=""{app}\Hatari\hatari.exe"
 [UninstallRun]
 Filename: "cmd.exe"; Parameters: "/c ftype hatarifile="; WorkingDir: "{app}\Hatari"; Flags: waituntilterminated runhidden; RunOnceId: "MountFuji"
 Filename: "cmd.exe"; Parameters: "/c assoc .mfhat="; WorkingDir: "{app}\Hatari"; Flags: waituntilterminated runhidden; RunOnceId: "MountFuji"
+
+[Code]
+function JSONReadString(AFileName, APath, ADefault: WideString; var AValue: WideString; var AValueLength: Integer): Boolean;
+	external 'JSONReadString@files:jsonconfig.dll stdcall';
+{function JSONReadBoolean(AFileName, APath: WideString; ADefault: Boolean; var AValue: Boolean): Boolean;
+	external 'JSONReadBoolean@files:jsonconfig.dll stdcall';}
+{function JSONReadInteger(AFileName, APath: WideString; ADefault: Int64; var AValue: Int64): Boolean;
+	external 'JSONReadInteger@files:jsonconfig.dll stdcall';}
+function JSONWriteString(AFileName, APath, AValue: WideString): Boolean;
+	external 'JSONWriteString@files:jsonconfig.dll stdcall';
+{function JSONWriteBoolean(AFileName, APath: WideString; AValue: Boolean): Boolean;
+	external 'JSONWriteBoolean@files:jsonconfig.dll stdcall';}
+{function JSONWriteInteger(AFileName, APath: WideString; AValue: Int64): Boolean;
+	external 'JSONWriteInteger@files:jsonconfig.dll stdcall';}
+
+function GetFujiFolder(): WideString;
+begin
+  Result := ExpandConstant('{userappdata}\{#MountFujiDataFolder}');
+end;
+
+function InitializeSetup(): Boolean;
+var
+  FileName: WideString;
+  strValue : WideString;
+  strLen: Integer;
+begin
+  ExtractTemporaryFile('{#PreferencesFileName}');
+  FileName := ExpandConstant('{tmp}\{#PreferencesFileName}');
+  MsgBox(FileName, mbInformation, MB_OK);
+  SetLength(strValue, 256);
+  strLen := Length(strValue);
+  if JSONReadString(FileName, '{#HaratiApplicationPropertyPath}', '(default)', strValue, strLen) then
+    MsgBox(strValue, mbInformation, MB_OK)
+  else
+    MsgBox('Not found', mbInformation, MB_OK);
+  if JSONWriteString(FileName, '{#HaratiApplicationPropertyPath}', 'New Value 123') then
+    MsgBox('Write Succeeded', mbInformation, MB_OK)
+  else
+    MsgBox('Write Failed', mbInformation, MB_OK);
+  strValue := GetFujiFolder();
+  MsgBox(strValue, mbInformation, MB_OK);
+  Result := False;
+end;
