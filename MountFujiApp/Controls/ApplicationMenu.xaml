@@ -12,9 +12,20 @@
     <Grid ColumnDefinitions="260,*,40" >
         
         <HorizontalStackLayout >
-        <Button  VerticalOptions="Center"  Style="{StaticResource InlineMaterialButton}"  Text="{x:Static controls1:IconFont.Info}" 
-                 Command="{Binding AboutCommand}" ToolTipProperties.Text="About Mount Fuji"/>
-
+            <Grid>
+                <Button  VerticalOptions="Center"  Style="{StaticResource InlineMaterialButton}"  Text="{x:Static controls1:IconFont.Info}" 
+                     Command="{Binding AboutCommand}" ToolTipProperties.Text="About Mount Fuji"/>
+                <Ellipse ToolTipProperties.Text="An update is available, open the about dialog to view."
+                         
+                         Fill="Red"
+                         Stroke="Red"
+                         StrokeThickness="0"
+                         WidthRequest="10"
+                         HeightRequest="10"
+                         VerticalOptions="Start"
+                         HorizontalOptions="End"
+                         IsVisible="{Binding UpdateAvailable}" />
+            </Grid>
         <Button  VerticalOptions="Center"  Style="{StaticResource InlineMaterialButton}" Text="{x:Static controls1:IconFont.Settings}" 
                  Command="{Binding EditPreferencesCommand}" ToolTipProperties.Text="Open settings"/>
 

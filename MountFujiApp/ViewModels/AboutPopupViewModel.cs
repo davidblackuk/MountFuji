@@ -16,23 +16,44 @@
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using MountFuji.Services.UpdatesService;
+using AsyncAwaitBestPractices;
 namespace MountFuji.ViewModels;
 
 public partial class AboutPopupViewModel: TinyViewModel
 {
     private readonly IPersistence persistence;
+    private readonly IAvailableUpdatesService updatesService;
+    private readonly IApplicationVersion applicationVersion;
     private readonly IPopupNavigation popupNavigation;
     
-    public string Version => AppInfo.VersionString;
-    public string BuildInfo => AppInfo.BuildString;
-    public string MountFujiFolder => persistence.MountFujiFolder;
+    public string Version => applicationVersion.Current.ToString();
+
+    [ObservableProperty] private bool updateAvailable;
+    [ObservableProperty] private string updateVersion;
     
-    public AboutPopupViewModel(IPopupNavigation popupNavigation, IPersistence persistence)
+    public AboutPopupViewModel(IPopupNavigation popupNavigation, 
+        IPersistence persistence, 
+        IAvailableUpdatesService updatesService,
+        IApplicationVersion applicationVersion)
     {
         this.popupNavigation = popupNavigation;
         this.persistence = persistence;
+        this.updatesService = updatesService;
+        this.applicationVersion = applicationVersion;
+        CheckForUpdate().SafeFireAndForget();
     }
-    
+
+    private async Task CheckForUpdate()
+    {
+        var updateInfo = await updatesService.CheckForUpdate();
+        UpdateAvailable = updateInfo.IsUpdateAvailable;
+        if (updateInfo.IsUpdateAvailable)
+        {
+            UpdateVersion = updateInfo.ToVersion.ToString();
+        }
+    }
+
     [RelayCommand]
     private async Task Close()
     {
@@ -50,5 +71,7 @@ public partial class AboutPopupViewModel: TinyViewModel
     {
         await Launcher.OpenAsync($"file://{persistence.MountFujiFolder}");
     }
+    
+    
 }
 

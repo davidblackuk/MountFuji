@@ -68,6 +68,12 @@ Here's what's in the different version of Mount Fuji. See the GitHub release not
   - More limited support for specifying shortcut keys (not all possible keys supported due to a limitation in Maui 8, may need to wait till Maui 9 for full Support)
   - supports importing shortcuts from a specific Hatari config file
   - there is a single global set of keyboard setting for all systems as I can't see them changing across them.
+**\#31** [_DB_] Added an indication that an upgrade is available.
+  - Disclosure indicator on the Information icon on the about dialog
+  - opening the about dialog shows an indicator next to the version number
+  - a message about the new version number and a link to the release page 
+  on GitHub.
+
 
 #### Contributers
 

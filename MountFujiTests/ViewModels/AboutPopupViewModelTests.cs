@@ -16,6 +16,8 @@
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using MountFuji.Services.UpdatesService;
+
 namespace MountFujiTests.ViewModels;
 
 [TestOf(typeof(AboutPopupViewModel))]
@@ -23,18 +25,20 @@ public class AboutPopupViewModelTests
 {
     private Mock<IPopupNavigation> popupNavigationMock;
     private Mock<IPersistence> persistanceMock;
+    private Mock<IAvailableUpdatesService> updateServiceMock;
     
     [SetUp]
     public void Setup()
     {
         popupNavigationMock = new Mock<IPopupNavigation>();
         persistanceMock = new Mock<IPersistence>();
-
+        updateServiceMock = new Mock<IAvailableUpdatesService>();
     }
 
     [Test]
     public async Task CloseCommand_WhenInvoked_ShouldPopTheWindowOffTheStack()
     {
+        updateServiceMock.Setup(us => us.CheckForUpdate()).ReturnsAsync((IsUpdateAvailable: false, ToVersion: new Version()));
         var sut = CreateSut();
         await sut.CloseCommand.ExecuteAsync(null);
         popupNavigationMock.Verify(d => d.PopAsync(true), Times.Once);
@@ -43,7 +47,6 @@ public class AboutPopupViewModelTests
 
     private AboutPopupViewModel CreateSut()
     {
-        return new AboutPopupViewModel(popupNavigationMock.Object, persistanceMock.Object);
+        return new AboutPopupViewModel(popupNavigationMock.Object, persistanceMock.Object, updateServiceMock.Object);
     }
-    
 }

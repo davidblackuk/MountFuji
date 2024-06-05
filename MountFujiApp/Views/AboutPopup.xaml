@@ -35,10 +35,32 @@
 
                 <Label Style="{StaticResource H2Label}" Text="(C) 2024 David Black"></Label>
 
-                <Grid ColumnDefinitions="85, *" RowDefinitions="30,30, 30, 30">
-                    <Label Grid.Column="0" Grid.Row="0" Text="Version:"></Label>
-                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Version}" />
+                <Grid ColumnDefinitions="85, *" RowDefinitions="30,30, 30, 30, 40">
 
+                    <Label Text="Version:"></Label>
+
+                    <HorizontalStackLayout Grid.Column="1" Grid.Row="0">
+                        <HorizontalStackLayout>
+                            <Ellipse Fill="Red"
+                                     Stroke="Red"
+                                     StrokeThickness="0"
+                                     WidthRequest="5"
+                                     HeightRequest="5"
+                                     VerticalOptions="Start"
+                                     IsVisible="{Binding UpdateAvailable}" />
+                            <Label Text="{Binding Version}" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout IsVisible="{Binding UpdateAvailable}">
+
+                            <Label Text=", a new version is available: "></Label>
+                            <Label Text="{Binding UpdateVersion}" Style="{StaticResource Url}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenUrlCommand}"
+                                                          CommandParameter="https://github.com/davidblackuk/MountFuji/releases" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </HorizontalStackLayout>
+                    </HorizontalStackLayout>
                     <!-- License row -->
                     <Label Grid.Column="0" Grid.Row="1" Text="License:"></Label>
                     <HorizontalStackLayout Spacing="4" Grid.Column="1" Grid.Row="1">
@@ -73,6 +95,15 @@
                             </Label.GestureRecognizers>
                         </Label>
                     </HorizontalStackLayout>
+
+                    <!-- Devs row -->
+                    <Label Grid.Column="0" Grid.Row="4" Text="Devs:"></Label>
+                    <VerticalStackLayout Spacing="2" Grid.Column="1" Grid.Row="4">
+                        <Label Text="David Black"></Label>
+                        <Label Text="Randy S. Hunsaker"></Label>
+                    </VerticalStackLayout>
+
+
                 </Grid>
             </VerticalStackLayout>
 

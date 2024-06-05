@@ -17,9 +17,12 @@
 */
 
 using System.Collections.ObjectModel;
+using AsyncAwaitBestPractices;
+using CommunityToolkit.Maui.Alerts;
 using Microsoft.Extensions.Logging;
 using MountFuji.Controls;
 using MountFuji.Extensions;
+using MountFuji.Services.UpdatesService;
 using MountFuji.Views;
 
 namespace MountFuji.ViewModels;
@@ -33,6 +36,7 @@ public partial class MainViewModel : TinyViewModel
     private readonly ISystemsService systemsService;
     private readonly IFujiFilePickerService fujiFilePicker;
     private readonly ILogger<MainViewModel> log;
+    private readonly IAvailableUpdatesService updateService;
 
     public MainViewModel(IConfigFileService configFileService,
         IPopupNavigation popupNavigation,
@@ -40,7 +44,8 @@ public partial class MainViewModel : TinyViewModel
         IPreferencesService preferencesService,
         ISystemsService systemsService,
         IFujiFilePickerService fujiFilePicker,
-        ILogger<MainViewModel> log)
+        ILogger<MainViewModel> log,         
+        IAvailableUpdatesService updateService)
     {
         this.configFileService = configFileService;
         this.popupNavigation = popupNavigation;
@@ -49,8 +54,16 @@ public partial class MainViewModel : TinyViewModel
         this.systemsService = systemsService;
         this.fujiFilePicker = fujiFilePicker;
         this.log = log;
+        this.updateService = updateService;
 
         UpdateSystemsFromService();
+        CheckForUpdate().SafeFireAndForget();
+    }
+    
+    private async Task CheckForUpdate()
+    {
+        var updateInfo = await updateService.CheckForUpdate();
+        UpdateAvailable = updateInfo.IsUpdateAvailable;
     }
 
     public ObservableCollection<AtariConfiguration> Systems { get; } = new();
@@ -62,6 +75,8 @@ public partial class MainViewModel : TinyViewModel
 
     [ObservableProperty] private int numberOfSystems;
 
+    [ObservableProperty] private bool updateAvailable;
+    
     public bool HasSelectedConfig =>
         SelectedConfiguration is not null && SelectedConfiguration.Id != AtariConfiguration.Empty.Id;
 

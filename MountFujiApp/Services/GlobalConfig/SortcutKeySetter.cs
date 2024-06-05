@@ -19,11 +19,6 @@ using KeyboardShortcuts = MountFuji.Models.Keyboard.KeyboardShortcuts;
 
 namespace MountFuji.Services.GlobalConfig;
 
-public interface ISortcutKeySetter
-{
-    void SetShortcutKey(KeyboardShortcuts shortcuts, ShortcutKey key, string newValue);
-}
-
 public class SortcutKeySetter : ISortcutKeySetter
 {
 

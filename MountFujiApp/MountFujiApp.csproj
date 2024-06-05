@@ -70,6 +70,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="AsyncAwaitBestPractices" Version="7.0.0" />
         <PackageReference Include="CommunityToolkit.Maui" Version="9.0.0" />
         <PackageReference Include="M.BindableProperty.Generator" Version="0.11.1" />
         <PackageReference Include="MetroLog.Maui" Version="2.1.0" />
@@ -131,9 +132,6 @@
     <ItemGroup>
       <None Remove="Platforms\Android\AndroidManifest.xml" />
       <None Remove="Platforms\Android\Resources\values\colors.xml" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Services\GlobalConfig\" />
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Update="Properties\Resources.resx">

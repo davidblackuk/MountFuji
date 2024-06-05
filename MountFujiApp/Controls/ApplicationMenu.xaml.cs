@@ -24,4 +24,6 @@ public partial class ApplicationMenu : ContentView
     {
         InitializeComponent();
     }
+    
+    
 }
