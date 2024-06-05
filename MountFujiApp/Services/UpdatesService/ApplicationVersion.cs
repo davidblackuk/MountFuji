@@ -31,5 +31,9 @@ public class ApplicationVersion : IApplicationVersion
     /// Gets the current app version but the interface allows use to inject this in tests. AppInfo.Current throws
     /// a not implemented exception in a unit test assembly.
     /// </summary>
-    public Version Current => new Version(1,0,2); // AppInfo.Version;
+#if FORCE_UPDATE_IS_AVAILABLE
+    public Version Current => new Version(1,0,2);
+#else
+    public Version Current => AppInfo.Version;
+#endif
 }

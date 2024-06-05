@@ -164,6 +164,7 @@
     </ItemGroup>
     <PropertyGroup Condition="$(TargetFramework.Contains('-maccatalyst')) and '$(Configuration)' == 'Debug'">
         <CodesignEntitlements>Platforms/MacCatalyst/Entitlements.Debug.plist</CodesignEntitlements>
+        <DefineConstants>TRACE;FORCE_UPDATE_IS_AVAILABLE_</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition="$(TargetFramework.Contains('-maccatalyst')) and '$(Configuration)' == 'Release'">

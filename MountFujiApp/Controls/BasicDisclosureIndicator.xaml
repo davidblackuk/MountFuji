@@ -6,16 +6,15 @@
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <Grid>
+                <ContentPresenter  />
                 <Ellipse ToolTipProperties.Text="{TemplateBinding ToolTipText}"
-                         Fill="Red"
-                         Stroke="Red"
+                         Fill="{TemplateBinding IndicatorColor}"
                          StrokeThickness="0"
                          WidthRequest="10"
                          HeightRequest="10"
                          VerticalOptions="Start"
                          HorizontalOptions="End"
                          IsVisible="{TemplateBinding IndicatorVisible}" />
-                <ContentPresenter  />
             </Grid>
         </ControlTemplate>
     </ContentView.ControlTemplate>

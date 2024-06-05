@@ -25,13 +25,11 @@ namespace MountFuji.Controls;
 
 public partial class BasicDisclosureIndicator : ContentView
 {
-    [AutoBindable]
-    private bool indicatorVisible;
+    [AutoBindable] private bool indicatorVisible;
     
-    [AutoBindable]
-    private string toolTipText;
-    
-    
+    [AutoBindable] private string toolTipText;
+
+    [AutoBindable(DefaultValue = "new SolidColorBrush(Colors.Red)") ] private Brush indicatorColor;
     
     
     public BasicDisclosureIndicator()
