@@ -25,12 +25,15 @@ namespace MountFuji.Controls;
 
 public partial class BasicDisclosureIndicator : ContentView
 {
+#pragma warning disable CS0169
+    
     [AutoBindable] private bool indicatorVisible;
     
     [AutoBindable] private string toolTipText;
 
     [AutoBindable(DefaultValue = "new SolidColorBrush(Colors.Red)") ] private Brush indicatorColor;
     
+#pragma warning restore CS0169
     
     public BasicDisclosureIndicator()
     {

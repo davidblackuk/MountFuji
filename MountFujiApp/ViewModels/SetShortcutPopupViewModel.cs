@@ -56,7 +56,7 @@ public partial class SetShortcutPopupViewModel: TinyViewModel
     [RelayCommand]
     private async Task Ok()
     {
-        configService.SetShortcutKey(OriginalShortcut.Modifier, originalShortcut.Key, currentShortcut);
+        configService.SetShortcutKey(OriginalShortcut.Modifier, OriginalShortcut.Key, CurrentShortcut);
         await popupNavigation.PopAsync();
     }
 }

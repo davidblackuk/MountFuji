@@ -66,6 +66,8 @@ public partial class MainViewModel : TinyViewModel
         UpdateAvailable = updateInfo.IsUpdateAvailable;
     }
 
+    public string ThemeIcon => preferencesService.GetTheme() == AppTheme.Dark ? IconFont.Dark_mode : IconFont.Light_mode;
+    
     public ObservableCollection<AtariConfiguration> Systems { get; } = new();
 
     [ObservableProperty] [NotifyPropertyChangedFor(nameof(HasSelectedConfig))]
@@ -77,11 +79,15 @@ public partial class MainViewModel : TinyViewModel
 
     [ObservableProperty] private bool updateAvailable;
     
+    [ObservableProperty]  private bool isDirty;
+
+    
     public bool HasSelectedConfig =>
         SelectedConfiguration is not null && SelectedConfiguration.Id != AtariConfiguration.Empty.Id;
 
 
-    private IDispatcherTimer timer;
+    private IDispatcherTimer singleShotTimer;
+    private IDispatcherTimer isDirtyTimer;
 
     public override Task OnFirstAppear()
     {
@@ -92,16 +98,10 @@ public partial class MainViewModel : TinyViewModel
 
         RunCommand.NotifyCanExecuteChanged();
 
-        // Setup our one shot timer to initialize selected item and fix that issue on windows
-        timer = Application.Current.Dispatcher.CreateTimer();
-        timer.Interval = TimeSpan.FromSeconds(1);
-        timer.IsRepeating = false;
-        timer.Tick += SingleShotTimerTick;
-        timer.Start();
+        SetupSingleShotTimer();
+        SetupIsDirtyTimer();
         return base.OnFirstAppear();
     }
-
-
 
     #region ----- ROM -----
 
@@ -158,8 +158,6 @@ public partial class MainViewModel : TinyViewModel
     }
 
     #endregion
-      
-  
     
     #region ----- ACSI -----
     
@@ -357,8 +355,6 @@ public partial class MainViewModel : TinyViewModel
         };
     }
 
-  
-
     [RelayCommand(CanExecute = nameof(CanRun))]
     private async Task Run()
     {
@@ -376,9 +372,6 @@ public partial class MainViewModel : TinyViewModel
         GlobalKeyboardConfigurationPopup popup = serviceProvider.GetService<GlobalKeyboardConfigurationPopup>();
         await popupNavigation.PushAsync(popup);
     }
-
-    
-    #endregion
     
     [RelayCommand]
     private Task Reordered()
@@ -393,10 +386,7 @@ public partial class MainViewModel : TinyViewModel
         preferencesService.ToggleTheme();
         OnPropertyChanged(nameof(ThemeIcon));
     }
-
-    public string ThemeIcon => preferencesService.GetTheme() == AppTheme.Dark ? IconFont.Dark_mode : IconFont.Light_mode;
-
-
+    
     private bool CanRun()
     {
         if (string.IsNullOrWhiteSpace(preferencesService.Preferences.HatariApplication) ||
@@ -409,11 +399,9 @@ public partial class MainViewModel : TinyViewModel
 
         return true;
     }
-
     
-    private bool SaveNeeded => systemsService.IsDirty;
-
-
+    #endregion 
+    
     #region ---- HELPERS ----
 
     /// <summary>
@@ -442,8 +430,20 @@ public partial class MainViewModel : TinyViewModel
         systemsService.ReorderByIds(ids);
     }
 
+    /// <summary>
+    /// Every second or so update the disclosure indicator for unsaved changes
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void IsDirtyTimerTick(object sender, EventArgs e)
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            IsDirty = systemsService.IsDirty;
+        });
+    }
 
-    private void SingleShotTimerTick(object sender, EventArgs e)
+    private void SingleShotSingleShotTimerTick(object sender, EventArgs e)
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
@@ -454,6 +454,31 @@ public partial class MainViewModel : TinyViewModel
             }
         });
     }
+    
+    /// <summary>
+    /// Initialize the one time timer, that sets the selected item to the first in the list
+    /// </summary>
+    private void SetupSingleShotTimer()
+    {
+        singleShotTimer = Application.Current.Dispatcher.CreateTimer();
+        singleShotTimer.Interval = TimeSpan.FromSeconds(1);
+        singleShotTimer.IsRepeating = false;
+        singleShotTimer.Tick += SingleShotSingleShotTimerTick;
+        singleShotTimer.Start();
+    }
+
+    /// <summary>
+    /// Set up a timer that periodically checks if the is dirty timer needs to be updated
+    /// </summary>
+    private void SetupIsDirtyTimer()
+    {
+        isDirtyTimer = Application.Current.Dispatcher.CreateTimer();
+        isDirtyTimer.Interval = TimeSpan.FromSeconds(1);
+        isDirtyTimer.IsRepeating = true;
+        isDirtyTimer.Tick += IsDirtyTimerTick;
+        isDirtyTimer.Start();
+    }
+
 
     #endregion
 }
