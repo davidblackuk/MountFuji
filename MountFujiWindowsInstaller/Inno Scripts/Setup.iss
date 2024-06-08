@@ -18,6 +18,7 @@
 ; NOTE: Uncomment this line to build a setup for MountFuji using the MSIX package rather than the unpackaged applicaiton files
 ;#define PACKAGED_APP
 
+; Setup metadata
 #define MyAppName "Mount Fuji"
 #define MyAppVersion "1.0.4.2"
 #define MyAppPublisher "davidblackuk"
@@ -25,6 +26,7 @@
 #define MyAppAuthor "David Black"
 #define MyAppCopyright "Copyright (C) 2024 " + MyAppAuthor
 
+; Runtime dependency and app details
 #define DotNetRuntimeVersion "8.0.4"
 #define CustomHatariVersionFolder "Hatari2.4.1-Windows"
 #define BuildConfigutation "Release"
@@ -33,6 +35,9 @@
   #define MSIXRoot "MountFujiApp_" + MyAppVersion + "_Test"
   #define MSIXPackageName "MountFujiApp_" + MyAppVersion + "_x64"
 #endif
+
+; Support routines for data file management
+#include "DataFiles.ish"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -100,12 +105,30 @@ Source: "..\Assets\MountFuji.ico"; DestDir: "{app}";
 Filename: "{tmp}\dotnet-runtime-{#DotNetRuntimeVersion}-win-x64.exe"; Parameters: "/install /quiet /norestart"; WorkingDir: "{tmp}"; Flags: runascurrentuser waituntilterminated 64bit; Description: "Installs .NET 8 64-bit runtime"; StatusMsg: "Installing .NET 8 64-bit Runtime..."; Check: IsWin64
 Filename: "{tmp}\dotnet-runtime-{#DotNetRuntimeVersion}-win-x86.exe"; Parameters: "/install /quiet /norestart"; WorkingDir: "{tmp}"; Flags: runascurrentuser waituntilterminated 32bit; Description: "Installs .NET 8 32-bit runtime"; StatusMsg: "Installing .NET 8 32-bit Runtime..."; Check: Not IsWin64
 Filename: "cmd.exe"; Parameters: "/c assoc .mfhat=hatarifile"; WorkingDir: "{tmp}"; Flags: runascurrentuser waituntilterminated runhidden; Description: "Creates .mfhat extension association"; StatusMsg: "Creating .mfhat association..."
-Filename: "cmd.exe"; Parameters: "/c ftype hatarifile=""{app}\Hatari\hatari.exe"" ""%1"""; WorkingDir: "{tmp}"; Flags: runascurrentuser waituntilterminated runhidden; Description: "Associates .mfhat file type with Hatari executable"; StatusMsg: "Accociating .mfhat files with Hatari executable..."
+Filename: "cmd.exe"; Parameters: "/c ftype hatarifile=""{app}\Hatari\hatari.exe"" ""%1"""; WorkingDir: "{tmp}"; Flags: runascurrentuser waituntilterminated runhidden; Description: "Associates .mfhat file type with Hatari executable"; StatusMsg: "Associating .mfhat files with Hatari executable..."
 #ifdef PACKAGED_APP
-  Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command Import-Certificate -FilePath '{tmp}\{#MSIXPackageName}.cer' -CertStoreLocation 'Cert:\LocalMachine\Root'"; WorkingDir: "{tmp}"; Flags: runascurrentuser waituntilterminated runhidden; Description: "Installs the WinUI App Certificate associated with the Mount Fuji application"; StatusMsg: "Installing self-signed application certificiate..."
+  Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command Import-Certificate -FilePath '{tmp}\{#MSIXPackageName}.cer' -CertStoreLocation 'Cert:\LocalMachine\Root'"; WorkingDir: "{tmp}"; Flags: runascurrentuser waituntilterminated runhidden; Description: "Installs the WinUI App Certificate associated with the Mount Fuji application"; StatusMsg: "Installing self-signed application certificate..."
   Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command Add-AppxPackage '{tmp}\{#MSIXPackageName}.msix'"; WorkingDir: "{tmp}"; Flags: runascurrentuser waituntilterminated runhidden
 #endif
 
 [UninstallRun]
 Filename: "cmd.exe"; Parameters: "/c ftype hatarifile="; WorkingDir: "{app}\Hatari"; Flags: waituntilterminated runhidden; RunOnceId: "MountFuji"
 Filename: "cmd.exe"; Parameters: "/c assoc .mfhat="; WorkingDir: "{app}\Hatari"; Flags: waituntilterminated runhidden; RunOnceId: "MountFuji"
+
+[Code]
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  // After all files have been installed and commands have been run...
+  if CurStep = ssPostInstall then
+  begin
+    // Look for and gather any existing data files from previous versions.  If successful...
+    if GatherPreviousDataFiles then
+    begin
+      // Update the preferences data file with the location of the new hatari.mfhat file.
+      if not UpdateHatariApplicationProperty(ExpandConstant('{app}\Hatari\hatari.mfhat')) then
+      begin
+        MsgBox('Failed to set HatariApplication property in preferences file', mbError, MB_OK);
+      end;
+    end;
+  end;
+end;

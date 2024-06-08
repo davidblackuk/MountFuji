@@ -1,0 +1,91 @@
+//
+// Copyright (C) 2024  David Black
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY// without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+//
+
+#ifndef _FILEATTR_ISH_
+#define _FILEATTR_ISH_
+
+[Code]
+// This function gets the last write date/time of the given filename.
+// If the file is found, it returns true and sets the FileTime parameter to the last write time of the file, otherwise it returns false.
+function GetFileLastWriteTime(FileName: WideString; var FileTime: TFileTime): Boolean;
+var
+  FindRec: TFindRec;
+begin
+  Result := false;
+  if FindFirst(FileName, FindRec) then
+  begin
+    FileTime := FindRec.LastWriteTime;
+    FindClose(FindRec);
+    Result := true;
+  end;
+end;
+
+function CompareFileTime(FileTime1, FileTime2: TFileTime): Integer;
+begin
+  // Assume FileTime1 is less than FileTime2
+  Result := -1;
+  // If FileTime1 is greater than FileTime2...
+  if (FileTime1.dwHighDateTime > FileTime2.dwHighDateTime) or ((FileTime1.dwHighDateTime = FileTime2.dwHighDateTime) and (FileTime1.dwLowDateTime > FileTime2.dwLowDateTime)) then
+    // Indicate FileTime1 is greater
+    Result := 1
+  // Else if FileTime1 is the same as FileTime2
+  else if (FileTime1.dwHighDateTime = FileTime2.dwHighDateTime) and (FileTime1.dwLowDateTime = FileTime2.dwLowDateTime) then
+    // Indicate FileTime1 and FileTIme2 are the same
+    Result := 0;
+end;
+
+// This function finds the newest file with the given name in the supplied Files string list.
+// If found, it returns true and sets NewestFile to the pathname of the newest file, otherwise it returns false.
+function GetNewestFile(Files: TStringList; Name: WideString; var NewestFile: WideString): Boolean;
+var
+  I: Integer;
+  NewestWriteTime: TFileTime;
+  WriteTime: TFileTime;
+begin
+  // Assume failure
+  Result := false;
+
+  // Prime the last file time to 0
+  NewestWriteTime.dwLowDateTime := 0;
+  NewestWriteTime.dwHighDateTime := 0;
+
+  // For each file supplied...
+  for I := 0 to Files.Count - 1 do
+  begin
+    // If its name is the expected name...
+    if CompareText(ExtractFileName(Files[I]), Name) = 0 then
+    begin
+      // Get the file's last write time.  If successful...
+      if GetFileLastWriteTime(Files[I], WriteTime) then
+      begin
+        // If the write time is greater than the newest write time seen...
+        if CompareFileTime(WriteTime, NewestWriteTime) > 0 then
+        begin
+          // Remember this as the newest write time
+          NewestWriteTime := WriteTime;
+          // Capture the filename
+          NewestFile := Files[I];
+          // Indicate Success
+          Result := true;
+        end;
+      end;
+    end;
+  end;
+end;
+[/Code]
+
+#endif
