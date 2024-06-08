@@ -15,24 +15,24 @@
                 <controls:HardDiskCascade
                     DrivePrefix="ACSI HD"
                     DiskPaths="{Binding SelectedConfiguration.AcsiImagePaths}"
-                    ClearDiskImageCommand="{Binding ClearAcsiDiskImageCommand}"
-                    BrowseDiskImageCommand="{Binding BrowseAcsiDiskImageCommand}" />
+                    ClearDiskImageCommand="{Binding AcsiCommands.ClearCommand}"
+                    BrowseDiskImageCommand="{Binding AcsiCommands.BrowseCommand}" />
             </configurationSections:ConfigurationGroup>
 
             <configurationSections:ConfigurationGroup Title="SCSI">
                 <controls:HardDiskCascade
                     DrivePrefix="SCSI HD"
                     DiskPaths="{Binding SelectedConfiguration.ScsiImagePaths}"
-                    ClearDiskImageCommand="{Binding ClearScsiDiskImageCommand}"
-                    BrowseDiskImageCommand="{Binding BrowseScsiDiskImageCommand}" />
+                    ClearDiskImageCommand="{Binding ScsiCommands.ClearCommand}"
+                    BrowseDiskImageCommand="{Binding ScsiCommands.BrowseCommand}" />
             </configurationSections:ConfigurationGroup>
 
             <configurationSections:ConfigurationGroup Title="IDE">
                 <controls:IdeCascade
                     DrivePrefix="IDE HD"
                     DiskPaths="{Binding SelectedConfiguration.IdeOptions}"
-                    ClearDiskImageCommand="{Binding ClearIdeDiskImageCommand}"
-                    BrowseDiskImageCommand="{Binding BrowseIdeDiskImageCommand}" />
+                    ClearDiskImageCommand="{Binding IdeCommands.ClearCommand}"
+                    BrowseDiskImageCommand="{Binding IdeCommands.BrowseCommand}" />
             </configurationSections:ConfigurationGroup>
 
 

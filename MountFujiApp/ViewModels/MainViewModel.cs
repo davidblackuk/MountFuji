@@ -34,6 +34,9 @@ public partial class MainViewModel : TinyViewModel
     public ICartridgeCommands CartridgeCommands { get; set; }
     public IGemdosCommands GemdosCommands { get; set; }
     public IFloppyCommands FloppyCommands { get; set; }
+    public IAcsiCommands AcsiCommands { get; set; }
+    public IScsiCommands ScsiCommands { get; set;  }
+    public IIdeCommands IdeCommands { get; set;  }
 
     private readonly IConfigFileService configFileService;
     private readonly IPopupNavigation popupNavigation;
@@ -43,8 +46,7 @@ public partial class MainViewModel : TinyViewModel
     private readonly IFujiFilePickerService fujiFilePicker;
     private readonly ILogger<MainViewModel> log;
     private readonly IAvailableUpdatesService updateService;
-
-
+    
     public MainViewModel(IConfigFileService configFileService,
         IPopupNavigation popupNavigation,
         IServiceProvider serviceProvider,
@@ -56,13 +58,19 @@ public partial class MainViewModel : TinyViewModel
         IRomCommands romCommands,
         ICartridgeCommands cartridgeCommands,
         IGemdosCommands gemdosCommands,
-        IFloppyCommands floppyCommands
+        IFloppyCommands floppyCommands,
+        IAcsiCommands acsiCommands,
+        IScsiCommands scsiCommands,
+        IIdeCommands ideCommands
         )
     {
         RomCommands = romCommands;
         CartridgeCommands = cartridgeCommands;
         GemdosCommands = gemdosCommands;
         FloppyCommands = floppyCommands;
+        AcsiCommands = acsiCommands;
+        ScsiCommands = scsiCommands;
+        IdeCommands = ideCommands;
         this.configFileService = configFileService;
         this.popupNavigation = popupNavigation;
         this.serviceProvider = serviceProvider;
@@ -71,8 +79,7 @@ public partial class MainViewModel : TinyViewModel
         this.fujiFilePicker = fujiFilePicker;
         this.log = log;
         this.updateService = updateService;
-
-
+        
         UpdateSystemsFromService();
         CheckForUpdate().SafeFireAndForget();
 
@@ -121,63 +128,7 @@ public partial class MainViewModel : TinyViewModel
         SetupIsDirtyTimer();
         return base.OnFirstAppear();
     }
-
-
-    #region ----- ACSI -----
     
-    [RelayCommand()]
-    private async Task BrowseAcsiDiskImage(int diskId)
-    {
-        await fujiFilePicker.PickFile("ACSI Disk Image",
-            (filename) =>
-                DiskImagePathsExtensions.SetImagePath((AcsiScsiDiskOptions)SelectedConfiguration.AcsiImagePaths, diskId,
-                    filename),
-            preferencesService.Preferences.HardDiskFolder);
-    }
-
-    [RelayCommand()]
-    private void ClearAcsiDiskImage(int diskId) =>
-        DiskImagePathsExtensions.ClearImagePath((AcsiScsiDiskOptions)SelectedConfiguration.AcsiImagePaths, diskId);
-
-    #endregion
-
-    #region ----- SCSI -----
-    
-    [RelayCommand()]
-    private async Task BrowseScsiDiskImage(int diskId)
-    {
-        await fujiFilePicker.PickFile("SCSI Disk Image",
-            (filename) =>
-                DiskImagePathsExtensions.SetImagePath((AcsiScsiDiskOptions)SelectedConfiguration.ScsiImagePaths, diskId,
-                    filename),
-            preferencesService.Preferences.HardDiskFolder);
-    }
-
-    [RelayCommand()]
-    private void ClearScsiDiskImage(int diskId) =>
-        DiskImagePathsExtensions.ClearImagePath((AcsiScsiDiskOptions)SelectedConfiguration.ScsiImagePaths, diskId);
-
-    #endregion
-    
-    #region ----- IDE -----
-    [RelayCommand()]
-    private async Task BrowseIdeDiskImage(int diskId)
-    {
-        await fujiFilePicker.PickFile("IDE Disk Image",
-            (filename) =>
-                DiskImagePathsExtensions.SetImagePath((IdeDiskOptions)SelectedConfiguration.IdeOptions, diskId,
-                    filename),
-            preferencesService.Preferences.HardDiskFolder);
-    }
-
-    [RelayCommand()]
-    private void ClearIdeDiskImage(int diskId) =>
-        DiskImagePathsExtensions.ClearImagePath((IdeDiskOptions)SelectedConfiguration.IdeOptions, diskId);
-
-    #endregion
-    
-  
-
 
     #region ----- APPLICATION TOOL BAR -----
     

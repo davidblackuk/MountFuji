@@ -19,6 +19,8 @@
 using System.ComponentModel;
 using System.Windows.Input;
 using Maui.BindableProperty.Generator.Core;
+using MountFuji.ViewModels;
+using MountFuji.ViewModels.MainViewModelCommands;
 
 namespace MountFuji.Controls;
 
@@ -145,21 +147,23 @@ public partial class IdeCascade : ContentView
 
     private void BrowseHddImage(object sender, EventArgs e)
     {
-        if (BrowseDiskImageCommand != null && BrowseDiskImageCommand.CanExecute(DiskId))
+        var item = MainViewModelItemId;
+        if (BrowseDiskImageCommand != null && BrowseDiskImageCommand.CanExecute(item))
         {
-            BrowseDiskImageCommand.Execute(DiskId);
+            BrowseDiskImageCommand.Execute(item);
         }
     }
 
     private void ClearClicked(object sender, EventArgs e)
     {
-        if (ClearDiskImageCommand != null && ClearDiskImageCommand.CanExecute(DiskId))
+        var item = MainViewModelItemId;
+        if (ClearDiskImageCommand != null && ClearDiskImageCommand.CanExecute(item))
         {
-            ClearDiskImageCommand.Execute(DiskId);
+            ClearDiskImageCommand.Execute(item);
             SetDiskImagePath();
         }
     }
 
-   
+    private MainViewModelItemId MainViewModelItemId => new MainViewModelItemId { ViewModel = BindingContext as MainViewModel, Id = DiskId };
 
 }

@@ -28,19 +28,6 @@ namespace MountFujiTests.ViewModels;
 
 public class MainViewModelTests: CommandsTestBase
 {
-    // private Mock<IConfigFileService> configFileServiceMock;
-    // private Mock<IPopupNavigation> popupNavigationMock;
-    // private Mock<IServiceProvider> serviceProviderMock;
-    // private Mock<IPreferencesService> preferencesServiceMock;
-    // private Mock<ISystemsService> systemsServiceMock;
-    // private Mock<IFujiFilePickerService> fujiFilePickerMock;
-    // private Mock<ILogger<MainViewModel>> logMock;
-    // private Mock<IAppSelectorStrategy> appSelectorMock;
-    // private Mock<IAvailableUpdatesService> updateServiceMock;
-    //
-    // private ApplicationPreferences Preferences { get; set; }
-    // private AtariConfiguration SelectedConfiguration { get; set; }
-
     
     [SetUp]
     public void Setup()
@@ -50,100 +37,9 @@ public class MainViewModelTests: CommandsTestBase
 
   
     
-    #region ----- ACSI -----
-    
-    [Test]
-    public void ClearAcsiDiskImage_WhenInvoked_ShouldSetTheAsciImagePathsValueInTheSelectedConfigurationToEmptyString()
-    {
-        var expectedValue = "disk 2";
-        SelectedConfiguration.AcsiImagePaths.Disk2 = expectedValue;
-        var sut = CreateSut();
-
-        SelectedConfiguration.AcsiImagePaths.Disk2.Should().Be(expectedValue);
-        sut.ClearAcsiDiskImageCommand.Execute(2);
-
-        SelectedConfiguration.AcsiImagePaths.Disk2.Should().BeEmpty();
-    }
-    
-    [Test]
-    public async Task BrowseAcsiDiskImage_WhenInvoked_ShouldSetTheAcsiImagePathValueInTheSelectedConfigFromTheFilePicker()
-    {
-        var expectedValue = "my disk filename"; 
-        var sut = CreateSut();
-
-        fujiFilePickerMock.Setup(x => x.PickFile(It.IsAny<string>(),
-                It.IsAny<Action<string>>(), null))
-            .Callback((string title, Action<string> action, string x) => action(expectedValue));
-
-        await sut.BrowseAcsiDiskImageCommand.ExecuteAsync(2);
-
-        SelectedConfiguration.AcsiImagePaths.Disk2.Should().Be(expectedValue); 
-    }
-    
-    #endregion
-       
-    #region ----- SCSI -----
-    
-    [Test]
-    public void ClearScsiDiskImage_WhenInvoked_ShouldSetTheSsciImagePathsValueInTheSelectedConfigurationToEmptyString()
-    {
-        var expectedValue = "disk 2";
-        SelectedConfiguration.ScsiImagePaths.Disk2 = expectedValue;
-        var sut = CreateSut();
-
-        SelectedConfiguration.ScsiImagePaths.Disk2.Should().Be(expectedValue);
-        sut.ClearScsiDiskImageCommand.Execute(2);
-
-        SelectedConfiguration.ScsiImagePaths.Disk2.Should().BeEmpty();
-    }
-    
-    [Test]
-    public async Task BrowseScsiDiskImage_WhenInvoked_ShouldSetTheScsiImagePathValueInTheSelectedConfigFromTheFilePicker()
-    {
-        var expectedValue = "my disk filename"; 
-        var sut = CreateSut();
-
-        fujiFilePickerMock.Setup(x => x.PickFile(It.IsAny<string>(),
-                It.IsAny<Action<string>>(), null))
-            .Callback((string title, Action<string> action, string x) => action(expectedValue));
-
-        await sut.BrowseScsiDiskImageCommand.ExecuteAsync(2);
-
-        SelectedConfiguration.ScsiImagePaths.Disk2.Should().Be(expectedValue); 
-    }
-
-    
-    #endregion
-    
     #region ----- IDE -----
     
-    [Test]
-    public void ClearIdeDiskImage_WhenInvoked_ShouldSetTheIdeImagePathsValueInTheSelectedConfigurationToEmptyString()
-    {
-        var expectedValue = "disk 1";
-        SelectedConfiguration.IdeOptions.Disk1 = expectedValue;
-        var sut = CreateSut();
-
-        SelectedConfiguration.IdeOptions.Disk1.Should().Be(expectedValue);
-        sut.ClearIdeDiskImageCommand.Execute(1);
-
-        SelectedConfiguration.IdeOptions.Disk1.Should().BeEmpty();
-    }
-    
-    [Test]
-    public async Task BrowseIdeDiskImage_WhenInvoked_ShouldSetTheIdeImagePathValueInTheSelectedConfigFromTheFilePicker()
-    {
-        var expectedValue = "my disk filename"; 
-        var sut = CreateSut();
-
-        fujiFilePickerMock.Setup(x => x.PickFile(It.IsAny<string>(),
-                It.IsAny<Action<string>>(), null))
-            .Callback((string title, Action<string> action, string x) => action(expectedValue));
-
-        await sut.BrowseAcsiDiskImageCommand.ExecuteAsync(2);
-
-        SelectedConfiguration.AcsiImagePaths.Disk2.Should().Be(expectedValue); 
-    }
+ 
 
     #endregion
     

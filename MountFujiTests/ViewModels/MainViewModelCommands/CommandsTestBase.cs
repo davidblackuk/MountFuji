@@ -39,6 +39,10 @@ public class CommandsTestBase
     protected Mock<ICartridgeCommands> cartridgeCommandsMock;
     protected Mock<IGemdosCommands> gemdosCommandsMock;
     protected Mock<IFloppyCommands> floppyCommandsMock;
+    protected Mock<IAcsiCommands> acsiCommandsMock;
+    protected Mock<IScsiCommands> scsiCommandsMock;
+    protected Mock<IIdeCommands> ideCommandsMock;
+    
     
     protected MainViewModel MainViewModel { get; set; }
 
@@ -62,13 +66,18 @@ public class CommandsTestBase
         cartridgeCommandsMock = new Mock<ICartridgeCommands>();
         gemdosCommandsMock = new Mock<IGemdosCommands>();
         floppyCommandsMock = new Mock<IFloppyCommands>();
+        acsiCommandsMock = new Mock<IAcsiCommands>();
+        scsiCommandsMock = new Mock<IScsiCommands>();
+        ideCommandsMock = new Mock<IIdeCommands>();
+        
         
         MainViewModel = new MainViewModel(configFileServiceMock.Object, popupNavigationMock.Object,
             serviceProviderMock.Object, preferencesServiceMock.Object,
             systemsServiceMock.Object, fujiFilePickerMock.Object, logMock.Object,
             updateServiceMock.Object,
             romCommandsMock.Object, cartridgeCommandsMock.Object, gemdosCommandsMock.Object,
-            floppyCommandsMock.Object);
+            floppyCommandsMock.Object,
+            acsiCommandsMock.Object, scsiCommandsMock.Object, ideCommandsMock.Object);
         MainViewModel.SelectedConfiguration = SelectedConfiguration;
     }
 }

@@ -76,5 +76,8 @@ public static class MvvmWireUp {
         services.AddSingleton<ICartridgeCommands, CartridgeCommands>();
         services.AddSingleton<IGemdosCommands, GemdosCommands>();
         services.AddSingleton<IFloppyCommands, FloppyCommands>();
+        services.AddSingleton<IAcsiCommands, AcsiCommands>();
+        services.AddSingleton<IScsiCommands, ScsiCommands>();
+        services.AddSingleton<IIdeCommands, IdeCommands>();
     }
 }

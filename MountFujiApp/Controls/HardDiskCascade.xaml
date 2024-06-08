@@ -31,7 +31,6 @@
                         Text="{x:Static controls:IconFont.Cancel}" 
                         Clicked="ClearClicked"
                         VerticalOptions="Center" >
-                    
                 </Button>
                 <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="5"
                         Text="{x:Static controls:IconFont.File_open}"

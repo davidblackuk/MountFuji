@@ -18,30 +18,28 @@ using MountFuji.Extensions;
 
 namespace MountFuji.ViewModels.MainViewModelCommands;
 
-public partial class FloppyCommands : IFloppyCommands
+public partial class AcsiCommands : IAcsiCommands
 {
     private readonly IFujiFilePickerService fujiFilePicker;
     private readonly IPreferencesService preferencesService;
-    
-    public FloppyCommands(IFujiFilePickerService fujiFilePicker, IPreferencesService preferencesService)
+
+    public AcsiCommands(IFujiFilePickerService fujiFilePicker, IPreferencesService preferencesService)
     {
         this.fujiFilePicker = fujiFilePicker;
         this.preferencesService = preferencesService;
     }
     
-      
     [RelayCommand()]
-    private async Task Browse(MainViewModelItemId item)
+    public async Task Browse(MainViewModelItemId item)
     {
-        await fujiFilePicker.PickFile("Floppy Disk Image",
-            (filename) => DiskImagePathsExtensions.SetImagePath((FloppyDriveOptions)item.ViewModel.SelectedConfiguration.FloppyOptions,
-                item.Id, filename),
-            preferencesService.Preferences.FloppyDiskFolder);
+        await fujiFilePicker.PickFile("ACSI Disk Image",
+            (filename) =>
+                DiskImagePathsExtensions.SetImagePath(item.ViewModel.SelectedConfiguration.AcsiImagePaths, item.Id,
+                    filename),
+            preferencesService.Preferences.HardDiskFolder);
     }
 
     [RelayCommand()]
-    private void Clear(MainViewModelItemId item) =>
-        DiskImagePathsExtensions.ClearImagePath((FloppyDriveOptions)item.ViewModel.SelectedConfiguration.FloppyOptions, item.Id);
-
-    
+    public void Clear(MainViewModelItemId item) =>
+        DiskImagePathsExtensions.ClearImagePath(item.ViewModel.SelectedConfiguration.AcsiImagePaths, item.Id);
 }
