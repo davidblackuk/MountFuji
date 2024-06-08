@@ -3,20 +3,24 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MountFuji.ViewModels"
-             xmlns:controls1="using:MountFuji.Controls"
+             xmlns:controls="using:MountFuji.Controls"
+             xmlns:converters="using:MountFuji.Converters"
              x:DataType="vm:MainViewModel"
              x:Class="MountFuji.Controls.HardDiskCascade">
+    <ContentView.Resources>
+        <converters:MainViewModelItemIdConverter x:Key="ModelIdConverter" />
+    </ContentView.Resources>
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <Grid Grid.ColumnDefinitions="40, 80, 40,*,40,40" RowDefinitions="*,*" Margin="0,10,0,0">
                 
-                <Button Text="{x:Static controls1:IconFont.Navigate_before}" 
+                <Button Text="{x:Static controls:IconFont.Navigate_before}" 
                         Clicked="PreviousClicked"
                         Grid.Column="0" Style="{StaticResource InlineMaterialButton}" />
                 
                 <Label Text="{TemplateBinding Title}" VerticalOptions="Center" Grid.Column="1"/>
 
-                <Button Text="{x:Static controls1:IconFont.Navigate_next}"  
+                <Button Text="{x:Static controls:IconFont.Navigate_next}"  
                         Clicked="NextClicked"
                         Grid.Column="2" Style="{StaticResource InlineMaterialButton}" />
 
@@ -24,13 +28,16 @@
                        VerticalOptions="Center" />
 
                 <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="4"
-                        Text="{x:Static controls1:IconFont.Cancel}" 
+                        Text="{x:Static controls:IconFont.Cancel}" 
                         Clicked="ClearClicked"
-                        VerticalOptions="Center" />
+                        VerticalOptions="Center" >
+                    
+                </Button>
                 <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="5"
-                        Text="{x:Static controls1:IconFont.File_open}"
+                        Text="{x:Static controls:IconFont.File_open}"
                         Clicked="BrowseHddImage"
-                        VerticalOptions="Center" />
+                        VerticalOptions="Center">
+                </Button>
                 
             </Grid>
         </ControlTemplate>

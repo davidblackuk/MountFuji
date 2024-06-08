@@ -2,20 +2,17 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
-             xmlns:controls="clr-namespace:MountFuji.Controls"
              xmlns:vm="clr-namespace:MountFuji.ViewModels"
-             xmlns:models="clr-namespace:MountFuji.Models"
-             xmlns:controls1="using:MountFuji.Controls"
+             xmlns:controls="using:MountFuji.Controls"
              xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
              xmlns:models1="using:MountFuji.Models"
              x:DataType="vm:MainViewModel"
              x:Class="MountFuji.Controls.ConfigurationSections.HardDiskSection">
 
-    <controls1:SystemEditorExpander Title="Hard Disks" Expanded="{Binding SectionVisibility.ExpandAcsiHddSection}">
+    <controls:SystemEditorExpander Title="Hard Disks" Expanded="{Binding SectionVisibility.ExpandAcsiHddSection}">
         <VerticalStackLayout>
             <configurationSections:ConfigurationGroup Title="ACSI">
-                <controls1:HardDiskCascade
+                <controls:HardDiskCascade
                     DrivePrefix="ACSI HD"
                     DiskPaths="{Binding SelectedConfiguration.AcsiImagePaths}"
                     ClearDiskImageCommand="{Binding ClearAcsiDiskImageCommand}"
@@ -23,7 +20,7 @@
             </configurationSections:ConfigurationGroup>
 
             <configurationSections:ConfigurationGroup Title="SCSI">
-                <controls1:HardDiskCascade
+                <controls:HardDiskCascade
                     DrivePrefix="SCSI HD"
                     DiskPaths="{Binding SelectedConfiguration.ScsiImagePaths}"
                     ClearDiskImageCommand="{Binding ClearScsiDiskImageCommand}"
@@ -31,7 +28,7 @@
             </configurationSections:ConfigurationGroup>
 
             <configurationSections:ConfigurationGroup Title="IDE">
-                <controls1:IdeCascade
+                <controls:IdeCascade
                     DrivePrefix="IDE HD"
                     DiskPaths="{Binding SelectedConfiguration.IdeOptions}"
                     ClearDiskImageCommand="{Binding ClearIdeDiskImageCommand}"
@@ -41,11 +38,11 @@
 
             <configurationSections:ConfigurationGroup Title="GEMDOS">
                 <VerticalStackLayout>
-                    <controls1:UntitledPathEditor PlaceHolder="Select a GEMDOS folder (Optional)"
-                                                      BrowseDiskImageCommand="{Binding BrowseGemdosFolderCommand}"
-                                                      ClearDiskImageCommand="{Binding ClearGemdosFolderCommand}"
+                    <controls:UntitledPathEditor PlaceHolder="Select a GEMDOS folder (Optional)"
+                                                      BrowseDiskImageCommand="{Binding GemdosCommands.BrowseCommand}"
+                                                      ClearDiskImageCommand="{Binding GemdosCommands.ClearCommand}"
                                                       DiskImagePath="{Binding SelectedConfiguration.GdosDriveOptions.GemdosFolder}" 
-                                                      PickerOpenIcon="{x:Static controls1:IconFont.Folder_open}"/>
+                                                      PickerOpenIcon="{x:Static controls:IconFont.Folder_open}"/>
 
 
                     <VerticalStackLayout >
@@ -83,7 +80,7 @@
             </configurationSections:ConfigurationGroup>
 
         </VerticalStackLayout>
-    </controls1:SystemEditorExpander>
+    </controls:SystemEditorExpander>
 
 
 </ContentView>

@@ -19,8 +19,8 @@
             <controls1:HardDiskPathEditor
                     Title="Drive A" DiskId="{sys:Int32 0}"
                     DiskImagePath="{Binding SelectedConfiguration.FloppyOptions.DriveAPath}"
-                    ClearDiskImageCommand="{Binding ClearFloppyDiskImageCommand}"
-                    BrowseDiskImageCommand="{Binding BrowseFloppyDiskImageCommand}" 
+                    ClearDiskImageCommand="{Binding FloppyCommands.ClearCommand}"
+                    BrowseDiskImageCommand="{Binding FloppyCommands.BrowseCommand}" 
                     PickerOpenIcon="{x:Static controls1:IconFont.File_open}"/>
 
             <Grid ColumnDefinitions="40,auto,40,*" Margin="60,10,0,20">
@@ -33,8 +33,8 @@
              <controls1:HardDiskPathEditor
                     Title="Drive B" DiskId="{sys:Int32 1}"
                     DiskImagePath="{Binding SelectedConfiguration.FloppyOptions.DriveBPath}"
-                    ClearDiskImageCommand="{Binding ClearFloppyDiskImageCommand}"
-                    BrowseDiskImageCommand="{Binding BrowseFloppyDiskImageCommand}" 
+                    ClearDiskImageCommand="{Binding FloppyCommands.ClearCommand}"
+                    BrowseDiskImageCommand="{Binding FloppyCommands.BrowseCommand}" 
                     PickerOpenIcon="{x:Static controls1:IconFont.File_open}"/>
 
             <Grid ColumnDefinitions="40,auto,40,*" Margin="60,10,0,20">

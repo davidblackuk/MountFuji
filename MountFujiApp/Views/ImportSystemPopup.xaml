@@ -6,8 +6,6 @@
                   xmlns:vm="clr-namespace:MountFuji.ViewModels"
                   xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
                   xmlns:controls="clr-namespace:MountFuji.Controls"
-                  xmlns:controls1="using:MountFuji.Controls"
-
                   x:DataType="vm:ImportSystemPopupViewModel"
                   x:Class="MountFuji.Views.ImportSystemPopup"
                   Title="Alert" BackgroundColor="#80000000" CloseWhenBackgroundIsClicked="False">
@@ -22,7 +20,7 @@
                    Style="{StaticResource H1Label}" />
             
             <Label  HorizontalTextAlignment="Center" VerticalTextAlignment="Start" Style="{StaticResource DialogTypeIcon}"
-                   Grid.Column="0" Grid.Row="1" Text="{x:Static controls1:IconFont.Arrow_circle_left}"
+                   Grid.Column="0" Grid.Row="1" Text="{x:Static controls:IconFont.Arrow_circle_left}"
                    HorizontalOptions="Center"  />
             
             <VerticalStackLayout Grid.Row="1" Spacing="5" VerticalOptions="Start" Grid.Column="1">
@@ -35,19 +33,19 @@
                 <Label HorizontalTextAlignment="Start" Style="{StaticResource H3Label}"
                        Text="Config file" Margin="0,10,0,0"/>
 
-                <controls1:UntitledPathEditor
+                <controls:UntitledPathEditor
                     PlaceHolder="Please select a Hatari config file"
                     Margin="0,0, 15,0 "
                     DiskImagePath="{Binding FileName}"
                     ClearDiskImageCommand="{Binding ClearHatariConfigFileCommand}"
                     BrowseDiskImageCommand="{Binding BrowseHatariConfigFileCommand}"
-                    PickerOpenIcon="{x:Static controls1:IconFont.File_open}" />
+                    PickerOpenIcon="{x:Static controls:IconFont.File_open}" />
 
             </VerticalStackLayout>
             
             <Rectangle Grid.Row="2" Grid.ColumnSpan="2"  Style="{StaticResource DialogButtonsSeparator}"></Rectangle>
 
-			<controls1:DialogButtons Margin="0,0,15,0" HorizontalOptions="End" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+			<controls:DialogButtons Margin="0,0,15,0" HorizontalOptions="End" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
 									 IsButtonSizeEqual="True"
 									 CancelCommand="{Binding CancelCommand}"
 									 OKCommand="{Binding OkCommand}" />

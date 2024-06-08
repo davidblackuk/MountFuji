@@ -1,6 +1,5 @@
 using System.Globalization;
 using System.Runtime.InteropServices.JavaScript;
-using CommunityToolkit.Maui.Converters;
 using MountFuji.Models.Keyboard;
 
 namespace MountFuji.Converters;
@@ -23,15 +22,4 @@ public class KeyboardShortcutConverter: NaiveConverter, IMultiValueConverter
     {
         return null;
     }
-}
-
-public class KeyboardShortcutTextDisplayConverter: BaseConverterOneWay<string?, string>
-{
-
-    public override string ConvertFrom(string? value, CultureInfo culture)
-    {
-        return String.IsNullOrEmpty(value) ? "<not set>" : value;
-    }
-
-    public override string DefaultConvertReturnValue { get; set; }
 }

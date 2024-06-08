@@ -26,6 +26,7 @@ public class AboutPopupViewModelTests
     private Mock<IPopupNavigation> popupNavigationMock;
     private Mock<IPersistence> persistanceMock;
     private Mock<IAvailableUpdatesService> updateServiceMock;
+    private Mock<IApplicationVersion> applicationVersionMock;
     
     [SetUp]
     public void Setup()
@@ -33,6 +34,7 @@ public class AboutPopupViewModelTests
         popupNavigationMock = new Mock<IPopupNavigation>();
         persistanceMock = new Mock<IPersistence>();
         updateServiceMock = new Mock<IAvailableUpdatesService>();
+        applicationVersionMock = new Mock<IApplicationVersion>();
     }
 
     [Test]
@@ -47,6 +49,6 @@ public class AboutPopupViewModelTests
 
     private AboutPopupViewModel CreateSut()
     {
-        return new AboutPopupViewModel(popupNavigationMock.Object, persistanceMock.Object, updateServiceMock.Object);
+        return new AboutPopupViewModel(popupNavigationMock.Object, persistanceMock.Object, updateServiceMock.Object, applicationVersionMock.Object);
     }
 }

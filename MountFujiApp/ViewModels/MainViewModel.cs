@@ -23,12 +23,18 @@ using Microsoft.Extensions.Logging;
 using MountFuji.Controls;
 using MountFuji.Extensions;
 using MountFuji.Services.UpdatesService;
+using MountFuji.ViewModels.MainViewModelCommands;
 using MountFuji.Views;
 
 namespace MountFuji.ViewModels;
 
 public partial class MainViewModel : TinyViewModel
 {
+    public IRomCommands RomCommands { get; set; }
+    public ICartridgeCommands CartridgeCommands { get; set; }
+    public IGemdosCommands GemdosCommands { get; set; }
+    public IFloppyCommands FloppyCommands { get; set; }
+
     private readonly IConfigFileService configFileService;
     private readonly IPopupNavigation popupNavigation;
     private readonly IServiceProvider serviceProvider;
@@ -38,6 +44,7 @@ public partial class MainViewModel : TinyViewModel
     private readonly ILogger<MainViewModel> log;
     private readonly IAvailableUpdatesService updateService;
 
+
     public MainViewModel(IConfigFileService configFileService,
         IPopupNavigation popupNavigation,
         IServiceProvider serviceProvider,
@@ -45,8 +52,17 @@ public partial class MainViewModel : TinyViewModel
         ISystemsService systemsService,
         IFujiFilePickerService fujiFilePicker,
         ILogger<MainViewModel> log,         
-        IAvailableUpdatesService updateService)
+        IAvailableUpdatesService updateService,
+        IRomCommands romCommands,
+        ICartridgeCommands cartridgeCommands,
+        IGemdosCommands gemdosCommands,
+        IFloppyCommands floppyCommands
+        )
     {
+        RomCommands = romCommands;
+        CartridgeCommands = cartridgeCommands;
+        GemdosCommands = gemdosCommands;
+        FloppyCommands = floppyCommands;
         this.configFileService = configFileService;
         this.popupNavigation = popupNavigation;
         this.serviceProvider = serviceProvider;
@@ -56,9 +72,12 @@ public partial class MainViewModel : TinyViewModel
         this.log = log;
         this.updateService = updateService;
 
+
         UpdateSystemsFromService();
         CheckForUpdate().SafeFireAndForget();
+
     }
+    
     
     private async Task CheckForUpdate()
     {
@@ -103,62 +122,7 @@ public partial class MainViewModel : TinyViewModel
         return base.OnFirstAppear();
     }
 
-    #region ----- ROM -----
 
-    [RelayCommand()]
-    private async Task OpenRomPicker()
-    {
-        RomPickerPopup popup = serviceProvider.GetService<RomPickerPopup>();
-
-        await popupNavigation.PushAsync(popup);
-
-        popup.Disappearing += (sender, args) =>
-        {
-            if (!popup.ViewModel.Confirmed) return;
-            Rom rom = popup.ViewModel.SelectedRom;
-            SelectedConfiguration.RomImage = rom!.Path;
-            RunCommand.NotifyCanExecuteChanged();
-            log.LogInformation("Rom Selected via the ROM Picker {ROM}", rom);
-        };
-    }
-
-    [RelayCommand()]
-    private async Task BrowseRoms()
-    {
-        var file = await fujiFilePicker.PickFile("ROM Image", (filename) =>
-            {
-                SelectedConfiguration.RomImage = filename;
-                RunCommand.NotifyCanExecuteChanged();
-            },
-            preferencesService.Preferences.RomFolder);
-    }
-
-    [RelayCommand]
-    private void ClearRom()
-    {
-        SelectedConfiguration.RomImage = String.Empty;
-        RunCommand.NotifyCanExecuteChanged();
-    }
-
-    #endregion
-    
-    #region ----- CART -----
-    
-    [RelayCommand()]
-    private async Task BrowseCartridges()
-    {
-        await fujiFilePicker.PickFile("Cartridge Image", (filename) => SelectedConfiguration.CartridgeImage = filename,
-            preferencesService.Preferences.CartridgeFolder);
-    }
-
-    [RelayCommand]
-    private void ClearCartridge()
-    {
-        SelectedConfiguration.CartridgeImage = String.Empty;
-    }
-
-    #endregion
-    
     #region ----- ACSI -----
     
     [RelayCommand()]
@@ -212,37 +176,8 @@ public partial class MainViewModel : TinyViewModel
 
     #endregion
     
-    #region ----- FLOPPY -----
-    
-    [RelayCommand()]
-    private async Task BrowseFloppyDiskImage(int diskId)
-    {
-        await fujiFilePicker.PickFile("Floppy Disk Image",
-            (filename) => DiskImagePathsExtensions.SetImagePath((FloppyDriveOptions)SelectedConfiguration.FloppyOptions,
-                diskId, filename),
-            preferencesService.Preferences.FloppyDiskFolder);
-    }
+  
 
-    [RelayCommand()]
-    private void ClearFloppyDiskImage(int diskId) =>
-        DiskImagePathsExtensions.ClearImagePath((FloppyDriveOptions)SelectedConfiguration.FloppyOptions, diskId);
-
-    #endregion
-
-    #region ----- GEMDOS -----
-    
-    [RelayCommand()]
-    private async Task BrowseGemdosFolder()
-    {
-        await fujiFilePicker.PickFolder("GEMDOS Folder",
-            (filename) => SelectedConfiguration.GdosDriveOptions.GemdosFolder = filename,
-            preferencesService.Preferences.GemDosFolder);
-    }
-    
-    [RelayCommand()]
-    private void ClearGemdosFolder() => SelectedConfiguration.GdosDriveOptions.GemdosFolder = string.Empty;
-
-    #endregion
 
     #region ----- APPLICATION TOOL BAR -----
     

@@ -18,6 +18,7 @@
 
 using Mopups.Services;
 using MountFuji.ViewModels;
+using MountFuji.ViewModels.MainViewModelCommands;
 using MountFuji.Views;
 
 namespace MountFuji.Extensions;
@@ -32,8 +33,7 @@ public static class MvvmWireUp {
     {
         services.AddSingleton<IPopupNavigation>(MopupService.Instance);
         
-        services.AddTransient<MainView>();
-        services.AddTransient<MainViewModel>();
+        AddMainViewModel(services);
 
         services.AddTransient<NewSystemPopup>();
         services.AddTransient<NewSystemViewModelViewModel>();
@@ -65,6 +65,16 @@ public static class MvvmWireUp {
         services.AddTransient<SetShortcutPopupView>();
         services.AddTransient<SetShortcutPopupViewModel>();
         
-        
+    }
+
+    private static void AddMainViewModel(IServiceCollection services)
+    {
+        services.AddSingleton<MainView>();
+        services.AddSingleton<MainViewModel>();
+
+        services.AddSingleton<IRomCommands, RomCommands>();
+        services.AddSingleton<ICartridgeCommands, CartridgeCommands>();
+        services.AddSingleton<IGemdosCommands, GemdosCommands>();
+        services.AddSingleton<IFloppyCommands, FloppyCommands>();
     }
 }

@@ -17,13 +17,20 @@
                 <Grid Grid.ColumnDefinitions="*,10,40, 40, 40" >
                     <Label Text="{Binding SelectedConfiguration.RomImage}" />
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="2"
-                            Text="{x:Static controls1:IconFont.Cancel}" Command="{Binding ClearRomCommand}"
+                            Text="{x:Static controls1:IconFont.Cancel}" 
+                            Command="{Binding RomCommands.ClearCommand}"
+                            CommandParameter="{Binding .}"
                             ToolTipProperties.Text="Clear selected ROM"/>
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="3"
-                            Text="{x:Static controls1:IconFont.File_open}" Command="{Binding BrowseRomsCommand}"
+                            Text="{x:Static controls1:IconFont.File_open}" 
+                            Command="{Binding RomCommands.BrowseCommand}"
+                            CommandParameter="{Binding .}"
                             ToolTipProperties.Text="Browse for a ROM"/>
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="4"
-                            Text="{x:Static controls1:IconFont.List_alt}" Command="{Binding OpenRomPickerCommand}"
+                            Text="{x:Static controls1:IconFont.List_alt}" 
+                            Command="{Binding RomCommands.OpenPickerCommand}"
+                            CommandParameter="{Binding .}"
+
                             ToolTipProperties.Text="Open the ROM picker"/>
                 </Grid>
             </configurationSections:ConfigurationGroup>
@@ -35,11 +42,13 @@
                 <Grid Grid.ColumnDefinitions="*, 10, 40, 40" >
                     <Label Text="{Binding SelectedConfiguration.CartridgeImage}" />
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="2"
-                            Text="{x:Static controls1:IconFont.Cancel}" Command="{Binding ClearCartridgeCommand}">
-                    </Button>
+                            Text="{x:Static controls1:IconFont.Cancel}" 
+                            Command="{Binding CartridgeCommands.ClearCommand}"
+                            CommandParameter="{Binding .}" />
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="3"
-                            Text="{x:Static controls1:IconFont.File_open}" Command="{Binding BrowseCartridgesCommand}">
-                    </Button>
+                            Text="{x:Static controls1:IconFont.File_open}" 
+                            Command="{Binding CartridgeCommands.BrowseCommand}"
+                            CommandParameter="{Binding .}" />
                 </Grid>
             </configurationSections:ConfigurationGroup>
         </VerticalStackLayout>

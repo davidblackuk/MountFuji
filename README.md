@@ -73,6 +73,7 @@ Here's what's in the different version of Mount Fuji. See the GitHub release not
   - opening the about dialog shows an indicator next to the version number
   - a message about the new version number and a link to the release page 
   on GitHub.
+- Added an indindicator that the application state needs saving.
 
 
 #### Contributers
