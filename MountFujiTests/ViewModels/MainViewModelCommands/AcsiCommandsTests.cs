@@ -4,10 +4,13 @@ namespace MountFujiTests.ViewModels.MainViewModelCommands;
 
 public class AcsiCommandsTests: CommandsTestBase
 {
+    private Mock<IFujiFilePickerService> fujiFilePickerMock;
+    
     [SetUp]
     public void Setup()
     {
         base.SetupMainViewModelMocks();
+        fujiFilePickerMock = new Mock<IFujiFilePickerService>();
     }
     
     [Test]
@@ -18,7 +21,7 @@ public class AcsiCommandsTests: CommandsTestBase
         var sut = CreateSut();
 
         SelectedConfiguration.AcsiImagePaths.Disk2.Should().Be(expectedValue);
-        sut.ClearCommand.Execute(new MainViewModelItemId { ViewModel = MainViewModel, Id = 2});
+        sut.ClearCommand.Execute(new MainViewModelDiskId { ViewModel = MainViewModel, Id = 2});
 
         SelectedConfiguration.AcsiImagePaths.Disk2.Should().BeEmpty();
     }
@@ -33,7 +36,7 @@ public class AcsiCommandsTests: CommandsTestBase
                 It.IsAny<Action<string>>(), null))
             .Callback((string title, Action<string> action, string x) => action(expectedValue));
 
-        await sut.BrowseCommand.ExecuteAsync(new MainViewModelItemId { ViewModel = MainViewModel, Id = 2});
+        await sut.BrowseCommand.ExecuteAsync(new MainViewModelDiskId { ViewModel = MainViewModel, Id = 2});
 
         SelectedConfiguration.AcsiImagePaths.Disk2.Should().Be(expectedValue); 
     }

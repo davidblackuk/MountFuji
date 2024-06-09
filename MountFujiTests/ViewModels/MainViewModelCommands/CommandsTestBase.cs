@@ -23,12 +23,12 @@ namespace MountFujiTests.ViewModels.MainViewModelCommands;
 
 public class CommandsTestBase
 {
+    #pragma warning disable CS8618
     protected Mock<IConfigFileService> configFileServiceMock;
     protected Mock<IPopupNavigation> popupNavigationMock;
     protected Mock<IServiceProvider> serviceProviderMock;
     protected Mock<IPreferencesService> preferencesServiceMock;
     protected Mock<ISystemsService> systemsServiceMock;
-    protected Mock<IFujiFilePickerService> fujiFilePickerMock;
     protected Mock<ILogger<MainViewModel>> logMock;
     protected Mock<IAppSelectorStrategy> appSelectorMock;
     protected Mock<IAvailableUpdatesService> updateServiceMock;
@@ -42,15 +42,18 @@ public class CommandsTestBase
     protected Mock<IAcsiCommands> acsiCommandsMock;
     protected Mock<IScsiCommands> scsiCommandsMock;
     protected Mock<IIdeCommands> ideCommandsMock;
-    
+    protected Mock<IToolbarCrudCommands> crudCommandsMock;
     
     protected MainViewModel MainViewModel { get; set; }
+#pragma warning restore CS8618
+    
+    
+
 
     
     public void SetupMainViewModelMocks()
     {
         popupNavigationMock = new Mock<IPopupNavigation>();
-        fujiFilePickerMock = new Mock<IFujiFilePickerService>();
         preferencesServiceMock = new Mock<IPreferencesService>();
         configFileServiceMock = new Mock<IConfigFileService>();
         serviceProviderMock = new Mock<IServiceProvider>();
@@ -69,15 +72,16 @@ public class CommandsTestBase
         acsiCommandsMock = new Mock<IAcsiCommands>();
         scsiCommandsMock = new Mock<IScsiCommands>();
         ideCommandsMock = new Mock<IIdeCommands>();
-        
+        crudCommandsMock = new Mock<IToolbarCrudCommands>();
         
         MainViewModel = new MainViewModel(configFileServiceMock.Object, popupNavigationMock.Object,
             serviceProviderMock.Object, preferencesServiceMock.Object,
-            systemsServiceMock.Object, fujiFilePickerMock.Object, logMock.Object,
+            systemsServiceMock.Object, logMock.Object,
             updateServiceMock.Object,
             romCommandsMock.Object, cartridgeCommandsMock.Object, gemdosCommandsMock.Object,
             floppyCommandsMock.Object,
-            acsiCommandsMock.Object, scsiCommandsMock.Object, ideCommandsMock.Object);
+            acsiCommandsMock.Object, scsiCommandsMock.Object, ideCommandsMock.Object,
+            crudCommandsMock.Object);
         MainViewModel.SelectedConfiguration = SelectedConfiguration;
     }
 }

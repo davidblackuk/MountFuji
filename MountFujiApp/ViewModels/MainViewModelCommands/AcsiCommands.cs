@@ -30,16 +30,16 @@ public partial class AcsiCommands : IAcsiCommands
     }
     
     [RelayCommand()]
-    public async Task Browse(MainViewModelItemId item)
+    public async Task Browse(MainViewModelDiskId disk)
     {
         await fujiFilePicker.PickFile("ACSI Disk Image",
             (filename) =>
-                DiskImagePathsExtensions.SetImagePath(item.ViewModel.SelectedConfiguration.AcsiImagePaths, item.Id,
+                DiskImagePathsExtensions.SetImagePath(disk.ViewModel.SelectedConfiguration.AcsiImagePaths, disk.Id,
                     filename),
             preferencesService.Preferences.HardDiskFolder);
     }
 
     [RelayCommand()]
-    public void Clear(MainViewModelItemId item) =>
-        DiskImagePathsExtensions.ClearImagePath(item.ViewModel.SelectedConfiguration.AcsiImagePaths, item.Id);
+    public void Clear(MainViewModelDiskId disk) =>
+        DiskImagePathsExtensions.ClearImagePath(disk.ViewModel.SelectedConfiguration.AcsiImagePaths, disk.Id);
 }

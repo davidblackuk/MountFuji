@@ -16,11 +16,21 @@
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using Mopups.Pages;
 using MountFuji.ViewModels;
 
 namespace MountFuji.Views;
 
-public partial class DeleteSystemPopup 
+public interface IDeleteSystemPopup
+{
+    DeleteSystemPopupViewModel ViewModel { get; }
+
+    event EventHandler Disappearing;
+    
+    PopupPage AsPopUp();
+}
+
+public partial class DeleteSystemPopup : IDeleteSystemPopup
 {
     public DeleteSystemPopupViewModel ViewModel { get; }
     
@@ -29,5 +39,10 @@ public partial class DeleteSystemPopup
         InitializeComponent();
         BindingContext = viewModel;
         ViewModel = viewModel;
+    }
+    
+    public PopupPage AsPopUp()
+    {
+        return this;
     }
 }

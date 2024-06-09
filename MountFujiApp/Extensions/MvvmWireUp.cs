@@ -35,8 +35,8 @@ public static class MvvmWireUp {
         
         AddMainViewModel(services);
 
-        services.AddTransient<NewSystemPopup>();
-        services.AddTransient<NewSystemViewModelViewModel>();
+        services.AddTransient<INewSystemPopup, NewSystemPopup>();
+        services.AddTransient<NewSystemViewModel>();
         
         services.AddTransient<IPreferencesPopup, PreferencesPopup>();
         services.AddTransient<PreferencesPopupViewModel>();
@@ -44,10 +44,10 @@ public static class MvvmWireUp {
         services.AddTransient<FujiFilePickerPopup>();
         services.AddTransient<FujiFilePickerPopupViewModel>();
         
-        services.AddTransient<CloneSystemPopup>();
+        services.AddTransient<ICloneSystemPopup, CloneSystemPopup>();
         services.AddTransient<CloneSystemPopupViewModel>();
         
-        services.AddTransient<DeleteSystemPopup>();
+        services.AddTransient<IDeleteSystemPopup, DeleteSystemPopup>();
         services.AddTransient<DeleteSystemPopupViewModel>();
 
         services.AddTransient<ImportSystemPopup>();
@@ -79,5 +79,6 @@ public static class MvvmWireUp {
         services.AddSingleton<IAcsiCommands, AcsiCommands>();
         services.AddSingleton<IScsiCommands, ScsiCommands>();
         services.AddSingleton<IIdeCommands, IdeCommands>();
+        services.AddTransient<IToolbarCrudCommands, ToolbarCrudMainViewModelCommands>();
     }
 }

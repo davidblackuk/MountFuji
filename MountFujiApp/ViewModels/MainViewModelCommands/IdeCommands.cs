@@ -14,17 +14,17 @@ public partial class IdeCommands : IIdeCommands
     }
     
     [RelayCommand()]
-    private async Task Browse(MainViewModelItemId item)
+    private async Task Browse(MainViewModelDiskId disk)
     {
         await fujiFilePicker.PickFile("IDE Disk Image",
             (filename) =>
-                DiskImagePathsExtensions.SetImagePath(item.ViewModel.SelectedConfiguration.IdeOptions, item.Id,
+                DiskImagePathsExtensions.SetImagePath(disk.ViewModel.SelectedConfiguration.IdeOptions, disk.Id,
                     filename),
             preferencesService.Preferences.HardDiskFolder);
     }
 
     [RelayCommand()]
-    private void Clear(MainViewModelItemId item) =>
-        DiskImagePathsExtensions.ClearImagePath(item.ViewModel.SelectedConfiguration.IdeOptions, item.Id);
+    private void Clear(MainViewModelDiskId disk) =>
+        DiskImagePathsExtensions.ClearImagePath(disk.ViewModel.SelectedConfiguration.IdeOptions, disk.Id);
 
 }

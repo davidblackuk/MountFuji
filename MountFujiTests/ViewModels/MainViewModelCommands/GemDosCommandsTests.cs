@@ -20,11 +20,15 @@ namespace MountFujiTests.ViewModels.MainViewModelCommands;
 
 public class GemDosCommandsTests: CommandsTestBase
 {
+    private Mock<IFujiFilePickerService> fujiFilePickerMock;
+    
     [SetUp]
     public void Setup()
     {
         base.SetupMainViewModelMocks();
+        fujiFilePickerMock = new Mock<IFujiFilePickerService>();
     }
+
 
     [Test]
     public void ClearGemdosFolder_WhenInvoked_ShouldSetTheGemDosFolderValueInTheSelectedConfigurationToEmptyString()

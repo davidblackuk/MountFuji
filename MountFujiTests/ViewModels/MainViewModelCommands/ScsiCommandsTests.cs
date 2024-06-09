@@ -4,11 +4,15 @@ namespace MountFujiTests.ViewModels.MainViewModelCommands;
 
 public class ScsiCommandsTests: CommandsTestBase
 {
+    private Mock<IFujiFilePickerService> fujiFilePickerMock;
+    
     [SetUp]
     public void Setup()
     {
         base.SetupMainViewModelMocks();
+        fujiFilePickerMock = new Mock<IFujiFilePickerService>();
     }
+
     
     [Test]
     public void ClearScsiDiskImage_WhenInvoked_ShouldSetTheSsciImagePathsValueInTheSelectedConfigurationToEmptyString()
@@ -18,7 +22,7 @@ public class ScsiCommandsTests: CommandsTestBase
         var sut = CreateSut();
 
         SelectedConfiguration.ScsiImagePaths.Disk2.Should().Be(expectedValue);
-        sut.ClearCommand.Execute(new MainViewModelItemId { ViewModel = MainViewModel, Id = 2});
+        sut.ClearCommand.Execute(new MainViewModelDiskId { ViewModel = MainViewModel, Id = 2});
 
         SelectedConfiguration.ScsiImagePaths.Disk2.Should().BeEmpty();
     }
@@ -33,7 +37,7 @@ public class ScsiCommandsTests: CommandsTestBase
                 It.IsAny<Action<string>>(), null))
             .Callback((string title, Action<string> action, string x) => action(expectedValue));
 
-        await sut.BrowseCommand.ExecuteAsync(new MainViewModelItemId { ViewModel = MainViewModel, Id = 2});
+        await sut.BrowseCommand.ExecuteAsync(new MainViewModelDiskId { ViewModel = MainViewModel, Id = 2});
 
         SelectedConfiguration.ScsiImagePaths.Disk2.Should().Be(expectedValue); 
     }

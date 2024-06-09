@@ -147,7 +147,7 @@ public partial class IdeCascade : ContentView
 
     private void BrowseHddImage(object sender, EventArgs e)
     {
-        var item = MainViewModelItemId;
+        var item = MainViewModelDiskId;
         if (BrowseDiskImageCommand != null && BrowseDiskImageCommand.CanExecute(item))
         {
             BrowseDiskImageCommand.Execute(item);
@@ -156,7 +156,7 @@ public partial class IdeCascade : ContentView
 
     private void ClearClicked(object sender, EventArgs e)
     {
-        var item = MainViewModelItemId;
+        var item = MainViewModelDiskId;
         if (ClearDiskImageCommand != null && ClearDiskImageCommand.CanExecute(item))
         {
             ClearDiskImageCommand.Execute(item);
@@ -164,6 +164,6 @@ public partial class IdeCascade : ContentView
         }
     }
 
-    private MainViewModelItemId MainViewModelItemId => new MainViewModelItemId { ViewModel = BindingContext as MainViewModel, Id = DiskId };
+    private MainViewModelDiskId MainViewModelDiskId => new MainViewModelDiskId { ViewModel = BindingContext as MainViewModel, Id = DiskId };
 
 }

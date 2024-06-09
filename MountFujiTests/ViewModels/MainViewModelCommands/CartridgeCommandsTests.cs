@@ -20,11 +20,15 @@ namespace MountFujiTests.ViewModels.MainViewModelCommands;
 
 public class CartridgeCommandsTests: CommandsTestBase
 {
+    private Mock<IFujiFilePickerService> fujiFilePickerMock;
+    
     [SetUp]
     public void Setup()
     {
         base.SetupMainViewModelMocks();
+        fujiFilePickerMock = new Mock<IFujiFilePickerService>();
     }
+
     
     [Test]
     public void ClearCartridges_WhenInvoked_ShouldSetTheCartridgeImageValueInTheSelectedConfigurationToEmptyString()

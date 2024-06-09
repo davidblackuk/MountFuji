@@ -8,7 +8,7 @@
              x:DataType="vm:MainViewModel"
              x:Class="MountFuji.Controls.HardDiskCascade">
     <ContentView.Resources>
-        <converters:MainViewModelItemIdConverter x:Key="ModelIdConverter" />
+        <converters:MainViewModelDiskIdConverter x:Key="ModelIdConverter" />
     </ContentView.Resources>
     <ContentView.ControlTemplate>
         <ControlTemplate>

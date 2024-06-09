@@ -18,7 +18,7 @@
 
 namespace MountFujiTests.ViewModels;
 
-public class NewSystemViewModelViewModelTests
+public class NewSystemViewModelTests
 {
     private Mock<IPopupNavigation> popupNavigationMock;
     private Mock<IMachineTemplateService> templateServiceMock;
@@ -134,8 +134,8 @@ public class NewSystemViewModelViewModelTests
     
     
     
-    private NewSystemViewModelViewModel CreateSut()
+    private NewSystemViewModel CreateSut()
     {
-        return new NewSystemViewModelViewModel( templateServiceMock.Object, popupNavigationMock.Object);
+        return new NewSystemViewModel( templateServiceMock.Object, popupNavigationMock.Object);
     }
 }

@@ -7,7 +7,8 @@
              xmlns:vm="clr-namespace:MountFuji.ViewModels"
              x:DataType="vm:MainViewModel"
              x:Class="MountFuji.Controls.ApplicationMenu">
-    <Border Style="{StaticResource Level1Panel}">
+        
+        <Border Style="{StaticResource Level1Panel}">
         <Grid ColumnDefinitions="260,*,40">
 
             <HorizontalStackLayout>
@@ -23,7 +24,8 @@
 
                 <Button VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}"
                         Text="{x:Static controls1:IconFont.Add_circle_outline}"
-                        Command="{Binding CreateNewSystemCommand}" ToolTipProperties.Text="New system" />
+                        Command="{Binding CrudCommands.CreateCommand}"
+                        ToolTipProperties.Text="New system" />
 
                 <Button VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}"
                         Text="{x:Static controls1:IconFont.Arrow_circle_left}"
@@ -35,7 +37,7 @@
                                                    IndicatorColor="LightGreen">
                     <Button VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}"
                             Text="{x:Static controls1:IconFont.Save}"
-                            Command="{Binding SaveSystemsCommand}" ToolTipProperties.Text="Save all systems" />
+                            Command="{Binding CrudCommands.SaveCommand}" ToolTipProperties.Text="Save all systems" />
                 </controls:BasicDisclosureIndicator>
 
                 <Button VerticalOptions="Center" Text="{x:Static controls1:IconFont.Play_circle_outline}"

@@ -16,7 +16,7 @@
 
 namespace MountFuji.ViewModels.MainViewModelCommands;
 
-public class MainViewModelItemId
+public class MainViewModelDiskId
 {
     
     /// <summary>

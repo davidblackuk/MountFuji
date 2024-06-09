@@ -8,7 +8,7 @@
                   xmlns:converters="using:MountFuji.Converters"
                   xmlns:configurationSections="using:MountFuji.Controls.ConfigurationSections"
 				  xmlns:controls1="using:MountFuji.Controls"
-				  x:DataType="vm:NewSystemViewModelViewModel"
+				  x:DataType="vm:NewSystemViewModel"
 
                   x:Class="MountFuji.Views.NewSystemPopup"
                   Title="NewSystemPopup" BackgroundColor="#80000000"  CloseWhenBackgroundIsClicked="False" >

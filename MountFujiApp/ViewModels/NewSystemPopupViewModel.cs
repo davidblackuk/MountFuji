@@ -23,12 +23,12 @@ namespace MountFuji.ViewModels
         bool Confirmed { get; set; }  
     }
     
-    public partial class NewSystemViewModelViewModel: TinyViewModel, IConfirmableViewModel
+    public partial class NewSystemViewModel: TinyViewModel, IConfirmableViewModel
     {
         private readonly IMachineTemplateService templatesService;
         private readonly IPopupNavigation popupNavigation;
 
-        public NewSystemViewModelViewModel(IMachineTemplateService templatesService, IPopupNavigation popupNavigation)
+        public NewSystemViewModel(IMachineTemplateService templatesService, IPopupNavigation popupNavigation)
         {
             this.templatesService = templatesService;
             this.popupNavigation = popupNavigation;

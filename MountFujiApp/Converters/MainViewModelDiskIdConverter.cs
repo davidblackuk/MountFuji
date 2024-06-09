@@ -4,14 +4,14 @@ using MountFuji.ViewModels.MainViewModelCommands;
 
 namespace MountFuji.Converters;
 
-public class MainViewModelItemIdConverter: NaiveConverter, IMultiValueConverter
+public class MainViewModelDiskIdConverter: NaiveConverter, IMultiValueConverter
 {
     public virtual object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
-        MainViewModelItemId res = null;
+        MainViewModelDiskId res = null;
         if (ValuesAllSet(values))
         {
-            res = new MainViewModelItemId()
+            res = new MainViewModelDiskId()
             {
                 ViewModel = (MainViewModel)values[0],
                 Id = (int) values[1],

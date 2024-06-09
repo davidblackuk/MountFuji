@@ -21,22 +21,33 @@ using MountFuji.ViewModels;
 
 namespace MountFuji.Views;
 
+public interface INewSystemPopup
+{
+    NewSystemViewModel ViewModel { get; }
+    event EventHandler Disappearing;
+    PopupPage AsPopUp();
+}
 
-public partial class NewSystemPopup: PopupPage
+public partial class NewSystemPopup: PopupPage, INewSystemPopup
 {
 
-    public NewSystemPopup(NewSystemViewModelViewModel viewModelViewModel)
+    public NewSystemPopup(NewSystemViewModel viewModel)
 	{
 		InitializeComponent();
-        BindingContext = viewModelViewModel;
-        ViewModelViewModel = viewModelViewModel;
+        BindingContext = viewModel;
+        ViewModel = viewModel;
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        ViewModelViewModel.SelectFirstTemplate();
+        ViewModel.SelectFirstTemplate();
     }
 
-    public NewSystemViewModelViewModel ViewModelViewModel { get; }
+    public NewSystemViewModel ViewModel { get; }
+    
+    public PopupPage AsPopUp()
+    {
+        return this;
+    }
 }

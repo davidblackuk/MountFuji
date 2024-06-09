@@ -9,22 +9,23 @@
              x:Class="MountFuji.Controls.SystemSelectorEntry"
              x:DataType="models:AtariConfiguration"
              Padding="10">
+    <HorizontalStackLayout.Resources>
+        <converters:AtariSystemMemorySummaryConverter x:Key="summaryConverter" />
+        <converters:CpuSummaryConverter x:Key="cpuConverter" />
+        <converters:MainViewModelSystemIdConverter x:Key="SystemIdConverter" />
+    </HorizontalStackLayout.Resources>
     <FlyoutBase.ContextFlyout>
         <MenuFlyout>
             <MenuFlyoutItem Text="Clone" 
-                            Command="{Binding CloneSystemCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}}" 
+                            Command="{Binding CrudCommands.CloneCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}}" 
                             CommandParameter="{Binding Id}"/>
             <MenuFlyoutSeparator></MenuFlyoutSeparator>
             <MenuFlyoutItem Text="Delete" 
-                            Command="{Binding DeleteSystemCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}}" 
+                            Command="{Binding CrudCommands.DeleteCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}}" 
                             CommandParameter="{Binding Id}"/>
         </MenuFlyout>
     </FlyoutBase.ContextFlyout>
 
-    <HorizontalStackLayout.Resources>
-        <converters:AtariSystemMemorySummaryConverter x:Key="summaryConverter" />
-        <converters:CpuSummaryConverter x:Key="cpuConverter" />
-    </HorizontalStackLayout.Resources>
     
         <Frame HeightRequest="70"
                WidthRequest="70"

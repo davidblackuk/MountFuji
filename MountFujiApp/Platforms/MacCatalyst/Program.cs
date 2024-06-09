@@ -13,7 +13,7 @@ public class Program
     {
         // TODO: REMOVE ME BEFORE RELEASE!!!!
         // there is a bug in JetBrains Rider, the debugger will not
-        // attach unless we sleep here!
+        // attach unless we sleep here! 
         //if (Debugger.IsAttached) Thread.Sleep(4000);
         
     

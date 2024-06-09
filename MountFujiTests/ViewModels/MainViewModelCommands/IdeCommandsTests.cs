@@ -4,11 +4,15 @@ namespace MountFujiTests.ViewModels.MainViewModelCommands;
 
 public class IdeCommandsTests: CommandsTestBase
 {
+    private Mock<IFujiFilePickerService> fujiFilePickerMock;
+    
     [SetUp]
     public void Setup()
     {
         base.SetupMainViewModelMocks();
+        fujiFilePickerMock = new Mock<IFujiFilePickerService>();
     }
+
     
     [Test]
     public void ClearIdeDiskImage_WhenInvoked_ShouldSetTheIdeImagePathsValueInTheSelectedConfigurationToEmptyString()
@@ -18,7 +22,7 @@ public class IdeCommandsTests: CommandsTestBase
         var sut = CreateSut();
 
         SelectedConfiguration.IdeOptions.Disk1.Should().Be(expectedValue);
-        sut.ClearCommand.Execute(new MainViewModelItemId { ViewModel = MainViewModel, Id = 1});
+        sut.ClearCommand.Execute(new MainViewModelDiskId { ViewModel = MainViewModel, Id = 1});
 
         SelectedConfiguration.IdeOptions.Disk1.Should().BeEmpty();
     }
@@ -33,7 +37,7 @@ public class IdeCommandsTests: CommandsTestBase
                 It.IsAny<Action<string>>(), null))
             .Callback((string title, Action<string> action, string x) => action(expectedValue));
 
-        await sut.BrowseCommand.ExecuteAsync(new MainViewModelItemId { ViewModel = MainViewModel, Id = 1});
+        await sut.BrowseCommand.ExecuteAsync(new MainViewModelDiskId { ViewModel = MainViewModel, Id = 1});
 
         SelectedConfiguration.IdeOptions.Disk1.Should().Be(expectedValue); 
     }

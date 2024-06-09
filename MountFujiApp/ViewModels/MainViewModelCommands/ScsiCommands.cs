@@ -14,18 +14,18 @@ public partial class ScsiCommands : IScsiCommands
     }
     
     [RelayCommand()]
-    private async Task Browse(MainViewModelItemId item)
+    private async Task Browse(MainViewModelDiskId disk)
     {
         await fujiFilePicker.PickFile("SCSI Disk Image",
             (filename) =>
-                DiskImagePathsExtensions.SetImagePath(item.ViewModel.SelectedConfiguration.ScsiImagePaths, item.Id,
+                DiskImagePathsExtensions.SetImagePath(disk.ViewModel.SelectedConfiguration.ScsiImagePaths, disk.Id,
                     filename),
             preferencesService.Preferences.HardDiskFolder);
     }
 
     [RelayCommand()]
-    private void Clear(MainViewModelItemId item) =>
-        DiskImagePathsExtensions.ClearImagePath(item.ViewModel.SelectedConfiguration.ScsiImagePaths, item.Id);
+    private void Clear(MainViewModelDiskId disk) =>
+        DiskImagePathsExtensions.ClearImagePath(disk.ViewModel.SelectedConfiguration.ScsiImagePaths, disk.Id);
 
     
 }

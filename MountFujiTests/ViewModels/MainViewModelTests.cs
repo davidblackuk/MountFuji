@@ -28,33 +28,15 @@ namespace MountFujiTests.ViewModels;
 
 public class MainViewModelTests: CommandsTestBase
 {
+    private Mock<IFujiFilePickerService> fujiFilePickerMock;
     
     [SetUp]
     public void Setup()
     {
-       base.SetupMainViewModelMocks();
+        base.SetupMainViewModelMocks();
+        fujiFilePickerMock = new Mock<IFujiFilePickerService>();
     }
 
-  
-    
-    #region ----- IDE -----
-    
- 
-
-    #endregion
-    
-
-    
-    
-    #region ----- CONTEXT MENU -----
-
-    [Test]
-    public void DeleteSystem_WhenConfirmed_ShouldCallTHeSystemServiceToDeleteTheSystem()
-    {
-        
-    }
-    
-    #endregion
 
     
     #region ----- APPLICATION TOOL BAR -----
@@ -69,15 +51,7 @@ public class MainViewModelTests: CommandsTestBase
         popupNavigationMock.Verify(p => p.PushAsync(It.IsAny<AboutPopup>(), true), Times.Once);
     }
     
-    [Test]
-    public async Task SaveSystemsCommand_WhenExecuted_ShouldCallTheSystemServiceSaveMethod()
-    {
-        var sut = CreateSut();
-
-        await sut.SaveSystemsCommand.ExecuteAsync(null);
-
-        systemsServiceMock.Verify(m => m.Save(), Times.Once());
-    }
+  
 
     [Test]
     public async Task EditPreferences_WhenInvoked_ShouldPushThePopupOnTheNavigationStack()

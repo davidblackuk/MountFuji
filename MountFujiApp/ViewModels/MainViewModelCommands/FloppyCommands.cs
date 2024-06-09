@@ -31,17 +31,17 @@ public partial class FloppyCommands : IFloppyCommands
     
       
     [RelayCommand()]
-    private async Task Browse(MainViewModelItemId item)
+    private async Task Browse(MainViewModelDiskId disk)
     {
         await fujiFilePicker.PickFile("Floppy Disk Image",
-            (filename) => DiskImagePathsExtensions.SetImagePath((FloppyDriveOptions)item.ViewModel.SelectedConfiguration.FloppyOptions,
-                item.Id, filename),
+            (filename) => DiskImagePathsExtensions.SetImagePath((FloppyDriveOptions)disk.ViewModel.SelectedConfiguration.FloppyOptions,
+                disk.Id, filename),
             preferencesService.Preferences.FloppyDiskFolder);
     }
 
     [RelayCommand()]
-    private void Clear(MainViewModelItemId item) =>
-        DiskImagePathsExtensions.ClearImagePath((FloppyDriveOptions)item.ViewModel.SelectedConfiguration.FloppyOptions, item.Id);
+    private void Clear(MainViewModelDiskId disk) =>
+        DiskImagePathsExtensions.ClearImagePath((FloppyDriveOptions)disk.ViewModel.SelectedConfiguration.FloppyOptions, disk.Id);
 
     
 }

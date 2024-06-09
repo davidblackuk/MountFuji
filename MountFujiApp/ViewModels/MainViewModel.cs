@@ -18,10 +18,8 @@
 
 using System.Collections.ObjectModel;
 using AsyncAwaitBestPractices;
-using CommunityToolkit.Maui.Alerts;
 using Microsoft.Extensions.Logging;
 using MountFuji.Controls;
-using MountFuji.Extensions;
 using MountFuji.Services.UpdatesService;
 using MountFuji.ViewModels.MainViewModelCommands;
 using MountFuji.Views;
@@ -37,13 +35,13 @@ public partial class MainViewModel : TinyViewModel
     public IAcsiCommands AcsiCommands { get; set; }
     public IScsiCommands ScsiCommands { get; set;  }
     public IIdeCommands IdeCommands { get; set;  }
+    public IToolbarCrudCommands CrudCommands { get; set;  }
 
     private readonly IConfigFileService configFileService;
     private readonly IPopupNavigation popupNavigation;
     private readonly IServiceProvider serviceProvider;
     private readonly IPreferencesService preferencesService;
     private readonly ISystemsService systemsService;
-    private readonly IFujiFilePickerService fujiFilePicker;
     private readonly ILogger<MainViewModel> log;
     private readonly IAvailableUpdatesService updateService;
     
@@ -52,7 +50,6 @@ public partial class MainViewModel : TinyViewModel
         IServiceProvider serviceProvider,
         IPreferencesService preferencesService,
         ISystemsService systemsService,
-        IFujiFilePickerService fujiFilePicker,
         ILogger<MainViewModel> log,         
         IAvailableUpdatesService updateService,
         IRomCommands romCommands,
@@ -61,7 +58,8 @@ public partial class MainViewModel : TinyViewModel
         IFloppyCommands floppyCommands,
         IAcsiCommands acsiCommands,
         IScsiCommands scsiCommands,
-        IIdeCommands ideCommands
+        IIdeCommands ideCommands,
+        IToolbarCrudCommands crudCommands
         )
     {
         RomCommands = romCommands;
@@ -71,12 +69,12 @@ public partial class MainViewModel : TinyViewModel
         AcsiCommands = acsiCommands;
         ScsiCommands = scsiCommands;
         IdeCommands = ideCommands;
+        CrudCommands = crudCommands;
         this.configFileService = configFileService;
         this.popupNavigation = popupNavigation;
         this.serviceProvider = serviceProvider;
         this.preferencesService = preferencesService;
         this.systemsService = systemsService;
-        this.fujiFilePicker = fujiFilePicker;
         this.log = log;
         this.updateService = updateService;
         
@@ -131,50 +129,7 @@ public partial class MainViewModel : TinyViewModel
     
 
     #region ----- APPLICATION TOOL BAR -----
-    
-    [RelayCommand]
-    private async Task DeleteSystem(string id)
-    {
-        AtariConfiguration system = systemsService.Find(id);
-        if (system is null) return;
 
-        DeleteSystemPopup popup = serviceProvider.GetService<DeleteSystemPopup>();
-        popup.ViewModel.System = system;
-        await popupNavigation.PushAsync(popup);
-
-        popup.Disappearing += (sender, args) =>
-        {
-            if (!popup.ViewModel.Confirmed) return;
-            int currentIndex = Systems.IndexOf(system);
-            int newIndex = currentIndex > 0 ? currentIndex - 1 : 0;
-            systemsService.Delete(system.Id);
-            UpdateSystemsFromService();
-
-            SelectedConfiguration = Systems.Count > 0 ? Systems[newIndex] : AtariConfiguration.Empty;
-        };
-    }
-
-    [RelayCommand]
-    private async Task CloneSystem(string id)
-    {
-        AtariConfiguration system = systemsService.Find(id);
-        if (system is null) return;
-
-
-        CloneSystemPopup popup = serviceProvider.GetService<CloneSystemPopup>();
-        popup.ViewModel.System = system;
-
-        await popupNavigation.PushAsync(popup);
-
-        popup.Disappearing += (sender, args) =>
-        {
-            if (!popup.ViewModel.Confirmed) return;
-            AtariConfiguration clone = systemsService.Clone(system, popup.ViewModel.NewName);
-            UpdateSystemsFromService();
-            SelectedConfiguration = clone;
-        };
-    }
-    
     [RelayCommand]
     private async Task About()
     {
@@ -183,16 +138,7 @@ public partial class MainViewModel : TinyViewModel
         await popupNavigation.PushAsync(popup);
     }
     
-    /// <summary>
-    /// Saves the systems I removed the can execute check as I'm worried that timer based check
-    /// was causing crashes
-    /// </summary>
-    [RelayCommand]
-    private async Task SaveSystems()
-    {
-        await systemsService.Save();
-    }
-    
+
     [RelayCommand]
     private async Task EditPreferences()
     {
@@ -206,23 +152,9 @@ public partial class MainViewModel : TinyViewModel
             RunCommand.NotifyCanExecuteChanged();
         };
     }
-
     
-    [RelayCommand]
-    private async Task CreateNewSystem()
-    {
-        var popup = serviceProvider.GetService<NewSystemPopup>();
-        await popupNavigation.PushAsync(popup);
+    
 
-        popup.Disappearing += (sender, args) =>
-        {
-            if (!popup.ViewModelViewModel.Confirmed) return;
-            var system = popup.ViewModelViewModel.GetConfiguration();
-            systemsService.Add(system);
-            UpdateSystemsFromService();
-            SelectedConfiguration = system;
-        };
-    }
     
     [RelayCommand]
     private async Task ImportHatariConfig()
@@ -293,7 +225,7 @@ public partial class MainViewModel : TinyViewModel
     /// <summary>
     /// Updates the systems in the MainViewModel from the service.
     /// </summary>
-    private void UpdateSystemsFromService()
+    internal void UpdateSystemsFromService()
     {
         Systems.Clear();
         int count = 0;

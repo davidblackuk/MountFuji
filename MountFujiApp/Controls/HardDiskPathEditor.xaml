@@ -9,7 +9,7 @@
 
              x:Class="MountFuji.Controls.HardDiskPathEditor">
     <ContentView.Resources>
-        <converters:MainViewModelItemIdConverter x:Key="ModelIdConverter" />
+        <converters:MainViewModelDiskIdConverter x:Key="ModelIdConverter" />
     </ContentView.Resources>
     <ContentView.ControlTemplate>
         <ControlTemplate>
