@@ -6,40 +6,56 @@
              xmlns:controls1="using:MountFuji.Controls"
              xmlns:vm="clr-namespace:MountFuji.ViewModels"
              x:DataType="vm:MainViewModel"
-             x:Class="MountFuji.Controls.ApplicationMenu"
-             >
-    <Border   Style="{StaticResource Level1Panel}" >
-    <Grid ColumnDefinitions="260,*,40" >
-        
-        <HorizontalStackLayout >
-        <Button  VerticalOptions="Center"  Style="{StaticResource InlineMaterialButton}"  Text="{x:Static controls1:IconFont.Info}" 
-                 Command="{Binding AboutCommand}" ToolTipProperties.Text="About Mount Fuji"/>
+             x:Class="MountFuji.Controls.ApplicationMenu">
+    <Border Style="{StaticResource Level1Panel}">
+        <Grid ColumnDefinitions="260,*,40">
 
-        <Button  VerticalOptions="Center"  Style="{StaticResource InlineMaterialButton}" Text="{x:Static controls1:IconFont.Settings}" 
-                 Command="{Binding EditPreferencesCommand}" ToolTipProperties.Text="Open settings"/>
+            <HorizontalStackLayout>
+                <controls:BasicDisclosureIndicator ToolTipText="An update is available, open the about dialog to view."
+                                                   IndicatorVisible="{Binding UpdateAvailable}">
+                    <Button VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}"
+                            Text="{x:Static controls1:IconFont.Info}"
+                            Command="{Binding AboutCommand}" ToolTipProperties.Text="About Mount Fuji" />
+                </controls:BasicDisclosureIndicator>
+                <Button VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}"
+                        Text="{x:Static controls1:IconFont.Settings}"
+                        Command="{Binding EditPreferencesCommand}" ToolTipProperties.Text="Open settings" />
 
-        <Button  VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}" Text="{x:Static controls1:IconFont.Add_circle_outline}" 
-                 Command="{Binding CreateNewSystemCommand}"  ToolTipProperties.Text="New system"/>
-        
-        <Button  VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}"  Text="{x:Static controls1:IconFont.Arrow_circle_left}" 
-                 Command="{Binding ImportHatariConfigCommand}"  ToolTipProperties.Text="Import Hatari config file"/>
-        
-        <Button  VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}"  Text="{x:Static controls1:IconFont.Save}" 
-                 Command="{Binding SaveSystemsCommand}"  ToolTipProperties.Text="Save all systems"/>
-        
-        <Button  VerticalOptions="Center" Text="{x:Static controls1:IconFont.Play_circle_outline}"  Style="{StaticResource InlineMaterialButton}" Command="{Binding RunCommand}"
-                 ToolTipProperties.Text="Run the selected system"/>
-        </HorizontalStackLayout>
-        
-        <HorizontalStackLayout HorizontalOptions="Center" Grid.Column="1">
-        <Button  VerticalOptions="Center" Text="{x:Static controls1:IconFont.Keyboard}"  Style="{StaticResource InlineMaterialButton}" Command="{Binding OpenGlobalKeyboardConfigPopupCommand}"
-                 ToolTipProperties.Text="Set keyboard options for all systems"/>
-        </HorizontalStackLayout>
-        
-        <Button  VerticalOptions="Center" HorizontalOptions="End" Grid.Column="2" Text="{Binding ThemeIcon }" Style="{StaticResource InlineMaterialButton}" Command="{Binding SwapThemeCommand}"
-                 ToolTipProperties.Text="Run the selected system"/>
+                <Button VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}"
+                        Text="{x:Static controls1:IconFont.Add_circle_outline}"
+                        Command="{Binding CreateNewSystemCommand}" ToolTipProperties.Text="New system" />
 
-        
-    </Grid>
+                <Button VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}"
+                        Text="{x:Static controls1:IconFont.Arrow_circle_left}"
+                        Command="{Binding ImportHatariConfigCommand}"
+                        ToolTipProperties.Text="Import Hatari config file" />
+
+                <controls:BasicDisclosureIndicator ToolTipText="You have unsaved changes."
+                                                   IndicatorVisible="{Binding IsDirty}"
+                                                   IndicatorColor="LightGreen">
+                    <Button VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}"
+                            Text="{x:Static controls1:IconFont.Save}"
+                            Command="{Binding SaveSystemsCommand}" ToolTipProperties.Text="Save all systems" />
+                </controls:BasicDisclosureIndicator>
+
+                <Button VerticalOptions="Center" Text="{x:Static controls1:IconFont.Play_circle_outline}"
+                        Style="{StaticResource InlineMaterialButton}" Command="{Binding RunCommand}"
+                        ToolTipProperties.Text="Run the selected system" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout HorizontalOptions="Center" Grid.Column="1">
+
+                <Button VerticalOptions="Center" Text="{x:Static controls1:IconFont.Keyboard}"
+                        Style="{StaticResource InlineMaterialButton}"
+                        Command="{Binding OpenGlobalKeyboardConfigPopupCommand}"
+                        ToolTipProperties.Text="Set keyboard options for all systems" />
+            </HorizontalStackLayout>
+
+            <Button VerticalOptions="Center" HorizontalOptions="End" Grid.Column="2" Text="{Binding ThemeIcon }"
+                    Style="{StaticResource InlineMaterialButton}" Command="{Binding SwapThemeCommand}"
+                    ToolTipProperties.Text="Run the selected system" />
+
+
+        </Grid>
     </Border>
 </ContentView>

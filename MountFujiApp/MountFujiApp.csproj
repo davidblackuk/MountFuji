@@ -70,6 +70,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="AsyncAwaitBestPractices" Version="7.0.0" />
         <PackageReference Include="CommunityToolkit.Maui" Version="9.0.0" />
         <PackageReference Include="M.BindableProperty.Generator" Version="0.11.1" />
         <PackageReference Include="MetroLog.Maui" Version="2.1.0" />
@@ -133,9 +134,6 @@
       <None Remove="Platforms\Android\Resources\values\colors.xml" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Services\GlobalConfig\" />
-    </ItemGroup>
-    <ItemGroup>
       <EmbeddedResource Update="Properties\Resources.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -166,6 +164,7 @@
     </ItemGroup>
     <PropertyGroup Condition="$(TargetFramework.Contains('-maccatalyst')) and '$(Configuration)' == 'Debug'">
         <CodesignEntitlements>Platforms/MacCatalyst/Entitlements.Debug.plist</CodesignEntitlements>
+        <DefineConstants>TRACE;FORCE_UPDATE_IS_AVAILABLE_</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition="$(TargetFramework.Contains('-maccatalyst')) and '$(Configuration)' == 'Release'">

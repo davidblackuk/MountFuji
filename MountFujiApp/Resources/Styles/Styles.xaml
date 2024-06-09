@@ -617,6 +617,18 @@
         <Setter Property="TextColor"
                 Value="{AppThemeBinding Light={StaticResource MediumEmphasisTextColorLight}, Dark={StaticResource MediumEmphasisTextColorDark}}" />
         <Setter Property="TextDecorations" Value="Underline" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource HighEmphasisTextColorLight}, Dark={StaticResource HighEmphasisTextColorDark}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
     </Style>
 
     <Style TargetType="Label" x:Key="DialogTypeIcon">

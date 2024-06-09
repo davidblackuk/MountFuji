@@ -20,6 +20,7 @@ using System.Configuration;
 using Microsoft.Extensions.Logging;
 using Mopups.Pages;
 using MountFuji;
+using MountFuji.Services.UpdatesService;
 using MountFuji.Views;
 
 namespace MountFujiTests.ViewModels;
@@ -34,6 +35,7 @@ public class MainViewModelTests
     private Mock<IFujiFilePickerService> fujiFilePickerMock;
     private Mock<ILogger<MainViewModel>> logMock;
     private Mock<IAppSelectorStrategy> appSelectorMock;
+    private Mock<IAvailableUpdatesService> updateServiceMock;
     
     private ApplicationPreferences Preferences { get; set; }
     private AtariConfiguration SelectedConfiguration { get; set; }
@@ -52,6 +54,7 @@ public class MainViewModelTests
         Preferences = new ApplicationPreferences();
         SelectedConfiguration = new AtariConfiguration();
         appSelectorMock = new Mock<IAppSelectorStrategy>();
+        updateServiceMock = new Mock<IAvailableUpdatesService>();
         preferencesServiceMock.Setup(x => x.Preferences).Returns(Preferences);
     }
 
@@ -370,7 +373,8 @@ public class MainViewModelTests
     {
         var sut = new MainViewModel(configFileServiceMock.Object, popupNavigationMock.Object,
             serviceProviderMock.Object, preferencesServiceMock.Object,
-            systemsServiceMock.Object, fujiFilePickerMock.Object, logMock.Object);
+            systemsServiceMock.Object, fujiFilePickerMock.Object, logMock.Object,
+            updateServiceMock.Object);
         sut.SelectedConfiguration = SelectedConfiguration;
         return sut;
     }

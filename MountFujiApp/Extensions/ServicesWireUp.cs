@@ -17,6 +17,7 @@
 */
 
 using MountFuji.Services.GlobalConfig;
+using MountFuji.Services.UpdatesService;
 
 namespace MountFuji.Extensions;
 
@@ -40,6 +41,9 @@ public static class ServicesWireUp
         services.AddTransient<IRomService, RomService>();
         services.AddSingleton<ISortcutKeySetter, SortcutKeySetter>();
         services.AddSingleton<IGlobalSystemConfigurationService, GlobalSystemConfigurationService>();
+        services.AddSingleton<IGitHubVersionApi, GitHubVersionApi>();
+        services.AddSingleton<IApplicationVersion, ApplicationVersion>();
+        services.AddSingleton<IAvailableUpdatesService, AvailableUpdatesService>();
     }
 
 }
