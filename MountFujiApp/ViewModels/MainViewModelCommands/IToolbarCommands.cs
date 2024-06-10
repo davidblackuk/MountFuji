@@ -15,4 +15,9 @@ public interface IToolbarCommands
     IAsyncRelayCommand RunCommand { get; }
 
     IAsyncRelayCommand EditPreferencesCommand { get; }
+    
+    IAsyncRelayCommand ImportHatariConfigCommand { get; }
+    
+    IAsyncRelayCommand OpenGlobalKeyboardConfigPopupCommand { get; }
+    
 }

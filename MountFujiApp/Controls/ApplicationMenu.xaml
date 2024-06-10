@@ -30,7 +30,7 @@
 
                 <Button VerticalOptions="Center" Style="{StaticResource InlineMaterialButton}"
                         Text="{x:Static controls1:IconFont.Arrow_circle_left}"
-                        Command="{Binding ImportHatariConfigCommand}"
+                        Command="{Binding ToolbarCommands.ImportHatariConfigCommand}"
                         ToolTipProperties.Text="Import Hatari config file" />
 
                 <controls:BasicDisclosureIndicator ToolTipText="You have unsaved changes."
@@ -50,7 +50,7 @@
 
                 <Button VerticalOptions="Center" Text="{x:Static controls1:IconFont.Keyboard}"
                         Style="{StaticResource InlineMaterialButton}"
-                        Command="{Binding OpenGlobalKeyboardConfigPopupCommand}"
+                        Command="{Binding ToolbarCommands.OpenGlobalKeyboardConfigPopupCommand}"
                         ToolTipProperties.Text="Set keyboard options for all systems" />
             </HorizontalStackLayout>
 

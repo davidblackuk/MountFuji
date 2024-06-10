@@ -162,7 +162,30 @@ public partial class ToolbarCommands: MainViewModelCommandsBase, IToolbarCommand
         };
     }
 
+    [RelayCommand]
+    private async Task ImportHatariConfig()
+    {
+        ImportSystemPopup popup = serviceProvider.GetService<ImportSystemPopup>();
 
+        await popupNavigation.PushAsync(popup);
+
+        popup.Disappearing += async (sender, args) =>
+        {
+            if (!popup.ViewModel.Confirmed) return;
+            AtariConfiguration clone =
+                await systemsService.Import(popup.ViewModel.FileName, popup.ViewModel.DisplayName); 
+            ViewModel.UpdateSystemsFromService();
+            ViewModel.SelectedConfiguration = clone;
+        };
+    }
+    
+    [RelayCommand]
+    private async Task OpenGlobalKeyboardConfigPopup()
+    { 
+        GlobalKeyboardConfigurationPopup popup = serviceProvider.GetService<GlobalKeyboardConfigurationPopup>();
+        await popupNavigation.PushAsync(popup);
+    }
+    
     
     private bool CanRun()
     {

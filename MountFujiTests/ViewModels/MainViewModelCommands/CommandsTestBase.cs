@@ -74,9 +74,9 @@ public class CommandsTestBase
         ideCommandsMock = new Mock<IIdeCommands>();
         crudCommandsMock = new Mock<IToolbarCommands>();
         
-        MainViewModel = new MainViewModel(configFileServiceMock.Object, popupNavigationMock.Object,
+        MainViewModel = new MainViewModel( popupNavigationMock.Object,
             serviceProviderMock.Object, preferencesServiceMock.Object,
-            systemsServiceMock.Object, logMock.Object,
+            systemsServiceMock.Object, 
             updateServiceMock.Object,
             romCommandsMock.Object, cartridgeCommandsMock.Object, gemdosCommandsMock.Object,
             floppyCommandsMock.Object,

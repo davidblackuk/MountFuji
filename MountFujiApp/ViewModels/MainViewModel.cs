@@ -37,20 +37,17 @@ public partial class MainViewModel : TinyViewModel
     public IIdeCommands IdeCommands { get; set;  }
     public IToolbarCommands ToolbarCommands { get; set;  }
 
-    private readonly IConfigFileService configFileService;
     private readonly IPopupNavigation popupNavigation;
     private readonly IServiceProvider serviceProvider;
     private readonly IPreferencesService preferencesService;
     private readonly ISystemsService systemsService;
-    private readonly ILogger<MainViewModel> log;
     private readonly IAvailableUpdatesService updateService;
     
-    public MainViewModel(IConfigFileService configFileService,
+    public MainViewModel(
         IPopupNavigation popupNavigation,
         IServiceProvider serviceProvider,
         IPreferencesService preferencesService,
         ISystemsService systemsService,
-        ILogger<MainViewModel> log,         
         IAvailableUpdatesService updateService,
         
         IRomCommands romCommands,
@@ -71,12 +68,10 @@ public partial class MainViewModel : TinyViewModel
         ScsiCommands = scsiCommands;
         IdeCommands = ideCommands;
         ToolbarCommands = toolbarCommands;
-        this.configFileService = configFileService;
         this.popupNavigation = popupNavigation;
         this.serviceProvider = serviceProvider;
         this.preferencesService = preferencesService;
         this.systemsService = systemsService;
-        this.log = log;
         this.updateService = updateService;
         
         UpdateSystemsFromService();
@@ -133,30 +128,7 @@ public partial class MainViewModel : TinyViewModel
 
    
 
-    [RelayCommand]
-    private async Task ImportHatariConfig()
-    {
-        ImportSystemPopup popup = serviceProvider.GetService<ImportSystemPopup>();
-
-        await popupNavigation.PushAsync(popup);
-
-        popup.Disappearing += async (sender, args) =>
-        {
-            if (!popup.ViewModel.Confirmed) return;
-           AtariConfiguration clone =
-                await systemsService.Import(popup.ViewModel.FileName, popup.ViewModel.DisplayName); 
-            UpdateSystemsFromService();
-            SelectedConfiguration = clone;
-        };
-    }
-    
-    [RelayCommand]
-    private async Task OpenGlobalKeyboardConfigPopup()
-    { 
-        GlobalKeyboardConfigurationPopup popup = serviceProvider.GetService<GlobalKeyboardConfigurationPopup>();
-        await popupNavigation.PushAsync(popup);
-    }
-    
+   
     [RelayCommand]
     private Task Reordered()
     {
