@@ -1,6 +1,6 @@
 namespace MountFuji.ViewModels.MainViewModelCommands;
 
-public interface IToolbarCrudCommands
+public interface IToolbarCommands
 {
     IAsyncRelayCommand<string> CloneCommand { get; }
 

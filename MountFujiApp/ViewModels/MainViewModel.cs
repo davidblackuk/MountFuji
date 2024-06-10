@@ -35,7 +35,7 @@ public partial class MainViewModel : TinyViewModel
     public IAcsiCommands AcsiCommands { get; set; }
     public IScsiCommands ScsiCommands { get; set;  }
     public IIdeCommands IdeCommands { get; set;  }
-    public IToolbarCrudCommands CrudCommands { get; set;  }
+    public IToolbarCommands ToolbarCommands { get; set;  }
 
     private readonly IConfigFileService configFileService;
     private readonly IPopupNavigation popupNavigation;
@@ -60,7 +60,7 @@ public partial class MainViewModel : TinyViewModel
         IAcsiCommands acsiCommands,
         IScsiCommands scsiCommands,
         IIdeCommands ideCommands,
-        IToolbarCrudCommands crudCommands
+        IToolbarCommands toolbarCommands
         )
     {
         RomCommands = romCommands;
@@ -70,7 +70,7 @@ public partial class MainViewModel : TinyViewModel
         AcsiCommands = acsiCommands;
         ScsiCommands = scsiCommands;
         IdeCommands = ideCommands;
-        CrudCommands = crudCommands;
+        ToolbarCommands = toolbarCommands;
         this.configFileService = configFileService;
         this.popupNavigation = popupNavigation;
         this.serviceProvider = serviceProvider;
@@ -121,7 +121,7 @@ public partial class MainViewModel : TinyViewModel
             SelectedConfiguration = Systems.First();
         }
 
-        CrudCommands.RunCommand.NotifyCanExecuteChanged();
+        ToolbarCommands.RunCommand.NotifyCanExecuteChanged();
 
         SetupSingleShotTimer();
         SetupIsDirtyTimer();

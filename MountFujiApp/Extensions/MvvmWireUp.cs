@@ -79,6 +79,6 @@ public static class MvvmWireUp {
         services.AddSingleton<IAcsiCommands, AcsiCommands>();
         services.AddSingleton<IScsiCommands, ScsiCommands>();
         services.AddSingleton<IIdeCommands, IdeCommands>();
-        services.AddTransient<IToolbarCrudCommands, ApplicationBarCrudCommands>();
+        services.AddTransient<IToolbarCommands, ToolbarCommands>();
     }
 }

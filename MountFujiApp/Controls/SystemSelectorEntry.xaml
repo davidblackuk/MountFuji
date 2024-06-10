@@ -17,11 +17,11 @@
     <FlyoutBase.ContextFlyout>
         <MenuFlyout>
             <MenuFlyoutItem Text="Clone" 
-                            Command="{Binding CrudCommands.CloneCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}}" 
+                            Command="{Binding ToolbarCommands.CloneCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}}" 
                             CommandParameter="{Binding Id}"/>
             <MenuFlyoutSeparator></MenuFlyoutSeparator>
             <MenuFlyoutItem Text="Delete" 
-                            Command="{Binding CrudCommands.DeleteCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}}" 
+                            Command="{Binding ToolbarCommands.DeleteCommand, Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}}" 
                             CommandParameter="{Binding Id}"/>
         </MenuFlyout>
     </FlyoutBase.ContextFlyout>

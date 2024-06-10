@@ -42,7 +42,7 @@ public class CommandsTestBase
     protected Mock<IAcsiCommands> acsiCommandsMock;
     protected Mock<IScsiCommands> scsiCommandsMock;
     protected Mock<IIdeCommands> ideCommandsMock;
-    protected Mock<IToolbarCrudCommands> crudCommandsMock;
+    protected Mock<IToolbarCommands> crudCommandsMock;
     
     protected MainViewModel MainViewModel { get; set; }
 #pragma warning restore CS8618
@@ -72,7 +72,7 @@ public class CommandsTestBase
         acsiCommandsMock = new Mock<IAcsiCommands>();
         scsiCommandsMock = new Mock<IScsiCommands>();
         ideCommandsMock = new Mock<IIdeCommands>();
-        crudCommandsMock = new Mock<IToolbarCrudCommands>();
+        crudCommandsMock = new Mock<IToolbarCommands>();
         
         MainViewModel = new MainViewModel(configFileServiceMock.Object, popupNavigationMock.Object,
             serviceProviderMock.Object, preferencesServiceMock.Object,

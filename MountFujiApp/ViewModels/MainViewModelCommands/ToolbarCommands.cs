@@ -6,7 +6,7 @@ namespace MountFuji.ViewModels.MainViewModelCommands;
 /// <summary>
 /// Application toolbar commands for CRUD operations on systems.
 /// </summary>
-public partial class ApplicationBarCrudCommands: MainViewModelCommandsBase, IToolbarCrudCommands
+public partial class ToolbarCommands: MainViewModelCommandsBase, IToolbarCommands
 {
     private readonly ISystemsService systemsService;
     private readonly IPopupNavigation popupNavigation;
@@ -24,7 +24,7 @@ public partial class ApplicationBarCrudCommands: MainViewModelCommandsBase, IToo
     /// <param name="preferencesService">The preferences service to persist system paths etc.</param>
     /// <param name="configFileService">The config file service for saving to hatari.cfg</param>
     /// <param name="log">Q logger to log to.</param>
-    public ApplicationBarCrudCommands(ISystemsService systemsService,  
+    public ToolbarCommands(ISystemsService systemsService,  
         IPopupNavigation popupNavigation,  
         IServiceProvider serviceProvider,
         IPreferencesService preferencesService,

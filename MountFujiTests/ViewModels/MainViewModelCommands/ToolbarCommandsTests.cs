@@ -21,7 +21,7 @@ using MountFuji.Views;
 
 namespace MountFujiTests.ViewModels.MainViewModelCommands;
 
-public class ApplicationBarCrudCommandsTests: CommandsTestBase
+public class ToolbarCommandsTests: CommandsTestBase
 {
     private Mock<ISystemsService> systemsServiceMock;
     private Mock<IPopupNavigation> popupNavigationMock;
@@ -294,11 +294,11 @@ public class ApplicationBarCrudCommandsTests: CommandsTestBase
         popupNavigationMock.Verify(p => p.PushAsync(It.IsAny<AboutPopup>(), true), Times.Once);
     }
     
-    private ApplicationBarCrudCommands CreateSut()
+    private ToolbarCommands CreateSut()
     {
-        var sut = new ApplicationBarCrudCommands(systemsServiceMock.Object, popupNavigationMock.Object, 
+        var sut = new ToolbarCommands(systemsServiceMock.Object, popupNavigationMock.Object, 
             serviceProviderMock.Object, preferencesServiceMock.Object, configFileServiceMock.Object, logMock.Object);
-        MainViewModel.CrudCommands = sut;
+        MainViewModel.ToolbarCommands = sut;
         return sut;
     }
  
