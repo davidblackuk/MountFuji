@@ -1,0 +1,274 @@
+﻿//
+// Copyright (C) 2024  David Black
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY// without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+//
+
+#ifndef _DATAFILES_ISH_
+#define _DATAFILES_ISH_
+
+; Configuration file migration and creation details
+#define PreferencesFileName             "preferences.json"
+#define SystemsFileName                 "systems.json"
+#define HatariApplicationPropertyPath   "/HatariApplication"
+#define LocalPckagesFolder              "{localappdata}\Packages"
+#define PackagedMountFujiBaseFolderMask "com.overtakenbyevents.mountfuji_*"
+#define PackagedMountFujiDataFolder     "LocalState\fuji"
+#define UnpackagedMountFujiDataFolder   "{userappdata}\David Black\com.overtakenbyevents.mountfuji\Data\fuji"
+
+; For file attribute support
+#include "FileAttr.ish"
+
+; For JSON support
+#include "JsonConfig.ish"
+
+[Files]
+Source: "..\Assets\{#PreferencesFileName}"; DestDir: "{tmp}"; Flags: dontcopy;
+
+[Code]
+const
+  COPY_FILE_ALLOW_DECRYPTED_DESTINATION = $00000008;
+function GetLastError: Cardinal;
+  external 'GetLastError@kernel32.dll stdcall';
+// This is required to copy existing data files from a previous installation of the MSIX-packaged app, since they are stored encrypted
+function CopyFileEx(ExistingFileName, NewFileName: WideString; pProgressRoutine, pData, pbCancel: Longword; CopyFlags: DWORD): Boolean;
+  external 'CopyFileExW@kernel32.dll stdcall';
+
+// This function produces a list of any existing MSIX-packaged app data folders
+// If any are found, it adds their pathnames to the Folders string list and returns true, otherwise it returns false.
+function FindPackagedDataFolders(var Folders: TStringList): Boolean;
+var
+  PackagesFolder: WideString;
+  FindRec: TFindRec;
+  SubFolder: WideString;
+  SubFindRec: TFindRec;
+begin
+  // Assume failure
+  Result := false;
+
+  // If there are any matches to the MSIX-packaged app base folder mask... 
+  PackagesFolder := ExpandConstant('{#LocalPckagesFolder}');
+  if FindFirst(PackagesFolder + '\' + '{#PackagedMountFujiBaseFolderMask}', FindRec) then
+  try
+    // Keep looking for more until none are found... 
+    repeat
+      // If it is a directory... 
+      if FindRec.Attributes and FILE_ATTRIBUTE_DIRECTORY = FILE_ATTRIBUTE_DIRECTORY then
+      begin
+        // If the folder has a proper data subfolder... 
+        SubFolder := PackagesFolder + '\' + FindRec.Name + '\' + '{#PackagedMountFujiDataFolder}';
+        if FindFirst(SubFolder, SubFindRec) then
+        begin
+          try
+            if SubFindRec.Attributes and FILE_ATTRIBUTE_DIRECTORY = FILE_ATTRIBUTE_DIRECTORY then
+            begin
+              // Add it to the list and indicate success. 
+              Result := true;
+              Folders.Add(SubFolder);
+            end;
+          finally
+            FindClose(SubFindRec);
+          end;
+        end;
+      end;
+    until not FindNext(FindRec);
+  finally
+    FindClose(FindRec);
+  end;
+end;
+
+// This function determines if there are any relevant data files in the given folder.
+// If so, it adds their pathnames to the Files string list and returns true, otherwise it returns false.
+function FindDataFiles(Folder: WideString; var Files: TStringList): Boolean;
+var
+  FileName: WideString;
+  FindRec: TFindRec;
+begin
+  // Assume failure
+  Result := false;
+
+  // Look for the preferences file
+  FileName := Folder + '\' + '{#PreferencesFileName}';
+  if FindFirst(FileName, FindRec) then
+  begin
+    Files.Add(FileName);
+    Result := true;
+    FindClose(FindRec);
+  end;
+
+  // Look for the systems file
+  FileName := Folder + '\' + '{#SystemsFileName}';
+  if FindFirst(FileName, FindRec) then
+  begin
+    Files.Add(FileName);
+    Result := true;
+    FindClose(FindRec);
+  end;
+end;
+
+// This function determines if there are existing data files from an old MSIX-packaged version of the app.
+// If so, it adds their pathnames to the DataFiles string list and returns true, otherwise it returns false.
+function PackagedDataExists(var DataFiles: TStringList): Boolean;
+var
+  Folders: TStringList;
+  I: Integer;
+begin
+  // Assume failure
+  Result := false;
+
+  // Look for any MSIX-packaged app folders.  If found...
+  Folders := TStringList.Create;
+  if FindPackagedDataFolders(Folders) then
+  begin
+    // For each folder found...
+    for I := 0 to Folders.Count - 1 do
+      // If the folder contains any data files, add them to the list and indicate success
+      if FindDataFiles(Folders[0], DataFiles) then
+        Result := true;
+  end;
+end;
+
+// This function determines if there are existing data files from a previous non-packaged version of the app.
+// If so, it adds their pathnames to the DataFiles string list and returns true, otherwise it returns false.
+// In addition, if the preferences file exists, the Preferences boolean value it set to true, otherwise it is set to false.
+function NonPackagedDataExists(var Preferences: Boolean; var DataFiles: TStringList): Boolean;
+var
+  Folder: WideString;
+  I: Integer;
+begin
+  // Assume failure
+  Result := false;
+  Preferences := false;
+
+  // Find any data files in the unpackaged app data folder and capture their pathnames.  If any found...
+  Folder := ExpandConstant('{#UnpackagedMountFujiDataFolder}');
+  if FindDataFiles(Folder, DataFiles) then
+  begin
+    // Indicate some were found
+    Result := true;
+    // Determine if the preferences file was located
+    for I := 0 to DataFiles.Count - 1 do
+    begin
+      if CompareText(ExtractFileName(DataFiles[I]), '{#PreferencesFileName}') = 0 then
+      begin
+        Preferences := true;
+        exit;
+      end;
+    end;
+  end;
+end;
+
+// This function finds the newest preferences data file in the supplied DataFiles string list.
+// If found, it returns true and sets NewestFile to the pathname of the newest file, otherwise it returns false.
+function GetNewestPreferencesDataFile(DataFiles: TStringList; var NewestFile: WideString): Boolean;
+begin
+  Result := GetNewestFile(DataFiles, '{#PreferencesFileName}', NewestFile);
+end;
+
+// This function finds the newest systems data file in the supplied DataFiles string list.
+// If found, it returns true and sets NewestFile to the pathname of the newest file, otherwise it returns false.
+function GetNewestSystemsDataFile(DataFiles: TStringList; var NewestFile: WideString): Boolean;
+begin
+  Result := GetNewestFile(DataFiles, '{#SystemsFileName}', NewestFile);
+end;
+
+// This function gathers data files from any previous installation and puts them in the non-packaged data files folder.
+// Previous non-packaged data files always take precedence over previous MSIX-packaged data files.
+// If a previous preferences data file was not found, a new one is copied to the non-packaged data files folder.
+// If any previous data files were found, it returns true, otherwise, it returns false.
+function GatherPreviousDataFiles: Boolean;
+var
+  DataFiles: TStringList;
+  DataFolder: WideString;
+  Preferences: Boolean;
+  FileName: WideString;
+  NewFileName: WideString;
+  Message: WideString;
+begin
+  // Create a string list
+  DataFiles := TStringList.Create;
+
+  // Get the non-packaged app data folder path
+  DataFolder := ExpandConstant('{#UnpackagedMountFujiDataFolder}');
+
+  // Make sure the folder exists
+  ForceDirectories(DataFolder);
+
+  // If non-packaged app data files do not exist...
+  Result := NonPackagedDataExists(Preferences, DataFiles)
+  if not Result then
+  begin
+    // If any MSIS-packaged app data files exist...
+    Result := PackagedDataExists(DataFiles);
+    if Result then
+    begin
+      // Copy the newest preferences file, if it exists, to the data folder
+      if GetNewestPreferencesDataFile(DataFiles, FileName) then
+      begin
+        NewFileName := DataFolder + '\' + ExtractFileName(FileName);
+        // Indicate a preferences data file exists if the file is successfully copied
+        Preferences := CopyFileEx(FileName, NewFileName, 0, 0, 0, COPY_FILE_ALLOW_DECRYPTED_DESTINATION);
+        if not Preferences then
+        begin
+          Message := 'Copy of "' + FileName + '" to "' + NewFileName + '" failed: ' + SysErrorMessage(GetLastError);
+          MsgBox(Message, mbError, MB_OK);
+        end;
+      end;
+      // Copy the newest systems file, if it exists, to the data folder
+      if GetNewestSystemsDataFile(DataFiles, FileName) then
+      begin
+        NewFileName := DataFolder + '\' + ExtractFileName(FileName);
+        if not CopyFileEx(FileName, NewFileName, 0, 0, 0, COPY_FILE_ALLOW_DECRYPTED_DESTINATION) then
+        begin
+          Message := 'Copy of "' + FileName + '" to "' + NewFileName + '" failed: ' + SysErrorMessage(GetLastError);
+          MsgBox(Message, mbError, MB_OK);
+        end;
+      end;
+    end;
+  end;
+
+  // If no preferences file was found or copied...
+  if not Preferences then
+  begin
+    // Extract a blank preferences file from the temp data folder and get its file name
+    ExtractTemporaryFile('{#PreferencesFileName}');
+    FileName := ExpandConstant('{tmp}\{#PreferencesFileName}');
+    NewFileName := DataFolder + '\' + '{#PreferencesFileName}';
+    // Copy it to the non-packaged app data folder
+    if not CopyFileEx(FileName, NewFileName, 0, 0, 0, COPY_FILE_ALLOW_DECRYPTED_DESTINATION) then
+    begin
+      Message := 'Copy of "' + FileName + '" to "' + NewFileName + '" failed: ' + SysErrorMessage(GetLastError);
+      MsgBox(Message, mbError, MB_OK);
+    end;
+  end;
+
+end;
+
+// This function modifies the HatariApplication property of the preferences data file with the supplied Value string.
+// If the preferences data file was successfully updated, it returns true, otherwise it returns false.
+function UpdateHatariApplicationProperty(Value: WideString): Boolean;
+var
+  DataFolder: WideString;
+  FileName: WideString;
+begin
+  // Get the non-packaged app data folder path
+  DataFolder := ExpandConstant('{#UnpackagedMountFujiDataFolder}');
+  // Get the full pathname of the preferences file
+  FileName := DataFolder + '\' + '{#PreferencesFileName}';
+  // Write the property to the file
+  Result := JsonWriteString(FileName, '{#HatariApplicationPropertyPath}', Value);
+end;
+[/Code]
+
+#endif
