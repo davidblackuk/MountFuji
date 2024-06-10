@@ -14,19 +14,26 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+using Microsoft.Extensions.Logging;
 using Mopups.Pages;
 using MountFuji.ViewModels.MainViewModelCommands;
 using MountFuji.Views;
 
 namespace MountFujiTests.ViewModels.MainViewModelCommands;
 
-public class ToolbarCrudMainViewModelCommandsTests: CommandsTestBase
+public class ApplicationBarCrudCommandsTests: CommandsTestBase
 {
     private Mock<ISystemsService> systemsServiceMock;
     private Mock<IPopupNavigation> popupNavigationMock;
     private Mock<IServiceProvider> serviceProviderMock;
     private Mock<IMachineTemplateService> templatesServiceMock;
-        
+    private Mock<IPreferencesService> preferencesServiceMock;
+    private Mock<IConfigFileService> configFileServiceMock;
+    private Mock<ILogger<MainViewModel>> logMock;
+    private Mock<IFujiFilePickerService> filePickerMock;
+    
+    
+    
     [SetUp]
     public void Setup()
     {
@@ -35,6 +42,10 @@ public class ToolbarCrudMainViewModelCommandsTests: CommandsTestBase
         popupNavigationMock = new Mock<IPopupNavigation>();
         serviceProviderMock = new Mock<IServiceProvider>();
         templatesServiceMock = new Mock<IMachineTemplateService>();
+        preferencesServiceMock = new Mock<IPreferencesService>();
+        configFileServiceMock = new Mock<IConfigFileService>();
+        logMock = new Mock<ILogger<MainViewModel>>();
+        filePickerMock = new Mock<IFujiFilePickerService>();
     }
 
     [Test]
@@ -274,13 +285,79 @@ public class ToolbarCrudMainViewModelCommandsTests: CommandsTestBase
         newSystemPopup.Raise(pp => pp.Disappearing += null, EventArgs.Empty);
         systemsServiceMock.Verify(s => s.Add(It.IsAny<AtariConfiguration>()), Times.Never);        
     }
-
     
-    private ToolbarCrudMainViewModelCommands CreateSut()
+    [Test]
+    public async Task About_WhenInvoked_ShouldGetThePopupAndPushIt()
     {
-        var sut = new ToolbarCrudMainViewModelCommands(systemsServiceMock.Object, popupNavigationMock.Object, serviceProviderMock.Object);
+
+        await CreateSut().AboutCommand.ExecuteAsync(null);
+        popupNavigationMock.Verify(p => p.PushAsync(It.IsAny<AboutPopup>(), true), Times.Once);
+    }
+    
+    private ApplicationBarCrudCommands CreateSut()
+    {
+        var sut = new ApplicationBarCrudCommands(systemsServiceMock.Object, popupNavigationMock.Object, 
+            serviceProviderMock.Object, preferencesServiceMock.Object, configFileServiceMock.Object, logMock.Object);
         MainViewModel.CrudCommands = sut;
         return sut;
     }
+ 
+        
+    [Test]
+    public async Task EditPreferences_WhenInvoked_ShouldPushThePopupOnTheNavigationStack()
+    {
+        var prefsPopupMock = new Mock<IPreferencesPopup>();
+        serviceProviderMock.Setup(s => s.GetService(typeof(IPreferencesPopup))).Returns(prefsPopupMock.Object);
+        
+        var sut = CreateSut();
+        
+        await sut.EditPreferencesCommand.ExecuteAsync(null);
+        
+        popupNavigationMock.Verify(n => n.PushAsync(It.IsAny<PopupPage>(), true), Times.Once);
+    }
+
+    [Test]
+    public async Task EditPreferences_WhenNotConfirmed_ShouldNotSave()
+    {
+        var prefsPopupMock = new Mock<IPreferencesPopup>();
+
+        var prefsPopupViewModel = new PreferencesPopupViewModel(preferencesServiceMock.Object, popupNavigationMock.Object,
+            filePickerMock.Object, appSelectorMock.Object);
+       
+        prefsPopupMock.SetupGet(p => p.ViewModel).Returns(prefsPopupViewModel);
+        
+        serviceProviderMock.Setup(s => s.GetService(typeof(IPreferencesPopup))).Returns(prefsPopupMock.Object);
+        
+        var sut = CreateSut();
+        
+        await sut.EditPreferencesCommand.ExecuteAsync(null);
+        
+        prefsPopupMock.Raise(pp => pp.Disappearing += null, EventArgs.Empty);
+        preferencesServiceMock.Verify(p => p.SaveAsync(), Times.Never);
+    }
+
     
+    [Test]
+    public async Task EditPreferences_WhenConfirmed_ShouldStoreThePreferencesViaTheService()
+    {
+        var prefsPopupMock = new Mock<IPreferencesPopup>();
+
+        var prefsPopupViewModel = new PreferencesPopupViewModel(preferencesServiceMock.Object, popupNavigationMock.Object,
+            filePickerMock.Object, appSelectorMock.Object);
+        prefsPopupViewModel.Confirmed = true;
+        
+        prefsPopupMock.SetupGet(p => p.ViewModel).Returns(prefsPopupViewModel);
+        
+        serviceProviderMock.Setup(s => s.GetService(typeof(IPreferencesPopup))).Returns(prefsPopupMock.Object);
+        
+        var sut = CreateSut();
+        
+        await sut.EditPreferencesCommand.ExecuteAsync(null);
+        
+        prefsPopupMock.Raise(pp => pp.Disappearing += null, EventArgs.Empty);
+        preferencesServiceMock.Verify(p => p.SaveAsync(), Times.Once);
+
+        
+    }
+   
 }

@@ -52,6 +52,7 @@ public partial class MainViewModel : TinyViewModel
         ISystemsService systemsService,
         ILogger<MainViewModel> log,         
         IAvailableUpdatesService updateService,
+        
         IRomCommands romCommands,
         ICartridgeCommands cartridgeCommands,
         IGemdosCommands gemdosCommands,
@@ -120,7 +121,7 @@ public partial class MainViewModel : TinyViewModel
             SelectedConfiguration = Systems.First();
         }
 
-        RunCommand.NotifyCanExecuteChanged();
+        CrudCommands.RunCommand.NotifyCanExecuteChanged();
 
         SetupSingleShotTimer();
         SetupIsDirtyTimer();
@@ -130,32 +131,8 @@ public partial class MainViewModel : TinyViewModel
 
     #region ----- APPLICATION TOOL BAR -----
 
-    [RelayCommand]
-    private async Task About()
-    {
-        AboutPopup popup = serviceProvider.GetService<AboutPopup>();
+   
 
-        await popupNavigation.PushAsync(popup);
-    }
-    
-
-    [RelayCommand]
-    private async Task EditPreferences()
-    {
-        var popup = serviceProvider.GetService<IPreferencesPopup>();
-        await popupNavigation.PushAsync(popup.AsPopUp());
-
-        popup.Disappearing += async (sender, args) =>
-        {
-            if (!popup.ViewModel.Confirmed) return;
-            await preferencesService.SaveAsync();
-            RunCommand.NotifyCanExecuteChanged();
-        };
-    }
-    
-    
-
-    
     [RelayCommand]
     private async Task ImportHatariConfig()
     {
@@ -172,18 +149,7 @@ public partial class MainViewModel : TinyViewModel
             SelectedConfiguration = clone;
         };
     }
-
-    [RelayCommand(CanExecute = nameof(CanRun))]
-    private async Task Run()
-    {
-        await configFileService.Save(SelectedConfiguration);
-        
-        var app = preferencesService.Preferences.HatariApplication;
-        var applicationUrl = $"file://{app}";
-        log.LogInformation("Launching application: {Url}", applicationUrl);
-        await Launcher.Default.OpenAsync(applicationUrl);
-    }
-
+    
     [RelayCommand]
     private async Task OpenGlobalKeyboardConfigPopup()
     { 
@@ -205,18 +171,7 @@ public partial class MainViewModel : TinyViewModel
         OnPropertyChanged(nameof(ThemeIcon));
     }
     
-    private bool CanRun()
-    {
-        if (string.IsNullOrWhiteSpace(preferencesService.Preferences.HatariApplication) ||
-            string.IsNullOrWhiteSpace(preferencesService.Preferences.HatariConfigFile) ||
-            SelectedConfiguration is null ||
-            string.IsNullOrWhiteSpace(SelectedConfiguration.RomImage))
-        {
-            return false;
-        }
-
-        return true;
-    }
+   
     
     #endregion 
     

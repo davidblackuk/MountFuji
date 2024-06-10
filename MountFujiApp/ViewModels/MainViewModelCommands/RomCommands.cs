@@ -42,7 +42,7 @@ public partial class RomCommands : IRomCommands
     private void Clear(MainViewModel viewModel)
     {
         viewModel.SelectedConfiguration.RomImage = String.Empty;
-        viewModel.RunCommand.NotifyCanExecuteChanged();
+        viewModel.CrudCommands.RunCommand.NotifyCanExecuteChanged();
     }
     
     [RelayCommand()]
@@ -51,7 +51,7 @@ public partial class RomCommands : IRomCommands
         await fujiFilePicker.PickFile("ROM Image", (filename) =>
             {
                 viewModel.SelectedConfiguration.RomImage = filename;
-                viewModel.RunCommand.NotifyCanExecuteChanged();
+                viewModel.CrudCommands.RunCommand.NotifyCanExecuteChanged();
             },
             preferencesService.Preferences.RomFolder);
     }
@@ -68,7 +68,7 @@ public partial class RomCommands : IRomCommands
             if (!popup.ViewModel.Confirmed) return;
             Rom rom = popup.ViewModel.SelectedRom;
             viewModel.SelectedConfiguration.RomImage = rom!.Path;
-            viewModel.RunCommand.NotifyCanExecuteChanged();
+            viewModel.CrudCommands.RunCommand.NotifyCanExecuteChanged();
             log.LogInformation("Rom Selected via the ROM Picker {ROM}", rom);
         };
     }

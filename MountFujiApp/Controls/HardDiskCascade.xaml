@@ -7,9 +7,6 @@
              xmlns:converters="using:MountFuji.Converters"
              x:DataType="vm:MainViewModel"
              x:Class="MountFuji.Controls.HardDiskCascade">
-    <ContentView.Resources>
-        <converters:MainViewModelDiskIdConverter x:Key="ModelIdConverter" />
-    </ContentView.Resources>
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <Grid Grid.ColumnDefinitions="40, 80, 40,*,40,40" RowDefinitions="*,*" Margin="0,10,0,0">

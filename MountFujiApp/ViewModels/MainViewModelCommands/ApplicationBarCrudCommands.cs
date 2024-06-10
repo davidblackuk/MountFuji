@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using MountFuji.Views;
 
 namespace MountFuji.ViewModels.MainViewModelCommands;
@@ -5,25 +6,38 @@ namespace MountFuji.ViewModels.MainViewModelCommands;
 /// <summary>
 /// Application toolbar commands for CRUD operations on systems.
 /// </summary>
-public partial class ToolbarCrudMainViewModelCommands: MainViewModelCommandsBase, IToolbarCrudCommands
+public partial class ApplicationBarCrudCommands: MainViewModelCommandsBase, IToolbarCrudCommands
 {
     private readonly ISystemsService systemsService;
     private readonly IPopupNavigation popupNavigation;
     private readonly IServiceProvider serviceProvider;
-    
+    private readonly IPreferencesService preferencesService;
+    private readonly IConfigFileService configFileService;
+    private readonly ILogger<MainViewModel> log;
+
     /// <summary>
     /// Application toolbar commands for CRUD operations on systems.
     /// </summary>
     /// <param name="systemsService">The system service for operations</param>
     /// <param name="popupNavigation">popup navigation servicde</param>
     /// <param name="serviceProvider">A service provider to source our popup views from</param>
-    public ToolbarCrudMainViewModelCommands(ISystemsService systemsService,  
+    /// <param name="preferencesService">The preferences service to persist system paths etc.</param>
+    /// <param name="configFileService">The config file service for saving to hatari.cfg</param>
+    /// <param name="log">Q logger to log to.</param>
+    public ApplicationBarCrudCommands(ISystemsService systemsService,  
         IPopupNavigation popupNavigation,  
-        IServiceProvider serviceProvider): base(serviceProvider)
+        IServiceProvider serviceProvider,
+        IPreferencesService preferencesService,
+        IConfigFileService configFileService,
+        ILogger<MainViewModel> log     
+        ): base(serviceProvider)
     {
         this.systemsService = systemsService;
         this.popupNavigation = popupNavigation;
         this.serviceProvider = serviceProvider;
+        this.preferencesService = preferencesService;
+        this.configFileService = configFileService;
+        this.log = log;
     }
     
     /// <summary>
@@ -104,5 +118,57 @@ public partial class ToolbarCrudMainViewModelCommands: MainViewModelCommandsBase
             ViewModel.UpdateSystemsFromService();
             ViewModel.SelectedConfiguration = clone;
         };
+    }
+    
+    /// <summary>
+    /// Display the about dialog.
+    /// </summary>
+    [RelayCommand]
+    public async Task About()
+    {
+        AboutPopup popup = serviceProvider.GetService<AboutPopup>();
+
+        await popupNavigation.PushAsync(popup);
+    }
+    
+    /// <summary>
+    /// Save the currently selected system to hatari.cfg and run Hatari.
+    /// </summary>
+    [RelayCommand(CanExecute = nameof(CanRun))]
+    public async Task Run()
+    {
+        await configFileService.Save(ViewModel.SelectedConfiguration);
+        
+        var app = preferencesService.Preferences.HatariApplication;
+        var applicationUrl = $"file://{app}";
+        log.LogInformation("Launching application: {Url}", applicationUrl);
+        await Launcher.Default.OpenAsync(applicationUrl);
+    }
+    
+    /// <summary>
+    /// Open a dialog to edit the application preferences
+    /// </summary>
+    [RelayCommand]
+    private async Task EditPreferences()
+    {
+        var popup = serviceProvider.GetService<IPreferencesPopup>();
+        await popupNavigation.PushAsync(popup.AsPopUp());
+
+        popup.Disappearing += async (sender, args) =>
+        {
+            if (!popup.ViewModel.Confirmed) return;
+            await preferencesService.SaveAsync();
+            RunCommand.NotifyCanExecuteChanged();
+        };
+    }
+
+
+    
+    private bool CanRun()
+    {
+        return !string.IsNullOrWhiteSpace(preferencesService.Preferences.HatariApplication) &&
+               !string.IsNullOrWhiteSpace(preferencesService.Preferences.HatariConfigFile) &&
+               ViewModel.SelectedConfiguration is not null &&
+               !string.IsNullOrWhiteSpace(ViewModel.SelectedConfiguration.RomImage);
     }
 }
