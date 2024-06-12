@@ -293,16 +293,7 @@ public class ToolbarCommandsTests: CommandsTestBase
         await CreateSut().AboutCommand.ExecuteAsync(null);
         popupNavigationMock.Verify(p => p.PushAsync(It.IsAny<AboutPopup>(), true), Times.Once);
     }
-    
-    private ToolbarCommands CreateSut()
-    {
-        var sut = new ToolbarCommands(systemsServiceMock.Object, popupNavigationMock.Object, 
-            serviceProviderMock.Object, preferencesServiceMock.Object, configFileServiceMock.Object, logMock.Object);
-        MainViewModel.ToolbarCommands = sut;
-        return sut;
-    }
- 
-        
+
     [Test]
     public async Task EditPreferences_WhenInvoked_ShouldPushThePopupOnTheNavigationStack()
     {
@@ -356,8 +347,95 @@ public class ToolbarCommandsTests: CommandsTestBase
         
         prefsPopupMock.Raise(pp => pp.Disappearing += null, EventArgs.Empty);
         preferencesServiceMock.Verify(p => p.SaveAsync(), Times.Once);
-
-        
     }
    
+    [Test]
+    public async Task OpenGlobalKeyboardConfig_WhenInvoked_ShouldGetThePopupAndPushIt()
+    {
+        var popupMock = new Mock<IGlobalKeyboardConfigurationPopup>();
+        serviceProviderMock.Setup(s => s.GetService(typeof(IGlobalKeyboardConfigurationPopup))).Returns(popupMock.Object);
+
+        var sut = CreateSut();
+        await sut.OpenGlobalKeyboardConfigPopupCommand.ExecuteAsync(null);
+        popupNavigationMock.Verify(p => p.PushAsync(It.IsAny<GlobalKeyboardConfigurationPopup>(), true), Times.Once);
+    }
+    
+ [Test]
+    public async Task Run_WhenInvoked_ShouldSaveTheSelectedConfigToHatariDorCfg()
+    {
+        string expectedAppName = "MountFuji";
+        preferencesServiceMock.SetupGet(ps => ps.Preferences).Returns(new ApplicationPreferences() { HatariApplication = expectedAppName});
+        serviceProviderMock.Setup(s => s.GetService(typeof(MainViewModel))).Returns(MainViewModel);
+        await CreateSut().RunCommand.ExecuteAsync(null);
+    }
+    
+    [Test]
+    public async Task ImportHatariConfig_WhenInvokedAndDialogIsConfirmed_ShouldImportTheSystem()
+    {
+        string expectedFilename = "file name";
+        string expectedDisplayName = "display name";
+        ApplicationPreferences expectedPreferences = new ApplicationPreferences{HatariConfigFile = Environment.CurrentDirectory};
+        AtariConfiguration expectedConfiguration = new AtariConfiguration();
+        preferencesServiceMock.SetupGet(p => p.Preferences).Returns(expectedPreferences);
+
+        var popupMock = new Mock<IImportSystemPopup>();
+        
+        var importPopupViewModel = new ImportSystemPopupViewModel( 
+            popupNavigationMock.Object,
+            filePickerMock.Object, 
+            preferencesServiceMock.Object) {FileName = expectedFilename, DisplayName = expectedDisplayName};
+        importPopupViewModel.Confirmed = true;
+        
+        popupMock.SetupGet(p => p.ViewModel).Returns(importPopupViewModel);
+        systemsServiceMock.Setup(ss => ss.Import(expectedFilename, expectedDisplayName)).ReturnsAsync(expectedConfiguration);
+        
+        serviceProviderMock.Setup(s => s.GetService(typeof(MainViewModel))).Returns(MainViewModel);
+        serviceProviderMock.Setup(s => s.GetService(typeof(IImportSystemPopup))).Returns(popupMock.Object);
+        
+        var sut = CreateSut();
+        
+        await sut.ImportHatariConfigCommand.ExecuteAsync(null);
+        popupMock.Raise(pp => pp.Disappearing += null, EventArgs.Empty);
+        systemsServiceMock.Verify(s => s.Import(expectedFilename, expectedDisplayName), Times.Once);
+        MainViewModel.SelectedConfiguration.Should().Be(expectedConfiguration);
+    }
+
+    [Test]
+    public async Task ImportHatariConfig_WhenInvokedAndDialogIsCanceled_ShouldDoNothing()
+    {
+        string expectedFilename = "file name";
+        string expectedDisplayName = "display name";
+        ApplicationPreferences expectedPreferences = new ApplicationPreferences{HatariConfigFile = Environment.CurrentDirectory};
+        AtariConfiguration expectedConfiguration = new AtariConfiguration();
+        preferencesServiceMock.SetupGet(p => p.Preferences).Returns(expectedPreferences);
+
+        var popupMock = new Mock<IImportSystemPopup>();
+        
+        var importPopupViewModel = new ImportSystemPopupViewModel( 
+            popupNavigationMock.Object,
+            filePickerMock.Object, 
+            preferencesServiceMock.Object) {FileName = expectedFilename, DisplayName = expectedDisplayName};
+        importPopupViewModel.Confirmed = false;
+        
+        popupMock.SetupGet(p => p.ViewModel).Returns(importPopupViewModel);
+        systemsServiceMock.Setup(ss => ss.Import(expectedFilename, expectedDisplayName)).ReturnsAsync(expectedConfiguration);
+        
+        serviceProviderMock.Setup(s => s.GetService(typeof(MainViewModel))).Returns(MainViewModel);
+        serviceProviderMock.Setup(s => s.GetService(typeof(IImportSystemPopup))).Returns(popupMock.Object);
+        
+        var sut = CreateSut();
+        
+        await sut.ImportHatariConfigCommand.ExecuteAsync(null);
+        popupMock.Raise(pp => pp.Disappearing += null, EventArgs.Empty);
+        systemsServiceMock.Verify(s => s.Import(expectedFilename, expectedDisplayName), Times.Never);
+    }
+
+    
+    private ToolbarCommands CreateSut()
+    {
+        var sut = new ToolbarCommands(systemsServiceMock.Object, popupNavigationMock.Object, 
+            serviceProviderMock.Object, preferencesServiceMock.Object, configFileServiceMock.Object, logMock.Object);
+        MainViewModel.ToolbarCommands = sut;
+        return sut;
+    }
 }

@@ -60,6 +60,9 @@ public class RomCommandsTests: CommandsTestBase
     {
         var sut = new RomCommands(fujiFilePickerMock.Object, preferencesServiceMock.Object, serviceProviderMock.Object, 
             popupNavigationMock.Object, logMock.Object);
+
+        toolbarCommandsMock.Setup(tc => tc.RunCommand.NotifyCanExecuteChanged());
+        
         MainViewModel.RomCommands = sut;
         return sut;
     }

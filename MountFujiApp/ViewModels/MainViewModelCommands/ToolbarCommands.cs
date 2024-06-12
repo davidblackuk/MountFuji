@@ -142,7 +142,15 @@ public partial class ToolbarCommands: MainViewModelCommandsBase, IToolbarCommand
         var app = preferencesService.Preferences.HatariApplication;
         var applicationUrl = $"file://{app}";
         log.LogInformation("Launching application: {Url}", applicationUrl);
-        await Launcher.Default.OpenAsync(applicationUrl);
+        try
+        {
+            await Launcher.Default.OpenAsync(applicationUrl);
+        }
+        catch (Exception e)
+        {
+            // in the unit tests the launcher throws a NotImplementedException, also stuff can happen on launching apps
+            log.LogError(e, "Failed to launch Hatari");
+        }
     }
     
     /// <summary>
@@ -162,31 +170,42 @@ public partial class ToolbarCommands: MainViewModelCommandsBase, IToolbarCommand
         };
     }
 
+    /// <summary>
+    /// Import a hatari config file and create a system from it.
+    /// </summary>
     [RelayCommand]
     private async Task ImportHatariConfig()
     {
-        ImportSystemPopup popup = serviceProvider.GetService<ImportSystemPopup>();
+        IImportSystemPopup popup = serviceProvider.GetService<IImportSystemPopup>();
 
-        await popupNavigation.PushAsync(popup);
+        await popupNavigation.PushAsync(popup.AsPopUp());
 
         popup.Disappearing += async (sender, args) =>
         {
             if (!popup.ViewModel.Confirmed) return;
-            AtariConfiguration clone =
+            AtariConfiguration imported =
                 await systemsService.Import(popup.ViewModel.FileName, popup.ViewModel.DisplayName); 
             ViewModel.UpdateSystemsFromService();
-            ViewModel.SelectedConfiguration = clone;
+            ViewModel.SelectedConfiguration = imported;
         };
     }
     
+    /// <summary>
+    /// Open the popup dialog from the global keybard settings.
+    /// </summary>
     [RelayCommand]
     private async Task OpenGlobalKeyboardConfigPopup()
     { 
-        GlobalKeyboardConfigurationPopup popup = serviceProvider.GetService<GlobalKeyboardConfigurationPopup>();
-        await popupNavigation.PushAsync(popup);
+        IGlobalKeyboardConfigurationPopup popup = serviceProvider.GetService<IGlobalKeyboardConfigurationPopup>();
+        await popupNavigation.PushAsync(popup.AsPopUp());
     }
     
+
     
+    /// <summary>
+    /// Checks if there is sufficient config set, to allow Hatari to run.
+    /// </summary>
+    /// <returns></returns>
     private bool CanRun()
     {
         return !string.IsNullOrWhiteSpace(preferencesService.Preferences.HatariApplication) &&

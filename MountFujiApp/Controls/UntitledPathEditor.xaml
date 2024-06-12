@@ -19,13 +19,11 @@
                 <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="2"
                         Text="{x:Static controls1:IconFont.Cancel}" 
                         Command="{TemplateBinding ClearDiskImageCommand}"
-                        CommandParameter="{Binding .}"
                         VerticalOptions="Center" />
                 
                 <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="3"
                         Text="{TemplateBinding PickerOpenIcon}"
                         Command="{TemplateBinding BrowseDiskImageCommand}" 
-                        CommandParameter="{Binding .}"
                         VerticalOptions="Center" />
             </Grid>
 

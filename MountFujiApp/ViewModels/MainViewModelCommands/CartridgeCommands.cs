@@ -18,13 +18,14 @@ using Microsoft.Extensions.Logging;
 
 namespace MountFuji.ViewModels.MainViewModelCommands;
 
-public partial class CartridgeCommands : ICartridgeCommands
+public partial class CartridgeCommands : MainViewModelCommandsBase, ICartridgeCommands
 {
     private readonly IFujiFilePickerService fujiFilePicker;
     private readonly IPreferencesService preferencesService;
     
     public CartridgeCommands(IFujiFilePickerService fujiFilePicker, 
-        IPreferencesService preferencesService)
+        IPreferencesService preferencesService, 
+            IServiceProvider serviceProvider): base(serviceProvider)
     {
         this.fujiFilePicker = fujiFilePicker;
         this.preferencesService = preferencesService;
@@ -32,16 +33,16 @@ public partial class CartridgeCommands : ICartridgeCommands
     }
     
     [RelayCommand()]
-    private async Task Browse(MainViewModel vm)
+    private async Task Browse()
     {
-        await fujiFilePicker.PickFile("Cartridge Image", (filename) => vm.SelectedConfiguration.CartridgeImage = filename,
+        await fujiFilePicker.PickFile("Cartridge Image", (filename) => ViewModel.SelectedConfiguration.CartridgeImage = filename,
             preferencesService.Preferences.CartridgeFolder);
     }
 
     [RelayCommand]
-    private void Clear(MainViewModel vm)
+    private void Clear()
     {
-        vm.SelectedConfiguration.CartridgeImage = String.Empty;
+        ViewModel.SelectedConfiguration.CartridgeImage = String.Empty;
     }
     
 }

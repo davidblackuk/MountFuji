@@ -16,18 +16,36 @@
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using Mopups.Pages;
 using MountFuji.ViewModels;
 
 namespace MountFuji.Views;
 
-public partial class ImportSystemPopup 
+public interface IImportSystemPopup
 {
-    public ImportSystemPopupViewModel ViewModel { get; }
+    
+    ImportSystemPopupViewModel ViewModel { get; set; }
+    
+    event EventHandler Disappearing;
+
+    PopupPage AsPopUp();
+
+}
+
+
+public partial class ImportSystemPopup : IImportSystemPopup
+{
+    public ImportSystemPopupViewModel ViewModel { get; set; }
     
     public ImportSystemPopup(ImportSystemPopupViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
         ViewModel = viewModel;
+    }
+    
+    public PopupPage AsPopUp()
+    {
+        return this;
     }
 }

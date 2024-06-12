@@ -2,7 +2,7 @@ namespace MountFuji.ViewModels.MainViewModelCommands;
 
 public interface IIdeCommands
 {
-    IRelayCommand<MainViewModelDiskId> ClearCommand { get; }
+    IRelayCommand<int> ClearCommand { get; }
 
-    IAsyncRelayCommand<MainViewModelDiskId> BrowseCommand { get; }
+    IAsyncRelayCommand<int> BrowseCommand { get; }
 }

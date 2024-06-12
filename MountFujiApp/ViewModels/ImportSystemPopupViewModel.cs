@@ -55,6 +55,7 @@ public partial class ImportSystemPopupViewModel: TinyViewModel
     private async Task Ok()
     {
         Confirmed = true;
+        
         await popupNavigation.PopAsync();
     }
 

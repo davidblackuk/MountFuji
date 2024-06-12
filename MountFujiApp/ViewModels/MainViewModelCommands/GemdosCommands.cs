@@ -16,26 +16,26 @@
 
 namespace MountFuji.ViewModels.MainViewModelCommands;
 
-public partial class GemdosCommands : IGemdosCommands
+public partial class GemdosCommands : MainViewModelCommandsBase, IGemdosCommands
 {
     private readonly IPreferencesService preferencesService;
     private readonly IFujiFilePickerService fujiFilePicker;
 
     public GemdosCommands(IPreferencesService preferencesService,
-        IFujiFilePickerService fujiFilePicker)
+        IFujiFilePickerService fujiFilePicker, IServiceProvider serviceProvider): base(serviceProvider)
     {
         this.preferencesService = preferencesService;
         this.fujiFilePicker = fujiFilePicker;
     }
 
     [RelayCommand()]
-    private async Task Browse(MainViewModel vm)
+    private async Task Browse()
     {
         await fujiFilePicker.PickFolder("GEMDOS Folder",
-            (filename) => vm.SelectedConfiguration.GdosDriveOptions.GemdosFolder = filename,
+            (filename) => ViewModel.SelectedConfiguration.GdosDriveOptions.GemdosFolder = filename,
             preferencesService.Preferences.GemDosFolder);
     }
 
     [RelayCommand()]
-    private void Clear(MainViewModel vm) => vm.SelectedConfiguration.GdosDriveOptions.GemdosFolder = string.Empty;
+    private void Clear() => ViewModel.SelectedConfiguration.GdosDriveOptions.GemdosFolder = string.Empty;
 }

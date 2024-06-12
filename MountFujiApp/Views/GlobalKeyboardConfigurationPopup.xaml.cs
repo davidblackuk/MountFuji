@@ -19,13 +19,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mopups.Pages;
 using MountFuji.ViewModels;
 
 namespace MountFuji.Views;
 
-public partial class GlobalKeyboardConfigurationPopup 
+public interface IGlobalKeyboardConfigurationPopup
 {
+    
+    
+    PopupPage AsPopUp();
+
+}
+
+public partial class GlobalKeyboardConfigurationPopup: IGlobalKeyboardConfigurationPopup
+{
+    private PreferencesPopupViewModel viewModel;
     public GlobalKeyboardOptionsPopupViewModel ViewModel { get; }
+
+    public PopupPage AsPopUp()
+    {
+        return this;
+    }
 
     public GlobalKeyboardConfigurationPopup(GlobalKeyboardOptionsPopupViewModel viewModel)
     {
@@ -33,4 +48,5 @@ public partial class GlobalKeyboardConfigurationPopup
         ViewModel = viewModel;
         BindingContext = ViewModel;
     }
+    
 }

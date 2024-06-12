@@ -22,7 +22,7 @@ public class ScsiCommandsTests: CommandsTestBase
         var sut = CreateSut();
 
         SelectedConfiguration.ScsiImagePaths.Disk2.Should().Be(expectedValue);
-        sut.ClearCommand.Execute(new MainViewModelDiskId { ViewModel = MainViewModel, Id = 2});
+        sut.ClearCommand.Execute(2);
 
         SelectedConfiguration.ScsiImagePaths.Disk2.Should().BeEmpty();
     }
@@ -37,14 +37,14 @@ public class ScsiCommandsTests: CommandsTestBase
                 It.IsAny<Action<string>>(), null))
             .Callback((string title, Action<string> action, string x) => action(expectedValue));
 
-        await sut.BrowseCommand.ExecuteAsync(new MainViewModelDiskId { ViewModel = MainViewModel, Id = 2});
+        await sut.BrowseCommand.ExecuteAsync(2);
 
         SelectedConfiguration.ScsiImagePaths.Disk2.Should().Be(expectedValue); 
     }
     
     private ScsiCommands CreateSut()
     {
-        var sut = new ScsiCommands(fujiFilePickerMock.Object, preferencesServiceMock.Object);
+        var sut = new ScsiCommands(fujiFilePickerMock.Object, preferencesServiceMock.Object, serviceProviderMock.Object);
         MainViewModel.ScsiCommands = sut;
         return sut;
     }

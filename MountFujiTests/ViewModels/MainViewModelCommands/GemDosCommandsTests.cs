@@ -62,7 +62,7 @@ public class GemDosCommandsTests: CommandsTestBase
     
     private GemdosCommands CreateSut()
     {
-        var sut = new GemdosCommands(preferencesServiceMock.Object, fujiFilePickerMock.Object);
+        var sut = new GemdosCommands(preferencesServiceMock.Object, fujiFilePickerMock.Object, serviceProviderMock.Object);
         MainViewModel.GemdosCommands = sut;
         return sut;
     }

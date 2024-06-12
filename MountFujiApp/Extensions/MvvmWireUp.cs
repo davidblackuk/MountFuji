@@ -50,7 +50,7 @@ public static class MvvmWireUp {
         services.AddTransient<IDeleteSystemPopup, DeleteSystemPopup>();
         services.AddTransient<DeleteSystemPopupViewModel>();
 
-        services.AddTransient<ImportSystemPopup>();
+        services.AddTransient<IImportSystemPopup, ImportSystemPopup>();
         services.AddTransient<ImportSystemPopupViewModel>();
         
         services.AddTransient<AboutPopup>();
@@ -59,7 +59,7 @@ public static class MvvmWireUp {
         services.AddTransient<RomPickerPopup>();
         services.AddTransient<RomPickerPopupViewModel>();
 
-        services.AddTransient<GlobalKeyboardConfigurationPopup>();
+        services.AddTransient<IGlobalKeyboardConfigurationPopup, GlobalKeyboardConfigurationPopup>();
         services.AddTransient<GlobalKeyboardOptionsPopupViewModel>();
         
         services.AddTransient<SetShortcutPopupView>();

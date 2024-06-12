@@ -2,7 +2,7 @@ namespace MountFuji.ViewModels.MainViewModelCommands;
 
 public interface ICartridgeCommands
 {
-    IRelayCommand<MainViewModel> ClearCommand { get; }
+    IRelayCommand ClearCommand { get; }
 
-    IAsyncRelayCommand<MainViewModel> BrowseCommand { get; }
+    IAsyncRelayCommand BrowseCommand { get; }
 }

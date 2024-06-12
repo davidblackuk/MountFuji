@@ -12,7 +12,6 @@
     <HorizontalStackLayout.Resources>
         <converters:AtariSystemMemorySummaryConverter x:Key="summaryConverter" />
         <converters:CpuSummaryConverter x:Key="cpuConverter" />
-        <converters:MainViewModelSystemIdConverter x:Key="SystemIdConverter" />
     </HorizontalStackLayout.Resources>
     <FlyoutBase.ContextFlyout>
         <MenuFlyout>

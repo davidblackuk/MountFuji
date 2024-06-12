@@ -2,9 +2,9 @@ namespace MountFuji.ViewModels.MainViewModelCommands;
 
 public interface IRomCommands
 {
-    IAsyncRelayCommand<MainViewModel> OpenPickerCommand { get; }
+    IAsyncRelayCommand OpenPickerCommand { get; }
 
-    IAsyncRelayCommand<MainViewModel> BrowseCommand { get; }
+    IAsyncRelayCommand BrowseCommand { get; }
 
-    IRelayCommand<MainViewModel> ClearCommand { get; }
+    IRelayCommand ClearCommand { get; }
 }

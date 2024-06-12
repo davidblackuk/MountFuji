@@ -8,9 +8,6 @@
              x:DataType="vm:MainViewModel"
 
              x:Class="MountFuji.Controls.HardDiskPathEditor">
-    <ContentView.Resources>
-        <converters:MainViewModelDiskIdConverter x:Key="ModelIdConverter" />
-    </ContentView.Resources>
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <Grid Grid.ColumnDefinitions="120,*,40,40" RowDefinitions="*,*" Margin="0,10,0,0">
@@ -23,26 +20,15 @@
                 <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="2"
                         Text="{x:Static controls:IconFont.Cancel}"
                         Command="{TemplateBinding ClearDiskImageCommand}"
+                        CommandParameter="{TemplateBinding DiskId}"
                         VerticalOptions="Center">
-                    <Button.CommandParameter>
-                        <MultiBinding Converter="{StaticResource ModelIdConverter}">
-                            <Binding Path="."></Binding>
-                            <Binding Path="DiskId" Source="{RelativeSource TemplatedParent}"></Binding>
-                        </MultiBinding>
-                    </Button.CommandParameter>
                 </Button>
 
                 <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="3"
                         Text="{TemplateBinding PickerOpenIcon}"
                         Command="{TemplateBinding BrowseDiskImageCommand}"
+                        CommandParameter="{TemplateBinding DiskId}"
                         VerticalOptions="Center">
-                    <Button.CommandParameter>
-                        <MultiBinding Converter="{StaticResource ModelIdConverter}">
-                            <Binding Path="."></Binding>
-                            <Binding Path="DiskId" Source="{RelativeSource TemplatedParent}"></Binding>
-                        </MultiBinding>
-                    </Button.CommandParameter>
-
                 </Button>
             </Grid>
 

@@ -18,28 +18,29 @@ using MountFuji.Extensions;
 
 namespace MountFuji.ViewModels.MainViewModelCommands;
 
-public partial class AcsiCommands : IAcsiCommands
+public partial class AcsiCommands : MainViewModelCommandsBase, IAcsiCommands
 {
     private readonly IFujiFilePickerService fujiFilePicker;
     private readonly IPreferencesService preferencesService;
-
-    public AcsiCommands(IFujiFilePickerService fujiFilePicker, IPreferencesService preferencesService)
+    
+    public AcsiCommands(IFujiFilePickerService fujiFilePicker, IPreferencesService preferencesService, 
+        IServiceProvider serviceProvider): base(serviceProvider)
     {
         this.fujiFilePicker = fujiFilePicker;
         this.preferencesService = preferencesService;
     }
     
     [RelayCommand()]
-    public async Task Browse(MainViewModelDiskId disk)
+    public async Task Browse(int diskId)
     {
         await fujiFilePicker.PickFile("ACSI Disk Image",
             (filename) =>
-                DiskImagePathsExtensions.SetImagePath(disk.ViewModel.SelectedConfiguration.AcsiImagePaths, disk.Id,
+                DiskImagePathsExtensions.SetImagePath(ViewModel.SelectedConfiguration.AcsiImagePaths, diskId,
                     filename),
             preferencesService.Preferences.HardDiskFolder);
     }
 
     [RelayCommand()]
-    public void Clear(MainViewModelDiskId disk) =>
-        DiskImagePathsExtensions.ClearImagePath(disk.ViewModel.SelectedConfiguration.AcsiImagePaths, disk.Id);
+    public void Clear(int diskId) =>
+        DiskImagePathsExtensions.ClearImagePath(ViewModel.SelectedConfiguration.AcsiImagePaths, diskId);
 }

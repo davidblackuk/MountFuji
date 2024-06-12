@@ -19,7 +19,7 @@ using MountFuji.Views;
 
 namespace MountFuji.ViewModels.MainViewModelCommands;
 
-public partial class RomCommands : IRomCommands
+public partial class RomCommands :MainViewModelCommandsBase, IRomCommands
 {
     private readonly IFujiFilePickerService fujiFilePicker;
     private readonly IPreferencesService preferencesService;
@@ -29,7 +29,7 @@ public partial class RomCommands : IRomCommands
 
     public RomCommands(IFujiFilePickerService fujiFilePicker, 
         IPreferencesService preferencesService, IServiceProvider serviceProvider, IPopupNavigation popupNavigation, 
-        ILogger<MainViewModel> log)
+        ILogger<MainViewModel> log):base(serviceProvider)
     {
         this.fujiFilePicker = fujiFilePicker;
         this.preferencesService = preferencesService;
@@ -39,25 +39,25 @@ public partial class RomCommands : IRomCommands
     }
     
     [RelayCommand]
-    private void Clear(MainViewModel viewModel)
+    private void Clear()
     {
-        viewModel.SelectedConfiguration.RomImage = String.Empty;
-        viewModel.ToolbarCommands.RunCommand.NotifyCanExecuteChanged();
+        ViewModel.SelectedConfiguration.RomImage = String.Empty;
+        ViewModel.ToolbarCommands.RunCommand.NotifyCanExecuteChanged();
     }
     
     [RelayCommand()]
-    private async Task Browse(MainViewModel viewModel)
+    private async Task Browse()
     {
         await fujiFilePicker.PickFile("ROM Image", (filename) =>
             {
-                viewModel.SelectedConfiguration.RomImage = filename;
-                viewModel.ToolbarCommands.RunCommand.NotifyCanExecuteChanged();
+                ViewModel.SelectedConfiguration.RomImage = filename;
+                ViewModel.ToolbarCommands.RunCommand.NotifyCanExecuteChanged();
             },
             preferencesService.Preferences.RomFolder);
     }
 
     [RelayCommand()]
-    private async Task OpenPicker(MainViewModel viewModel)
+    private async Task OpenPicker()
     {
         RomPickerPopup popup = serviceProvider.GetService<RomPickerPopup>();
 
@@ -67,8 +67,8 @@ public partial class RomCommands : IRomCommands
         {
             if (!popup.ViewModel.Confirmed) return;
             Rom rom = popup.ViewModel.SelectedRom;
-            viewModel.SelectedConfiguration.RomImage = rom!.Path;
-            viewModel.ToolbarCommands.RunCommand.NotifyCanExecuteChanged();
+            ViewModel.SelectedConfiguration.RomImage = rom!.Path;
+            ViewModel.ToolbarCommands.RunCommand.NotifyCanExecuteChanged();
             log.LogInformation("Rom Selected via the ROM Picker {ROM}", rom);
         };
     }

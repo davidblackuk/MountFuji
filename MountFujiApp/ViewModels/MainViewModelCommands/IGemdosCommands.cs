@@ -2,7 +2,7 @@ namespace MountFuji.ViewModels.MainViewModelCommands;
 
 public interface IGemdosCommands
 {
-    IAsyncRelayCommand<MainViewModel> BrowseCommand { get; }
+    IAsyncRelayCommand BrowseCommand { get; }
 
-    IRelayCommand<MainViewModel> ClearCommand { get; }
+    IRelayCommand ClearCommand { get; }
 }

@@ -38,7 +38,7 @@ public class FloppyCommandsTests: CommandsTestBase
         var sut = CreateSut();
 
         SelectedConfiguration.FloppyOptions.DriveAPath.Should().Be(expectedValue);
-        sut.ClearCommand.Execute(new MainViewModelDiskId{ ViewModel = MainViewModel, Id = 0});
+        sut.ClearCommand.Execute(0);
 
         SelectedConfiguration.FloppyOptions.DriveAPath.Should().BeEmpty();
     }
@@ -53,14 +53,14 @@ public class FloppyCommandsTests: CommandsTestBase
                 It.IsAny<Action<string>>(), null))
             .Callback((string title, Action<string> action, string x) => action(expectedValue));
 
-        await sut.BrowseCommand.ExecuteAsync(new MainViewModelDiskId{ ViewModel = MainViewModel, Id = 0});
+        await sut.BrowseCommand.ExecuteAsync(0);
 
         SelectedConfiguration.FloppyOptions.DriveAPath.Should().Be(expectedValue); 
     }
     
     private FloppyCommands CreateSut()
     {
-        var sut = new FloppyCommands(fujiFilePickerMock.Object, preferencesServiceMock.Object);
+        var sut = new FloppyCommands(fujiFilePickerMock.Object, preferencesServiceMock.Object, serviceProviderMock.Object);
         MainViewModel.FloppyCommands = sut;
         return sut;
     }

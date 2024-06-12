@@ -42,7 +42,7 @@ public class CommandsTestBase
     protected Mock<IAcsiCommands> acsiCommandsMock;
     protected Mock<IScsiCommands> scsiCommandsMock;
     protected Mock<IIdeCommands> ideCommandsMock;
-    protected Mock<IToolbarCommands> crudCommandsMock;
+    protected Mock<IToolbarCommands> toolbarCommandsMock;
     
     protected MainViewModel MainViewModel { get; set; }
 #pragma warning restore CS8618
@@ -72,16 +72,18 @@ public class CommandsTestBase
         acsiCommandsMock = new Mock<IAcsiCommands>();
         scsiCommandsMock = new Mock<IScsiCommands>();
         ideCommandsMock = new Mock<IIdeCommands>();
-        crudCommandsMock = new Mock<IToolbarCommands>();
+        toolbarCommandsMock = new Mock<IToolbarCommands>();
         
-        MainViewModel = new MainViewModel( popupNavigationMock.Object,
-            serviceProviderMock.Object, preferencesServiceMock.Object,
+        MainViewModel = new MainViewModel( 
+            preferencesServiceMock.Object,
             systemsServiceMock.Object, 
             updateServiceMock.Object,
             romCommandsMock.Object, cartridgeCommandsMock.Object, gemdosCommandsMock.Object,
             floppyCommandsMock.Object,
             acsiCommandsMock.Object, scsiCommandsMock.Object, ideCommandsMock.Object,
-            crudCommandsMock.Object);
+            toolbarCommandsMock.Object);
         MainViewModel.SelectedConfiguration = SelectedConfiguration;
+        serviceProviderMock.Setup(s => s.GetService(typeof(MainViewModel))).Returns(MainViewModel);
+
     }
 }

@@ -18,11 +18,9 @@
 
 using System.Collections.ObjectModel;
 using AsyncAwaitBestPractices;
-using Microsoft.Extensions.Logging;
 using MountFuji.Controls;
 using MountFuji.Services.UpdatesService;
 using MountFuji.ViewModels.MainViewModelCommands;
-using MountFuji.Views;
 
 namespace MountFuji.ViewModels;
 
@@ -36,16 +34,12 @@ public partial class MainViewModel : TinyViewModel
     public IScsiCommands ScsiCommands { get; set;  }
     public IIdeCommands IdeCommands { get; set;  }
     public IToolbarCommands ToolbarCommands { get; set;  }
-
-    private readonly IPopupNavigation popupNavigation;
-    private readonly IServiceProvider serviceProvider;
+    
     private readonly IPreferencesService preferencesService;
     private readonly ISystemsService systemsService;
     private readonly IAvailableUpdatesService updateService;
     
     public MainViewModel(
-        IPopupNavigation popupNavigation,
-        IServiceProvider serviceProvider,
         IPreferencesService preferencesService,
         ISystemsService systemsService,
         IAvailableUpdatesService updateService,
@@ -68,24 +62,14 @@ public partial class MainViewModel : TinyViewModel
         ScsiCommands = scsiCommands;
         IdeCommands = ideCommands;
         ToolbarCommands = toolbarCommands;
-        this.popupNavigation = popupNavigation;
-        this.serviceProvider = serviceProvider;
         this.preferencesService = preferencesService;
         this.systemsService = systemsService;
         this.updateService = updateService;
         
         UpdateSystemsFromService();
         CheckForUpdate().SafeFireAndForget();
-
     }
     
-    
-    private async Task CheckForUpdate()
-    {
-        var updateInfo = await updateService.CheckForUpdate();
-        UpdateAvailable = updateInfo.IsUpdateAvailable;
-    }
-
     public string ThemeIcon => preferencesService.GetTheme() == AppTheme.Dark ? IconFont.Dark_mode : IconFont.Light_mode;
     
     public ObservableCollection<AtariConfiguration> Systems { get; } = new();
@@ -100,15 +84,18 @@ public partial class MainViewModel : TinyViewModel
     [ObservableProperty] private bool updateAvailable;
     
     [ObservableProperty]  private bool isDirty;
-
     
     public bool HasSelectedConfig =>
         SelectedConfiguration is not null && SelectedConfiguration.Id != AtariConfiguration.Empty.Id;
-
-
+    
     private IDispatcherTimer singleShotTimer;
     private IDispatcherTimer isDirtyTimer;
 
+    /// <summary>
+    /// Handles initialization of the MainView, sets the first system in the system selector as the current one
+    /// and initilizes various timers.
+    /// </summary>
+    /// <returns></returns>
     public override Task OnFirstAppear()
     {
         if (Systems is not null && Systems.Count > 0)
@@ -123,29 +110,27 @@ public partial class MainViewModel : TinyViewModel
         return base.OnFirstAppear();
     }
     
-
-    #region ----- APPLICATION TOOL BAR -----
-
-   
-
-   
+   /// <summary>
+   /// Handle the end of a drag and drop operation on the system selector by reordering
+   /// the systems in the store based on their display order on screen.
+   /// </summary>
     [RelayCommand]
     private Task Reordered()
     {
-        ReorderServicesFromDisplayOrder();
+        var ids = Systems.Select<AtariConfiguration, string>(s => s.Id).ToList();
+        systemsService.ReorderByIds(ids);
         return Task.CompletedTask;
     }
-
-    [RelayCommand]
+   
+    /// <summary>
+    /// Toggle the application theme between light and dak modes
+    /// </summary>
+    [RelayCommand()]
     private void SwapTheme()
     {
         preferencesService.ToggleTheme();
         OnPropertyChanged(nameof(ThemeIcon));
     }
-    
-   
-    
-    #endregion 
     
     #region ---- HELPERS ----
 
@@ -161,20 +146,9 @@ public partial class MainViewModel : TinyViewModel
             Systems.Add(system);
             count++;
         }
-
         NumberOfSystems = count;
     }
-
-
-    /// <summary>
-    /// Reorders the systems in the store based on their display order on screen.
-    /// </summary>
-    private void ReorderServicesFromDisplayOrder()
-    {
-        var ids = Systems.Select<AtariConfiguration, string>(s => s.Id).ToList();
-        systemsService.ReorderByIds(ids);
-    }
-
+    
     /// <summary>
     /// Every second or so update the disclosure indicator for unsaved changes
     /// </summary>
@@ -224,6 +198,15 @@ public partial class MainViewModel : TinyViewModel
         isDirtyTimer.Start();
     }
 
-
+    /// <summary>
+    /// Checks if an update is available based on the current version by making a call to a GitHub API.
+    /// </summary>
+    /// <returns>A tuple reflecting whether an update is available and, if so, the latest version number.</returns>
+    private async Task CheckForUpdate()
+    {
+        var updateInfo = await updateService.CheckForUpdate();
+        UpdateAvailable = updateInfo.IsUpdateAvailable;
+    }
+    
     #endregion
 }

@@ -19,17 +19,14 @@
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="2"
                             Text="{x:Static controls1:IconFont.Cancel}" 
                             Command="{Binding RomCommands.ClearCommand}"
-                            CommandParameter="{Binding .}"
                             ToolTipProperties.Text="Clear selected ROM"/>
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="3"
                             Text="{x:Static controls1:IconFont.File_open}" 
                             Command="{Binding RomCommands.BrowseCommand}"
-                            CommandParameter="{Binding .}"
                             ToolTipProperties.Text="Browse for a ROM"/>
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="4"
                             Text="{x:Static controls1:IconFont.List_alt}" 
                             Command="{Binding RomCommands.OpenPickerCommand}"
-                            CommandParameter="{Binding .}"
 
                             ToolTipProperties.Text="Open the ROM picker"/>
                 </Grid>
@@ -43,12 +40,10 @@
                     <Label Text="{Binding SelectedConfiguration.CartridgeImage}" />
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="2"
                             Text="{x:Static controls1:IconFont.Cancel}" 
-                            Command="{Binding CartridgeCommands.ClearCommand}"
-                            CommandParameter="{Binding .}" />
+                            Command="{Binding CartridgeCommands.ClearCommand}"/>
                     <Button Style="{StaticResource InlineMaterialButton}" Grid.Column="3"
                             Text="{x:Static controls1:IconFont.File_open}" 
-                            Command="{Binding CartridgeCommands.BrowseCommand}"
-                            CommandParameter="{Binding .}" />
+                            Command="{Binding CartridgeCommands.BrowseCommand}"/>
                 </Grid>
             </configurationSections:ConfigurationGroup>
         </VerticalStackLayout>

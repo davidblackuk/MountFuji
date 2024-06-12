@@ -22,7 +22,7 @@ public class IdeCommandsTests: CommandsTestBase
         var sut = CreateSut();
 
         SelectedConfiguration.IdeOptions.Disk1.Should().Be(expectedValue);
-        sut.ClearCommand.Execute(new MainViewModelDiskId { ViewModel = MainViewModel, Id = 1});
+        sut.ClearCommand.Execute(1);
 
         SelectedConfiguration.IdeOptions.Disk1.Should().BeEmpty();
     }
@@ -37,7 +37,7 @@ public class IdeCommandsTests: CommandsTestBase
                 It.IsAny<Action<string>>(), null))
             .Callback((string title, Action<string> action, string x) => action(expectedValue));
 
-        await sut.BrowseCommand.ExecuteAsync(new MainViewModelDiskId { ViewModel = MainViewModel, Id = 1});
+        await sut.BrowseCommand.ExecuteAsync(1);
 
         SelectedConfiguration.IdeOptions.Disk1.Should().Be(expectedValue); 
     }
@@ -45,7 +45,7 @@ public class IdeCommandsTests: CommandsTestBase
    
     private IdeCommands CreateSut()
     {
-        var sut = new IdeCommands(fujiFilePickerMock.Object, preferencesServiceMock.Object);
+        var sut = new IdeCommands(fujiFilePickerMock.Object, preferencesServiceMock.Object, serviceProviderMock.Object);
         MainViewModel.IdeCommands = sut;
         return sut;
     }

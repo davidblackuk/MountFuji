@@ -56,7 +56,6 @@ public partial class HardDiskCascade
         InitializeComponent();
         SetDisplayValues();
     }
-
     
     protected override void OnPropertyChanged(string propertyName = null)
     {
@@ -121,22 +120,19 @@ public partial class HardDiskCascade
     }
     private void BrowseHddImage(object sender, EventArgs e)
     {
-        var item = MainViewModelDiskId;
-        if (BrowseDiskImageCommand != null && BrowseDiskImageCommand.CanExecute(item))
+        if (BrowseDiskImageCommand != null && BrowseDiskImageCommand.CanExecute(DiskId))
         {
-            BrowseDiskImageCommand.Execute(item);
+            BrowseDiskImageCommand.Execute(DiskId);
         }
     }
 
     private void ClearClicked(object sender, EventArgs e)
     {
-        var item = MainViewModelDiskId;
-        if (ClearDiskImageCommand != null && ClearDiskImageCommand.CanExecute(item))
+        
+        if (ClearDiskImageCommand != null && ClearDiskImageCommand.CanExecute(DiskId))
         {
-            ClearDiskImageCommand.Execute(item);
+            ClearDiskImageCommand.Execute(DiskId);
             SetDiskImagePath();
         }
     }
-
-    private MainViewModelDiskId MainViewModelDiskId => new MainViewModelDiskId { ViewModel = BindingContext as MainViewModel, Id = DiskId };
 }

@@ -59,7 +59,7 @@ public class CartridgeCommandsTests: CommandsTestBase
     
     private CartridgeCommands CreateSut()
     {
-        var sut = new CartridgeCommands(fujiFilePickerMock.Object, preferencesServiceMock.Object);
+        var sut = new CartridgeCommands(fujiFilePickerMock.Object, preferencesServiceMock.Object, serviceProviderMock.Object);
         MainViewModel.CartridgeCommands = sut;
         return sut;
     }
