@@ -59,9 +59,9 @@ public partial class RomCommands :MainViewModelCommandsBase, IRomCommands
     [RelayCommand()]
     private async Task OpenPicker()
     {
-        RomPickerPopup popup = serviceProvider.GetService<RomPickerPopup>();
+        IRomPickerPopup popup = serviceProvider.GetService<IRomPickerPopup>();
 
-        await popupNavigation.PushAsync(popup);
+        await popupNavigation.PushAsync(popup.AsPopUp());
 
         popup.Disappearing += (sender, args) =>
         {

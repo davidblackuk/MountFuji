@@ -16,6 +16,7 @@
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using System.Diagnostics.CodeAnalysis;
 using MountFuji.Services.UpdatesService;
 using AsyncAwaitBestPractices;
 namespace MountFuji.ViewModels;
@@ -60,12 +61,14 @@ public partial class AboutPopupViewModel: TinyViewModel
         await popupNavigation.PopAsync();
     }
 
+    [ExcludeFromCodeCoverage]  // can't test static system methods like this
     [RelayCommand]
     private async Task OpenUrl(string url)
     {
         await Launcher.OpenAsync(new Uri(url));
     }
     
+    [ExcludeFromCodeCoverage]  // can't test static system methods like this
     [RelayCommand]
     private async Task OpenDataFolder()
     {

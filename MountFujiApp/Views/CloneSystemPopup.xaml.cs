@@ -40,9 +40,6 @@ public partial class CloneSystemPopup : ICloneSystemPopup
         BindingContext = viewModel;
         ViewModel = viewModel;
     }
-    
-    public PopupPage AsPopUp()
-    {
-        return this;
-    }
+
+    public PopupPage AsPopUp() => this;
 }

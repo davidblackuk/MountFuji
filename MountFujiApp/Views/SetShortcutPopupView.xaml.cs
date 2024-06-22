@@ -14,13 +14,20 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+using Mopups.Pages;
 using MountFuji.ViewModels;
 
 namespace MountFuji.Views;
 
-public partial class SetShortcutPopupView
+public interface ISetShortcutPopupView
 {
-    public SetShortcutPopupViewModel ViewModel;
+    SetShortcutPopupViewModel ViewModel { get; }
+    PopupPage AsPopUp();
+}
+
+public partial class SetShortcutPopupView : ISetShortcutPopupView
+{
+    public SetShortcutPopupViewModel ViewModel { get; }
 
     public SetShortcutPopupView(SetShortcutPopupViewModel viewModel)
     {
@@ -28,4 +35,6 @@ public partial class SetShortcutPopupView
         InitializeComponent();  
         BindingContext = ViewModel;
     }
+    
+    public PopupPage AsPopUp() => this;
 }

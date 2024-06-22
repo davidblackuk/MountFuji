@@ -29,11 +29,9 @@ public partial class GlobalKeyboardOptionsPopupViewModel: TinyViewModel
     private readonly IPreferencesService preferencesService;
     private readonly IFujiFilePickerService fujiFilePicker;
     private readonly IServiceProvider serviceProvider;
-    private readonly IConfigFileService configFileService;
     private readonly ILogger<GlobalKeyboardOptionsPopupViewModel> log;
 
     private string hatariConfigFilePath = String.Empty;
-    private KeyboardOptions originalOptions;
     public GlobalSystemConfiguration Configuration { get; }
     
     public GlobalKeyboardOptionsPopupViewModel(IPopupNavigation popupNavigation, 
@@ -41,7 +39,6 @@ public partial class GlobalKeyboardOptionsPopupViewModel: TinyViewModel
         IPreferencesService preferencesService, 
         IFujiFilePickerService fujiFilePicker,
         IServiceProvider serviceProvider,
-        IConfigFileService configFileService,
         ILogger<GlobalKeyboardOptionsPopupViewModel> log)
     {
         this.popupNavigation = popupNavigation;
@@ -49,10 +46,8 @@ public partial class GlobalKeyboardOptionsPopupViewModel: TinyViewModel
         this.preferencesService = preferencesService;
         this.fujiFilePicker = fujiFilePicker;
         this.serviceProvider = serviceProvider;
-        this.configFileService = configFileService;
         this.log = log;
         Configuration = globalConfigService.Configuration;
-        this.originalOptions = Configuration.KeyboardOptions;
         hatariConfigFilePath = Path.GetDirectoryName((string)preferencesService.Preferences.HatariConfigFile);
     }
     
@@ -85,14 +80,11 @@ public partial class GlobalKeyboardOptionsPopupViewModel: TinyViewModel
     private async Task SetKey(HatariShortcut key)
     {
         log.LogInformation("Setting key for {Key}", key);
-        SetShortcutPopupView popup = serviceProvider.GetService<SetShortcutPopupView>();
+        ISetShortcutPopupView popup = serviceProvider.GetService<ISetShortcutPopupView>();
 
         popup.ViewModel.SetInitialState(key);
-        await popupNavigation.PushAsync(popup);
-        
-        
+        await popupNavigation.PushAsync(popup.AsPopUp());
     }
-
     
     [RelayCommand]
     private async Task Cancel()
@@ -107,5 +99,4 @@ public partial class GlobalKeyboardOptionsPopupViewModel: TinyViewModel
         await globalConfigService.SaveAsync();
         await popupNavigation.PopAsync();
     }
-
 }

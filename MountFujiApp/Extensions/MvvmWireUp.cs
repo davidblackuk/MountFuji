@@ -80,5 +80,7 @@ public static class MvvmWireUp {
         services.AddSingleton<IScsiCommands, ScsiCommands>();
         services.AddSingleton<IIdeCommands, IdeCommands>();
         services.AddTransient<IToolbarCommands, ToolbarCommands>();
+        services.AddTransient<IRomPickerPopup, RomPickerPopup>();
+        services.AddTransient<ISetShortcutPopupView, SetShortcutPopupView>();
     }
 }

@@ -14,11 +14,19 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+using Mopups.Pages;
 using MountFuji.ViewModels;
 
 namespace MountFuji.Views;
 
-public partial class RomPickerPopup
+public interface IRomPickerPopup
+{
+    RomPickerPopupViewModel ViewModel { get; }
+    event EventHandler Disappearing;
+    PopupPage AsPopUp();
+}
+
+public partial class RomPickerPopup : IRomPickerPopup
 {
     public RomPickerPopupViewModel ViewModel { get; }
     
@@ -28,4 +36,6 @@ public partial class RomPickerPopup
         ViewModel = popupViewModel;
         BindingContext = popupViewModel;
     }
+    
+    public PopupPage AsPopUp() => this;
 }

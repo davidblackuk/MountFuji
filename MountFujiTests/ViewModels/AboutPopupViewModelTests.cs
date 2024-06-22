@@ -46,7 +46,25 @@ public class AboutPopupViewModelTests
         popupNavigationMock.Verify(d => d.PopAsync(true), Times.Once);
     }
 
+    [Test]
+    public void Ctor_WhenInvoked_ShouldCheckForUpdate()
+    {
+        var sut = CreateSut();
+        updateServiceMock.Verify(us => us.CheckForUpdate(), Times.Once);
+    }
 
+    [Test]
+    public void Ctor_WhenInvokedAndUpdateIsAvailable_ShouldStoreTheUpdateInfo()
+    {
+        
+        updateServiceMock
+            .Setup(us => us.CheckForUpdate())
+            .ReturnsAsync((IsUpdateAvailable: true, ToVersion: new Version(1, 1)));
+        var sut = CreateSut(); 
+        sut.UpdateAvailable.Should().BeTrue();
+        sut.UpdateVersion.Should().Be("1.1");
+    }   
+        
     private AboutPopupViewModel CreateSut()
     {
         return new AboutPopupViewModel(popupNavigationMock.Object, persistanceMock.Object, updateServiceMock.Object, applicationVersionMock.Object);

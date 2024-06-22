@@ -15,13 +15,14 @@
 //    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 using MountFuji.ViewModels.MainViewModelCommands;
+using MountFuji.Views;
 
 namespace MountFujiTests.ViewModels.MainViewModelCommands;
 
-public class RomCommandsTests: CommandsTestBase
+public class RomCommandsTests : CommandsTestBase
 {
     private Mock<IFujiFilePickerService> fujiFilePickerMock;
-    
+
     [SetUp]
     public void Setup()
     {
@@ -34,7 +35,7 @@ public class RomCommandsTests: CommandsTestBase
     public void ClearRom_WhenInvoked_ShouldSetTheRomPathValueInTheSelectedConfigurationToEmptyString()
     {
         SelectedConfiguration.RomImage = Guid.NewGuid().ToString();
-        
+
         var sut = CreateSut();
 
         sut.ClearCommand.Execute(MainViewModel);
@@ -46,23 +47,85 @@ public class RomCommandsTests: CommandsTestBase
     {
         var expectedValue = "my filename";
         var sut = CreateSut();
-        
-        fujiFilePickerMock.Setup(x => x.PickFile(It.IsAny<string>(), 
+
+        fujiFilePickerMock.Setup(x => x.PickFile(It.IsAny<string>(),
                 It.IsAny<Action<string>>(), null))
             .Callback((string title, Action<string> action, string x) => action(expectedValue));
 
         await sut.BrowseCommand.ExecuteAsync(MainViewModel);
-        
+
         SelectedConfiguration.RomImage.Should().Be(expectedValue);
+    }
+
+    [Test]
+    public async Task OpenPicker_WhenInvokedAndConfirmed_ShouldSetTHeSelectedSystemsRomToTheChoosenOne()
+    {
+        string expectedFilename = "file name";
+
+        Rom expectedRom = new Rom() { Path = expectedFilename };
+
+        AtariConfiguration expectedConfiguration = new AtariConfiguration();
+
+        var popupMock = new Mock<IRomPickerPopup>();
+        var romServiceMock = new Mock<IRomService>();
+        var viewModelMock = new RomPickerPopupViewModel(
+            popupNavigationMock.Object,
+            romServiceMock.Object) { SelectedRom = expectedRom };
+
+        viewModelMock.Confirmed = true;
+
+        popupMock.SetupGet(p => p.ViewModel).Returns(viewModelMock);
+
+        MainViewModel.SelectedConfiguration = expectedConfiguration;
+
+        serviceProviderMock.Setup(s => s.GetService(typeof(MainViewModel))).Returns(MainViewModel);
+        serviceProviderMock.Setup(s => s.GetService(typeof(IRomPickerPopup))).Returns(popupMock.Object);
+
+        var sut = CreateSut();
+
+        await sut.OpenPickerCommand.ExecuteAsync(null);
+        popupMock.Raise(pp => pp.Disappearing += null, EventArgs.Empty);
+        expectedConfiguration.RomImage.Should().Be(expectedFilename);
+    }
+
+    [Test]
+    public async Task OpenPicker_WhenInvokedAndCanceled_ShouldNotSetTHeSelectedSystemsRomToTheChoosenOne()
+    {
+        string expectedFilename = "file name";
+
+        Rom expectedRom = new Rom() { Path = expectedFilename };
+
+        AtariConfiguration expectedConfiguration = new AtariConfiguration();
+
+        var popupMock = new Mock<IRomPickerPopup>();
+        var romServiceMock = new Mock<IRomService>();
+        var viewModelMock = new RomPickerPopupViewModel(
+            popupNavigationMock.Object,
+            romServiceMock.Object) { SelectedRom = expectedRom };
+
+        viewModelMock.Confirmed = false;
+
+        popupMock.SetupGet(p => p.ViewModel).Returns(viewModelMock);
+
+        MainViewModel.SelectedConfiguration = expectedConfiguration;
+
+        serviceProviderMock.Setup(s => s.GetService(typeof(MainViewModel))).Returns(MainViewModel);
+        serviceProviderMock.Setup(s => s.GetService(typeof(IRomPickerPopup))).Returns(popupMock.Object);
+
+        var sut = CreateSut();
+
+        await sut.OpenPickerCommand.ExecuteAsync(null);
+        popupMock.Raise(pp => pp.Disappearing += null, EventArgs.Empty);
+        expectedConfiguration.RomImage.Should().NotBe(expectedFilename);
     }
 
     private RomCommands CreateSut()
     {
-        var sut = new RomCommands(fujiFilePickerMock.Object, preferencesServiceMock.Object, serviceProviderMock.Object, 
+        var sut = new RomCommands(fujiFilePickerMock.Object, preferencesServiceMock.Object, serviceProviderMock.Object,
             popupNavigationMock.Object, logMock.Object);
 
         toolbarCommandsMock.Setup(tc => tc.RunCommand.NotifyCanExecuteChanged());
-        
+
         MainViewModel.RomCommands = sut;
         return sut;
     }
