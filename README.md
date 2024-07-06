@@ -57,29 +57,29 @@ Here's what's in the different version of Mount Fuji. See the GitHub release not
 
 ### Version 1.1.0 (date TBD)
 
-- **\#22** [_RSH_] - Modified RadioButton control template and styling to provide consistent look on supported platforms.
-  - Previously themed stying on Windows was broken. Light mode and dark mode both worked when they were the OS default. However changing theme modes on windows led to problems. This is fixed now. 
-- **\#24** [_RSH_] - Added a dialog buttons control to properly order OK / Cancel buttons on different platforms
-  - Previously we used the Mac idiom `[Cancel] [OK]` on MacOS and Windows Now we use Now we use  `[Cancel] [OK]` on Mac and  `[OK] [Cancel]` on windows
-- **\#25** [_RSH_] - Internal refactoring to reduce code complexity
-  - Not visible, but needed.
-- **\#24** [_DB_] Added support for keyboard configuration
-  - Supports all functionality present in Hatari in a minimal way, supports setting the mapping type, specifying a mapping file etc.
-  - More limited support for specifying shortcut keys (not all possible keys supported due to a limitation in Maui 8, may need to wait till Maui 9 for full Support)
-  - supports importing shortcuts from a specific Hatari config file
-  - there is a single global set of keyboard setting for all systems as I can't see them changing across them.
-- **\#31** [_DB_] Added an indication that an upgrade is available.
+- [__RSH__] - We now have a windows installer to provide a much simpler install and upgrade path!
+- [__DB__] - Added an indication that an upgrade is available.
   - Disclosure indicator on the Information icon on the about dialog
   - opening the about dialog shows an indicator next to the version number
   - a message about the new version number and a link to the release page 
   on GitHub.
-- Added an indindicator that the application state needs saving.
-
+- [__RSH__] - Modified RadioButton control template and styling to provide consistent look on supported platforms.
+  - Previously themed stying on Windows was broken. Light mode and dark mode both worked when they were the OS default. However changing theme modes on windows led to problems. This is fixed now. 
+- [__DB__] Added support for keyboard configuration
+  - Supports all functionality present in Hatari in a minimal way, supports setting the mapping type, specifying a mapping file etc.
+  - More limited support for specifying shortcut keys (not all possible keys supported due to a limitation in Maui 8, may need to wait till Maui 9 for full Support)
+  - supports importing shortcuts from a specific Hatari config file
+  - there's a single global set of keyboard setting for all systems,I can't see different systems requiring unique keyboard settings.- [__RSH__] - Added a dialog buttons control to properly order OK / Cancel buttons on different platforms
+  - Previously we used the Mac idiom `[Cancel] [OK]` on MacOS and Windows Now we use Now we use  `[Cancel] [OK]` on Mac and  `[OK] [Cancel]` on windows
+- [__RSH__] - Internal refactoring to reduce code complexity
+  - Not visible, but needed.
+- [__DB__] Added an indicator that the application state is dirty and needs saving.
+- [__DB__] The file picker now has a button to allow the user to open the current folder in file explorer / finder
 
 #### Contributers
 
-- [DB] David Black: [GitHub](https://github.com/davidblackuk), [YouTube](https://www.youtube.com/channel/UC--sLs1pvHWkTxa9J-zIzAw), [Twitter](twitter.com/david_black_uk)
-- [RSH] Randy S. Hunsaker [GitHub](https://github.com/hunsra)
+- [_DB_] David Black: [GitHub](https://github.com/davidblackuk), [YouTube](https://www.youtube.com/channel/UC--sLs1pvHWkTxa9J-zIzAw), [Twitter](twitter.com/david_black_uk)
+- [_RSH_] Randy S. Hunsaker [GitHub](https://github.com/hunsra)
 
 
 ### Version 1.0.3 (Mar 25th 2024)
