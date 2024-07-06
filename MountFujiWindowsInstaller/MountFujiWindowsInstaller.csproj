@@ -37,6 +37,13 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Assets\jsonconfig\jsonconfig.dll" />
+    <None Include="Assets\jsonconfig\LICENSE" />
+    <None Include="Assets\preferences.json" />
+    <None Include="Inno Scripts\Setup.iss" />
+    <None Include="Inno Scripts\JsonConfig.ish" />
+    <None Include="Inno Scripts\FileAttr.ish" />
+    <None Include="Inno Scripts\DataFiles.ish" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
@@ -55,9 +62,8 @@
     <Content Include="Assets\MountFuji-Small-225.bmp" />
     <Content Include="Assets\MountFuji-Small-250.bmp" />
     <Content Include="Assets\MountFuji.ico" />
-    <Content Include="Dependencies\dotnet-runtime-8.0.4-win-x64.exe" />
-    <Content Include="Dependencies\dotnet-runtime-8.0.4-win-x86.exe" />
-    <Content Include="Inno Scripts\Setup.iss" />
+    <Content Include="Dependencies\dotnet-runtime-8.0.6-win-x64.exe" />
+    <Content Include="Dependencies\dotnet-runtime-8.0.6-win-x86.exe" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dummy.cs" />
@@ -66,9 +72,11 @@
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"%25PROGRAMFILES(X86)%25\Inno Setup 6\iscc.exe" "$(ProjectDir)Inno Scripts\Setup.iss"
-</PostBuildEvent>
+    <PostBuildEvent>
+			"%25PROGRAMFILES(X86)%25\Inno Setup 6\iscc.exe" "$(ProjectDir)Inno Scripts\Setup.iss"
+		</PostBuildEvent>
   </PropertyGroup>
 </Project>

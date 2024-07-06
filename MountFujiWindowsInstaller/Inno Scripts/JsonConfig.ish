@@ -1,0 +1,45 @@
+﻿//
+// Copyright (C) 2024  David Black
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY// without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+//
+// Attributions:
+// This program uses jsonconfig, Copyright (C) 2021 Sergey Solodyagin,
+// and is used under the MIT License.  See Assets\jsonconfig\LICENSE 
+// for more information. 
+//
+
+#ifndef _JSONCONFIG_ISH_
+#define _JSONCONFIG_ISH_
+
+[Files]
+Source: "..\Assets\jsonconfig\jsonconfig.dll"; Flags: dontcopy;
+Source: "..\Assets\jsonconfig\LICENSE"; Flags: dontcopy;
+
+[Code]
+function JSONReadString(AFileName, APath, ADefault: WideString; var AValue: WideString; var AValueLength: Integer): Boolean;
+	external 'JSONReadString@files:jsonconfig.dll stdcall';
+function JSONReadBoolean(AFileName, APath: WideString; ADefault: Boolean; var AValue: Boolean): Boolean;
+  external 'JSONReadBoolean@files:jsonconfig.dll stdcall';
+function JSONReadInteger(AFileName, APath: WideString; ADefault: Int64; var AValue: Int64): Boolean;
+	external 'JSONReadInteger@files:jsonconfig.dll stdcall';
+function JSONWriteString(AFileName, APath, AValue: WideString): Boolean;
+	external 'JSONWriteString@files:jsonconfig.dll stdcall';
+function JSONWriteBoolean(AFileName, APath: WideString; AValue: Boolean): Boolean;
+	external 'JSONWriteBoolean@files:jsonconfig.dll stdcall';
+function JSONWriteInteger(AFileName, APath: WideString; AValue: Int64): Boolean;
+	external 'JSONWriteInteger@files:jsonconfig.dll stdcall';
+[/Code]
+
+#endif
