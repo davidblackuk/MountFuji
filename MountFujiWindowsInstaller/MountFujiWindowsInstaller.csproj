@@ -62,8 +62,8 @@
     <Content Include="Assets\MountFuji-Small-225.bmp" />
     <Content Include="Assets\MountFuji-Small-250.bmp" />
     <Content Include="Assets\MountFuji.ico" />
-    <Content Include="Dependencies\dotnet-runtime-8.0.4-win-x64.exe" />
-    <Content Include="Dependencies\dotnet-runtime-8.0.4-win-x86.exe" />
+    <Content Include="Dependencies\dotnet-runtime-8.0.6-win-x64.exe" />
+    <Content Include="Dependencies\dotnet-runtime-8.0.6-win-x86.exe" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dummy.cs" />

@@ -27,7 +27,7 @@
 #define MyAppCopyright "Copyright (C) 2024 " + MyAppAuthor
 
 ; Runtime dependency and app details
-#define DotNetRuntimeVersion "8.0.4"
+#define DotNetRuntimeVersion "8.0.6"
 #define CustomHatariVersionFolder "Hatari2.4.1-Windows"
 #define BuildConfigutation "Release"
 #define WindowsTargetFramework "net8.0-windows10.0.19041.0"
